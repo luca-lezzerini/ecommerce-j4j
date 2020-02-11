@@ -1,0 +1,7 @@
+tocTab[tocTab.length] = new Array("0.1", "1", "010 - Mind mapping", "EARoot/EA1/EA3.htm", "31.png", "", "", "{3671FC0E-B70C-44d0-A0A3-997E5FA4D80D}", "Package");
+tocTab[tocTab.length] = new Array("0.2", "1", "020 - Conversation", "EARoot/EA2/EA44.htm", "34.png", "", "", "{6617AA2D-A0F8-4d9f-B48C-8E69D14B3EF5}", "Package");
+tocTab[tocTab.length] = new Array("0.3", "1", "030 - Choerography", "EARoot/EA3/EA69.htm", "31.png", "", "", "{CB67EFC3-F3E9-46ce-8392-AD1512C299D7}", "Package");
+tocTab[tocTab.length] = new Array("0.4", "1", "040 - Collaboration", "EARoot/EA4/EA133.htm", "31.png", "", "", "{D43D6FE7-6690-41fc-9AC1-3FFA30B4C8D0}", "Package");
+tocTab[tocTab.length] = new Array("0.5", "1", "050 - Use Case", "EARoot/EA5/EA225.htm", "31.png", "", "", "{1C16D9E1-7ED4-4b64-906F-B0C8F4246699}", "Package");
+tocTab[tocTab.length] = new Array("0.6", "1", "060 - Class diagram", "EARoot/EA6/EA285.htm", "31.png", "", "", "{1F2FB9E8-608C-4063-A1CE-42BCBB4C2194}", "Package");
+tocTab[tocTab.length] = new Array("0.7", "1", "070 - User interface", "EARoot/EA7/EA301.htm", "31.png", "", "", "{78198EAE-AC3F-44dc-9F41-8C09E4E1FEAF}", "Package");
