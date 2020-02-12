@@ -27,7 +27,7 @@ public class SecurityController {
     public void checkDoubleOptin(@RequestBody LoginRequestDto){
     }
     
-    @RequestMapping("/registrazione")
+    @RequestMapping("/registrami")
     @ResponseBody
     public RegistrazioneResponseDto registrami(@RequestBody RegistrazioneRequestDto){
     return ss;
