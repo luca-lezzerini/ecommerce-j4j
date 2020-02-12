@@ -1,0 +1,6 @@
+tocTab[tocTab.length] = new Array("0.8.2:1", "", "Shop", "EARoot/EA8/EA2/EA432.htm", "175.png", "43", "0", "", "Logical diagram0","{2C35C1E6-82D2-4757-950D-27511E9E0FF7}");
+tocTab[tocTab.length] = new Array("0.8.2:2", "", "Colori", "EARoot/EA8/EA2/EA435.htm", "5.png", "E597", "0", "", "Class0","{AAA115FC-D7B1-44bd-B3B3-E5F0D24B665B}");
+tocTab[tocTab.length] = new Array("0.8.2:3", "", "ColoriProdotto", "EARoot/EA8/EA2/EA436.htm", "5.png", "E599", "0", "", "Class0","{88C0345C-4F0E-40da-ABCC-18E84C608483}");
+tocTab[tocTab.length] = new Array("0.8.2:4", "", "Prodotto", "EARoot/EA8/EA2/EA437.htm", "5.png", "E595", "0", "", "Class0","{2D539A1B-8957-48b3-BD3B-E4C21457A715}");
+tocTab[tocTab.length] = new Array("0.8.2:5", "", "Taglie", "EARoot/EA8/EA2/EA438.htm", "5.png", "E596", "0", "", "Class0","{4D6A405B-CEEE-4ef3-A00B-92272845961F}");
+tocTab[tocTab.length] = new Array("0.8.2:6", "", "TaglieProdotto", "EARoot/EA8/EA2/EA439.htm", "5.png", "E598", "0", "", "Class0","{E6416011-DE5D-4f49-A8FD-4923A7AE6B68}");

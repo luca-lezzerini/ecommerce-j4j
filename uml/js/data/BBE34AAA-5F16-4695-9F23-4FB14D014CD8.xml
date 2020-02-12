@@ -1,4 +1,4 @@
-tocTab[tocTab.length] = new Array("0.14.1", "", "UI Home Page", "EARoot/EA14/EA1/EA488.htm", "4.png", "", "", "{45635FB0-C36D-46d7-A18B-FF2C85B4DEB4}", "Package");
-tocTab[tocTab.length] = new Array("0.14.2", "1", "UI Login ", "EARoot/EA14/EA2/EA491.htm", "4.png", "", "", "{85D0FFD2-7EEF-47a2-A7C0-354DD9FEF90F}", "Package");
-tocTab[tocTab.length] = new Array("0.14.3", "1", "UI Password Dimenticata", "EARoot/EA14/EA3/EA501.htm", "4.png", "", "", "{153AD326-1A89-44ac-9884-E6048117E1E1}", "Package");
-tocTab[tocTab.length] = new Array("0.14.4", "1", "UI Registrazione", "EARoot/EA14/EA4/EA508.htm", "4.png", "", "", "{56928E90-C716-49f6-8AD0-8D2100634D4C}", "Package");
+tocTab[tocTab.length] = new Array("0.14.1", "", "UI Home Page", "EARoot/EA14/EA1/EA491.htm", "4.png", "", "", "{45635FB0-C36D-46d7-A18B-FF2C85B4DEB4}", "Package");
+tocTab[tocTab.length] = new Array("0.14.2", "1", "UI Login ", "EARoot/EA14/EA2/EA494.htm", "4.png", "", "", "{85D0FFD2-7EEF-47a2-A7C0-354DD9FEF90F}", "Package");
+tocTab[tocTab.length] = new Array("0.14.3", "1", "UI Password Dimenticata", "EARoot/EA14/EA3/EA504.htm", "4.png", "", "", "{153AD326-1A89-44ac-9884-E6048117E1E1}", "Package");
+tocTab[tocTab.length] = new Array("0.14.4", "1", "UI Registrazione", "EARoot/EA14/EA4/EA511.htm", "4.png", "", "", "{56928E90-C716-49f6-8AD0-8D2100634D4C}", "Package");

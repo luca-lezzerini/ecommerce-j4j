@@ -1,0 +1,11 @@
+tocTab[tocTab.length] = new Array("0.15.2:1", "", "UCs Cliente", "EARoot/EA15/EA2/EA567.htm", "180.png", "44", "0", "", "Use Case diagram0","{AB9E2FF7-B5FC-474a-9856-0CE5DCEB9327}");
+tocTab[tocTab.length] = new Array("0.15.2:2", "", "Anagrafica Colori", "EARoot/EA15/EA2/EA570.htm", "7.png", "E608", "0", "", "UseCase0","{E2DADC23-EB77-441b-B0C8-33E1F1F0307D}");
+tocTab[tocTab.length] = new Array("0.15.2:3", "", "Anagrafica Prodotti", "EARoot/EA15/EA2/EA571.htm", "7.png", "E609", "0", "", "UseCase0","{A9000594-4F51-4ebc-9858-17DF0A997816}");
+tocTab[tocTab.length] = new Array("0.15.2:4", "", "Anagrafica Taglie", "EARoot/EA15/EA2/EA572.htm", "7.png", "E607", "0", "", "UseCase0","{342314C9-DF21-426a-98F0-953A3B1E8F7D}");
+tocTab[tocTab.length] = new Array("0.15.2:5", "", "Associa Prodotto a Colori", "EARoot/EA15/EA2/EA573.htm", "7.png", "E611", "0", "", "UseCase0","{4C0EBE93-EF31-4377-AA11-05C058E6F6C5}");
+tocTab[tocTab.length] = new Array("0.15.2:6", "", "Associa Prodotto a Taglie", "EARoot/EA15/EA2/EA574.htm", "7.png", "E610", "0", "", "UseCase0","{5D065F8A-2706-4043-B84D-062769D37305}");
+tocTab[tocTab.length] = new Array("0.15.2:7", "", "Home Area Riservata", "EARoot/EA15/EA2/EA575.htm", "7.png", "E591", "0", "", "UseCase0","{795C6D14-77B7-4d40-9530-351EA77294F3}");
+tocTab[tocTab.length] = new Array("0.15.2:8", "", "Home Page Pubblica", "EARoot/EA15/EA2/EA576.htm", "7.png", "E509", "0", "", "UseCase0","{233DAA7A-28F4-4549-AC28-770AEE672470}");
+tocTab[tocTab.length] = new Array("0.15.2:9", "", "Login", "EARoot/EA15/EA2/EA577.htm", "7.png", "E507", "0", "", "UseCase0","{2DA80E6F-885D-45c3-8D7E-89803A9B5061}");
+tocTab[tocTab.length] = new Array("0.15.2:10", "", "Password Dimenticata", "EARoot/EA15/EA2/EA578.htm", "7.png", "E508", "0", "", "UseCase0","{7C0F38CC-C862-4c01-8409-C3470CDD541D}");
+tocTab[tocTab.length] = new Array("0.15.2:11", "", "Registrazione", "EARoot/EA15/EA2/EA579.htm", "7.png", "E606", "0", "", "UseCase0","{573AB5F9-A56B-4c65-86DE-B9301B15B0AE}");
