@@ -1,4 +1,9 @@
+import { RegistrazioneResponseDto } from './../classi/registrazione-response-dto';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { RegistrazioneRequestDto } from '../classi/registrazione-request-dto';
 
 @Component({
   selector: 'app-registrazione',
@@ -7,28 +12,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrazioneComponent implements OnInit {
 
-  username: string;
-  password: string;
-  confermapassword: string;
-  email: string;
+  username = '';
+  password = '';
+  confermapassword = '';
+  email = '';
 
 
-  constructor() { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit() {
   }
 
   registrami() {
     // verifica se i campi siano valorizzati
-    // verifica che password e conferma password siano uguali
-    // prepara la richiesta http
-    // crea la callback
-    // se registrato è true l'utente è stato registrato e mostra messaggio di successo
-    // se registrato è false l'utente non è stato registrato e mostra messaggio di errore
+    if (this.username !== '' && this.password !== '' && this.confermapassword !== '' && this.email !== '') {
+      // verifica che password e conferma password siano uguali
+      if (this.password === this.confermapassword) {
+        // prepara la richiesta http
+        const dto: RegistrazioneRequestDto = new RegistrazioneRequestDto();
+        dto.email = this.email;
+        dto.password = this.password;
+        dto.username = this.username;
+        const obs: Observable<RegistrazioneResponseDto> =
+          this.http.post<RegistrazioneResponseDto>('http://localhost:8080/registrami', dto);
+        // crea la callback
+        obs.subscribe(risposta => {
+          if (risposta.registrato) {
+            // se registrato è true l'utente è stato registrato e mostra messaggio di successo
+            // TODO
+          } else {
+            // se registrato è false l'utente non è stato registrato e mostra messaggio di errore
+            // TODO
+          }
+          this.router.navigateByUrl('home-pubblica');
+        });
+      } else {
+        // mostra messaggio di errore
+        // TODO
+      }
+    } else {
+      // mostra messaggio di errore
+      // TODO
+    }
   }
 
   annulla() {
     // pulisci i campi username, password, conferma password e email
+    this.email = '';
+    this.password = '';
+    this.confermapassword = '';
+    this.username = '';
     // torna alla home page
+    this.router.navigateByUrl('home-pubblica');
   }
 }

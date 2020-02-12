@@ -13,12 +13,14 @@ import { PasswordDimenticataComponent } from './password-dimenticata/password-di
 import { ReimpostaPasswordComponent } from './reimposta-password/reimposta-password.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ViewCarrelloComponent } from './view-carrello/view-carrello.component';
+import { DoubleOptinComponent } from './double-optin/double-optin.component';
 
 const appRoutes: Routes = [
   { path: 'home-pubblica', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registrazione', component: RegistrazioneComponent },
   { path: 'view-carrello', component: ViewCarrelloComponent },
+  { path: 'double-optin', component: DoubleOptinComponent },
   {
     path: '',
     redirectTo: '/home-pubblica',
@@ -35,7 +37,8 @@ const appRoutes: Routes = [
     RegistrazioneComponent,
     PasswordDimenticataComponent,
     ReimpostaPasswordComponent,
-    ViewCarrelloComponent
+    ViewCarrelloComponent,
+    DoubleOptinComponent
   ],
   imports: [
     RouterModule.forRoot(
