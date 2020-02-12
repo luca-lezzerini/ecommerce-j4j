@@ -34,15 +34,15 @@ function nameClassifier(name, separator)
 <div class="pageHeader"></div>
 <div class="PageBody">
 	<div id="name_classifier" style="display: none;"></div>
-	<span class="ObjectTitle"><script type="text/javascript">document.write(nameClassifier("", " : "))</script>  : Public  &lt;&lt;Choreography&gt;&gt; Choreography</span>
+	<span class="ObjectTitle"><script type="text/javascript">document.write(nameClassifier("", " : "))</script>  : Public  &lt;&lt;Gateway&gt;&gt; Gateway</span>
 	<table border="0" cellpadding="0" cellspacing="0" class="ObjectDetails">
 		<tr>
 			<td width="15%" class="ObjectDetailsTopic">Created:</td>
-			<td width="85%" class="ObjectDetailsValue">16/10/2019 11:29:55</td>
+			<td width="85%" class="ObjectDetailsValue">16/10/2019 11:45:29</td>
 		</tr>
 		<tr>
 			<td class="ObjectDetailsTopic">Modified:</td>
-			<td class="ObjectDetailsValue">16/10/2019 11:31:41</td>
+			<td class="ObjectDetailsValue">16/10/2019 11:45:29</td>
 		</tr>
 		<tr style="height: 10px"><td colspan="2"></td></tr>
 		<tr>
@@ -87,20 +87,60 @@ function nameClassifier(name, separator)
 		</tr>
 		<tr id="adv00" style="display: none;">
 			<td class="ObjectDetailsTopic" style="padding-left: 18px;">UUID:</td>
-			<td class="ObjectDetailsValue">{4DE2E03E-1B37-4d0f-86BF-9320CEF06253}</td>
+			<td class="ObjectDetailsValue">{124C0A50-F5EA-4c7c-BAF5-EB40982C2E1B}</td>
 		</tr>
 		<tr id="adv01" style="display: none;">
 			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Appears In:</td>
-			<td class="ObjectDetailsValue"></td>
+			<td class="ObjectDetailsValue"><a href="EA63.htm">ChoreographyModel1</a></td>
 		</tr>
 	</table>
 	
 	<div class="TableGroup" id="TableGroup">
 		<ul class="ItemTitle">
+			<li onClick="parent.toggleItem('FlowTo');" id="FlowToTitle">Flow To</li>
 			<li onClick="parent.toggleItem('FlowFrom');" id="FlowFromTitle">Flow From</li>
 			<li onClick="parent.toggleItem('TaggedVal');" id="TaggedValTitle">Tagged Values</li>
 			<li onClick="parent.toggleItem('CustomProperties');" id="CustomPropertiesTitle">Advanced</li>
 		</ul>
+		<div class="ItemBody" id="FlowToTable">
+			<table border="0" cellspacing="0" cellpadding="0" class="Table">
+				<tr>
+					<td width="50%" class="TableHeading">Element</td>
+					<td width="50%" class="TableHeading">Name</td>
+				</tr>
+				<tr>
+					<td width="50%" class="TableRow" valign="top">
+						<a href="EA86.htm">Cerca prodotto</a><br />
+						Activity «SequenceFlow» 
+					</td>
+					<td width="50%" class="TableRow" valign="top">&nbsp;</td>					
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="2">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLinkFlow189" onclick="parent.toggleDiv('detailsDIVLinkFlow189', 'DetailsImageLinkFlow189')" />Details:
+							<div id="detailsDIVLinkFlow189" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>				<tr>
+					<td width="50%" class="TableRow" valign="top">
+						<a href="EA88.htm">Consulta cataglogo</a><br />
+						Activity «SequenceFlow» 
+					</td>
+					<td width="50%" class="TableRow" valign="top">&nbsp;</td>					
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="2">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLinkFlow190" onclick="parent.toggleDiv('detailsDIVLinkFlow190', 'DetailsImageLinkFlow190')" />Details:
+							<div id="detailsDIVLinkFlow190" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
 		<div class="ItemBody" id="FlowFromTable">
 			<table border="0" cellspacing="0" cellpadding="0" class="Table">
 				<tr>
@@ -109,15 +149,60 @@ function nameClassifier(name, separator)
 				</tr>
 				<tr>
 					<td width="50%" class="TableRow" valign="top">
-						<a href="EA95.htm">Registrato?</a><br />
+						<a href="EA103.htm">Trova qualcosa ?</a><br />
 						Decision «SequenceFlow» 
 					</td>
 					<td width="50%" class="TableRow" valign="top">No</td>					
 				</tr>
 				<tr>
 					<td class="TableRowBottomDashed"  colspan="2">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLinkFlow191" onclick="parent.toggleDiv('detailsDIVLinkFlow191', 'DetailsImageLinkFlow191')" />Details:
+							<div id="detailsDIVLinkFlow191" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>				<tr>
+					<td width="50%" class="TableRow" valign="top">
+						<a href="EA77.htm">{anonymous}</a><br />
+						Decision «SequenceFlow» 
+					</td>
+					<td width="50%" class="TableRow" valign="top">&nbsp;</td>					
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="2">
 						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLinkFlow192" onclick="parent.toggleDiv('detailsDIVLinkFlow192', 'DetailsImageLinkFlow192')" />Details:
 							<div id="detailsDIVLinkFlow192" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>				<tr>
+					<td width="50%" class="TableRow" valign="top">
+						<a href="EA85.htm">Aggiungi prodotti?</a><br />
+						Decision «SequenceFlow» 
+					</td>
+					<td width="50%" class="TableRow" valign="top">Si</td>					
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="2">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLinkFlow193" onclick="parent.toggleDiv('detailsDIVLinkFlow193', 'DetailsImageLinkFlow193')" />Details:
+							<div id="detailsDIVLinkFlow193" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>				<tr>
+					<td width="50%" class="TableRow" valign="top">
+						<a href="EA109.htm">Vuole ricercare?</a><br />
+						Decision «SequenceFlow» 
+					</td>
+					<td width="50%" class="TableRow" valign="top">Si</td>					
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="2">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLinkFlow194" onclick="parent.toggleDiv('detailsDIVLinkFlow194', 'DetailsImageLinkFlow194')" />Details:
+							<div id="detailsDIVLinkFlow194" class="DetailsDiv" >
 							&nbsp;
 							</div>
 						</div>
@@ -132,72 +217,46 @@ function nameClassifier(name, separator)
 			<td width="50%" class="TableHeading">Value</td>
 		</tr>
 					<tr>
-				<td width="50%" class="TableRow" valign="top">choreographyType</td>
-				<td width="50%" class="TableRow" valign="top">Task</td>
-			</tr>	
-			<tr>
-				<td class="TableRowBottomDashed"  colspan="2">
-					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario193" onclick="parent.toggleDiv('detailsDIVScenario193','DetailsImageScenario193')" />Details:
-						<div id="detailsDIVScenario193" class="DetailsDiv" >
-						<div class="ObjectDetailsNotes">Values: Task,Sub-Process<br />Default: Task<br /></div>
-
-						</div>
-					</div>
-				</td>
-			</tr>			<tr>
-				<td width="50%" class="TableRow" valign="top">isACalledChoreography</td>
-				<td width="50%" class="TableRow" valign="top">false</td>
-			</tr>	
-			<tr>
-				<td class="TableRowBottomDashed"  colspan="2">
-					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario194" onclick="parent.toggleDiv('detailsDIVScenario194','DetailsImageScenario194')" />Details:
-						<div id="detailsDIVScenario194" class="DetailsDiv" >
-						<div class="ObjectDetailsNotes">Values: true,false<br />Default: false<br /></div>
-
-						</div>
-					</div>
-				</td>
-			</tr>			<tr>
-				<td width="50%" class="TableRow" valign="top">loopType</td>
-				<td width="50%" class="TableRow" valign="top">None</td>
+				<td width="50%" class="TableRow" valign="top">eventGatewayType</td>
+				<td width="50%" class="TableRow" valign="top">Exclusive</td>
 			</tr>	
 			<tr>
 				<td class="TableRowBottomDashed"  colspan="2">
 					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario195" onclick="parent.toggleDiv('detailsDIVScenario195','DetailsImageScenario195')" />Details:
 						<div id="detailsDIVScenario195" class="DetailsDiv" >
-						<div class="ObjectDetailsNotes">Values: None,Standard,MultiInstanceParallel,MultiInstanceSequential<br />Default: None<br /></div>
+						<div class="ObjectDetailsNotes">Values: Exclusive,Parallel<br />Default: Exclusive<br /></div>
 
 						</div>
 					</div>
 				</td>
 			</tr>			<tr>
-				<td width="50%" class="TableRow" valign="top">numberOfParticipants</td>
-				<td width="50%" class="TableRow" valign="top">2</td>
+				<td width="50%" class="TableRow" valign="top">gatewayDirection</td>
+				<td width="50%" class="TableRow" valign="top">Unspecified</td>
 			</tr>	
 			<tr>
 				<td class="TableRowBottomDashed"  colspan="2">
 					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario196" onclick="parent.toggleDiv('detailsDIVScenario196','DetailsImageScenario196')" />Details:
 						<div id="detailsDIVScenario196" class="DetailsDiv" >
-						<div class="ObjectDetailsNotes">Values: 2,3,4<br />Default: 2<br /></div>
+						<div class="ObjectDetailsNotes">Values: Unspecified,Converging,Diverging,Mixed<br />Default: Unspecified<br /></div>
 
 						</div>
 					</div>
 				</td>
 			</tr>			<tr>
-				<td width="50%" class="TableRow" valign="top">participantAMultiplicity</td>
-				<td width="50%" class="TableRow" valign="top">false</td>
+				<td width="50%" class="TableRow" valign="top">gatewayType</td>
+				<td width="50%" class="TableRow" valign="top">Exclusive</td>
 			</tr>	
 			<tr>
 				<td class="TableRowBottomDashed"  colspan="2">
 					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario197" onclick="parent.toggleDiv('detailsDIVScenario197','DetailsImageScenario197')" />Details:
 						<div id="detailsDIVScenario197" class="DetailsDiv" >
-						<div class="ObjectDetailsNotes">Values: true,false<br />Default: false<br /></div>
+						<div class="ObjectDetailsNotes">Values: Exclusive,Complex,Inclusive,Parallel,Event<br />Default: Exclusive<br /></div>
 
 						</div>
 					</div>
 				</td>
 			</tr>			<tr>
-				<td width="50%" class="TableRow" valign="top">participantBMultiplicity</td>
+				<td width="50%" class="TableRow" valign="top">instantiate</td>
 				<td width="50%" class="TableRow" valign="top">false</td>
 			</tr>	
 			<tr>
@@ -210,7 +269,7 @@ function nameClassifier(name, separator)
 					</div>
 				</td>
 			</tr>			<tr>
-				<td width="50%" class="TableRow" valign="top">participantCMultiplicity</td>
+				<td width="50%" class="TableRow" valign="top">markerVisible</td>
 				<td width="50%" class="TableRow" valign="top">false</td>
 			</tr>	
 			<tr>
@@ -223,14 +282,14 @@ function nameClassifier(name, separator)
 					</div>
 				</td>
 			</tr>			<tr>
-				<td width="50%" class="TableRow" valign="top">participantDMultiplicity</td>
-				<td width="50%" class="TableRow" valign="top">false</td>
+				<td width="50%" class="TableRow" valign="top">waitingForStart</td>
+				<td width="50%" class="TableRow" valign="top">true</td>
 			</tr>	
 			<tr>
 				<td class="TableRowBottomDashed"  colspan="2">
 					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario200" onclick="parent.toggleDiv('detailsDIVScenario200','DetailsImageScenario200')" />Details:
 						<div id="detailsDIVScenario200" class="DetailsDiv" >
-						<div class="ObjectDetailsNotes">Values: true,false<br />Default: false<br /></div>
+						<div class="ObjectDetailsNotes">Values: true,false<br />Default: true<br /></div>
 
 						</div>
 					</div>
@@ -245,32 +304,22 @@ function nameClassifier(name, separator)
 				</tr>
 			<tr>
 				<td width="30%" class="TableRow">_tagGroupings:</td>
-				<td width="70%" class="TableRow">auditing=Base Element;categoryValue=Base Element;correlationKeys=Base Element;documentation=Base Element;monitoring=Base Element;calledChoreographyRef=Choreography;choreographyType=Choreography;isACalledChoreography=Choreography;loopType=Choreography;initiatingParticipant=Participants;initiatingParticipantRef=Participants;numberOfParticipants=Participants;participantA=ParticipantA;participantAMessageRef=ParticipantA;participantAMultiplicity=ParticipantA;participantARef=ParticipantA;participantB=ParticipantB;participantBMessageRef=ParticipantB;participantBMultiplicity=ParticipantB;participantBRef=ParticipantB;participantC=ParticipantC;participantCMessageRef=ParticipantC;participantCMultiplicity=ParticipantC;participantCRef=ParticipantC;participantD=ParticipantD;participantDMessageRef=ParticipantD;participantDMultiplicity=ParticipantD;participantDRef=ParticipantD;</td>
+				<td width="70%" class="TableRow">auditing=Base Element;categoryValue=Base Element;documentation=Base Element;monitoring=Base Element;gatewayDirection=Gateway;gatewayType=Gateway;eventGatewayType=Event Gateway;instantiate=Event Gateway;markerVisible=Exclusive Gateway;activationCondition=Complex Gateway;waitingForStart=Complex Gateway;assignments=Other;</td>
 			</tr>
 
 			<tr>
 				<td width="30%" class="TableRow">_tagGroups:</td>
-				<td width="70%" class="TableRow">Base Element,Choreography,Participants,ParticipantA,ParticipantB,ParticipantC,ParticipantD</td>
+				<td width="70%" class="TableRow">Base Element,Gateway,Event Gateway,Exclusive Gateway,Complex Gateway,Other</td>
+			</tr>
+
+			<tr>
+				<td width="30%" class="TableRow">_subtypeProperty:</td>
+				<td width="70%" class="TableRow">BPMN2.0::Gateway::gatewayType</td>
 			</tr>
 
 			<tr>
 				<td width="30%" class="TableRow">_tagGroupStates:</td>
-				<td width="70%" class="TableRow">Base Element=closed;Choreography=open;Participants=open;ParticipantA=open;ParticipantB=open;ParticipantC=closed;ParticipantD=closed;</td>
-			</tr>
-
-			<tr>
-				<td width="30%" class="TableRow">_defaultDiagramType:</td>
-				<td width="70%" class="TableRow">BPMN2.0::Choreography</td>
-			</tr>
-
-			<tr>
-				<td width="30%" class="TableRow">isReadOnly:</td>
-				<td width="70%" class="TableRow">false</td>
-			</tr>
-
-			<tr>
-				<td width="30%" class="TableRow">isFinalSpecialization:</td>
-				<td width="70%" class="TableRow">0</td>
+				<td width="70%" class="TableRow">Base Element=closed;Gateway=open;Event Gateway=open;Exclusive Gateway=open;Complex Gateway=closed;Other=closed;</td>
 			</tr>
 
 
