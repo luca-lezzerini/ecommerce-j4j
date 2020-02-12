@@ -1,5 +1,5 @@
-tocTab[tocTab.length] = new Array("0.14.4.1", "1", "Mappa di Navigazione", "EARoot/EA14/EA4/EA1/EA519.htm", "4.png", "", "", "{C2959C87-9B2A-423b-85E4-791EBF84EF17}", "Package");
-tocTab[tocTab.length] = new Array("0.14.4.2", "1", "UI Registrazione-Dati", "EARoot/EA14/EA4/EA2/EA537.htm", "4.png", "", "", "{1C557DD6-2DAE-42ed-8112-1A8C7F96FC5E}", "Package");
-tocTab[tocTab.length] = new Array("0.14.4.3", "1", "UI Registrazione-Double Optin", "EARoot/EA14/EA4/EA3/EA551.htm", "4.png", "", "", "{B87A047C-1680-438a-A7E9-72FC32ECD5AE}", "Package");
-tocTab[tocTab.length] = new Array("0.14.4.4", "1", "UI Registrazione-Errore", "EARoot/EA14/EA4/EA4/EA554.htm", "4.png", "", "", "{EC1A669F-BB99-45b6-8C35-771CA1F4E3FA}", "Package");
-tocTab[tocTab.length] = new Array("0.14.4.5", "1", "UI Registrazione-Successo", "EARoot/EA14/EA4/EA5/EA557.htm", "4.png", "", "", "{F9D33ABC-3E6F-4bff-8714-91C531616F34}", "Package");
+tocTab[tocTab.length] = new Array("0.14.4.1", "1", "Mappa di Navigazione", "EARoot/EA14/EA4/EA1/EA535.htm", "4.png", "", "", "{C2959C87-9B2A-423b-85E4-791EBF84EF17}", "Package");
+tocTab[tocTab.length] = new Array("0.14.4.2", "1", "UI Registrazione-Dati", "EARoot/EA14/EA4/EA2/EA553.htm", "4.png", "", "", "{1C557DD6-2DAE-42ed-8112-1A8C7F96FC5E}", "Package");
+tocTab[tocTab.length] = new Array("0.14.4.3", "1", "UI Registrazione-Double Optin", "EARoot/EA14/EA4/EA3/EA567.htm", "4.png", "", "", "{B87A047C-1680-438a-A7E9-72FC32ECD5AE}", "Package");
+tocTab[tocTab.length] = new Array("0.14.4.4", "1", "UI Registrazione-Errore", "EARoot/EA14/EA4/EA4/EA570.htm", "4.png", "", "", "{EC1A669F-BB99-45b6-8C35-771CA1F4E3FA}", "Package");
+tocTab[tocTab.length] = new Array("0.14.4.5", "1", "UI Registrazione-Successo", "EARoot/EA14/EA4/EA5/EA573.htm", "4.png", "", "", "{F9D33ABC-3E6F-4bff-8714-91C531616F34}", "Package");
