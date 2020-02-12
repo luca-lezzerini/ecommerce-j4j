@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 export class HomePageComponent implements OnInit {
 
   prodotti: Prodotto [] = [];
+  ricerca: string;
 
   constructor(private router: Router) { }
 
