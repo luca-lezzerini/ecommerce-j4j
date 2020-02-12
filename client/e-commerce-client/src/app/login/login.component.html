@@ -1,8 +1,23 @@
-<h2>LOGIN<h2>
-  User name<input type="text" [(ngModel)]="username">
-  <br>
-  Password<input type="text" [(ngModel)]="password">
-  <br>
-  <button type="button" (click)="login()">Login</button>
-  <button type="button" (click)="passwordDimenticata()">Password dimenticata</button>
-  <br>
+<div class="master">
+    <div class="log">
+        <h1>Login</h1>
+    </div>
+    <div class="up">
+        <form>
+            <p>
+                <label>Username</label> &nbsp;
+                <input type="text" [(ngModel)]="username" class="username" placeholder=" Username" />
+            </p>
+            <p>
+                <label> Password </label> &nbsp;
+                <input type="text" [(ngModel)]="password" class="password" placeholder=" Password" />
+            </p>
+            <button class="L" type="button" (click)="login()">Login</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a routerLink="/password-dimenticata">
+                <button class="P" type="button" (click)="passwordDimenticata()">
+          Password dimenticata
+        </button>
+            </a>
+        </form>
+    </div>
+</div>
