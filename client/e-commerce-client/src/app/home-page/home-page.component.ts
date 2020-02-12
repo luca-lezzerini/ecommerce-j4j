@@ -1,5 +1,6 @@
 import { Prodotto } from './../classi/prodotto';
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -10,10 +11,10 @@ export class HomePageComponent implements OnInit {
 
   prodotti: Prodotto [] = [];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   visualizzaCarrello() {
-
+    this.router.navigateByUrl('/view-carrello');
   }
 
   login() {
