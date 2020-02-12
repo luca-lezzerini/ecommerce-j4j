@@ -10,6 +10,22 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrazioneComponent } from './registrazione/registrazione.component';
 import { PasswordDimenticataComponent } from './password-dimenticata/password-dimenticata.component';
+import { ReimpostaPasswordComponent } from './reimposta-password/reimposta-password.component';
+import { Routes, RouterModule } from '@angular/router';
+import { ViewCarrelloComponent } from './view-carrello/view-carrello.component';
+
+const appRoutes: Routes = [
+  { path: 'home-pubblica', component: HomePageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'registrazione', component: RegistrazioneComponent },
+  { path: 'view-carrello', component: ViewCarrelloComponent },
+  {
+    path: '',
+    redirectTo: '/home-pubblica',
+    pathMatch: 'full'
+  },
+  { path: 'password-dimenticata', component: PasswordDimenticataComponent }
+];
 
 @NgModule({
   declarations: [
@@ -17,9 +33,15 @@ import { PasswordDimenticataComponent } from './password-dimenticata/password-di
     HomePageComponent,
     LoginComponent,
     RegistrazioneComponent,
-    PasswordDimenticataComponent
+    PasswordDimenticataComponent,
+    ReimpostaPasswordComponent,
+    ViewCarrelloComponent
   ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
