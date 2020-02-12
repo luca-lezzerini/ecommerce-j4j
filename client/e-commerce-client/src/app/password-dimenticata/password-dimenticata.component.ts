@@ -1,4 +1,8 @@
+import { LoginRequestDto } from './../classi/login-request-dto';
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { LoginResponseDto } from '../classi/login-response-dto';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-password-dimenticata',
@@ -7,9 +11,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PasswordDimenticataComponent implements OnInit {
 
-  constructor() { }
+  username: string;
+  password: string;
+  token: string;
 
-  ngOnInit() {
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {}
+
+  // richiesta per password dimenticata
+  passDimenticata() {
+    // preparo i dati da inviare al server
+    let dto: LoginRequestDto = new LoginRequestDto();
+    dto.username = this.username;
+    // preparo la richiesta http
+    let obs: Observable<LoginResponseDto> = this.http.post<LoginResponseDto>(
+      'http://localhost:8080/password-dimenticata',
+      dto
+    );
+    obs.subscribe(data => {
+      this.token = data.token;
+    });
   }
+  // controllo sul token per verificare la ricezione della mail
+  checkDoubleOptin() {}
 
+  // torna sulla pagina di login
+  annulla(){}
 }

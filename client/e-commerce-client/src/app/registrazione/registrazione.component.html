@@ -1,1 +1,23 @@
-<p>registrazione works!</p>
+<div>
+  Username
+  <input [(ngModel)]="username">
+
+  <br><br>
+  Password
+  <input [(ngModel)]="password">
+
+  <br><br>
+  Conferma password
+  <input [(ngModel)]="confermapassword">
+
+  <br><br>
+  Email
+  <input [(ngModel)]="email">
+
+  <br><br>
+  <button (click)="registrami()">Conferma</button>
+
+  &nbsp;
+  <button (click)="annulla()">Annulla</button>
+
+</div>
