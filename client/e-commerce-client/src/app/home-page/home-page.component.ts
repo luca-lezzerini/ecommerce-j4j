@@ -18,10 +18,6 @@ export class HomePageComponent implements OnInit {
     this.router.navigateByUrl('/view-carrello');
   }
 
-  login() {
-
-  }
-
   search() {
 
   }
