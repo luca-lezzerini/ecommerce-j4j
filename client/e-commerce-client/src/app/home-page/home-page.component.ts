@@ -9,6 +9,22 @@ export class HomePageComponent implements OnInit {
 
   constructor() { }
 
+  visualizzaCarrello() {
+
+  }
+
+  login() {
+
+  }
+
+  search() {
+
+  }
+
+  aggiungiAlCarrello() {
+
+  }
+
   ngOnInit() {
   }
 

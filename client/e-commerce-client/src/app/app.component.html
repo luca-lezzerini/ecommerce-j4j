@@ -1,1 +1,22 @@
-<app-registrazione></app-registrazione>
+<app-home-page>
+    Benvenuto!
+    <button (click)="visualizzaCarrello()">Visualizza Carrello</button>
+    <button (click)="login()">Login</button>
+    <br>
+    <input type="text" value="search for product" [(ngModel)]="search">
+    <button (click)="search()">Search</button>
+    <table>
+        <tr>
+            <th>Codice</th>
+            <th>Descrizione</th>
+            <th>Prezzo</th>
+            <th>Aggiungi al carrello</th>
+        </tr>
+        <tr *ngFor= "let p of prodotti">
+            <td>  {{p.codice}}</td>
+            <td> {{p.descrizione}}</td>
+            <td> {{p.prezzo}}</td>
+            <td><button (click)="aggiungiAlCarrello()">Aggiungi al carrello</button></td>
+        </tr>
+    </table>
+</app-home-page>
