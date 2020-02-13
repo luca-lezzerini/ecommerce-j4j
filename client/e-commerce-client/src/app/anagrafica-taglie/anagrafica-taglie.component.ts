@@ -1,3 +1,4 @@
+import { AreaComuneService } from './../area-comune.service';
 import { TagliaSearchDto } from './../classi/taglia-search-dto';
 import { HttpClient } from '@angular/common/http';
 import { TagliaSearchResultsDto } from './../classi/taglia-search-results-dto';
@@ -25,15 +26,16 @@ export class AnagraficaTaglieComponent implements OnInit {
   aggiungiEnabled: boolean;
   risultatoEnabled: boolean;
   taglie: Taglia[] = [];
+  inputEditable: boolean;
 
-  constructor(private http: HttpClient) {
-    this.initNgIf();
+  constructor(private http: HttpClient, private singleton: AreaComuneService) {
+    this.initVis();
   }
 
   ngOnInit() {
   }
 
-  initNgIf() {
+  initVis() {
     this.panelEnabled = false;
     this.confermaEnabled = false;
     this.annullaEnabled = false;
@@ -45,7 +47,7 @@ export class AnagraficaTaglieComponent implements OnInit {
     this.risultatoEnabled = false;
   }
 
-  cercaSiRisultato() {
+  visCercaSiRisultato() {
     this.panelEnabled = false;
     this.confermaEnabled = false;
     this.annullaEnabled = false;
@@ -57,22 +59,48 @@ export class AnagraficaTaglieComponent implements OnInit {
     this.risultatoEnabled = true;
   }
 
-  cercaNoRisultato() {
-    this.cercaSiRisultato();
+  visCercaNoRisultato() {
+    this.visCercaSiRisultato();
     this.risultatoEnabled = false;
+  }
+
+  visAggiungi() {
+    this.panelEnabled = true;
+    this.inputEditable = true;
+    this.confermaEnabled = true;
+    this.annullaEnabled = true;
+    this.creaEnabled = false;
+    this.modificaEnabled = false;
+    this.rimuoviEnabled = false;
+    this.cercaEnabled = false;
+    this.risultatoEnabled = false;
+    this.aggiungiEnabled = false;
   }
 
   cerca() {
     //prepara la chiamata al server
     let dto: TagliaSearchDto = new TagliaSearchDto();
-    dto.token = null; // TODO da inserire il token della sessione corrente
+    dto.token = this.singleton.token;
     dto.searchKey = this.searchKey;
+    let obs: Observable<TagliaSearchResultsDto> =
+      this.http.post<TagliaSearchResultsDto>('http://localhost:8080/search-taglie', dto);
 
-      let obs: Observable < TagliaSearchResultsDto > =
-    this.http.post<TagliaSearchResultsDto>('http://localhost:8080/search-taglie' , dto);
     //prepara la callback
-    //se trova qualcosa imposta le visibilità su cercaSiRisultato
-    //altrimenti imposta le visibilità su cercaNoRisultato
+    obs.subscribe(risposta => {
+      this.taglie = risposta.result;
+      if (this.taglie.length > 0) {
+        //se trova qualcosa imposta le visibilità su visCercaSiRisultato
+        this.visCercaSiRisultato();
+      } else {
+        //altrimenti imposta le visibilità su visCercaNoRisultato
+        this.visCercaNoRisultato();
+      }
+    });
+  }
+
+  aggiungi() {
+    //imposta la visibilità su visAggiungi
+    this.visAggiungi();
   }
 
   conferma() {
@@ -92,10 +120,6 @@ export class AnagraficaTaglieComponent implements OnInit {
   }
 
   rimuovi() {
-
-  }
-
-  aggiungi() {
 
   }
 
