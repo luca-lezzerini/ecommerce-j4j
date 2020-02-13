@@ -20,6 +20,8 @@ import { RegistrazioneDoubleOptinComponent } from './registrazione-double-optin/
 import { RegistrazioneSuccessoComponent } from './registrazione-successo/registrazione-successo.component';
 import { RegistrazioneErroreComponent } from './registrazione-errore/registrazione-errore.component';
 import { AnagraficaSpedizioniComponent } from './anagrafica-spedizioni/anagrafica-spedizioni.component';
+import { Visualizzatore02Component } from './esercizio/esercizio02/visualizzatore02/visualizzatore02.component';
+import { Incrementatore02Component } from './esercizio/esercizio02/incrementatore02/incrementatore02.component';
 
 const appRoutes: Routes = [
   { path: 'anagrafica-prodotti', component: AnagraficaProdottiComponent },
@@ -56,7 +58,9 @@ const appRoutes: Routes = [
     RegistrazioneErroreComponent,
     AnagraficaTaglieComponent,
     AnagraficaProdottiComponent,
-    AnagraficaSpedizioniComponent
+    AnagraficaSpedizioniComponent,
+    Visualizzatore02Component,
+    Incrementatore02Component
   ],
   imports: [
     RouterModule.forRoot(
