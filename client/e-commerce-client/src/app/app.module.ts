@@ -19,7 +19,6 @@ import { ViewCarrelloComponent } from './view-carrello/view-carrello.component';
 import { RegistrazioneDoubleOptinComponent } from './registrazione-double-optin/registrazione-double-optin.component';
 import { RegistrazioneSuccessoComponent } from './registrazione-successo/registrazione-successo.component';
 import { RegistrazioneErroreComponent } from './registrazione-errore/registrazione-errore.component';
-import { AnagraficaSpedizioniComponent } from './anagrafica-spedizioni/anagrafica-spedizioni.component';
 import { Visualizzatore02Component } from './esercizio/esercizio02/visualizzatore02/visualizzatore02.component';
 import { Incrementatore02Component } from './esercizio/esercizio02/incrementatore02/incrementatore02.component';
 
@@ -29,7 +28,6 @@ const appRoutes: Routes = [
   { path: 'home-riservata', component: HomeRiservataComponent },
   { path: 'login', component: LoginComponent },
   { path: 'anagrafica-taglie', component: AnagraficaTaglieComponent },
-  { path: 'anagrafica-spedizioni', component: AnagraficaSpedizioniComponent },
   { path: 'registrazione', component: RegistrazioneComponent },
   { path: 'view-carrello', component: ViewCarrelloComponent },
   { path: 'registrazione-double-optin', component: RegistrazioneDoubleOptinComponent },
@@ -58,7 +56,6 @@ const appRoutes: Routes = [
     RegistrazioneErroreComponent,
     AnagraficaTaglieComponent,
     AnagraficaProdottiComponent,
-    AnagraficaSpedizioniComponent,
     Visualizzatore02Component,
     Incrementatore02Component
   ],
