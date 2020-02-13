@@ -49,7 +49,8 @@ const appRoutes: Routes = [
     ViewCarrelloComponent,
     RegistrazioneDoubleOptinComponent,
     RegistrazioneSuccessoComponent,
-    RegistrazioneErroreComponent
+    RegistrazioneErroreComponent,
+    AnagraficaTaglieComponent
   ],
   imports: [
     RouterModule.forRoot(
