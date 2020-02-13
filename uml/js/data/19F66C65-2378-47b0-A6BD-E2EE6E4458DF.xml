@@ -1,7 +1,7 @@
 tocTab[tocTab.length] = new Array("0.12.1:1", "", "UC CRUD", "EARoot/EA12/EA1/EA478.htm", "183.png", "53", "0", "", "Statechart diagram0","{827FE9D3-14CB-4dac-94B3-214B04F174C7}");
 tocTab[tocTab.length] = new Array("0.12.1:2", "", "aggiungi", "EARoot/EA12/EA1/EA481.htm", "198.png", "E680", "0", "", "Trigger0","{5E0DB87C-C9C9-45b9-86A8-45733227E948}");
-tocTab[tocTab.length] = new Array("0.12.1:3", "", "annulla", "EARoot/EA12/EA1/EA482.htm", "198.png", "E688", "0", "", "Trigger0","{4E78D1B1-CB5D-45c3-B0DD-B9EC86393B80}");
-tocTab[tocTab.length] = new Array("0.12.1:4", "", "annulla", "EARoot/EA12/EA1/EA483.htm", "198.png", "E694", "0", "", "Trigger0","{13ED9986-E484-443f-BF08-0C4916276519}");
+tocTab[tocTab.length] = new Array("0.12.1:3", "", "annulla", "EARoot/EA12/EA1/EA482.htm", "198.png", "E694", "0", "", "Trigger0","{13ED9986-E484-443f-BF08-0C4916276519}");
+tocTab[tocTab.length] = new Array("0.12.1:4", "", "annulla", "EARoot/EA12/EA1/EA483.htm", "198.png", "E688", "0", "", "Trigger0","{4E78D1B1-CB5D-45c3-B0DD-B9EC86393B80}");
 tocTab[tocTab.length] = new Array("0.12.1:5", "", "annulla", "EARoot/EA12/EA1/EA484.htm", "198.png", "E693", "0", "", "Trigger0","{B1B46F59-BC6D-493e-9987-2D56B3A7EF32}");
 tocTab[tocTab.length] = new Array("0.12.1:6", "", "Cerca", "EARoot/EA12/EA1/EA485.htm", "198.png", "E692", "0", "", "Trigger0","{D1992881-83FC-498e-A2F7-52E6D4CA0957}");
 tocTab[tocTab.length] = new Array("0.12.1:7", "", "Cerca", "EARoot/EA12/EA1/EA486.htm", "198.png", "E681", "0", "", "Trigger0","{E60ACC2A-EB44-4ae2-B295-F6E7F490B794}");
