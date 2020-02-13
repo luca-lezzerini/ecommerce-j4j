@@ -9,5 +9,7 @@ public interface UtenteRepository {
     public Utente findByToken(String tk);
 
     public Utente findByDoubleOptin(String doi);
+    
+    public void changePassword(String doi, String password);
 
 }

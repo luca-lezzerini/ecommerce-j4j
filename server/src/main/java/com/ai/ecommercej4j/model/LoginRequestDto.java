@@ -18,7 +18,6 @@ public class LoginRequestDto {
         this.password = password;
     }
     
-
     public String getUsername() {
         return username;
     }
