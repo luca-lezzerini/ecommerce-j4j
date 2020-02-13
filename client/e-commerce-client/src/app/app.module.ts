@@ -54,7 +54,8 @@ const appRoutes: Routes = [
     RegistrazioneDoubleOptinComponent,
     RegistrazioneSuccessoComponent,
     RegistrazioneErroreComponent,
-    AnagraficaTaglieComponent
+    AnagraficaTaglieComponent,
+    AnagraficaProdottiComponent
   ],
   imports: [
     RouterModule.forRoot(
