@@ -1,5 +1,6 @@
 import { AnagraficaProdottiComponent } from './anagrafica-prodotti/anagrafica-prodotti.component';
 import { AnagraficaTaglieComponent } from './anagrafica-taglie/anagrafica-taglie.component';
+import { AnagraficaSpedizioniComponent } from './anagrafica-spedizioni/anagrafica-spedizioni.component';
 import { HomeRiservataComponent } from './home-riservata/home-riservata.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -23,9 +24,12 @@ import { Visualizzatore06Component } from './esercizio/esercizio06/visualizzator
 import { Incrementatore06Component } from './esercizio/esercizio06/incrementatore06/incrementatore06.component';
 import { Visualizzatore02Component } from './esercizio/esercizio02/visualizzatore02/visualizzatore02.component';
 import { Incrementatore02Component } from './esercizio/esercizio02/incrementatore02/incrementatore02.component';
+import { Visualizzatore08Component } from './visualizzatore08/visualizzatore08.component';
+import { Incrementatore08Component } from './incrementatore08/incrementatore08.component';
 
 const appRoutes: Routes = [
   { path: 'anagrafica-prodotti', component: AnagraficaProdottiComponent },
+  { path: 'anagrafica-spedizioni', component: AnagraficaSpedizioniComponent },
   { path: 'home-pubblica', component: HomePageComponent },
   { path: 'home-riservata', component: HomeRiservataComponent },
   { path: 'login', component: LoginComponent },
@@ -61,10 +65,13 @@ const appRoutes: Routes = [
     RegistrazioneErroreComponent,
     AnagraficaTaglieComponent,
     AnagraficaProdottiComponent,
+    AnagraficaSpedizioniComponent,
     Visualizzatore06Component,
     Incrementatore06Component,
     Visualizzatore02Component,
     Incrementatore02Component,
+    Visualizzatore08Component,
+    Incrementatore08Component,
   ],
   imports: [
     RouterModule.forRoot(
