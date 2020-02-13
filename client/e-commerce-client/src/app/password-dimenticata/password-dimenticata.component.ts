@@ -15,9 +15,9 @@ export class PasswordDimenticataComponent implements OnInit {
   password: string;
   token: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   // richiesta per password dimenticata
   passDimenticata() {
@@ -34,8 +34,17 @@ export class PasswordDimenticataComponent implements OnInit {
     });
   }
   // controllo sul token per verificare la ricezione della mail
-  checkDoubleOptin() {}
+  checkDoubleOptin() {
+    // prepara i dati
+    let dto: LoginResponseDto = new LoginResponseDto();
+    dto.token = this.token;
 
-  // torna sulla pagina di login
-  annulla(){}
+    // prepara la richiesta
+    let obs: Observable<void> = this.http.post<void>(
+      'http://localhost:8080/check-double-optin',
+      dto
+    );
+
+    obs.subscribe(data => {});
+  }
 }
