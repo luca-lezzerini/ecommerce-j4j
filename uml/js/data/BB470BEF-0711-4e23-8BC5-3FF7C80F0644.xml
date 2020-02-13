@@ -1,6 +1,6 @@
-tocTab[tocTab.length] = new Array("0.15.3:1", "", "UCs Gestore Negozio", "EARoot/EA15/EA3/EA622.htm", "180.png", "45", "0", "", "Use Case diagram0","{EF8B6563-05BF-4f34-B404-9B9B227DF2DE}");
-tocTab[tocTab.length] = new Array("0.15.3:2", "", "Anagrafica Colori", "EARoot/EA15/EA3/EA625.htm", "7.png", "E608", "0", "", "UseCase0","{E2DADC23-EB77-441b-B0C8-33E1F1F0307D}");
-tocTab[tocTab.length] = new Array("0.15.3:3", "", "Anagrafica Prodotti", "EARoot/EA15/EA3/EA626.htm", "7.png", "E609", "0", "", "UseCase0","{A9000594-4F51-4ebc-9858-17DF0A997816}");
-tocTab[tocTab.length] = new Array("0.15.3:4", "", "Anagrafica Taglie", "EARoot/EA15/EA3/EA627.htm", "7.png", "E607", "0", "", "UseCase0","{342314C9-DF21-426a-98F0-953A3B1E8F7D}");
-tocTab[tocTab.length] = new Array("0.15.3:5", "", "Associa Prodotto a Colori", "EARoot/EA15/EA3/EA628.htm", "7.png", "E611", "0", "", "UseCase0","{4C0EBE93-EF31-4377-AA11-05C058E6F6C5}");
-tocTab[tocTab.length] = new Array("0.15.3:6", "", "Associa Prodotto a Taglie", "EARoot/EA15/EA3/EA629.htm", "7.png", "E610", "0", "", "UseCase0","{5D065F8A-2706-4043-B84D-062769D37305}");
+tocTab[tocTab.length] = new Array("0.15.3:1", "", "UCs Gestore Negozio", "EARoot/EA15/EA3/EA623.htm", "180.png", "45", "0", "", "Use Case diagram0","{EF8B6563-05BF-4f34-B404-9B9B227DF2DE}");
+tocTab[tocTab.length] = new Array("0.15.3:2", "", "Anagrafica Colori", "EARoot/EA15/EA3/EA626.htm", "7.png", "E608", "0", "", "UseCase0","{E2DADC23-EB77-441b-B0C8-33E1F1F0307D}");
+tocTab[tocTab.length] = new Array("0.15.3:3", "", "Anagrafica Prodotti", "EARoot/EA15/EA3/EA627.htm", "7.png", "E609", "0", "", "UseCase0","{A9000594-4F51-4ebc-9858-17DF0A997816}");
+tocTab[tocTab.length] = new Array("0.15.3:4", "", "Anagrafica Taglie", "EARoot/EA15/EA3/EA628.htm", "7.png", "E607", "0", "", "UseCase0","{342314C9-DF21-426a-98F0-953A3B1E8F7D}");
+tocTab[tocTab.length] = new Array("0.15.3:5", "", "Associa Prodotto a Colori", "EARoot/EA15/EA3/EA629.htm", "7.png", "E611", "0", "", "UseCase0","{4C0EBE93-EF31-4377-AA11-05C058E6F6C5}");
+tocTab[tocTab.length] = new Array("0.15.3:6", "", "Associa Prodotto a Taglie", "EARoot/EA15/EA3/EA630.htm", "7.png", "E610", "0", "", "UseCase0","{5D065F8A-2706-4043-B84D-062769D37305}");
