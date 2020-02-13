@@ -7,9 +7,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnagraficaTaglieComponent implements OnInit {
 
+  codice = '';
+  descrizione = '';
+  panelEnable = false;
+  confermaEnable = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  conferma() {
+
+  }
+
+  annulla() {
+
+  }
+
+  crea() {
+
+  }
+
+  modifica() {
+
+  }
+  
+  rimuovi() {
+
   }
 
 }
