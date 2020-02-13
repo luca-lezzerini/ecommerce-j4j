@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { LoginResponseDto } from '../classi/login-response-dto';
 import { LoginRequestDto } from '../classi/login-request-dto';
+import { AreaComuneService } from '../area-comune.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   password: string;
   token: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private ac: AreaComuneService) { }
 
   ngOnInit() {
   }
@@ -31,10 +32,9 @@ export class LoginComponent implements OnInit {
       this.http.
       post<LoginResponseDto>('http://localhost:8080/login', lg);
 
-    // creo al callback
+    // creo la callback
     og.subscribe(data => {
-      this.token = data.token;
-
+      this.ac.token = data.token;
     });
   }
 
