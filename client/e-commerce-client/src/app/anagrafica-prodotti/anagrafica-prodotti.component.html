@@ -1,0 +1,44 @@
+<div>
+  <input type="text" [(ngModel)]="codice">&nbsp;
+  <input type="text" [(ngModel)]="descrizione">&nbsp;
+  <input type="text" [(ngModel)]="prezzo">
+  <br>
+  <button (click)="conferma()">Conferma</button>&nbsp;
+  <button (click)="annulla()">Annulla</button>&nbsp;
+  <button (click)="crea()">Crea</button>&nbsp;
+  <button (click)="modifica()">Modifica</button>&nbsp;
+  <button (click)="rimuovi()">Rimuovi</button>
+</div>
+
+<div>
+  <input type="text" [(ngModel)]="search">&nbsp;
+  <button (click)="cerca()">Cerca</button>&nbsp;
+  <button (click)="crea()">Aggiungi</button>&nbsp;
+</div>
+
+<div>
+  <table>
+    <tr>
+    <th>Codice</th>
+    <th>Descrizione</th>
+    <th>Prezzo</th>
+    <th>View</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    </tr>
+    <tr *ngFor="let p of prodotti">
+      <td>{{p.codice}}</td>
+      <td>{{p.descrizione}}</td>
+      <td>{{p.prezzo}}</td>
+      <td>
+        <button (click)="view()">View</button>>
+      </td>
+      <td>
+        <button (click)="modifica()">Edit</button>>
+      </td>
+      <td>
+        <button (click)="rimuovi()">Delete</button>>
+      </td>
+      </tr>
+  </table>
+</div>
