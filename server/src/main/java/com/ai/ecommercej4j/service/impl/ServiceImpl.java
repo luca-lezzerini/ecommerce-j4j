@@ -10,6 +10,8 @@ import com.ai.ecommercej4j.model.LoginRequestDto;
 import com.ai.ecommercej4j.model.LoginResponseDto;
 import com.ai.ecommercej4j.model.RegistrazioneRequestDto;
 import com.ai.ecommercej4j.model.RegistrazioneResponseDto;
+import com.ai.ecommercej4j.model.SpedizioneSearchDto;
+import com.ai.ecommercej4j.model.SpedizioneSearchResultsDto;
 import com.ai.ecommercej4j.service.SecurityService;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,11 @@ public class ServiceImpl implements SecurityService{
 
     @Override
     public RegistrazioneResponseDto registrami(RegistrazioneRequestDto dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public SpedizioneSearchResultsDto searchSpedizione(SpedizioneSearchDto dto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
