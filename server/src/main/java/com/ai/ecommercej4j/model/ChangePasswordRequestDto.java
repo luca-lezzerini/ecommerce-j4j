@@ -1,39 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ai.ecommercej4j.model;
 
-/**
- *
- * @author utente
- */
-public class ChangePasswordRequestDto {
-    private String doi;
-    private String password;
+public class ChangePasswordRequestDto extends LoginRequestDto {
+    private String doiCode;
+    private String oldPassword;
+    private String newPassword;
 
-    public ChangePasswordRequestDto(String doi, String password) {
-        this.doi = doi;
-        this.password = password;
+    public ChangePasswordRequestDto(String doiCode, String oldPassword, String newPassword) {
+        this.doiCode = doiCode;
+        this.oldPassword = oldPassword;
+        this.newPassword = newPassword;
     }
 
     public ChangePasswordRequestDto() {
     }
+
+    public String getDoiCode() {
+        return doiCode;
+    }
+
+    public void setDoiCode(String doiCode) {
+        this.doiCode = doiCode;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
     
-    public String getDoi() {
-        return doi;
-    }
-
-    public void setDoi(String doi) {
-        this.doi = doi;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    
 }

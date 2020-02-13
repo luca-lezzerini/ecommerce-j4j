@@ -20,6 +20,8 @@ import { RegistrazioneDoubleOptinComponent } from './registrazione-double-optin/
 import { RegistrazioneSuccessoComponent } from './registrazione-successo/registrazione-successo.component';
 import { RegistrazioneErroreComponent } from './registrazione-errore/registrazione-errore.component';
 import { AnagraficaSpedizioniComponent } from './anagrafica-spedizioni/anagrafica-spedizioni.component';
+import { Visualizzatore06Component } from './esercizio06/visualizzatore06/visualizzatore06.component';
+import { Incrementatore06Component } from './esercizio06/incrementatore06/incrementatore06.component';
 
 const appRoutes: Routes = [
   { path: 'anagrafica-prodotti', component: AnagraficaProdottiComponent },
@@ -39,6 +41,7 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   { path: 'password-dimenticata', component: PasswordDimenticataComponent }
+  { path: 'esercizio06', component: Visualizzatore06Component }
 ];
 
 @NgModule({
@@ -56,7 +59,10 @@ const appRoutes: Routes = [
     RegistrazioneErroreComponent,
     AnagraficaTaglieComponent,
     AnagraficaProdottiComponent,
-    AnagraficaSpedizioniComponent
+    AnagraficaSpedizioniComponent,
+    Esercizio06Component,
+    Visualizzatore06Component,
+    Incrementatore06Component
   ],
   imports: [
     RouterModule.forRoot(
