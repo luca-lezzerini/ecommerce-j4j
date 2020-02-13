@@ -12,7 +12,9 @@
                 <label> Password </label> &nbsp;
                 <input type="text" [(ngModel)]="password" class="password" placeholder=" Password" />
             </p>
-            <button class="L" type="button" (click)="login()">Login</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a routerLink="/home-riservata">
+              <button class="L" type="button" (click)="login()">Login</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </a>
             <a routerLink="/password-dimenticata">
                 <button class="P" type="button" (click)="passwordDimenticata()">
           Password dimenticata
