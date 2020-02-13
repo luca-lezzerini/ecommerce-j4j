@@ -1,7 +1,7 @@
-tocTab[tocTab.length] = new Array("0.11.5:1", "", "UC CRUD", "EARoot/EA11/EA5/EA486.htm", "175.png", "54", "0", "", "Logical diagram0","{2216EB6A-76EC-4904-915A-56932B23978A}");
-tocTab[tocTab.length] = new Array("0.11.5:2", "", "XyzController", "EARoot/EA11/EA5/EA492.htm", "5.png", "E711", "0", "", "Class0","{FA62295D-6136-47cb-B505-28EDF763D58D}");
-tocTab[tocTab.length] = new Array("0.11.5:3", "", "XyzCreateDto", "EARoot/EA11/EA5/EA493.htm", "5.png", "E712", "0", "", "Class0","{4E98B2F7-3FF7-4241-945F-26784DB5723C}");
-tocTab[tocTab.length] = new Array("0.11.5:4", "", "XyzDeleteDto", "EARoot/EA11/EA5/EA494.htm", "5.png", "E715", "0", "", "Class0","{A5893FD5-55DB-4681-9FF4-C5F73B0B3E96}");
-tocTab[tocTab.length] = new Array("0.11.5:5", "", "XyzSearchDto", "EARoot/EA11/EA5/EA495.htm", "5.png", "E713", "0", "", "Class0","{6DA06539-668D-4e86-A5D1-026F9E2A583D}");
-tocTab[tocTab.length] = new Array("0.11.5:6", "", "XyzSearchResultsDto", "EARoot/EA11/EA5/EA496.htm", "5.png", "E714", "0", "", "Class0","{876F1D92-F24D-4888-95F6-904A3E2E190C}");
-tocTab[tocTab.length] = new Array("0.11.5:7", "", "XyzUpdateDto", "EARoot/EA11/EA5/EA497.htm", "5.png", "E716", "0", "", "Class0","{6E9A6100-C4CE-4470-8E19-FE34DCCED461}");
+tocTab[tocTab.length] = new Array("0.11.5:1", "", "UC CRUD", "EARoot/EA11/EA5/EA487.htm", "175.png", "54", "0", "", "Logical diagram0","{2216EB6A-76EC-4904-915A-56932B23978A}");
+tocTab[tocTab.length] = new Array("0.11.5:2", "", "XyzController", "EARoot/EA11/EA5/EA493.htm", "5.png", "E711", "0", "", "Class0","{FA62295D-6136-47cb-B505-28EDF763D58D}");
+tocTab[tocTab.length] = new Array("0.11.5:3", "", "XyzCreateDto", "EARoot/EA11/EA5/EA494.htm", "5.png", "E712", "0", "", "Class0","{4E98B2F7-3FF7-4241-945F-26784DB5723C}");
+tocTab[tocTab.length] = new Array("0.11.5:4", "", "XyzDeleteDto", "EARoot/EA11/EA5/EA495.htm", "5.png", "E715", "0", "", "Class0","{A5893FD5-55DB-4681-9FF4-C5F73B0B3E96}");
+tocTab[tocTab.length] = new Array("0.11.5:5", "", "XyzSearchDto", "EARoot/EA11/EA5/EA496.htm", "5.png", "E713", "0", "", "Class0","{6DA06539-668D-4e86-A5D1-026F9E2A583D}");
+tocTab[tocTab.length] = new Array("0.11.5:6", "", "XyzSearchResultsDto", "EARoot/EA11/EA5/EA497.htm", "5.png", "E714", "0", "", "Class0","{876F1D92-F24D-4888-95F6-904A3E2E190C}");
+tocTab[tocTab.length] = new Array("0.11.5:7", "", "XyzUpdateDto", "EARoot/EA11/EA5/EA498.htm", "5.png", "E716", "0", "", "Class0","{6E9A6100-C4CE-4470-8E19-FE34DCCED461}");
