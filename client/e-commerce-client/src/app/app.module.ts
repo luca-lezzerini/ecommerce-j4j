@@ -14,6 +14,8 @@ import { ReimpostaPasswordComponent } from './reimposta-password/reimposta-passw
 import { Routes, RouterModule } from '@angular/router';
 import { ViewCarrelloComponent } from './view-carrello/view-carrello.component';
 import { RegistrazioneDoubleOptinComponent } from './registrazione-double-optin/registrazione-double-optin.component';
+import { RegistrazioneSuccessoComponent } from './registrazione-successo/registrazione-successo.component';
+import { RegistrazioneErroreComponent } from './registrazione-errore/registrazione-errore.component';
 
 const appRoutes: Routes = [
   { path: 'home-pubblica', component: HomePageComponent },
@@ -21,6 +23,8 @@ const appRoutes: Routes = [
   { path: 'registrazione', component: RegistrazioneComponent },
   { path: 'view-carrello', component: ViewCarrelloComponent },
   { path: 'registrazione-double-optin', component: RegistrazioneDoubleOptinComponent },
+  { path: 'registrazione-successo', component: RegistrazioneSuccessoComponent },
+  { path: 'registrazione-errore', component: RegistrazioneErroreComponent },
   {
     path: '',
     redirectTo: '/home-pubblica',
@@ -38,7 +42,9 @@ const appRoutes: Routes = [
     PasswordDimenticataComponent,
     ReimpostaPasswordComponent,
     ViewCarrelloComponent,
-    RegistrazioneDoubleOptinComponent
+    RegistrazioneDoubleOptinComponent,
+    RegistrazioneSuccessoComponent,
+    RegistrazioneErroreComponent
   ],
   imports: [
     RouterModule.forRoot(
