@@ -1,5 +1,5 @@
 import { LoginResponseDto } from './login-response-dto';
 
-export class ColoriCreateDto extends LoginResponseDto {
+export class ColoriDeleteDto extends LoginResponseDto {
   idToDelete: number;
 }

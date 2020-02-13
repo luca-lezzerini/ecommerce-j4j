@@ -1,3 +1,4 @@
+import { AnagraficaProdottiComponent } from './anagrafica-prodotti/anagrafica-prodotti.component';
 import { AnagraficaTaglieComponent } from './anagrafica-taglie/anagrafica-taglie.component';
 import { HomeRiservataComponent } from './home-riservata/home-riservata.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +21,7 @@ import { RegistrazioneSuccessoComponent } from './registrazione-successo/registr
 import { RegistrazioneErroreComponent } from './registrazione-errore/registrazione-errore.component';
 
 const appRoutes: Routes = [
+  { path: 'anagrafica-prodotti', component: AnagraficaProdottiComponent },
   { path: 'home-pubblica', component: HomePageComponent },
   { path: 'home-riservata', component: HomeRiservataComponent },
   { path: 'login', component: LoginComponent },
@@ -50,7 +52,8 @@ const appRoutes: Routes = [
     RegistrazioneDoubleOptinComponent,
     RegistrazioneSuccessoComponent,
     RegistrazioneErroreComponent,
-    AnagraficaTaglieComponent
+    AnagraficaTaglieComponent,
+    AnagraficaProdottiComponent
   ],
   imports: [
     RouterModule.forRoot(
