@@ -33,6 +33,7 @@ const appRoutes: Routes = [
   { path: 'registrazione-double-optin', component: RegistrazioneDoubleOptinComponent },
   { path: 'registrazione-successo', component: RegistrazioneSuccessoComponent },
   { path: 'registrazione-errore', component: RegistrazioneErroreComponent },
+  { path: 'visualizzatore02', component: Visualizzatore02Component },
   {
     path: '',
     redirectTo: '/home-pubblica',

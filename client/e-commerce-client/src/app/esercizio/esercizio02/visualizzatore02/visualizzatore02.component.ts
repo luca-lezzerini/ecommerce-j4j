@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Visualizzatore02Component implements OnInit {
 
+  c = 0;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  inc(contatore: number) {
+    this.c = contatore;
   }
 
 }
