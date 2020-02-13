@@ -1,5 +1,5 @@
-tocTab[tocTab.length] = new Array("0.15.1", "1", "UI CRUD", "EARoot/EA15/EA1/EA522.htm", "4.png", "", "", "{DA61A5DC-E717-4088-B366-9B253B2E7BDE}", "Package");
-tocTab[tocTab.length] = new Array("0.15.2", "1", "UI Home Page Pubblica", "EARoot/EA15/EA2/EA541.htm", "4.png", "", "", "{45635FB0-C36D-46d7-A18B-FF2C85B4DEB4}", "Package");
-tocTab[tocTab.length] = new Array("0.15.3", "1", "UI Login ", "EARoot/EA15/EA3/EA553.htm", "4.png", "", "", "{85D0FFD2-7EEF-47a2-A7C0-354DD9FEF90F}", "Package");
-tocTab[tocTab.length] = new Array("0.15.4", "1", "UI Password Dimenticata", "EARoot/EA15/EA4/EA562.htm", "4.png", "", "", "{153AD326-1A89-44ac-9884-E6048117E1E1}", "Package");
-tocTab[tocTab.length] = new Array("0.15.5", "1", "UI Registrazione", "EARoot/EA15/EA5/EA596.htm", "4.png", "", "", "{56928E90-C716-49f6-8AD0-8D2100634D4C}", "Package");
+tocTab[tocTab.length] = new Array("0.15.1", "1", "UI CRUD", "EARoot/EA15/EA1/EA556.htm", "4.png", "", "", "{DA61A5DC-E717-4088-B366-9B253B2E7BDE}", "Package");
+tocTab[tocTab.length] = new Array("0.15.2", "1", "UI Home Page Pubblica", "EARoot/EA15/EA2/EA575.htm", "4.png", "", "", "{45635FB0-C36D-46d7-A18B-FF2C85B4DEB4}", "Package");
+tocTab[tocTab.length] = new Array("0.15.3", "1", "UI Login ", "EARoot/EA15/EA3/EA587.htm", "4.png", "", "", "{85D0FFD2-7EEF-47a2-A7C0-354DD9FEF90F}", "Package");
+tocTab[tocTab.length] = new Array("0.15.4", "1", "UI Password Dimenticata", "EARoot/EA15/EA4/EA596.htm", "4.png", "", "", "{153AD326-1A89-44ac-9884-E6048117E1E1}", "Package");
+tocTab[tocTab.length] = new Array("0.15.5", "1", "UI Registrazione", "EARoot/EA15/EA5/EA630.htm", "4.png", "", "", "{56928E90-C716-49f6-8AD0-8D2100634D4C}", "Package");

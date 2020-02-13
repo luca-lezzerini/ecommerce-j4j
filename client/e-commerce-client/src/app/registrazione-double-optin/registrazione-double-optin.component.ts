@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrazioneDoubleOptinComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+    this.checkDoubleOptin();
+  }
 
   ngOnInit() {
   }
-
+  checkDoubleOptin(){
+    //const obs: Observable<> = http.post<>('' + d);
+  }
 }
