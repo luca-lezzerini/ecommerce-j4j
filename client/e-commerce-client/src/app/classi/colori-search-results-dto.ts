@@ -1,5 +1,5 @@
 import { Colori } from './colori';
 
-export class ColoriCreateDto {
+export class ColoriSearchResultsDto {
   result: Colori[];
 }

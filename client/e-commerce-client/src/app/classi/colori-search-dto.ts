@@ -1,5 +1,5 @@
 import { LoginResponseDto } from './login-response-dto';
 
-export class ColoriCreateDto extends LoginResponseDto {
+export class ColoriSearchDto extends LoginResponseDto {
   searchKey: string;
 }
