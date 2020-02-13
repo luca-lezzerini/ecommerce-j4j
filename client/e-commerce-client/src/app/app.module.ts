@@ -24,8 +24,8 @@ import { Visualizzatore06Component } from './esercizio/esercizio06/visualizzator
 import { Incrementatore06Component } from './esercizio/esercizio06/incrementatore06/incrementatore06.component';
 import { Visualizzatore02Component } from './esercizio/esercizio02/visualizzatore02/visualizzatore02.component';
 import { Incrementatore02Component } from './esercizio/esercizio02/incrementatore02/incrementatore02.component';
-import { Visualizzatore08Component } from './visualizzatore08/visualizzatore08.component';
-import { Incrementatore08Component } from './incrementatore08/incrementatore08.component';
+import { Visualizzatore08Component } from './esercizio/esercizio08/visualizzatore08/visualizzatore08.component';
+import { Incrementatore08Component } from './esercizio/esercizio08/incrementatore08/incrementatore08.component';
 
 const appRoutes: Routes = [
   { path: 'anagrafica-prodotti', component: AnagraficaProdottiComponent },
@@ -40,6 +40,7 @@ const appRoutes: Routes = [
   { path: 'registrazione-successo', component: RegistrazioneSuccessoComponent },
   { path: 'registrazione-errore', component: RegistrazioneErroreComponent },
   { path: 'visualizzatore02', component: Visualizzatore02Component },
+  { path: 'visualizzatore08', component: Visualizzatore08Component },
   {
     path: '',
     redirectTo: '/home-pubblica',
