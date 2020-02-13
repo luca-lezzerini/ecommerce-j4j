@@ -13,8 +13,12 @@ import { PasswordDimenticataComponent } from './password-dimenticata/password-di
 import { ReimpostaPasswordComponent } from './reimposta-password/reimposta-password.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ViewCarrelloComponent } from './view-carrello/view-carrello.component';
+<<<<<<< HEAD
 import { DoubleOptinComponent } from './double-optin/double-optin.component';
 import { HomeRiservataComponent } from './home-riservata/home-riservata.component';
+=======
+import { RegistrazioneDoubleOptinComponent } from './registrazione-double-optin/registrazione-double-optin.component';
+>>>>>>> b1d31f19b5c2124b34828ca3ed9d7c85e8f0ef06
 
 const appRoutes: Routes = [
   { path: 'home-pubblica', component: HomePageComponent },
@@ -22,7 +26,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registrazione', component: RegistrazioneComponent },
   { path: 'view-carrello', component: ViewCarrelloComponent },
-  { path: 'double-optin', component: DoubleOptinComponent },
+  { path: 'registrazione-double-optin', component: RegistrazioneDoubleOptinComponent },
   {
     path: '',
     redirectTo: '/home-pubblica',
@@ -40,8 +44,12 @@ const appRoutes: Routes = [
     PasswordDimenticataComponent,
     ReimpostaPasswordComponent,
     ViewCarrelloComponent,
+<<<<<<< HEAD
     DoubleOptinComponent,
     HomeRiservataComponent
+=======
+    RegistrazioneDoubleOptinComponent
+>>>>>>> b1d31f19b5c2124b34828ca3ed9d7c85e8f0ef06
   ],
   imports: [
     RouterModule.forRoot(
