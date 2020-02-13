@@ -27,8 +27,7 @@ const appRoutes: Routes = [
   { path: 'home-riservata', component: HomeRiservataComponent },
   { path: 'login', component: LoginComponent },
   { path: 'anagrafica-taglie', component: AnagraficaTaglieComponent },
-  // FIXME
-  // { path: 'anagrafica-spedizione', component: AnagraficaSpedizioneComponent },
+  { path: 'anagrafica-spedizioni', component: AnagraficaSpedizioniComponent },
   { path: 'registrazione', component: RegistrazioneComponent },
   { path: 'view-carrello', component: ViewCarrelloComponent },
   { path: 'registrazione-double-optin', component: RegistrazioneDoubleOptinComponent },
