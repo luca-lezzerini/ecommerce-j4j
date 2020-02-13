@@ -1,4 +1,4 @@
-export class ChangePasswordRequestDto{
+export class ChangePasswordRequestDto {
   doi: string;
   password: string;
 }
