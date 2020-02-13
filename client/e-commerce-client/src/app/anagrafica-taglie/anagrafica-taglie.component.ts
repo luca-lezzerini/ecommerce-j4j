@@ -1,3 +1,7 @@
+import { TagliaSearchDto } from './../classi/taglia-search-dto';
+import { HttpClient } from '@angular/common/http';
+import { TagliaSearchResultsDto } from './../classi/taglia-search-results-dto';
+import { Taglia } from './../classi/taglia';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,6 +14,7 @@ export class AnagraficaTaglieComponent implements OnInit {
 
   codice = '';
   descrizione = '';
+  searchKey = '';
   panelEnabled: boolean;
   confermaEnabled: boolean;
   annullaEnabled: boolean;
@@ -19,8 +24,9 @@ export class AnagraficaTaglieComponent implements OnInit {
   cercaEnabled: boolean;
   aggiungiEnabled: boolean;
   risultatoEnabled: boolean;
+  taglie: Taglia[] = [];
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.initNgIf();
   }
 
@@ -58,9 +64,39 @@ export class AnagraficaTaglieComponent implements OnInit {
 
   cerca() {
     //prepara la chiamata al server
+    let dto: TagliaSearchDto = new TagliaSearchDto();
+    dto.token = null; // TODO da inserire il token della sessione corrente
+    dto.searchKey = this.searchKey;
+
+      let obs: Observable < TagliaSearchResultsDto > =
+    this.http.post<TagliaSearchResultsDto>('http://localhost:8080/search-taglie' , dto);
     //prepara la callback
     //se trova qualcosa imposta le visibilità su cercaSiRisultato
     //altrimenti imposta le visibilità su cercaNoRisultato
+  }
+
+  conferma() {
+
+  }
+
+  annulla() {
+
+  }
+
+  crea() {
+
+  }
+
+  modifica() {
+
+  }
+
+  rimuovi() {
+
+  }
+
+  aggiungi() {
+
   }
 
 }
