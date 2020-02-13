@@ -44,7 +44,7 @@ export class RegistrazioneComponent implements OnInit {
             // se registrato è false l'utente non è stato registrato e mostra messaggio di errore
             // TODO
           }
-          this.router.navigateByUrl('home-pubblica');
+          this.router.navigateByUrl('registrazione-double-optin');
         });
       } else {
         // mostra messaggio di errore
