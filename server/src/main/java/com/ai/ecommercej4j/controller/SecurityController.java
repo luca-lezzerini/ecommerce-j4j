@@ -8,31 +8,38 @@ import com.ai.ecommercej4j.service.SecurityService;
 @RestController
 @CrossOrigin("*")
 public class SecurityController {
-    
+
     @Autowired
     SecurityService ss;
-    
+
     @RequestMapping("/login")
     @ResponseBody
-    public LoginResponseDto login(@RequestBody LoginRequestDto dto){
-    return ss.login(dto);
+    public LoginResponseDto login(@RequestBody LoginRequestDto dto) {
+        return ss.login(dto);
     }
-    
+
     @RequestMapping("/password-dimenticata")
     @ResponseBody
-    public LoginResponseDto passwordDimenticata(@RequestBody LoginRequestDto dto){
-    return ss.passwordDimenticata(dto);
+    public LoginResponseDto passwordDimenticata(@RequestBody LoginRequestDto dto) {
+        return ss.passwordDimenticata(dto);
     }
-    
+
     @RequestMapping("/check-double-optin")
     @ResponseBody
-    public void checkDoubleOptin(@RequestBody LoginResponseDto dto){
+    public void checkDoubleOptin(@RequestBody LoginResponseDto dto) {
         ss.checkDoubleOptin(dto);
     }
-    
+
     @RequestMapping("/registrazione")
     @ResponseBody
-    public RegistrazioneResponseDto registrami(@RequestBody RegistrazioneRequestDto dto){
-    return ss.registrami(dto);
+    public RegistrazioneResponseDto registrami(@RequestBody RegistrazioneRequestDto dto) {
+        return ss.registrami(dto);
     }
+
+    @RequestMapping("/reimposta-password")
+    @ResponseBody
+    public void reimpostaPassword(@RequestBody ChangePasswordRequestDto dto) {
+        ss.reimpostaPassword(dto);
+    }
+
 }
