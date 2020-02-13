@@ -19,6 +19,8 @@ import { ViewCarrelloComponent } from './view-carrello/view-carrello.component';
 import { RegistrazioneDoubleOptinComponent } from './registrazione-double-optin/registrazione-double-optin.component';
 import { RegistrazioneSuccessoComponent } from './registrazione-successo/registrazione-successo.component';
 import { RegistrazioneErroreComponent } from './registrazione-errore/registrazione-errore.component';
+import { Visualizzatore06Component } from './esercizio/esercizio06/visualizzatore06/visualizzatore06.component';
+import { Incrementatore06Component } from './esercizio/esercizio06/incrementatore06/incrementatore06.component';
 import { Visualizzatore02Component } from './esercizio/esercizio02/visualizzatore02/visualizzatore02.component';
 import { Incrementatore02Component } from './esercizio/esercizio02/incrementatore02/incrementatore02.component';
 
@@ -39,7 +41,9 @@ const appRoutes: Routes = [
     redirectTo: '/home-pubblica',
     pathMatch: 'full'
   },
-  { path: 'password-dimenticata', component: PasswordDimenticataComponent }
+  { path: 'password-dimenticata', component: PasswordDimenticataComponent },
+  { path: 'reimposta-password', component: ReimpostaPasswordComponent },
+  { path: 'esercizio06', component: Visualizzatore06Component }
 ];
 
 @NgModule({
@@ -57,8 +61,10 @@ const appRoutes: Routes = [
     RegistrazioneErroreComponent,
     AnagraficaTaglieComponent,
     AnagraficaProdottiComponent,
+    Visualizzatore06Component,
+    Incrementatore06Component,
     Visualizzatore02Component,
-    Incrementatore02Component
+    Incrementatore02Component,
   ],
   imports: [
     RouterModule.forRoot(
