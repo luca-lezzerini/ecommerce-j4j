@@ -1,3 +1,4 @@
+import { HomeRiservataComponent } from './home-riservata/home-riservata.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -13,14 +14,19 @@ import { PasswordDimenticataComponent } from './password-dimenticata/password-di
 import { ReimpostaPasswordComponent } from './reimposta-password/reimposta-password.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ViewCarrelloComponent } from './view-carrello/view-carrello.component';
-import { DoubleOptinComponent } from './double-optin/double-optin.component';
+import { RegistrazioneDoubleOptinComponent } from './registrazione-double-optin/registrazione-double-optin.component';
+import { RegistrazioneSuccessoComponent } from './registrazione-successo/registrazione-successo.component';
+import { RegistrazioneErroreComponent } from './registrazione-errore/registrazione-errore.component';
 
 const appRoutes: Routes = [
   { path: 'home-pubblica', component: HomePageComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'home-riservata', component: HomeRiservataComponent },
+   { path: 'login', component: LoginComponent },
   { path: 'registrazione', component: RegistrazioneComponent },
   { path: 'view-carrello', component: ViewCarrelloComponent },
-  { path: 'double-optin', component: DoubleOptinComponent },
+  { path: 'registrazione-double-optin', component: RegistrazioneDoubleOptinComponent },
+  { path: 'registrazione-successo', component: RegistrazioneSuccessoComponent },
+  { path: 'registrazione-errore', component: RegistrazioneErroreComponent },
   {
     path: '',
     redirectTo: '/home-pubblica',
@@ -33,12 +39,15 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomePageComponent,
+    HomeRiservataComponent,
     LoginComponent,
     RegistrazioneComponent,
     PasswordDimenticataComponent,
     ReimpostaPasswordComponent,
     ViewCarrelloComponent,
-    DoubleOptinComponent
+    RegistrazioneDoubleOptinComponent,
+    RegistrazioneSuccessoComponent,
+    RegistrazioneErroreComponent
   ],
   imports: [
     RouterModule.forRoot(

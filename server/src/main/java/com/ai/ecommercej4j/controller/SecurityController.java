@@ -15,23 +15,24 @@ public class SecurityController {
     @RequestMapping("/login")
     @ResponseBody
     public LoginResponseDto login(@RequestBody LoginRequestDto dto){
-    return ss;
+    return ss.login(dto);
     }
     
     @RequestMapping("/password-dimenticata")
     @ResponseBody
     public LoginResponseDto passwordDimenticata(@RequestBody LoginRequestDto dto){
-    return ss;
+    return ss.passwordDimenticata(dto);
     }
     
     @RequestMapping("/check-double-optin")
     @ResponseBody
-    public void checkDoubleOptin(@RequestBody LoginRequestDto dto){
+    public void checkDoubleOptin(@RequestBody LoginResponseDto dto){
+        ss.checkDoubleOptin(dto);
     }
     
     @RequestMapping("/registrazione")
     @ResponseBody
     public RegistrazioneResponseDto registrami(@RequestBody RegistrazioneRequestDto dto){
-    return ss;
+    return ss.registrami(dto);
     }
 }
