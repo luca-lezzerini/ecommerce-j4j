@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,32 +10,57 @@ export class AnagraficaTaglieComponent implements OnInit {
 
   codice = '';
   descrizione = '';
-  panelEnable = false;
-  confermaEnable = false;
+  panelEnabled: boolean;
+  confermaEnabled: boolean;
+  annullaEnabled: boolean;
+  creaEnabled: boolean;
+  modificaEnabled: boolean;
+  rimuoviEnabled: boolean;
+  cercaEnabled: boolean;
+  aggiungiEnabled: boolean;
+  risultatoEnabled: boolean;
 
-  constructor() { }
+  constructor() {
+    this.initNgIf();
+  }
 
   ngOnInit() {
   }
 
-  conferma() {
-
+  initNgIf() {
+    this.panelEnabled = false;
+    this.confermaEnabled = false;
+    this.annullaEnabled = false;
+    this.creaEnabled = false;
+    this.modificaEnabled = false;
+    this.rimuoviEnabled = false;
+    this.cercaEnabled = true;
+    this.aggiungiEnabled = true;
+    this.risultatoEnabled = false;
   }
 
-  annulla() {
-
+  cercaSiRisultato() {
+    this.panelEnabled = false;
+    this.confermaEnabled = false;
+    this.annullaEnabled = false;
+    this.creaEnabled = false;
+    this.modificaEnabled = false;
+    this.rimuoviEnabled = false;
+    this.cercaEnabled = true;
+    this.aggiungiEnabled = true;
+    this.risultatoEnabled = true;
   }
 
-  crea() {
-
+  cercaNoRisultato() {
+    this.cercaSiRisultato();
+    this.risultatoEnabled = false;
   }
 
-  modifica() {
-
-  }
-  
-  rimuovi() {
-
+  cerca() {
+    //prepara la chiamata al server
+    //prepara la callback
+    //se trova qualcosa imposta le visibilità su cercaSiRisultato
+    //altrimenti imposta le visibilità su cercaNoRisultato
   }
 
 }
