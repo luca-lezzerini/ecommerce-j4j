@@ -14,7 +14,8 @@ export class Incrementatore06Component implements OnInit {
   ngOnInit(): void {
   }
 
-  aumenta(){
-   this.aumentato.emit(1);
+  aumenta(numero: number) {
+    // emette l'evento che fa aumentrare il numero in visualizzatore
+   this.aumentato.emit(numero);
  }
 }

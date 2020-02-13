@@ -19,9 +19,10 @@ import { ViewCarrelloComponent } from './view-carrello/view-carrello.component';
 import { RegistrazioneDoubleOptinComponent } from './registrazione-double-optin/registrazione-double-optin.component';
 import { RegistrazioneSuccessoComponent } from './registrazione-successo/registrazione-successo.component';
 import { RegistrazioneErroreComponent } from './registrazione-errore/registrazione-errore.component';
-import { AnagraficaSpedizioniComponent } from './anagrafica-spedizioni/anagrafica-spedizioni.component';
-import { Visualizzatore06Component } from './esercizio06/visualizzatore06/visualizzatore06.component';
-import { Incrementatore06Component } from './esercizio06/incrementatore06/incrementatore06.component';
+import { Visualizzatore06Component } from './esercizio/esercizio06/visualizzatore06/visualizzatore06.component';
+import { Incrementatore06Component } from './esercizio/esercizio06/incrementatore06/incrementatore06.component';
+import { Visualizzatore02Component } from './esercizio/esercizio02/visualizzatore02/visualizzatore02.component';
+import { Incrementatore02Component } from './esercizio/esercizio02/incrementatore02/incrementatore02.component';
 
 const appRoutes: Routes = [
   { path: 'anagrafica-prodotti', component: AnagraficaProdottiComponent },
@@ -29,7 +30,6 @@ const appRoutes: Routes = [
   { path: 'home-riservata', component: HomeRiservataComponent },
   { path: 'login', component: LoginComponent },
   { path: 'anagrafica-taglie', component: AnagraficaTaglieComponent },
-  { path: 'anagrafica-spedizioni', component: AnagraficaSpedizioniComponent },
   { path: 'registrazione', component: RegistrazioneComponent },
   { path: 'view-carrello', component: ViewCarrelloComponent },
   { path: 'registrazione-double-optin', component: RegistrazioneDoubleOptinComponent },
@@ -40,7 +40,8 @@ const appRoutes: Routes = [
     redirectTo: '/home-pubblica',
     pathMatch: 'full'
   },
-  { path: 'password-dimenticata', component: PasswordDimenticataComponent }
+  { path: 'password-dimenticata', component: PasswordDimenticataComponent },
+  { path: 'reimposta-password', component: ReimpostaPasswordComponent },
   { path: 'esercizio06', component: Visualizzatore06Component }
 ];
 
@@ -59,10 +60,10 @@ const appRoutes: Routes = [
     RegistrazioneErroreComponent,
     AnagraficaTaglieComponent,
     AnagraficaProdottiComponent,
-    AnagraficaSpedizioniComponent,
-    Esercizio06Component,
     Visualizzatore06Component,
-    Incrementatore06Component
+    Incrementatore06Component,
+    Visualizzatore02Component,
+    Incrementatore02Component,
   ],
   imports: [
     RouterModule.forRoot(

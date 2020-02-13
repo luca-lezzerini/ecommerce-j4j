@@ -6,13 +6,13 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./visualizzatore06.component.css']
 })
 export class Visualizzatore06Component implements OnInit {
+  @Input() numero = 0;
 
-  @Input() numero: number;
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  onAumenta(numero: number) {
+    this.numero += numero;
   }
-
-  onAumenta(numero: number){}
 }
