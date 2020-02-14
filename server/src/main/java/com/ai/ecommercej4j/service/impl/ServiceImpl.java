@@ -4,7 +4,7 @@ import com.ai.ecommercej4j.model.*;
 import com.ai.ecommercej4j.service.SecurityService;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("securityService")
 public class ServiceImpl implements SecurityService{
    public String generateRandomString() {
        double d = Math.random();
