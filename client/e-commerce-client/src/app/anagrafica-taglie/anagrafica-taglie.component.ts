@@ -84,7 +84,7 @@ export class AnagraficaTaglieComponent implements OnInit {
     dto.token = this.singleton.token;
     dto.searchKey = this.searchKey;
     let obs: Observable<TagliaSearchResultsDto> =
-      this.http.post<TagliaSearchResultsDto>('http://localhost:8080/search-taglie', dto);
+      this.http.post<TagliaSearchResultsDto>('http://localhost:8080/search-taglia', dto);
 
     //prepara la callback
     obs.subscribe(risposta => {
@@ -136,7 +136,7 @@ export class AnagraficaTaglieComponent implements OnInit {
     dto.dati = new Taglia();
     dto.dati.codice = this.codice;
     dto.dati.descrizione = this.descrizione;
-    let obs: Observable<any> = this.http.post('http://localhost:8080/create-taglie', dto);
+    let obs: Observable<any> = this.http.post('http://localhost:8080/create-taglia', dto);
     //prepara la callback
     obs.subscribe(risposta => {
       //ripete ultima ricerca
@@ -144,13 +144,17 @@ export class AnagraficaTaglieComponent implements OnInit {
     });
   }
 
-  annulla() {
-
-  }
+  annulla() { }
 
   crea() { }
 
   modifica() { }
 
   rimuovi() { }
+
+  view() { }
+
+  edit() { }
+
+  delete() { }
 }

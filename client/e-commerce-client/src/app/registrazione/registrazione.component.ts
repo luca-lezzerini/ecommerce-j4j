@@ -30,24 +30,7 @@ export class RegistrazioneComponent implements OnInit {
       // verifica che password e confermapassword siano uguali
       if (this.password === this.confermapassword) {
         this.messaggioErrore = '';
-        // prepara la richiesta http
-        const dto: RegistrazioneRequestDto = new RegistrazioneRequestDto();
-        dto.email = this.email;
-        dto.password = this.password;
-        dto.username = this.username;
-        const obs: Observable<RegistrazioneResponseDto> =
-          this.http.post<RegistrazioneResponseDto>('http://localhost:8080/registrami', dto);
-        // crea la callback
-        obs.subscribe(risposta => {
-          if (risposta.registrato) {
-            // se registrato è true l'utente è stato registrato e mostra messaggio di successo
-            this.router.navigateByUrl('registrazione-successo');
-          } else {
-            // se registrato è false l'utente non è stato registrato e mostra messaggio di errore
-            this.router.navigateByUrl('registrazione-errore');
-          }
-          this.router.navigateByUrl('registrazione-double-optin');
-        });
+        this.richiestaRegistrazione();
       } else {
         // mostra messaggio di errore
         this.messaggioErrore = 'I campi Password e Conferma Password devono coincidere';
@@ -56,6 +39,27 @@ export class RegistrazioneComponent implements OnInit {
       // mostra messaggio di errore
       this.messaggioErrore = 'Tutti i campi devono essere popolati';
     }
+  }
+
+  richiestaRegistrazione() {
+    // prepara la richiesta http
+    const dto: RegistrazioneRequestDto = new RegistrazioneRequestDto();
+    dto.email = this.email;
+    dto.password = this.password;
+    dto.username = this.username;
+    const obs: Observable<RegistrazioneResponseDto> =
+      this.http.post<RegistrazioneResponseDto>('http://localhost:8080/registrami', dto);
+    // crea la callback
+    obs.subscribe(risposta => {
+      if (risposta.registrato) {
+        // se registrato è true l'utente è stato registrato e mostra messaggio di successo
+        this.router.navigateByUrl('registrazione-successo');
+      } else {
+        // se registrato è false l'utente non è stato registrato e mostra messaggio di errore
+        this.router.navigateByUrl('registrazione-errore');
+      }
+      this.router.navigateByUrl('registrazione-double-optin');
+    });
   }
 
   annulla() {
