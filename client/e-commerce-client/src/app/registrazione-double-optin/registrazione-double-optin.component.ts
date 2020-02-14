@@ -1,3 +1,4 @@
+import { RegistrazioneResponseDto } from './../classi/registrazione-response-dto';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +18,11 @@ export class RegistrazioneDoubleOptinComponent implements OnInit {
 
   ngOnInit() {
   }
+
   checkDoubleOptin() {
-    // const obs: Observable<> = http.post<>('' + d);
+    this.codiceDoubleOptin = '12345';
+    const obs: Observable<RegistrazioneResponseDto> =
+      this.http.post<RegistrazioneResponseDto>('http://localhost:8080/registrazione-successo', this.codiceDoubleOptin);
   }
+
 }
