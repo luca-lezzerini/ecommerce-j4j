@@ -14,4 +14,6 @@ public interface SecurityService {
     
     void reimpostaPassword(ChangePasswordRequestDto dto);
     
+    Boolean checkToken(String tok);
+    
 }

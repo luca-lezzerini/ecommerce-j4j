@@ -1,15 +1,21 @@
 package com.ai.ecommercej4j.service.impl;
 
 import com.ai.ecommercej4j.model.*;
+import com.ai.ecommercej4j.repository.UtenteRepository;
 import com.ai.ecommercej4j.service.SecurityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SecurityServiceImpl implements SecurityService{
-   private String generateRandomString() {
-       double d = Math.random();
-       String str= (Double.toString(d));
-       return str;
+public class SecurityServiceImpl implements SecurityService {
+
+    @Autowired
+    private UtenteRepository ur;
+
+    private String generateRandomString() {
+        double d = Math.random();
+        String str = (Double.toString(d));
+        return str;
     }
 
     @Override
@@ -19,7 +25,7 @@ public class SecurityServiceImpl implements SecurityService{
 
     @Override
     public void checkDoubleOptin(LoginResponseDto dto) {
-        
+
     }
 
     @Override
@@ -29,12 +35,17 @@ public class SecurityServiceImpl implements SecurityService{
 
     @Override
     public void reimpostaPassword(ChangePasswordRequestDto dto) {
-        
+
     }
 
     @Override
     public RegistrazioneResponseDto registrami(RegistrazioneRequestDto dto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean checkToken(String tok) {
+        return ur.findByToken(tok) != null;
     }
 
 }
