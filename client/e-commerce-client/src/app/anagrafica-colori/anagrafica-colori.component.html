@@ -1,25 +1,29 @@
-<div class="panel">
-  <input type="text" />
-  <input type="text" />
-  <button></button>
-  <button></button>
-  <button></button>
-  <button></button>
-  <button></button>
+<div class="panel" *ngIf="panelHidden">
+  <form>
+    <input type="text" [(ngModel)]="codice" [disabled]="inputEditable" />
+    <input type="text" [(ngModel)]="descrizione" [disabled]="inputEditable" />
+    <button *ngIf="confermaHidden" (click)="confermaCheckState(state)">Conferma</button>
+    <button *ngIf="annullaHidden" (click)="annullaCheckState(state)">Annulla</button>
+    <button *ngIf="creaHidden" (click)="createColori()">Crea</button>
+    <button *ngIf="modificaHidden" (click)="modificaCheckState(state)">Modifica</button>
+    <button *ngIf="rimuoviHidden" (click)="cancellaCheckState(state)">Rimuovi</button>
+  </form>
 </div>
+
 <div class="search">
-  <input type="text">
-  <button></button>
-  <button></button>
+  <input type="text" [(ngModel)]="ricerca" />
+  <button (click)="cercaCheckState(state)">Cerca</button>
+  <button (click)="aggiungiState()">Aggiungi</button>
 </div>
-<div class="results">
+
+<div class="results" *ngIf="risultatiHidden">
   <table>
     <tr *ngFor="let r of result">
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{{ r.codice }}</td>
+      <td>{{ r.descrizione }}</td>
+      <td><button *ngIf="visualizzaHidden" (click)="visualizzaState(r)">Visualizza</button></td>
+      <td><button *ngIf="modificaHidden" (click)="modificaCheckState(state)">Modifica</button></td>
+      <td><button *ngIf="rimuoviHidden" (click)="cancellaCheckState(state)">Rimuovi</button></td>
     </tr>
   </table>
 </div>

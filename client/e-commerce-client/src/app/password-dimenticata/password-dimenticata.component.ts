@@ -1,3 +1,5 @@
+import { AreaComuneService } from './../area-comune.service';
+import { Router } from '@angular/router';
 import { LoginRequestDto } from './../classi/login-request-dto';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -15,7 +17,7 @@ export class PasswordDimenticataComponent implements OnInit {
   password: string;
   token: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router, private ac: AreaComuneService) { }
 
   ngOnInit() { }
 
@@ -30,7 +32,7 @@ export class PasswordDimenticataComponent implements OnInit {
       dto
     );
     obs.subscribe(data => {
-      this.token = data.token;
+      this.ac.token = data.token;
     });
   }
   // controllo sul token per verificare la ricezione della mail
@@ -45,6 +47,11 @@ export class PasswordDimenticataComponent implements OnInit {
       dto
     );
 
-    obs.subscribe(data => {});
+    obs.subscribe(data => {
+      // 0cambia se non riceve un errore
+      // if (data.token) {
+      //   this.router.navigateByUrl('/reimposta-password')
+      // }
+    });
   }
 }
