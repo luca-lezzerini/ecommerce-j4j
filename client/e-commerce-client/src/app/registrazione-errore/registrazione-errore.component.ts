@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrazioneErroreComponent implements OnInit {
 
+  errori: string [] = [];
+
   constructor() { }
 
   ngOnInit() {

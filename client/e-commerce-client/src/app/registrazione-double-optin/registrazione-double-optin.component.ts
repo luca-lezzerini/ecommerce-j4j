@@ -9,13 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrazioneDoubleOptinComponent implements OnInit {
 
+  codiceDoubleOptin: string;
+
   constructor(private http: HttpClient) {
     this.checkDoubleOptin();
   }
 
   ngOnInit() {
   }
-  checkDoubleOptin(){
-    //const obs: Observable<> = http.post<>('' + d);
+  checkDoubleOptin() {
+    // const obs: Observable<> = http.post<>('' + d);
   }
 }

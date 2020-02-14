@@ -1,5 +1,9 @@
+import { Observable } from 'rxjs';
+import { ProdottoSearchDto } from './../classi/prodotto-search-dto';
 import { Component, OnInit } from '@angular/core';
 import { Prodotto } from '../classi/prodotto';
+import { ProdottoSearchResultsDto } from '../classi/prodotto-search-results';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-anagrafica-prodotti',
@@ -25,8 +29,10 @@ export class AnagraficaProdottiComponent implements OnInit {
   showAggiungi: boolean;
   trovatoQualcosa: boolean;
   venivoDaView: boolean;
+  searchKey: string;
+  result: Prodotto[];
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.showPanel = false;
     this.inputDisabled = true;
     this.showConferma = false;
@@ -120,6 +126,19 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showSearchPanel = true;
     this.showResults = this.trovatoQualcosa;
     this.showAggiungi = true;
+
+    let dx: ProdottoSearchDto  = new ProdottoSearchDto();
+    dx.searchKey = this.searchKey;
+
+    let oss: Observable<ProdottoSearchResultsDto> =
+      this.http
+        .post<ProdottoSearchResultsDto>('http://localhost:8080/search-prodotto', dx);
+
+    oss.subscribe(risposta => {
+      console.log(risposta);
+      this.result = risposta.result;
+
+    });
   }
 
   view() {
