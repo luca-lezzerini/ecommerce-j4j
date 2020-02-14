@@ -1,9 +1,20 @@
 
 package com.ai.ecommercej4j.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Colori {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column
     private String codice;
+    @Column
     private String descrizione;
 
     public Colori(Long id, String codice, String descrizione) {

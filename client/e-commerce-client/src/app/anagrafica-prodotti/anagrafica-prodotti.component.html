@@ -16,7 +16,7 @@
   <button *ngIf="showAggiungi" (click)="crea()">Aggiungi</button>
 </div>
 
-<div *ngIf="showResults">
+<div *ngIf="prodotti && prodotti.length > 0">
   <br>
   <table>
     <tr>

@@ -30,7 +30,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   trovatoQualcosa: boolean;
   venivoDaView: boolean;
   searchKey: string;
-  result: Prodotto[];
 
   constructor(private http: HttpClient) {
     this.showPanel = false;
@@ -127,7 +126,7 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showResults = this.trovatoQualcosa;
     this.showAggiungi = true;
 
-    let dx: ProdottoSearchDto  = new ProdottoSearchDto();
+    let dx: ProdottoSearchDto = new ProdottoSearchDto();
     dx.searchKey = this.searchKey;
 
     let oss: Observable<ProdottoSearchResultsDto> =
@@ -136,8 +135,8 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     oss.subscribe(risposta => {
       console.log(risposta);
-      this.result = risposta.result;
-
+      this.prodotti = risposta.results;
+      console.log(this.prodotti);
     });
   }
 

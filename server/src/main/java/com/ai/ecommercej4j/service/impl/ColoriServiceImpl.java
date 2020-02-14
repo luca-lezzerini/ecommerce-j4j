@@ -9,10 +9,11 @@ import com.ai.ecommercej4j.model.ColoriSearchResultsDto;
 import com.ai.ecommercej4j.model.ColoriUpdateDto;
 import com.ai.ecommercej4j.repository.ColoriRepository;
 import com.ai.ecommercej4j.service.ColoriService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("coloriService")
+@Service
 public class ColoriServiceImpl implements ColoriService {
     
     @Autowired
@@ -24,23 +25,24 @@ public class ColoriServiceImpl implements ColoriService {
         colore.setDescrizione(colore.getDescrizione());
         colore.setCodice(colore.getCodice());
         colore.setId(colore.getId());
-        dto.setDati(colore);
-        coloriRepository.saveColori(dto);
+        coloriRepository.save(colore);
     }
 
     @Override
     public ColoriSearchResultsDto searchColori(ColoriSearchDto dto) {
-        return coloriRepository.findColori(dto);
+        List<Colori> ace = coloriRepository.findByCodice(dto.getSearchKey());
+        ColoriSearchResultsDto dto2 = new ColoriSearchResultsDto(ace);
+        return dto2;
     }
 
     @Override
     public void deleteColori(ColoriDeleteDto dto) {
-    coloriRepository.deleteColori(dto);
+    coloriRepository.deleteById(dto.getIdToDelete());
     }
 
     @Override
     public void updateColori(ColoriUpdateDto dto) {
-    coloriRepository.updateColori(dto);
+    coloriRepository.save(dto.getDati());
     }
     
 }

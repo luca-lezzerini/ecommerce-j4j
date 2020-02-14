@@ -14,16 +14,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProdottoServiceImpl implements ProdottoService{
 
-    private List<Prodotto> prodotti = new ArrayList<>();
-    
     @Override
     public void createProdotto(ProdottoCreateDto dto) {
     }
 
     @Override
     public ProdottoSearchResultsDto searchProdotto(ProdottoSearchDto dto) {
-        
-        return new ProdottoSearchResultsDto();
+        // FIXME: codice stub
+        List<Prodotto> lp = new ArrayList<>();
+        Prodotto p1 = new Prodotto(null, "P1", "P1descr", 100);
+        lp.add(p1);
+         p1 = new Prodotto(null, "P2", "P2descr", 200);
+        lp.add(p1);
+        p1 = new Prodotto(null, "P3", "P3descr", 300);
+        lp.add(p1);
+        ProdottoSearchResultsDto pr = new ProdottoSearchResultsDto();
+        pr.setResults(lp);
+        return pr;
     }
 
     @Override
