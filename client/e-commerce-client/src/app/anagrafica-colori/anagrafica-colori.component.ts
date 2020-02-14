@@ -18,27 +18,29 @@ export class AnagraficaColoriComponent implements OnInit {
   descrizione: string;
   colore: Colori;
   ricerca: string;
-  result: Colori[];
+  result: Colori[] = [];
   state: string;
   olderState: string;
+  idTest: number = 0;
 
-  panelHidden: boolean;
-  inputEditable: boolean;
-  confermaHidden: boolean;
-  annullaHidden: boolean;
-  creaHidden: boolean;
-  modificaHidden: boolean;
-  rimuoviHidden: boolean;
-  cercaHidden: boolean;
-  risultatiHidden: boolean;
-  aggiungiHidden: boolean;
-  visualizzaHidden: boolean;
+  showPanel: boolean;
+  inputNotEditable: boolean;
+  showConferma: boolean;
+  showAnnulla: boolean;
+  showCrea: boolean;
+  showModifica: boolean;
+  showRimuovi: boolean;
+  showCerca: boolean;
+  showRisultati: boolean;
+  showAggiungi: boolean;
+  showVisualizza: boolean;
 
   constructor(private http: HttpClient) {
-    this.panelHidden = true;
-    this.cercaHidden = false;
-    this.risultatiHidden = true;
-    this.aggiungiHidden = false;
+    this.showPanel = false;
+    this.showCerca = true;
+    this.showRisultati = false;
+    this.showAggiungi = true;
+    this.state = 'Cerca';
   }
 
   ngOnInit() {}
@@ -48,7 +50,7 @@ export class AnagraficaColoriComponent implements OnInit {
       this.olderState = this.state;
       this.state = 'Cerca';
       this.createColori();
-      this.creaState();
+      this.cercaState();
     } else if (stato === 'Modifica') {
       this.olderState = this.state;
       this.state = 'Visualizza';
@@ -88,7 +90,8 @@ export class AnagraficaColoriComponent implements OnInit {
     if (stato === ('Cerca' || 'Visualizza')) {
       this.olderState = this.state;
       this.state = 'Modifica';
-      this.modificaState();
+      this.CUDState();
+      this.inputNotEditable = false;
     }
   }
 
@@ -96,7 +99,8 @@ export class AnagraficaColoriComponent implements OnInit {
     if (stato === ('Cerca' || 'Visualizza')) {
       this.olderState = this.state;
       this.state = 'Cancella';
-      this.cancellaState();
+      this.CUDState();
+      this.inputNotEditable = true;
     }
   }
 
@@ -116,81 +120,63 @@ export class AnagraficaColoriComponent implements OnInit {
     this.codice = colore.codice;
     this.descrizione = colore.descrizione;
 
-    this.panelHidden = false;
-    this.inputEditable = false;
-    this.confermaHidden = true;
-    this.annullaHidden = true;
-    this.creaHidden = false;
-    this.modificaHidden = false;
-    this.rimuoviHidden = false;
-    this.cercaHidden = false;
-    this.risultatiHidden = false;
-    this.aggiungiHidden = false;
+    this.showPanel = true;
+    this.inputNotEditable = true;
+    this.showConferma = false;
+    this.showAnnulla = false;
+    this.showCrea = true;
+    this.showVisualizza = true;
+    this.showModifica = true;
+    this.showRimuovi = true;
+    this.showCerca = true;
+    this.showRisultati = true;
+    this.showAggiungi = true;
   }
-
-  modificaState() {
-    this.panelHidden = false;
-    this.inputEditable = true;
-    this.confermaHidden = false;
-    this.annullaHidden = false;
-    this.creaHidden = true;
-    this.modificaHidden = true;
-    this.rimuoviHidden = true;
-    this.cercaHidden = true;
-    this.risultatiHidden = true;
-    this.aggiungiHidden = true;
-  }
-  creaState() {
-    this.panelHidden = false;
-    this.inputEditable = true;
-    this.confermaHidden = false;
-    this.annullaHidden = false;
-    this.creaHidden = true;
-    this.modificaHidden = true;
-    this.rimuoviHidden = true;
-    this.cercaHidden = true;
-    this.risultatiHidden = true;
-    this.aggiungiHidden = true;
-  }
-  cancellaState() {
-    this.panelHidden = false;
-    this.inputEditable = false;
-    this.confermaHidden = true;
-    this.annullaHidden = true;
-    this.creaHidden = true;
-    this.modificaHidden = true;
-    this.rimuoviHidden = true;
-    this.cercaHidden = true;
-    this.risultatiHidden = true;
-    this.aggiungiHidden = true;
+// create, update, delete
+  CUDState() {
+    this.showPanel = true;
+    this.showConferma = true;
+    this.showAnnulla = true;
+    this.showCrea = false;
+    this.showVisualizza = false;
+    this.showModifica = false;
+    this.showRimuovi = false;
+    this.showCerca = false;
+    this.showRisultati = false;
+    this.showAggiungi = false;
   }
   cercaState() {
-    this.panelHidden = true;
-    this.inputEditable = false;
-    this.confermaHidden = true;
-    this.annullaHidden = true;
-    this.creaHidden = true;
-    this.modificaHidden = true;
-    this.rimuoviHidden = false;
-    this.cercaHidden = true;
-    // this.risultatiHidden = true;
-    this.aggiungiHidden = true;
+    this.showPanel = false;
+    this.inputNotEditable = true;
+    this.showConferma = false;
+    this.showAnnulla = false;
+    this.showCrea = true;
+    this.showVisualizza = true;
+    this.showModifica = true;
+    this.showRimuovi = true;
+    this.showCerca = true;
+    // this.showRisultati = true;
+    this.showAggiungi = true;
   }
   aggiungiState() {
-    this.panelHidden = false;
-    this.inputEditable = true;
-    this.confermaHidden = false;
-    this.annullaHidden = false;
-    this.creaHidden = true;
-    this.modificaHidden = true;
-    this.rimuoviHidden = true;
-    this.cercaHidden = true;
-    this.risultatiHidden = true;
-    this.aggiungiHidden = true;
+    this.showPanel = true;
+    this.inputNotEditable = false;
+    this.showConferma = true;
+    this.showAnnulla = true;
+    this.showCrea = true;
+    this.showVisualizza = true;
+    this.showModifica = true;
+    this.showRimuovi = true;
+    this.showCerca = true;
+    this.showRisultati = true;
+    this.showAggiungi = true;
+    this.state = 'Aggiungi';
   }
 
   createColori(): void {
-    let coloreTest: Colori = {id: 1, codice: 'ciao', descrizione: 'ciao'};
+    const coloreTest: Colori = {id: this.idTest, codice: this.codice, descrizione: this.descrizione};
+    this.result.push(coloreTest);
+    this.idTest++;
     // // TODO Fare check dei campi se sono vuoti o meno
 
     // // preparo i dati da inviare al server
