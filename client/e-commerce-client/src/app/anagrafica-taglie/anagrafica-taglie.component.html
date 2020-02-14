@@ -30,6 +30,9 @@
   <tr *ngFor="let item of taglie">
     <td>{{item.codice}}</td>
     <td>{{item.descrizione}}</td>
+    <td><button (click)="view()">View</button></td>
+    <td><button (click)="edit()">Edit</button></td>
+    <td><button (click)="delete()">Delete</button></td>
   </tr>
 </table>
 
