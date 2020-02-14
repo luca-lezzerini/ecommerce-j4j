@@ -77,6 +77,33 @@ export class AnagraficaTaglieComponent implements OnInit {
     this.aggiungiEnabled = false;
   }
 
+  visAnnulla() {
+    switch (this.visPrecedente) {
+      case 'crea':
+        this.panelEnabled = false;
+        this.cercaEnabled = true;
+        this.aggiungiEnabled = true;
+        this.cerca;
+        break;
+
+      case 'delete':
+        this.panelEnabled = true;
+        this.confermaEnabled = false;
+        this.creaEnabled = true;
+        this.modificaEnabled = true;
+        this.rimuoviEnabled = true;
+        this.cercaEnabled = true;
+        this.risultatoEnabled = true;
+        this.aggiungiEnabled = true;
+        this. inputEditable = false;
+        break;
+      
+    }
+
+
+
+  }
+
   cerca() {
     //prepara la chiamata al server
     let dto: TagliaSearchDto = new TagliaSearchDto();
@@ -85,10 +112,10 @@ export class AnagraficaTaglieComponent implements OnInit {
     let obs: Observable<TagliaSearchResultsDto> =
       this.http.post<TagliaSearchResultsDto>('http://localhost:8080/search-taglia', dto);
 
-    //prepara la callback
+    //invia la richiesta al server 
     obs.subscribe(risposta => {
       this.taglie = risposta.result;
-      if (this.taglie.length > 0) {
+      if (this.taglie && this.taglie.length > 0) {
         //se trova qualcosa imposta le visibilità su visCercaSiRisultato
         this.visCercaSiRisultato();
       } else {
@@ -143,7 +170,9 @@ export class AnagraficaTaglieComponent implements OnInit {
     });
   }
 
-  annulla() { }
+  annulla() {
+    //
+  }
 
   crea() { }
 
