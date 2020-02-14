@@ -18,6 +18,8 @@ import { ViewCarrelloComponent } from './view-carrello/view-carrello.component';
 import { RegistrazioneDoubleOptinComponent } from './registrazione-double-optin/registrazione-double-optin.component';
 import { RegistrazioneSuccessoComponent } from './registrazione-successo/registrazione-successo.component';
 import { RegistrazioneErroreComponent } from './registrazione-errore/registrazione-errore.component';
+import { CrudColoriComponent } from './crud-colori/crud-colori.component';
+import { AnagraficaColoriComponent } from './anagrafica-colori/anagrafica-colori.component';
 
 const appRoutes: Routes = [
   { path: 'home-pubblica', component: HomePageComponent },
@@ -50,7 +52,9 @@ const appRoutes: Routes = [
     RegistrazioneDoubleOptinComponent,
     RegistrazioneSuccessoComponent,
     RegistrazioneErroreComponent,
-    AnagraficaTaglieComponent
+    AnagraficaTaglieComponent,
+    CrudColoriComponent,
+    AnagraficaColoriComponent
   ],
   imports: [
     RouterModule.forRoot(
