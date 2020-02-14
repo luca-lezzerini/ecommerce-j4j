@@ -1,24 +1,24 @@
 import { TagliaCreateDto } from './../classi/taglia-create-dto';
-import { AreaComuneService } from "./../area-comune.service";
-import { TagliaSearchDto } from "./../classi/taglia-search-dto";
-import { HttpClient } from "@angular/common/http";
-import { TagliaSearchResultsDto } from "./../classi/taglia-search-results-dto";
-import { Taglia } from "./../classi/taglia";
-import { Observable } from "rxjs";
-import { Component, OnInit } from "@angular/core";
+import { AreaComuneService } from './../area-comune.service';
+import { TagliaSearchDto } from './../classi/taglia-search-dto';
+import { HttpClient } from '@angular/common/http';
+import { TagliaSearchResultsDto } from './../classi/taglia-search-results-dto';
+import { Taglia } from './../classi/taglia';
+import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: "app-anagrafica-taglie",
-  templateUrl: "./anagrafica-taglie.component.html",
-  styleUrls: ["./anagrafica-taglie.component.css"]
+  selector: 'app-anagrafica-taglie',
+  templateUrl: './anagrafica-taglie.component.html',
+  styleUrls: ['./anagrafica-taglie.component.css']
 })
 export class AnagraficaTaglieComponent implements OnInit {
   codice = '';
   descrizione = '';
   searchKey = '';
-  panelEnabled2: boolean;
+  panelEnabled: boolean;
   confermaEnabled: boolean;
   annullaEnabled: boolean;
   creaEnabled: boolean;
@@ -31,18 +31,20 @@ export class AnagraficaTaglieComponent implements OnInit {
   inputEditable: boolean;
   visPrecedente: string;
 
- 
-  constructor(private http: HttpClient,
+
+  constructor(
+    private http: HttpClient,
     private singleton: AreaComuneService,
     private root: ActivatedRoute,
-private router: Router) {
+    private router: Router
+  ) {
     this.initVis();
   }
 
   ngOnInit() { }
 
   initVis() {
-    this.panelEnabled2 = false;
+    this.panelEnabled = false;
     this.confermaEnabled = false;
     this.annullaEnabled = false;
     this.creaEnabled = false;
@@ -54,7 +56,7 @@ private router: Router) {
   }
 
   visCercaSiRisultato() {
-    this.panelEnabled2 = false;
+    this.panelEnabled = false;
     this.confermaEnabled = false;
     this.annullaEnabled = false;
     this.creaEnabled = false;
@@ -71,7 +73,7 @@ private router: Router) {
   }
 
   visAggiungi() {
-    this.panelEnabled2 = true;
+    this.panelEnabled = true;
     this.inputEditable = true;
     this.confermaEnabled = true;
     this.annullaEnabled = true;
@@ -89,7 +91,7 @@ private router: Router) {
         this.panelEnabled = false;
         this.cercaEnabled = true;
         this.aggiungiEnabled = true;
-        this.cerca;
+        this.cerca();
         break;
 
       case 'delete':
@@ -101,9 +103,9 @@ private router: Router) {
         this.cercaEnabled = true;
         this.risultatoEnabled = true;
         this.aggiungiEnabled = true;
-        this. inputEditable = false;
+        this.inputEditable = false;
         break;
-      
+
     }
 
 
@@ -111,21 +113,21 @@ private router: Router) {
   }
 
   cerca() {
-    //prepara la chiamata al server
-    let dto: TagliaSearchDto = new TagliaSearchDto();
+    // prepara la chiamata al server
+    const dto: TagliaSearchDto = new TagliaSearchDto();
     dto.token = this.singleton.token;
     dto.searchKey = this.searchKey;
-    let obs: Observable<TagliaSearchResultsDto> =
+    const obs: Observable<TagliaSearchResultsDto> =
       this.http.post<TagliaSearchResultsDto>('http://localhost:8080/search-taglia', dto);
 
-    //invia la richiesta al server 
+    // invia la richiesta al server
     obs.subscribe(risposta => {
       this.taglie = risposta.result;
       if (this.taglie && this.taglie.length > 0) {
-        //se trova qualcosa imposta le visibilità su visCercaSiRisultato
+        // se trova qualcosa imposta le visibilità su visCercaSiRisultato
         this.visCercaSiRisultato();
       } else {
-        //altrimenti imposta le visibilità su visCercaNoRisultato
+        // altrimenti imposta le visibilità su visCercaNoRisultato
         this.visCercaNoRisultato();
       }
     });
@@ -133,7 +135,7 @@ private router: Router) {
   }
 
   aggiungi() {
-    //imposta la visibilità su visAggiungi
+    // imposta la visibilità su visAggiungi
     this.visAggiungi();
     this.visPrecedente = 'aggiungi';
   }
@@ -162,16 +164,16 @@ private router: Router) {
   }
 
   confermaCrea() {
-    //prepara la chiamata al server
-    let dto: TagliaCreateDto = new TagliaCreateDto();
+    // prepara la chiamata al server
+    const dto: TagliaCreateDto = new TagliaCreateDto();
     dto.token = this.singleton.token;
     dto.dati = new Taglia();
     dto.dati.codice = this.codice;
     dto.dati.descrizione = this.descrizione;
-    let obs: Observable<any> = this.http.post('http://localhost:8080/create-taglia', dto);
-    //prepara la callback
+    const obs: Observable<any> = this.http.post('http://localhost:8080/create-taglia', dto);
+    // prepara la callback
     obs.subscribe(risposta => {
-      //ripete ultima ricerca
+      // ripete ultima ricerca
       this.cerca();
     });
   }
