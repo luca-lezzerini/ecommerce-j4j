@@ -7,6 +7,7 @@ import { Taglia } from "./../classi/taglia";
 import { Observable } from "rxjs";
 import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: "app-anagrafica-taglie",
@@ -30,10 +31,11 @@ export class AnagraficaTaglieComponent implements OnInit {
   inputEditable: boolean;
   visPrecedente: string;
 
-  constructor(private http: HttpClient, 
+ 
+  constructor(private http: HttpClient,
     private singleton: AreaComuneService,
-    private router: Router
-    ) {
+    private root: ActivatedRoute,
+private router: Router) {
     this.initVis();
   }
 
