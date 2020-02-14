@@ -1,8 +1,8 @@
-tocTab[tocTab.length] = new Array("0.11.1", "1", "UC Anagrafica Colori", "EARoot/EA11/EA1/EA472.htm", "4.png", "", "", "{D613895F-21F6-4785-8D55-6DD927C6D8AF}", "Package");
-tocTab[tocTab.length] = new Array("0.11.2", "1", "UC Anagrafica Prodotti", "EARoot/EA11/EA2/EA476.htm", "4.png", "", "", "{E92B775C-24B7-475b-B10A-B74122A2C5FF}", "Package");
-tocTab[tocTab.length] = new Array("0.11.3", "1", "UC Anagrafica Spedizioni", "EARoot/EA11/EA3/EA480.htm", "4.png", "", "", "{79DBB312-97E2-4456-A6D7-92F2036E3804}", "Package");
-tocTab[tocTab.length] = new Array("0.11.4", "1", "UC Anagrafica Taglie", "EARoot/EA11/EA4/EA484.htm", "4.png", "", "", "{66865875-82B0-401a-8445-11EEDE74E042}", "Package");
-tocTab[tocTab.length] = new Array("0.11.5", "1", "UC CRUD", "EARoot/EA11/EA5/EA488.htm", "4.png", "", "", "{68CC31A2-7072-4377-AE92-6662AB6E7B0F}", "Package");
-tocTab[tocTab.length] = new Array("0.11.6", "1", "UC Home Page Pubblica", "EARoot/EA11/EA6/EA500.htm", "4.png", "", "", "{81A5965B-8A5E-4bac-A8DF-D4268545AD9C}", "Package");
-tocTab[tocTab.length] = new Array("0.11.7", "1", "UC Login", "EARoot/EA11/EA7/EA504.htm", "4.png", "", "", "{2E747B7F-F290-462e-8413-60A72151CB65}", "Package");
-tocTab[tocTab.length] = new Array("0.11.8", "1", "UC Password Dimenticata", "EARoot/EA11/EA8/EA508.htm", "4.png", "", "", "{33D3C834-437C-44c6-B1F2-40163A090C0B}", "Package");
+tocTab[tocTab.length] = new Array("0.11.1", "1", "UC Anagrafica Colori", "EARoot/EA11/EA1/EA473.htm", "4.png", "", "", "{D613895F-21F6-4785-8D55-6DD927C6D8AF}", "Package");
+tocTab[tocTab.length] = new Array("0.11.2", "1", "UC Anagrafica Prodotti", "EARoot/EA11/EA2/EA477.htm", "4.png", "", "", "{E92B775C-24B7-475b-B10A-B74122A2C5FF}", "Package");
+tocTab[tocTab.length] = new Array("0.11.3", "1", "UC Anagrafica Spedizioni", "EARoot/EA11/EA3/EA481.htm", "4.png", "", "", "{79DBB312-97E2-4456-A6D7-92F2036E3804}", "Package");
+tocTab[tocTab.length] = new Array("0.11.4", "1", "UC Anagrafica Taglie", "EARoot/EA11/EA4/EA485.htm", "4.png", "", "", "{66865875-82B0-401a-8445-11EEDE74E042}", "Package");
+tocTab[tocTab.length] = new Array("0.11.5", "1", "UC CRUD", "EARoot/EA11/EA5/EA489.htm", "4.png", "", "", "{68CC31A2-7072-4377-AE92-6662AB6E7B0F}", "Package");
+tocTab[tocTab.length] = new Array("0.11.6", "1", "UC Home Page Pubblica", "EARoot/EA11/EA6/EA503.htm", "4.png", "", "", "{81A5965B-8A5E-4bac-A8DF-D4268545AD9C}", "Package");
+tocTab[tocTab.length] = new Array("0.11.7", "1", "UC Login", "EARoot/EA11/EA7/EA507.htm", "4.png", "", "", "{2E747B7F-F290-462e-8413-60A72151CB65}", "Package");
+tocTab[tocTab.length] = new Array("0.11.8", "1", "UC Password Dimenticata", "EARoot/EA11/EA8/EA511.htm", "4.png", "", "", "{33D3C834-437C-44c6-B1F2-40163A090C0B}", "Package");

@@ -1,7 +1,7 @@
-tocTab[tocTab.length] = new Array("0.15.4.2:1", "", "Richiesta nuova password", "EARoot/EA15/EA4/EA2/EA614.htm", "188.png", "34", "0", "", "Custom diagram0","{7D95B8A6-1485-48af-95DC-4C2B013ADA47}");
-tocTab[tocTab.length] = new Array("0.15.4.2:2", "", "«WireframeWebsite» Webpage1", "EARoot/EA15/EA4/EA2/EA617.htm", "11.png", "E540", "0", "", "Screen0","{2857F73D-2C87-4a50-9306-BF9AC65E1C67}");
-tocTab[tocTab.length] = new Array("0.15.4.2:3", "", "«WireframeButton» Annulla", "EARoot/EA15/EA4/EA2/EA618.htm", "16.png", "E548", "E540", "", "GUIElement0","{C6141826-BFFF-4492-838E-0A608BAED82D}");
-tocTab[tocTab.length] = new Array("0.15.4.2:4", "", "«WireframeButton» Conferma", "EARoot/EA15/EA4/EA2/EA619.htm", "16.png", "E547", "E540", "", "GUIElement0","{EBF5A02F-A5EA-4e70-B3A7-0B5669B8F6B3}");
-tocTab[tocTab.length] = new Array("0.15.4.2:5", "", "«WireframeButton» Double opt-in", "EARoot/EA15/EA4/EA2/EA620.htm", "16.png", "E549", "E540", "", "GUIElement0","{7867E19A-AB65-406b-A90B-CBDD91E4C867}");
-tocTab[tocTab.length] = new Array("0.15.4.2:6", "", "«WireframeTextField» Text", "EARoot/EA15/EA4/EA2/EA621.htm", "16.png", "E542", "E540", "", "GUIElement0","{4273F28A-D2E6-4bec-A509-CEFCC8DA69E7}");
-tocTab[tocTab.length] = new Array("0.15.4.2:7", "", "«WireframeLabel» Username", "EARoot/EA15/EA4/EA2/EA622.htm", "16.png", "E541", "E540", "", "GUIElement0","{C33034E1-54B3-4ece-92E5-6B838105C1F9}");
+tocTab[tocTab.length] = new Array("0.15.4.2:1", "", "Richiesta nuova password", "EARoot/EA15/EA4/EA2/EA617.htm", "188.png", "34", "0", "", "Custom diagram0","{7D95B8A6-1485-48af-95DC-4C2B013ADA47}");
+tocTab[tocTab.length] = new Array("0.15.4.2:2", "", "«WireframeWebsite» Webpage1", "EARoot/EA15/EA4/EA2/EA620.htm", "11.png", "E540", "0", "", "Screen0","{2857F73D-2C87-4a50-9306-BF9AC65E1C67}");
+tocTab[tocTab.length] = new Array("0.15.4.2:3", "", "«WireframeButton» Annulla", "EARoot/EA15/EA4/EA2/EA621.htm", "16.png", "E548", "E540", "", "GUIElement0","{C6141826-BFFF-4492-838E-0A608BAED82D}");
+tocTab[tocTab.length] = new Array("0.15.4.2:4", "", "«WireframeButton» Conferma", "EARoot/EA15/EA4/EA2/EA622.htm", "16.png", "E547", "E540", "", "GUIElement0","{EBF5A02F-A5EA-4e70-B3A7-0B5669B8F6B3}");
+tocTab[tocTab.length] = new Array("0.15.4.2:5", "", "«WireframeButton» Double opt-in", "EARoot/EA15/EA4/EA2/EA623.htm", "16.png", "E549", "E540", "", "GUIElement0","{7867E19A-AB65-406b-A90B-CBDD91E4C867}");
+tocTab[tocTab.length] = new Array("0.15.4.2:6", "", "«WireframeTextField» Text", "EARoot/EA15/EA4/EA2/EA624.htm", "16.png", "E542", "E540", "", "GUIElement0","{4273F28A-D2E6-4bec-A509-CEFCC8DA69E7}");
+tocTab[tocTab.length] = new Array("0.15.4.2:7", "", "«WireframeLabel» Username", "EARoot/EA15/EA4/EA2/EA625.htm", "16.png", "E541", "E540", "", "GUIElement0","{C33034E1-54B3-4ece-92E5-6B838105C1F9}");

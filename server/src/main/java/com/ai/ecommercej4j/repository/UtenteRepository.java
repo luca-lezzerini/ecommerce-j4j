@@ -10,6 +10,4 @@ public interface UtenteRepository {
 
     public Utente findByDoubleOptin(String doi);
     
-    public void changePassword(String doi, String password);
-
 }

@@ -1,4 +1,6 @@
+import { AnagraficaProdottiComponent } from './anagrafica-prodotti/anagrafica-prodotti.component';
 import { AnagraficaTaglieComponent } from './anagrafica-taglie/anagrafica-taglie.component';
+import { AnagraficaSpedizioniComponent } from './anagrafica-spedizioni/anagrafica-spedizioni.component';
 import { HomeRiservataComponent } from './home-riservata/home-riservata.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -18,10 +20,17 @@ import { ViewCarrelloComponent } from './view-carrello/view-carrello.component';
 import { RegistrazioneDoubleOptinComponent } from './registrazione-double-optin/registrazione-double-optin.component';
 import { RegistrazioneSuccessoComponent } from './registrazione-successo/registrazione-successo.component';
 import { RegistrazioneErroreComponent } from './registrazione-errore/registrazione-errore.component';
-import { CrudColoriComponent } from './crud-colori/crud-colori.component';
 import { AnagraficaColoriComponent } from './anagrafica-colori/anagrafica-colori.component';
+import { Visualizzatore06Component } from './esercizio/esercizio06/visualizzatore06/visualizzatore06.component';
+import { Incrementatore06Component } from './esercizio/esercizio06/incrementatore06/incrementatore06.component';
+import { Visualizzatore02Component } from './esercizio/esercizio02/visualizzatore02/visualizzatore02.component';
+import { Incrementatore02Component } from './esercizio/esercizio02/incrementatore02/incrementatore02.component';
+import { Visualizzatore08Component } from './esercizio/esercizio08/visualizzatore08/visualizzatore08.component';
+import { Incrementatore08Component } from './esercizio/esercizio08/incrementatore08/incrementatore08.component';
 
 const appRoutes: Routes = [
+  { path: 'anagrafica-prodotti', component: AnagraficaProdottiComponent },
+  { path: 'anagrafica-spedizioni', component: AnagraficaSpedizioniComponent },
   { path: 'home-pubblica', component: HomePageComponent },
   { path: 'home-riservata', component: HomeRiservataComponent },
   { path: 'login', component: LoginComponent },
@@ -31,12 +40,17 @@ const appRoutes: Routes = [
   { path: 'registrazione-double-optin', component: RegistrazioneDoubleOptinComponent },
   { path: 'registrazione-successo', component: RegistrazioneSuccessoComponent },
   { path: 'registrazione-errore', component: RegistrazioneErroreComponent },
+  { path: 'visualizzatore02', component: Visualizzatore02Component },
+  { path: 'visualizzatore08', component: Visualizzatore08Component },
   {
     path: '',
     redirectTo: '/home-pubblica',
     pathMatch: 'full'
   },
-  { path: 'password-dimenticata', component: PasswordDimenticataComponent }
+  { path: 'password-dimenticata', component: PasswordDimenticataComponent },
+  { path: 'reimposta-password', component: ReimpostaPasswordComponent },
+  { path: 'visualizzatore06', component: Visualizzatore06Component },
+  { path: 'anagrafica-colori', component: AnagraficaColoriComponent }
 ];
 
 @NgModule({
@@ -53,8 +67,15 @@ const appRoutes: Routes = [
     RegistrazioneSuccessoComponent,
     RegistrazioneErroreComponent,
     AnagraficaTaglieComponent,
-    CrudColoriComponent,
-    AnagraficaColoriComponent
+    AnagraficaColoriComponent,
+    AnagraficaProdottiComponent,
+    AnagraficaSpedizioniComponent,
+    Visualizzatore06Component,
+    Incrementatore06Component,
+    Visualizzatore02Component,
+    Incrementatore02Component,
+    Visualizzatore08Component,
+    Incrementatore08Component,
   ],
   imports: [
     RouterModule.forRoot(

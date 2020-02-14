@@ -14,5 +14,4 @@ public interface SecurityService {
     
     public void reimpostaPassword(ChangePasswordRequestDto dto);
     
-    
 }

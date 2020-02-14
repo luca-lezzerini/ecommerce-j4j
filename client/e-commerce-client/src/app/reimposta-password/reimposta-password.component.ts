@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class ReimpostaPasswordComponent implements OnInit {
   nuovaPassword: string;
   confermaPassword: string;
-  doi: string;
+  doiCode: string;
   err: string;
   constructor(private http: HttpClient) { }
 
@@ -23,11 +23,14 @@ export class ReimpostaPasswordComponent implements OnInit {
 
       let dto: ChangePasswordRequestDto = new ChangePasswordRequestDto();
       // il doi verrà preso dalla pagina precedente del client(codice DoubleOptin)
-      dto.doi = this.doi;
-      dto.password = this.nuovaPassword;
+      dto.doiCode = this.doiCode;
+      dto.newPassword = this.nuovaPassword;
+      // da aggiungere ?
+      // dto.oldPassword = this.vecchiaPassword
       // preparo la richiesta
       let cp: Observable<void> = this.http.post<void>('http://localhost:8080/reimposta-password', dto);
-      cp.subscribe(data => { });
+      cp.subscribe(data => {
+       });
 
     } else {
       this.err = 'Le due password non coincidono!';

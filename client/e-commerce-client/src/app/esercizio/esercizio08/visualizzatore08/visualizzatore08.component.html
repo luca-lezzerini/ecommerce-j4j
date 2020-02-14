@@ -1,0 +1,6 @@
+<p>Da dove cominciamo?</p>
+
+<input type="text" [(ngModel)]="c">
+
+<br>
+<app-incrementatore08 [c]="c" (aggiunto)="inc($event)"></app-incrementatore08>
