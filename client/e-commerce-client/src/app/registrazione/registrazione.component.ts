@@ -16,6 +16,7 @@ export class RegistrazioneComponent implements OnInit {
   password = '';
   confermapassword = '';
   email = '';
+  messaggioErrore = '';
 
 
   constructor(private router: Router, private http: HttpClient) { }
@@ -24,10 +25,11 @@ export class RegistrazioneComponent implements OnInit {
   }
 
   registrami() {
-    // verifica se i campi siano valorizzati
+    // verifica che i campi siano valorizzati
     if (this.username !== '' && this.password !== '' && this.confermapassword !== '' && this.email !== '') {
-      // verifica che password e conferma password siano uguali
+      // verifica che password e confermapassword siano uguali
       if (this.password === this.confermapassword) {
+        this.messaggioErrore = '';
         // prepara la richiesta http
         const dto: RegistrazioneRequestDto = new RegistrazioneRequestDto();
         dto.email = this.email;
@@ -39,20 +41,20 @@ export class RegistrazioneComponent implements OnInit {
         obs.subscribe(risposta => {
           if (risposta.registrato) {
             // se registrato è true l'utente è stato registrato e mostra messaggio di successo
-            // TODO
+            this.router.navigateByUrl('registrazione-successo');
           } else {
             // se registrato è false l'utente non è stato registrato e mostra messaggio di errore
-            // TODO
+            this.router.navigateByUrl('registrazione-errore');
           }
           this.router.navigateByUrl('registrazione-double-optin');
         });
       } else {
         // mostra messaggio di errore
-        // TODO
+        this.messaggioErrore = 'I campi Password e Conferma Password devono coincidere';
       }
     } else {
       // mostra messaggio di errore
-      // TODO
+      this.messaggioErrore = 'Tutti i campi devono essere popolati';
     }
   }
 
@@ -62,6 +64,7 @@ export class RegistrazioneComponent implements OnInit {
     this.password = '';
     this.confermapassword = '';
     this.username = '';
+    this.messaggioErrore = '';
     // torna alla home page
     this.router.navigateByUrl('home-pubblica');
   }
