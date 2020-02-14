@@ -5,9 +5,10 @@
  */
 package com.ai.ecommercej4j.model;
 
-public class SpedizioneUpdateDto extends SpedizioneCreateDto{
+public class SpedizioneUpdateDto extends SpedizioneCreateDto {
 
-    public SpedizioneUpdateDto() {
+    public SpedizioneUpdateDto(Spedizione dati, String token) {
+         super(dati, token);
     }
 
 }

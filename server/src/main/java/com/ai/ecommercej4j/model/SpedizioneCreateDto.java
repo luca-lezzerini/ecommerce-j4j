@@ -5,8 +5,17 @@
  */
 package com.ai.ecommercej4j.model;
 
-public class SpedizioneCreateDto {
+public class SpedizioneCreateDto extends LoginResponseDto {
+
     Spedizione dati;
+
+    public SpedizioneCreateDto() {
+    }
+
+    public SpedizioneCreateDto(Spedizione dati, String token) {
+        super(token);
+        this.dati = dati;
+    }
 
     public Spedizione getDati() {
         return dati;
@@ -16,11 +25,4 @@ public class SpedizioneCreateDto {
         this.dati = dati;
     }
 
-    public SpedizioneCreateDto(Spedizione dati) {
-        this.dati = dati;
-    }
-
-    public SpedizioneCreateDto() {
-    }
-    
 }

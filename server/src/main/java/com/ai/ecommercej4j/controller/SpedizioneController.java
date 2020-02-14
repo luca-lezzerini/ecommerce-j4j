@@ -10,7 +10,7 @@ import com.ai.ecommercej4j.model.SpedizioneDeleteDto;
 import com.ai.ecommercej4j.model.SpedizioneSearchDto;
 import com.ai.ecommercej4j.model.SpedizioneSearchResultsDto;
 import com.ai.ecommercej4j.model.SpedizioneUpdateDto;
-import com.ai.ecommercej4j.service.SecurityService;
+import com.ai.ecommercej4j.service.SpedizioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SpedizioneController {
 
     @Autowired
-    SecurityService ss;
+    SpedizioneService ss;
 
     @RequestMapping("/create-spedizione")
     @ResponseBody
@@ -33,10 +33,10 @@ public class SpedizioneController {
 
     @RequestMapping("/search-spedizione")
     @ResponseBody
-    public SpedizioneSearchResultsDto searchSpedizione(@RequestBody SpedizioneSearchDto dto) {
+   public SpedizioneSearchResultsDto searchSpedizione(@RequestBody SpedizioneSearchDto dto) {
         return ss.searchSpedizione(dto);
-    }
-
+    
+   }
     @RequestMapping("/delete-spedizione")
     @ResponseBody
     public void deleteSpedizione(@RequestBody SpedizioneDeleteDto dto) {

@@ -5,8 +5,17 @@
  */
 package com.ai.ecommercej4j.model;
 
-public class SpedizioneSearchDto {
+public class SpedizioneSearchDto extends LoginResponseDto {
+
     String searchKey;
+
+    public SpedizioneSearchDto(String searchKey, String token) {
+        super(token);
+        this.searchKey = searchKey;
+    }
+
+    public SpedizioneSearchDto() {
+    }
 
     public String getSearchKey() {
         return searchKey;
@@ -16,11 +25,4 @@ public class SpedizioneSearchDto {
         this.searchKey = searchKey;
     }
 
-    public SpedizioneSearchDto(String searchKey) {
-        this.searchKey = searchKey;
-    }
-
-    public SpedizioneSearchDto() {
-    }
-    
 }

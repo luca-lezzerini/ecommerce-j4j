@@ -13,16 +13,14 @@
                 <input type="text" [(ngModel)]="password" class="password" placeholder=" Password" />
             </p>
             <a routerLink="/home-riservata">
-              <button class="L" type="button" (click)="login()">Login</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="L" type="button" (click)="login()">Login</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </a>
 
             &nbsp;&nbsp;&nbsp;
-            <a routerLink="/password-dimenticata">
-                <button class="P" type="button">
+
+            <button class="P" type="button" routerLink="/password-dimenticata" routerLinkActive="active">
           Password dimenticata
-        </button>
-            </a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a routerLink="/registrazione"><button type="button">Registrazione</button>
             </a>
         </form>

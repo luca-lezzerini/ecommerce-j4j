@@ -5,8 +5,18 @@
  */
 package com.ai.ecommercej4j.model;
 
-public class SpedizioneDeleteDto {
+public class SpedizioneDeleteDto extends LoginResponseDto {
+
     Long idToDelete;
+
+    public SpedizioneDeleteDto(Long idToDelete, String token) {
+        super(token);
+        this.idToDelete = idToDelete;
+       
+    }
+
+    public SpedizioneDeleteDto() {
+    }
 
     public Long getIdToDelete() {
         return idToDelete;
@@ -16,11 +26,4 @@ public class SpedizioneDeleteDto {
         this.idToDelete = idToDelete;
     }
 
-    public SpedizioneDeleteDto(Long idToDelete) {
-        this.idToDelete = idToDelete;
-    }
-
-    public SpedizioneDeleteDto() {
-    }
-    
 }

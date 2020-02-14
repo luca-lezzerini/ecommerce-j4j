@@ -11,7 +11,7 @@ import com.ai.ecommercej4j.model.Spedizione;
  *
  * @author utente
  */
-public interface SpedizioneRepository {
-     public Spedizione findByeIdAndCodice(String id, String cod);
+public interface SpedizioniRepository {
+     public Spedizione findByCodice(String id, String cod);
     
 }

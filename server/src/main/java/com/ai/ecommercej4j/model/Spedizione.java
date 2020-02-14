@@ -1,11 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ai.ecommercej4j.model;
 
+
+/*Per Fabio : Inserire  @Entity & @Table nello spazio sottostante e 
+in seguito relativi import -Io non riesco ad importarli-
+*/
 public class Spedizione {
+    //X Fabio : nello spazio sottostante inserire annotazioni id  e generated value con relativi import
+    //Da valutare l'insert di equals
     Long id;
     String codice;
     String descrizione;
