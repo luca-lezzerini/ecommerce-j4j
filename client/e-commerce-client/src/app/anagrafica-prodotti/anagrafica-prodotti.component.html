@@ -1,22 +1,23 @@
-<div>
-  <input type="text" [(ngModel)]="codice">&nbsp;
-  <input type="text" [(ngModel)]="descrizione">&nbsp;
-  <input type="text" [(ngModel)]="prezzo">
+<div *ngIf="showPanel">
+  <input type="text" [(ngModel)]="codice" [disabled]="inputDisabled">&nbsp;
+  <input type="text" [(ngModel)]="descrizione" [disabled]="inputDisabled">&nbsp;
+  <input type="text" [(ngModel)]="prezzo" [disabled]="inputDisabled">
   <br>
-  <button (click)="conferma()">Conferma</button>&nbsp;
-  <button (click)="annulla()">Annulla</button>&nbsp;
-  <button (click)="crea()">Crea</button>&nbsp;
-  <button (click)="modifica()">Modifica</button>&nbsp;
-  <button (click)="rimuovi()">Rimuovi</button>
+  <button *ngIf="showConferma" (click)="conferma()">Conferma</button>&nbsp;
+  <button *ngIf="showAnnulla" (click)="annulla()">Annulla</button>&nbsp;
+  <button *ngIf="showCrea" (click)="crea()">Crea</button>&nbsp;
+  <button *ngIf="showModifica" (click)="modifica()">Modifica</button>&nbsp;
+  <button *ngIf="showRimuovi" (click)="rimuovi()">Rimuovi</button>
 </div>
 
 <div>
-  <input type="text" [(ngModel)]="search">&nbsp;
-  <button (click)="cerca()">Cerca</button>&nbsp;
-  <button (click)="crea()">Aggiungi</button>&nbsp;
+  <input *ngIf="showSearchPanel" type="text" [(ngModel)]="search">&nbsp;
+  <button *ngIf="showSearchPanel" (click)="cerca()">Cerca</button>&nbsp;
+  <button *ngIf="showAggiungi" (click)="crea()">Aggiungi</button>
 </div>
 
-<div>
+<div *ngIf="showResults">
+  <br>
   <table>
     <tr>
     <th>Codice</th>
