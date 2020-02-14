@@ -6,6 +6,7 @@ import { TagliaSearchResultsDto } from "./../classi/taglia-search-results-dto";
 import { Taglia } from "./../classi/taglia";
 import { Observable } from "rxjs";
 import { Component, OnInit } from "@angular/core";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-anagrafica-taglie",
@@ -16,7 +17,7 @@ export class AnagraficaTaglieComponent implements OnInit {
   codice = '';
   descrizione = '';
   searchKey = '';
-  panelEnabled: boolean;
+  panelEnabled2: boolean;
   confermaEnabled: boolean;
   annullaEnabled: boolean;
   creaEnabled: boolean;
@@ -30,14 +31,16 @@ export class AnagraficaTaglieComponent implements OnInit {
   visPrecedente: string;
 
   constructor(private http: HttpClient, 
-    private singleton: AreaComuneService) {
+    private singleton: AreaComuneService,
+    private router: Router
+    ) {
     this.initVis();
   }
 
   ngOnInit() { }
 
   initVis() {
-    this.panelEnabled = false;
+    this.panelEnabled2 = false;
     this.confermaEnabled = false;
     this.annullaEnabled = false;
     this.creaEnabled = false;
@@ -49,7 +52,7 @@ export class AnagraficaTaglieComponent implements OnInit {
   }
 
   visCercaSiRisultato() {
-    this.panelEnabled = false;
+    this.panelEnabled2 = false;
     this.confermaEnabled = false;
     this.annullaEnabled = false;
     this.creaEnabled = false;
@@ -66,7 +69,7 @@ export class AnagraficaTaglieComponent implements OnInit {
   }
 
   visAggiungi() {
-    this.panelEnabled = true;
+    this.panelEnabled2 = true;
     this.inputEditable = true;
     this.confermaEnabled = true;
     this.annullaEnabled = true;
