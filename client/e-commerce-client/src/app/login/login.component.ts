@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { LoginResponseDto } from '../classi/login-response-dto';
 import { LoginRequestDto } from '../classi/login-request-dto';
 import { AreaComuneService } from '../area-comune.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   password: string;
   token: string;
 
-  constructor(private http: HttpClient, private ac: AreaComuneService) { }
+  constructor(private http: HttpClient, private ac: AreaComuneService,
+    private router:Router) { }
 
   ngOnInit() {
   }
@@ -35,6 +37,9 @@ export class LoginComponent implements OnInit {
     // creo la callback
     og.subscribe(data => {
       this.ac.token = data.token;
+      if (data.token){
+        this.router.navigateByUrl('/home-riservata');
+      }
     });
   }
 

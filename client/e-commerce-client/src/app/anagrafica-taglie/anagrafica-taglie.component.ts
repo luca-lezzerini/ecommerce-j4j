@@ -1,18 +1,18 @@
-import { AreaComuneService } from './../area-comune.service';
-import { TagliaSearchDto } from './../classi/taglia-search-dto';
-import { HttpClient } from '@angular/common/http';
-import { TagliaSearchResultsDto } from './../classi/taglia-search-results-dto';
-import { Taglia } from './../classi/taglia';
-import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { TagliaCreateDto } from './../classi/taglia-create-dto';
+import { AreaComuneService } from "./../area-comune.service";
+import { TagliaSearchDto } from "./../classi/taglia-search-dto";
+import { HttpClient } from "@angular/common/http";
+import { TagliaSearchResultsDto } from "./../classi/taglia-search-results-dto";
+import { Taglia } from "./../classi/taglia";
+import { Observable } from "rxjs";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-anagrafica-taglie',
-  templateUrl: './anagrafica-taglie.component.html',
-  styleUrls: ['./anagrafica-taglie.component.css']
+  selector: "app-anagrafica-taglie",
+  templateUrl: "./anagrafica-taglie.component.html",
+  styleUrls: ["./anagrafica-taglie.component.css"]
 })
 export class AnagraficaTaglieComponent implements OnInit {
-
   codice = '';
   descrizione = '';
   searchKey = '';
@@ -27,13 +27,13 @@ export class AnagraficaTaglieComponent implements OnInit {
   risultatoEnabled: boolean;
   taglie: Taglia[] = [];
   inputEditable: boolean;
+  visPrecedente: string;
 
   constructor(private http: HttpClient, private singleton: AreaComuneService) {
     this.initVis();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   initVis() {
     this.panelEnabled = false;
@@ -96,31 +96,60 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.visCercaNoRisultato();
       }
     });
+    this.visPrecedente = 'cerca';
   }
 
   aggiungi() {
     //imposta la visibilità su visAggiungi
     this.visAggiungi();
+    this.visPrecedente = 'aggiungi';
   }
 
   conferma() {
+    switch (this.visPrecedente) {
+      case 'aggiungi':
+        this.confermaCrea();
+        break;
+      case 'crea':
+        this.confermaCrea();
+        break;
+      case 'modifica':
+        this.confermaCrea();
+        break;
+      case 'edit':
+        this.confermaCrea();
+        break;
+      case 'rimuovi':
+        this.confermaCrea();
+        break;
+      case 'delete':
+        this.confermaCrea();
+        break;
+    }
+  }
 
+  confermaCrea() {
+    //prepara la chiamata al server
+    let dto: TagliaCreateDto = new TagliaCreateDto();
+    dto.token = this.singleton.token;
+    dto.dati = new Taglia();
+    dto.dati.codice = this.codice;
+    dto.dati.descrizione = this.descrizione;
+    let obs: Observable<any> = this.http.post('http://localhost:8080/create-taglie', dto);
+    //prepara la callback
+    obs.subscribe(risposta => {
+      //ripete ultima ricerca
+      this.cerca();
+    });
   }
 
   annulla() {
 
   }
 
-  crea() {
+  crea() { }
 
-  }
+  modifica() { }
 
-  modifica() {
-
-  }
-
-  rimuovi() {
-
-  }
-
+  rimuovi() { }
 }

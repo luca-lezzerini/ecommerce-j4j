@@ -5,8 +5,8 @@ import com.ai.ecommercej4j.service.SecurityService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ServiceImpl implements SecurityService{
-   public String generateRandomString() {
+public class SecurityServiceImpl implements SecurityService{
+   private String generateRandomString() {
        double d = Math.random();
        String str= (Double.toString(d));
        return str;
@@ -19,7 +19,7 @@ public class ServiceImpl implements SecurityService{
 
     @Override
     public void checkDoubleOptin(LoginResponseDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ServiceImpl implements SecurityService{
 
     @Override
     public void reimpostaPassword(ChangePasswordRequestDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
