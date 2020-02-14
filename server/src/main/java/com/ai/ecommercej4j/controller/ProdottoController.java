@@ -19,28 +19,28 @@ public class ProdottoController {
 
     @Autowired
     ProdottoService ps;
-    
+
     @RequestMapping(value = "/create-prodotto")
     @ResponseBody
     public void createProdotto(@RequestBody ProdottoCreateDto dto) {
-        return ps.createProdotto();
+        ps.createProdotto(dto);
     }
-    
+
     @RequestMapping(value = "/search-prodotto")
     @ResponseBody
     public ProdottoSearchResultsDto searchProdotto(@RequestBody ProdottoSearchDto dto) {
-        return ps.searchProdotto();
+        return ps.searchProdotto(dto);
     }
-    
+
     @RequestMapping(value = "/delete-prodotto")
     @ResponseBody
     public void deleteProdotto(@RequestBody ProdottoDeleteDto dto) {
-        return ps.deleteProdotto();
+        ps.deleteProdotto(dto);
     }
+
     @RequestMapping(value = "/update-prodotto")
     @ResponseBody
     public void updateProdotto(@RequestBody ProdottoUpdateDto dto) {
-        
-        return ps.updateProdotto();
+        ps.updateProdotto(dto);
     }
 }

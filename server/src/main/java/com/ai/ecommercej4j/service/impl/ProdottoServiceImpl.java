@@ -22,6 +22,7 @@ public class ProdottoServiceImpl implements ProdottoService{
 
     @Override
     public ProdottoSearchResultsDto searchProdotto(ProdottoSearchDto dto) {
+        
         return new ProdottoSearchResultsDto();
     }
 
