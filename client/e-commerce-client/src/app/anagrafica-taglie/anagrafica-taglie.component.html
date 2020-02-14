@@ -1,10 +1,10 @@
 <div *ngIf="panelEnabled">
   Codice
-  <input [(ngModel)]="codice" [disabled]="inputEditable">
+  <input [(ngModel)]="codice" [disabled]="!inputEditable">
   &nbsp;
 
   Descrizione
-  <input [(ngModel)]="descrizione" [disabled]="inputEditable">
+  <input [(ngModel)]="descrizione" [disabled]="!inputEditable">
   &nbsp;
 
   <br>
