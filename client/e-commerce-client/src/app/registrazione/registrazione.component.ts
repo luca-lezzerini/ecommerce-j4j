@@ -49,7 +49,7 @@ export class RegistrazioneComponent implements OnInit {
     dto.username = this.username;
     const obs: Observable<RegistrazioneResponseDto> =
       this.http.post<RegistrazioneResponseDto>('http://localhost:8080/registrami', dto);
-    // crea la callback
+    // invia la richiesta al server
     obs.subscribe(risposta => {
       if (risposta.registrato) {
         // se registrato è true l'utente è stato registrato e mostra messaggio di successo
