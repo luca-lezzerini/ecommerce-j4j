@@ -6,6 +6,7 @@ import { TagliaSearchResultsDto } from "./../classi/taglia-search-results-dto";
 import { Taglia } from "./../classi/taglia";
 import { Observable } from "rxjs";
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: "app-anagrafica-taglie",
@@ -29,8 +30,9 @@ export class AnagraficaTaglieComponent implements OnInit {
   inputEditable: boolean;
   visPrecedente: string;
 
-  constructor(private http: HttpClient, 
-    private singleton: AreaComuneService) {
+  constructor(private http: HttpClient,
+    private singleton: AreaComuneService,
+    private root: ActivatedRoute) {
     this.initVis();
   }
 
