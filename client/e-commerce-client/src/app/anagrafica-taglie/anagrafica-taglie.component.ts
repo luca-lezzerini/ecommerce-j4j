@@ -29,7 +29,8 @@ export class AnagraficaTaglieComponent implements OnInit {
   inputEditable: boolean;
   visPrecedente: string;
 
-  constructor(private http: HttpClient, private singleton: AreaComuneService) {
+  constructor(private http: HttpClient, 
+    private singleton: AreaComuneService) {
     this.initVis();
   }
 
