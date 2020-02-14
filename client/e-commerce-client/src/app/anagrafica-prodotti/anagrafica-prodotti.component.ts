@@ -115,6 +115,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   cerca() {
+    // imposta visibilità degli elementi dell'interfaccia
     this.showPanel = false;
     this.inputDisabled = true;
     this.showConferma = false;
@@ -126,13 +127,16 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showResults = this.trovatoQualcosa;
     this.showAggiungi = true;
 
-    let dx: ProdottoSearchDto = new ProdottoSearchDto();
-    dx.searchKey = this.searchKey;
+    // prepara i dati da inviare al server
+    let dto: ProdottoSearchDto = new ProdottoSearchDto();
+    dto.searchKey = this.searchKey;
 
+    // prepara la richiesta HTTP
     let oss: Observable<ProdottoSearchResultsDto> =
       this.http
-        .post<ProdottoSearchResultsDto>('http://localhost:8080/search-prodotto', dx);
+        .post<ProdottoSearchResultsDto>('http://localhost:8080/search-prodotto', dto);
 
+   // invio la richiesta
     oss.subscribe(risposta => {
       console.log(risposta);
       this.prodotti = risposta.results;
