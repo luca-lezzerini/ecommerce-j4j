@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ai.ecommercej4j.service.impl;
 
-import com.ai.ecommercej4j.model.LoginRequestDto;
-import com.ai.ecommercej4j.model.LoginResponseDto;
+import com.ai.ecommercej4j.model.*;
 import com.ai.ecommercej4j.service.SecurityService;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +27,14 @@ public class ServiceImpl implements SecurityService{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
- 
+    @Override
+    public void reimpostaPassword(ChangePasswordRequestDto dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public RegistrazioneResponseDto registrami(RegistrazioneRequestDto dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
