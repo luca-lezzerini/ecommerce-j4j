@@ -19,7 +19,7 @@ public class ServiceImpl implements SecurityService{
 
     @Override
     public void checkDoubleOptin(LoginResponseDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ServiceImpl implements SecurityService{
 
     @Override
     public void reimpostaPassword(ChangePasswordRequestDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
