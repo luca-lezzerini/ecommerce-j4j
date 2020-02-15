@@ -41,7 +41,7 @@ public class TagliaServiceImpl implements TagliaService {
         //verifico che il token sia registrato...
         if (ss.checkToken(dto.getToken())) {
             //...se è registrato cerco le taglie che soddisfano la ricerca e le metto nella risposta
-            result.setResult(tr.findByCodiceOrDescrizione(dto.getSearchKey()));
+            result.setResult(tr.findByCodiceOrDescrizione(dto.getSearchKey(), dto.getSearchKey()));
         } else {
             //...altrimenti ritorno una lista vuota 
             result.setResult(Collections.emptyList());
