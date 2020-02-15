@@ -1,10 +1,11 @@
 <div *ngIf="panelEnabled">
+  <input type="hidden" [value]="id">
   Codice
-  <input [(ngModel)]="codice" [disabled]="!inputEditable">
+  <input [(ngModel)]="codice" [disabled]="inputDisabled">
   &nbsp;
 
   Descrizione
-  <input [(ngModel)]="descrizione" [disabled]="!inputEditable">
+  <input [(ngModel)]="descrizione" [disabled]="inputDisabled">
   &nbsp;
 
   <br>
@@ -30,9 +31,9 @@
   <tr *ngFor="let item of taglie">
     <td>{{item.codice}}</td>
     <td>{{item.descrizione}}</td>
-    <td><button (click)="view()">View</button></td>
-    <td><button (click)="edit()">Edit</button></td>
-    <td><button (click)="delete()">Delete</button></td>
+    <td><button (click)="view(item.id)">View</button></td>
+    <td><button (click)="edit(item.id)">Edit</button></td>
+    <td><button (click)="delete(item.id)">Delete</button></td>
   </tr>
 </table>
 

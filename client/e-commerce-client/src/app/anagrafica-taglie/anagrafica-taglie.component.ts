@@ -28,8 +28,9 @@ export class AnagraficaTaglieComponent implements OnInit {
   aggiungiEnabled: boolean;
   risultatoEnabled: boolean;
   taglie: Taglia[] = [];
-  inputEditable: boolean;
+  inputDisabled: boolean;
   visPrecedente: string;
+  id: number;
 
 
   constructor(
@@ -39,6 +40,8 @@ export class AnagraficaTaglieComponent implements OnInit {
     private router: Router
   ) {
     this.initVis();
+    // FIXME : stub
+    this.singleton.token = '123';
   }
 
   ngOnInit() { }
@@ -74,7 +77,7 @@ export class AnagraficaTaglieComponent implements OnInit {
 
   visAggiungi() {
     this.panelEnabled = true;
-    this.inputEditable = true;
+    this.inputDisabled = false;
     this.confermaEnabled = true;
     this.annullaEnabled = true;
     this.creaEnabled = false;
@@ -103,7 +106,7 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.cercaEnabled = true;
         this.risultatoEnabled = true;
         this.aggiungiEnabled = true;
-        this.inputEditable = false;
+        this.inputDisabled = true;
         break;
 
     }
@@ -188,9 +191,11 @@ export class AnagraficaTaglieComponent implements OnInit {
 
   rimuovi() { }
 
-  view() { }
+  view(id: number) {
+    this.id = id;
+   }
 
-  edit() { }
+  edit(id: number) { }
 
-  delete() { }
+  delete(id: number) { }
 }
