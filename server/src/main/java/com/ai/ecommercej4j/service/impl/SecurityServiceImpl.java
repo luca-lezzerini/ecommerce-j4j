@@ -30,7 +30,19 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public LoginResponseDto passwordDimenticata(LoginRequestDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        //Creo la risposta...
+        LoginResponseDto rdto = new LoginResponseDto();
+        
+        //...creo l'oggetto utente e gli faccio puntare l'utente che trova con il metodo findByUsernameAndPassword...
+        Utente utente = new Utente();
+        utente = ur.findByUsernameAndPassword(dto.getUsername(), dto.getPassword());
+        
+        //...nella risposta ci metto il token dell'utente che ho trovato...
+        rdto.setToken("" + ur.findByToken(utente.getToken()));
+
+        //...ritorno il token tramite il LoginResponseDto rdto.
+        return rdto;
     }
 
     @Override
