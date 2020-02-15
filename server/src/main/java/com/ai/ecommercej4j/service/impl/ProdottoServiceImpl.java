@@ -8,44 +8,65 @@ import com.ai.ecommercej4j.model.ProdottoSearchResultsDto;
 import com.ai.ecommercej4j.model.ProdottoUpdateDto;
 import com.ai.ecommercej4j.repository.ProdottoRepository;
 import com.ai.ecommercej4j.service.ProdottoService;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProdottoServiceImpl implements ProdottoService{
+public class ProdottoServiceImpl implements ProdottoService {
 
     @Autowired
     private ProdottoRepository prodottoRepository;
-    
+
     @Override
     public void createProdotto(ProdottoCreateDto dto) {
+
+        // controllo se il dto esiste e se il codice del prodotto non è una stringa vuota
+        if (dto != null && dto.getDati().getCodice().length() > 0) {
+
+            // controllo se esiste già il codice del prodotto da creare
+            List<Prodotto> lp = prodottoRepository.findByCodice(dto.getDati().getCodice());
+
+            //se non esiste già, lo creo
+            if (lp.isEmpty()) {
+                prodottoRepository.save(dto.getDati());
+            }
+        }
     }
 
     @Override
     public ProdottoSearchResultsDto searchProdotto(ProdottoSearchDto dto) {
-        // FIXME: codice stub
-        List<Prodotto> lp = new ArrayList<>();
-//        Prodotto p1 = new Prodotto(null, "P1", "P1descr", 100);
-//        lp.add(p1);
-//         p1 = new Prodotto(null, "P2", "P2descr", 200);
-//        lp.add(p1);
-//        p1 = new Prodotto(null, "P3", "P3descr", 300);
-//        lp.add(p1);
-        ProdottoSearchResultsDto pr = new ProdottoSearchResultsDto();
-        pr.setResults(lp);
-        return pr;
+        ProdottoSearchResultsDto resultDto = new ProdottoSearchResultsDto();
+        if (dto != null) {
+            List<Prodotto> lp = prodottoRepository.findByCodice(dto.getSearchKey());
+            resultDto.setResults(lp);
+        }
+        return resultDto;
     }
 
     @Override
     public void deleteProdotto(ProdottoDeleteDto dto) {
-        
+        if (dto != null) {
+            prodottoRepository.deleteById(dto.getIdToDelete());
+        }
     }
 
     @Override
     public void updateProdotto(ProdottoUpdateDto dto) {
-        
+
+        // controllo se il dto esiste e se il codice del prodotto non è una stringa vuota
+        if (dto != null && dto.getDati().getCodice().length() > 0) {
+
+            // cerco il prodotto da aggiornare
+            List<Prodotto> lp = prodottoRepository.findByCodice(dto.getDati().getCodice());
+
+            // se ho trovato qualcosa, recupero l'id del prodotto da aggiornare
+            if (!lp.isEmpty()) {
+                dto.getDati().setId(lp.get(0).getId());
+
+                //aggiorno il prodotto sul db
+                prodottoRepository.save(dto.getDati());
+            }
+        }
     }
-    
 }
