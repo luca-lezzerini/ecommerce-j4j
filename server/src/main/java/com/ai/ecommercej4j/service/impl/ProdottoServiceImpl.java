@@ -8,6 +8,7 @@ import com.ai.ecommercej4j.model.ProdottoSearchResultsDto;
 import com.ai.ecommercej4j.model.ProdottoUpdateDto;
 import com.ai.ecommercej4j.repository.ProdottoRepository;
 import com.ai.ecommercej4j.service.ProdottoService;
+import com.ai.ecommercej4j.service.SecurityService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,55 +19,66 @@ public class ProdottoServiceImpl implements ProdottoService {
     @Autowired
     private ProdottoRepository prodottoRepository;
 
+    @Autowired
+    private SecurityService securityService;
+    
     @Override
     public void createProdotto(ProdottoCreateDto dto) {
 
         // controllo se il dto esiste e se il codice del prodotto non è una stringa vuota
         if (dto != null && dto.getDati().getCodice().length() > 0) {
 
-            // controllo se esiste già il codice del prodotto da creare
-            List<Prodotto> lp = prodottoRepository.findByCodice(dto.getDati().getCodice());
+            // controllo se il token esiste
+            if (securityService.checkToken(dto.getToken())) {
 
-            //se non esiste già, lo creo
-            if (lp.isEmpty()) {
-                prodottoRepository.save(dto.getDati());
+                // controllo se esiste già il codice del prodotto da creare
+                List<Prodotto> lp = prodottoRepository.findByCodice(dto.getDati().getCodice());
+
+                // se non esiste già, lo creo
+                if (lp.isEmpty()) {
+                    prodottoRepository.save(dto.getDati());
+                }
             }
         }
     }
 
     @Override
     public ProdottoSearchResultsDto searchProdotto(ProdottoSearchDto dto) {
+
+        // istanzio il dto di ritorno
         ProdottoSearchResultsDto resultDto = new ProdottoSearchResultsDto();
+
+        // controllo se il dto in ingresso esiste
         if (dto != null) {
-            List<Prodotto> lp = prodottoRepository.findByCodice(dto.getSearchKey());
-            resultDto.setResults(lp);
+
+            // controllo se il token esiste
+            if (securityService.checkToken(dto.getToken())) {
+
+                //recupero i risultati e avvaloro il dto di ritorno
+                List<Prodotto> lp = prodottoRepository.findByCodice(dto.getSearchKey());
+                resultDto.setResults(lp);
+            }
         }
+
+        // se non trovo nulla il dto è vuoto
         return resultDto;
     }
 
     @Override
     public void deleteProdotto(ProdottoDeleteDto dto) {
+
+        // controllo se il dto in ingresso esiste
         if (dto != null) {
-            prodottoRepository.deleteById(dto.getIdToDelete());
+
+            // controllo se il token esiste ed elimino il prodotto
+            if (securityService.checkToken(dto.getToken())) {
+                prodottoRepository.deleteById(dto.getIdToDelete());
+            }
         }
     }
 
     @Override
     public void updateProdotto(ProdottoUpdateDto dto) {
-
-        // controllo se il dto esiste e se il codice del prodotto non è una stringa vuota
-        if (dto != null && dto.getDati().getCodice().length() > 0) {
-
-            // cerco il prodotto da aggiornare
-            List<Prodotto> lp = prodottoRepository.findByCodice(dto.getDati().getCodice());
-
-            // se ho trovato qualcosa, recupero l'id del prodotto da aggiornare
-            if (!lp.isEmpty()) {
-                dto.getDati().setId(lp.get(0).getId());
-
-                //aggiorno il prodotto sul db
-                prodottoRepository.save(dto.getDati());
-            }
-        }
+        createProdotto(dto);
     }
 }
