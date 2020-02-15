@@ -6,6 +6,7 @@ import com.ai.ecommercej4j.model.TagliaDeleteDto;
 import com.ai.ecommercej4j.model.TagliaSearchDto;
 import com.ai.ecommercej4j.model.TagliaSearchResultsDto;
 import com.ai.ecommercej4j.model.TagliaUpdateDto;
+import com.ai.ecommercej4j.repository.TagliaRepository;
 import com.ai.ecommercej4j.service.SecurityService;
 import com.ai.ecommercej4j.service.TagliaService;
 import java.util.ArrayList;
@@ -18,11 +19,21 @@ public class TagliaServiceImpl implements TagliaService {
     @Autowired
     private SecurityService ss;
 
+    @Autowired
+    private TagliaRepository tr;
+
     @Override
     public void createTaglia(TagliaCreateDto dto) {
-        //if (ss.verificaToken()) {
-        //
-        //};
+        //verifico che il token sia registrato...
+        if (ss.checkToken(dto.getToken())) {
+            //...se è registrato verifico che non esista una taglia con lo stesso codice...   
+            if (tr.findByCodice(dto.getDati().getCodice()) != null) {
+                //...se non esiste la salvo nel db
+                tr.save(dto.getDati());
+            }
+                //...se esiste non faccio nulla
+        }
+            //...se il token non è registrato non faccio nulla
     }
 
     @Override

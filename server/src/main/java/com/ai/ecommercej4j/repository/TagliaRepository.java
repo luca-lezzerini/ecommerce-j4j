@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TagliaRepository extends JpaRepository<Taglia, Long>{
     Taglia findByCodiceOrDescrizione(String filtro); 
+    Taglia findByCodice(String codice);
     
 }
