@@ -17,7 +17,7 @@ public class SecurityServiceImpl implements SecurityService {
         String str = (Double.toString(d));
         return str;
     }
-
+    
     @Override
     public LoginResponseDto login(LoginRequestDto dto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -35,7 +35,17 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public void reimpostaPassword(ChangePasswordRequestDto dto) {
-
+    /*
+     Utente ut = new Utente();
+     ur.findByUsernameAndPassword(ut.getUsername(), ut.getPassword());
+         if(dto.getOldPassword().equalsIgnoreCase(ut.getPassword())){
+             ut.setPassword(dto.getNewPassword());
+             ur.save(ut);
+         }else{
+             dto.setNewPassword(" ");
+             dto.setOldPassword(" ");
+         }
+    */
     }
 
     @Override
