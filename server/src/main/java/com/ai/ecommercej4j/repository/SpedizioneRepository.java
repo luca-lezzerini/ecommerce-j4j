@@ -6,12 +6,13 @@
 package com.ai.ecommercej4j.repository;
 
 import com.ai.ecommercej4j.model.Spedizione;
-
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 /**
  *
  * @author utente
  */
-public interface SpedizioniRepository {
-     public Spedizione findByCodice(String id, String cod);
+public interface SpedizioneRepository extends JpaRepository<Spedizione, Long> {
+     public Spedizione findByCodice(String codice);
     
 }
