@@ -31,11 +31,11 @@ public class TagliaController {
 
     @RequestMapping(value = "/delete-taglia")
     public void deleteTaglia(@RequestBody TagliaDeleteDto dto) {
-
+        ts.deleteTaglia(dto);
     }
 
     @RequestMapping(value = "/update-taglia")
     public void updateTaglia(@RequestBody TagliaUpdateDto dto) {
-
+        ts.updateTaglia(dto);
     }
 }

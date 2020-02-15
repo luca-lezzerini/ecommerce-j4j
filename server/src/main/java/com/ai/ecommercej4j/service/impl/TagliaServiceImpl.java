@@ -58,7 +58,10 @@ public class TagliaServiceImpl implements TagliaService {
 
     @Override
     public void updateTaglia(TagliaUpdateDto dto) {
-
+        if (ss.checkToken(dto.getToken())) {  
+            if (tr.findById(dto.getDati().getId()) != null ) {
+                tr.save(dto.getDati());
+            }
+        }
     }
-
 }
