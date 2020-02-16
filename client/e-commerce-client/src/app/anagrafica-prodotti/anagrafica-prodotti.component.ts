@@ -34,6 +34,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   showAggiungi: boolean;
   trovatoQualcosa: boolean;
   searchKey = '';
+  searchKeyPrecedente = '';
   statoPrecedente = '';
 
   constructor(private http: HttpClient,
@@ -57,27 +58,29 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   conferma() {
-    // imposta visibilità degli elementi dell'interfaccia
-    this.showPanel = this.statoPrecedente == 'modifica';
-    this.inputDisabled = true;
-    this.showConferma = false;
-    this.showAnnulla = false;
-    this.showCrea = this.statoPrecedente == 'modifica';
-    this.showModifica = this.statoPrecedente == 'modifica';
-    this.showRimuovi = this.statoPrecedente == 'modifica';
-    this.showSearchPanel = true;
-    this.showAggiungi = true;
+    // se i campi di input del panel sono vuoti non esegue
+    if (this.codice && this.descrizione && this.prezzo !== null) {
 
-    // TODO: se i campi sono vuoti non esegue
+      // imposta visibilità degli elementi dell'interfaccia
+      this.showPanel = this.statoPrecedente == 'modifica';
+      this.inputDisabled = true;
+      this.showConferma = false;
+      this.showAnnulla = false;
+      this.showCrea = this.statoPrecedente == 'modifica';
+      this.showModifica = this.statoPrecedente == 'modifica';
+      this.showRimuovi = this.statoPrecedente == 'modifica';
+      this.showSearchPanel = true;
+      this.showAggiungi = true;
 
-    // eseguo operazione confermata in base allo stato precedente
-    switch (this.statoPrecedente) {
-      case 'crea': this.confermaCrea();
-        break;
-      case 'modifica': this.confermaModifica();
-        break;
-      case 'rimuovi': this.confermaRimuovi();
-        break;
+      // eseguo operazione confermata in base allo stato precedente
+      switch (this.statoPrecedente) {
+        case 'crea': this.confermaCrea();
+          break;
+        case 'modifica': this.confermaModifica();
+          break;
+        case 'rimuovi': this.confermaRimuovi();
+          break;
+      }
     }
   }
 
@@ -98,7 +101,9 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // invio la richiesta
     oss.subscribe(risposta => {
-      // TODO eseguo una nuova ricerca per aggiornare la lista dei prodotti
+
+      // una volta eseguito l'inserimento, eseguo di nuovo l'ultima ricerca effettuata
+      this.eseguiRicerca(this.searchKeyPrecedente);
     });
   }
 
@@ -120,7 +125,9 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // invio la richiesta
     oss.subscribe(risposta => {
-      // TODO eseguo una nuova ricerca per aggiornare la lista dei prodotti
+
+      // una volta eseguita la modifica, eseguo di nuovo l'ultima ricerca effettuata
+      this.eseguiRicerca(this.searchKeyPrecedente);
     });
   }
 
@@ -138,7 +145,9 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // invio la richiesta
     oss.subscribe(risposta => {
-      // TODO eseguo una nuova ricerca per aggiornare la lista dei prodotti
+
+      // una volta eseguita la rimozione, eseguo di nuovo l'ultima ricerca effettuata
+      this.eseguiRicerca(this.searchKeyPrecedente);
     });
   }
 
@@ -233,9 +242,14 @@ export class AnagraficaProdottiComponent implements OnInit {
     // aggiorno lo stato
     this.statoPrecedente = 'cerca';
 
+    // eseguo la ricerca con la searchKey attuale
+    this.eseguiRicerca(this.searchKey);
+  }
+
+  private eseguiRicerca(search: string) {
     // prepara i dati da inviare al server
     let dto: ProdottoSearchDto = new ProdottoSearchDto();
-    dto.searchKey = this.searchKey;
+    dto.searchKey = search;
     dto.token = this.acService.token;
 
     // prepara la richiesta HTTP
@@ -244,8 +258,18 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // invio la richiesta
     oss.subscribe(risposta => {
+
+      // aggiorno lista prodotti
       this.prodotti = risposta.results;
+
+      // se ci sono risultati li visualizzo
       this.showResults = risposta.results.length > 0;
+
+      // salvo la chiave di ricerca
+      this.searchKeyPrecedente = this.searchKey;
+
+      // pulisco il campo ricerca
+      this.searchKey = '';
     });
   }
 
@@ -286,6 +310,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   private annullaCampiPanel() {
     this.codice = '';
     this.descrizione = '';
-    this.prezzo = 0;
+    this.prezzo = null;
   }
 }
