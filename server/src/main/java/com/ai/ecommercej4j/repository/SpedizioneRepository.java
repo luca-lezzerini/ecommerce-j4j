@@ -6,6 +6,7 @@
 package com.ai.ecommercej4j.repository;
 
 import com.ai.ecommercej4j.model.Spedizione;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 /**
@@ -13,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author utente
  */
 public interface SpedizioneRepository extends JpaRepository<Spedizione, Long> {
-     public Spedizione findByCodice(String codice);
+    List<Spedizione> findByCodice(String codice);
     
 }

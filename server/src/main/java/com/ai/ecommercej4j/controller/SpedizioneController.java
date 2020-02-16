@@ -28,25 +28,26 @@ public class SpedizioneController {
     @RequestMapping("/create-spedizione")
     @ResponseBody
     public void createSpedizione(@RequestBody SpedizioneCreateDto dto) {
-        
+        ss.createSpedizione(dto);
     }
 
     @RequestMapping("/search-spedizione")
     @ResponseBody
-   public SpedizioneSearchResultsDto searchSpedizione(@RequestBody SpedizioneSearchDto dto) {
+    public SpedizioneSearchResultsDto searchSpedizione(@RequestBody SpedizioneSearchDto dto) {
         return ss.searchSpedizione(dto);
-    
-   }
+
+    }
+
     @RequestMapping("/delete-spedizione")
     @ResponseBody
     public void deleteSpedizione(@RequestBody SpedizioneDeleteDto dto) {
-       
+        ss.deleteSpedizione(dto);
     }
 
     @RequestMapping("/update-spedizione")
     @ResponseBody
     public void updateSpedizione(SpedizioneUpdateDto dto) {
-
+        ss.updateSpedizione(dto);
     }
 
 }
