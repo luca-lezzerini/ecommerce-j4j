@@ -87,12 +87,25 @@ export class AnagraficaTaglieComponent implements OnInit {
     this.aggiungiEnabled = false;
   }
 
+  visView() {
+    this.panelEnabled = true;
+    this.inputDisabled = true;
+    this.confermaEnabled = false;
+    this.annullaEnabled = false;
+    this.creaEnabled = true;
+    this.modificaEnabled = true;
+    this.rimuoviEnabled = true;
+    this.cercaEnabled = true;
+    this.risultatoEnabled = true;
+    this.aggiungiEnabled = true;
+  }
+
   visAnnulla() {
     switch (this.visPrecedente) {
+      case 'aggiungi':
+        this.cerca();
+        break;
       case 'crea':
-        this.panelEnabled = false;
-        this.cercaEnabled = true;
-        this.aggiungiEnabled = true;
         this.cerca();
         break;
       case 'delete':
@@ -162,6 +175,8 @@ export class AnagraficaTaglieComponent implements OnInit {
   annulla() {
     switch (this.visPrecedente) {
       case 'aggiungi':
+        this.visAnnulla();
+
         break;
       case 'crea':
         break;
@@ -180,18 +195,20 @@ export class AnagraficaTaglieComponent implements OnInit {
   }
 
   confermaCrea() {
-    // prepara la chiamata al server
-    const dto: TagliaCreateDto = new TagliaCreateDto();
-    dto.token = this.singleton.token;
-    dto.dati = new Taglia();
-    dto.dati.codice = this.codice;
-    dto.dati.descrizione = this.descrizione;
-    const obs: Observable<any> = this.http.post('http://localhost:8080/create-taglia', dto);
-    // prepara la callback
-    obs.subscribe(risposta => {
-      // ripete ultima ricerca
-      this.cerca();
-    });
+    if (this.codice && this.descrizione) {
+      // prepara la chiamata al server
+      const dto: TagliaCreateDto = new TagliaCreateDto();
+      dto.token = this.singleton.token;
+      dto.dati = new Taglia();
+      dto.dati.codice = this.codice;
+      dto.dati.descrizione = this.descrizione;
+      const obs: Observable<any> = this.http.post('http://localhost:8080/create-taglia', dto);
+      // prepara la callback
+      obs.subscribe(risposta => {
+        // ripete ultima ricerca
+        this.cerca();
+      });
+    }
   }
 
   crea() { }
@@ -202,6 +219,13 @@ export class AnagraficaTaglieComponent implements OnInit {
 
   view(id: number) {
     this.id = id;
+    this.visView();
+    this.taglie.forEach(element => {
+      if (element.id === id) {
+        this.codice = element.codice;
+        this.descrizione = element.descrizione;
+      }
+    });
   }
 
   edit(id: number) {

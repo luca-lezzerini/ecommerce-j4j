@@ -9,20 +9,20 @@
   &nbsp;
 
   <br>
-  <button (click)="conferma()" *ngIf="confermaEnabled">Conferma</button>&nbsp;
-  <button (click)="annulla()" *ngIf="annullaEnabled">Annulla</button>&nbsp;
-  <button (click)="crea()" *ngIf="creaEnabled">Crea</button>&nbsp;
-  <button (click)="modifica()" *ngIf="modificaEnabled">Modifica</button>&nbsp;
+  <button (click)="conferma()" *ngIf="confermaEnabled">Conferma</button>
+  <button (click)="annulla()" *ngIf="annullaEnabled">Annulla</button>
+  <button (click)="crea()" *ngIf="creaEnabled">Crea</button>
+  <button (click)="modifica()" *ngIf="modificaEnabled">Modifica</button>
   <button (click)="rimuovi()" *ngIf="rimuoviEnabled">Rimuovi</button>
 </div>
-
+<br>
 <div *ngIf="cercaEnabled">
   <input [(ngModel)]="searchKey">&nbsp;
   <button (click)="cerca()" *ngIf="cercaEnabled">Cerca</button>
   &nbsp;
   <button (click)="aggiungi()" *ngIf="aggiungiEnabled">Aggiungi</button>
 </div>
-
+<br>
 <table *ngIf="risultatoEnabled">
   <tr>
     <th>CODICE</th>
