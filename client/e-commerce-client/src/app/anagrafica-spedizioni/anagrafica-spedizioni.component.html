@@ -1,7 +1,7 @@
-<div *ngIf="dettagliEnabled">
-  Codice <input type="text" [(ngModel)]="codice" [disabled]="inputEditable">&nbsp;
-  Descrizione <input type="text" [(ngModel)]="descrizione"[disabled]="inputEditable">&nbsp;
-  Prezzo <input type="text" [(ngModel)]="prezzo" [disabled]="inputEditable">
+<div *ngIf="panelEnabled">
+  Codice <input type="text" [(ngModel)]="codice" [disabled]="panelInputDisabled">&nbsp;
+  Descrizione <input type="text" [(ngModel)]="descrizione"[disabled]="panelInputDisabled">&nbsp;
+  Prezzo <input type="text" [(ngModel)]="prezzo" [disabled]="panelInputDisabled">
   <br>
   <br>
   <button (click)="conferma()" *ngIf="confermaEnabled">Conferma</button>&nbsp;
@@ -13,15 +13,16 @@
 <br>
 <hr>
 <br>
-<div *ngIf="cercaEnabled">
-  <input type="text" [(ngModel)]="search" [disabled]="inputEditable">&nbsp;
-  <button (click)="cerca()" *ngIf="cercaEnabled">Cerca</button>&nbsp;
-  <button (click)="aggiungi()" *ngIf="aggiungiEnabled">Aggiungi</button>&nbsp;
+<div *ngIf="searchPanelEnabled">
+  <input type="text" [(ngModel)]="searchKey" [disabled]="cercaInputDisabled">&nbsp;
+  <button (click)="cerca()" *ngIf="cercaEnabled">Cerca</button>
 </div>
+  <button (click)="aggiungi()" *ngIf="aggiungiEnabled">Aggiungi</button>&nbsp;
+
 <br>
 <hr>
 <br>
-<table *ngIf="tableEnabled">
+<table *ngIf="resultsEnabled">
   <tr>
     <th>Codice Spedizione</th>
     <th>Descrizione</th>
