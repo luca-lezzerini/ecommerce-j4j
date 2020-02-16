@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { Prodotto } from '../classi/prodotto';
 import { ProdottoSearchResultsDto } from '../classi/prodotto-search-results';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { AreaComuneService } from '../area-comune.service';
 import { ProdottoCreateDto } from '../classi/prodotto-create-dto';
 import { ProdottoUpdateDto } from '../classi/prodotto-update-dto';
@@ -23,7 +22,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   descrizione = '';
   prezzo: number;
   prodotti: Prodotto[] = [];
-  search: '';
   showPanel: boolean;
   inputDisabled: boolean;
   showConferma: boolean;
@@ -35,11 +33,11 @@ export class AnagraficaProdottiComponent implements OnInit {
   showResults: boolean;
   showAggiungi: boolean;
   trovatoQualcosa: boolean;
-  searchKey: string;
+  searchKey = '';
   statoPrecedente = '';
 
   constructor(private http: HttpClient,
-    private acService: AreaComuneService,) {
+    private acService: AreaComuneService, ) {
     // imposta visibilità iniziale degli elementi dell'interfaccia
     this.showPanel = false;
     this.inputDisabled = true;
@@ -72,7 +70,9 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showAggiungi = true;
 
     // aggiorno lo stato
-    this.statoPrecedente = 'annulla';
+    this.statoPrecedente = 'conferma';
+
+    // TODO: se i campi sono vuoti non esegue
 
     // eseguo operazione confermata in base allo stato precedente
     switch (this.statoPrecedente) {

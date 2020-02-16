@@ -11,7 +11,7 @@
 </div>
 
 <div>
-  <input *ngIf="showSearchPanel" type="text" [(ngModel)]="search">&nbsp;
+  <input *ngIf="showSearchPanel" type="text" [(ngModel)]="searchKey">&nbsp;
   <button *ngIf="showSearchPanel" (click)="cerca()">Cerca</button>&nbsp;
   <button *ngIf="showAggiungi" (click)="crea()">Aggiungi</button>
 </div>
@@ -32,13 +32,13 @@
       <td>{{p.descrizione}}</td>
       <td>{{p.prezzo}}</td>
       <td>
-        <button (click)="view(p)">View</button>>
+        <button (click)="view(p)">View</button>
       </td>
       <td>
-        <button (click)="modifica(p)">Edit</button>>
+        <button (click)="modifica(p)">Edit</button>
       </td>
       <td>
-        <button (click)="rimuovi(p)">Delete</button>>
+        <button (click)="rimuovi(p)">Delete</button>
       </td>
       </tr>
   </table>

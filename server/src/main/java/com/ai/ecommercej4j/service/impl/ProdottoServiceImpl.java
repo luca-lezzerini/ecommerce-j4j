@@ -50,11 +50,11 @@ public class ProdottoServiceImpl implements ProdottoService {
 
         // controllo se il dto in ingresso esiste
         if (dto != null) {
-
             // controllo se il token esiste
-            if (securityService.checkToken(dto.getToken())) {
-
-                //recupero i risultati e avvaloro il dto di ritorno
+            if(true){
+            //TODO riabilita if
+            //if (securityService.checkToken(dto.getToken())) {
+                //recupero i risultati e avvaloro il dto di ritorno                
                 List<Prodotto> lp = prodottoRepository.findByCodice(dto.getSearchKey());
                 resultDto.setResults(lp);
             }
