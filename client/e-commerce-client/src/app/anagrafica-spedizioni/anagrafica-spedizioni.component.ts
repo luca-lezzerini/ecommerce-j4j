@@ -305,32 +305,6 @@ export class AnagraficaSpedizioniComponent implements OnInit {
   }
 
 
-
-  /* template
-
-    this.panelEnabled = ;
-    this.panelEditable = ;
-    this.confermaEnabled = ;
-    this.annullaEnabled = ;
-    this.creaEnabled = ;
-    this.modificaEnabled = ;
-    this.rimuoviEnabled = ;
-
-    this.searchPanelEnabled = ;
-    this.cercaEditable = ;
-    this.cercaEnabled = ;
-
-    this.aggiungiEnabled = ;
-
-    this.resultsEnabled = ;
-    this.viewEnabled = ;
-    this.editEnabled = ;
-    this.deleteEnabled = ;
-
-  */
-
-
-
   // Metodo invocato dal bottone conferma
   conferma() {
 
@@ -439,7 +413,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
      // DEBUG only
      console.log('sono in modificaa, vengo da ' + this.statoPrecedente);
 
-    this.edit();
+     this.edit();
   }
 
   // Metodo invocato dal bottone delete
@@ -516,37 +490,38 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
   creaSpedizione(){     // CRUD create
 
-    //FIXME
+    // DEBUG only
     console.log('Sono in creaSpedizione');
 
-/*  codice da testare
-        // prepara la chiamata al server
-        const dto: SpedizioneCreateDto = new SpedizioneCreateDto();
-        dto.token = this.singleton.token;
-        dto.dati = new Spedizione();
-        dto.dati.codice = this.codice;
-        dto.dati.descrizione = this.descrizione;
-        dto.dati.prezzo = +this.prezzo;  // qui + converte string in number
+    /*  codice da testare */
 
-        const obs: Observable<SpedizioneCreateDto> =
+    // prepara la chiamata al server
+    const dto: SpedizioneCreateDto = new SpedizioneCreateDto();
+    dto.token = this.singleton.token;
+    dto.dati = new Spedizione();
+    dto.dati.codice = this.codice;
+    dto.dati.descrizione = this.descrizione;
+    dto.dati.prezzo = +this.prezzo;  // qui + converte string in number
+
+    const obs: Observable<SpedizioneCreateDto> =
           this.http.post<SpedizioneCreateDto>('http://localhost:8080/create-spedizione', dto);
 
-        // invia la richiesta al server
-        obs.subscribe(risposta => {
-          // ripete ultima ricerca
-          // this.cercaSpedizione();
+    // invia la richiesta al server
+    obs.subscribe(risposta => {
+      // ripete ultima ricerca
+      // this.cercaSpedizione();
 
-          console.log(risposta);
-        });
-*/
+      console.log(risposta);
+    });
+
   }
 
   cercaSpedizione(){    // CRUD read
 
-  //FIXME
-  console.log('Sono in cercaSpedizione');
+    // DEBUG only
+    console.log('Sono in cercaSpedizione');
 
-/*  codice da testare
+    /*  codice da testare */
     // prepara la chiamata al server
     const dto: SpedizioneSearchDto = new SpedizioneSearchDto();
     dto.token = this.singleton.token;
@@ -558,21 +533,20 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     obs.subscribe(risposta => {
       this.spedizioni = risposta.result;
       if (this.spedizioni && this.spedizioni.length > 0) {
-        // se trova qualcosa lo fa vedere
-        this.showResults();
+       // se trova qualcosa lo fa vedere
+       this.showResults();
       } else {
         this.resultsEnabled = false;
       }
     });
-*/
   }
 
   modificaSpedizione() {    // CRUD update
 
-  //FIXME
-  console.log('Sono in modificaSpedizione');
+    // DEBUG only
+    console.log('Sono in modificaSpedizione');
 
-/*  codice da testare
+    /*  codice da testare  */
     // prepara la chiamata al server
     const dto: SpedizioneUpdateDto = new SpedizioneUpdateDto();
     dto.token = this.singleton.token;
@@ -581,25 +555,24 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     dto.dati.descrizione = this.descrizione;
     dto.dati.prezzo = +this.prezzo;  // qui + converte string in number
     const obs: Observable<SpedizioneUpdateDto> =
-      this.http.post<SpedizioneUpdateDto>('http://localhost:8080/update-spedizione', dto);
+          this.http.post<SpedizioneUpdateDto>('http://localhost:8080/update-spedizione', dto);
 
     // invia la richiesta al server
     obs.subscribe(risposta => {
-       // ripete ultima ricerca
-          // this.cercaSpedizione();
+      // ripete ultima ricerca
+      // this.cercaSpedizione();
 
-          console.log(risposta);
-        });
-*/
+      console.log(risposta);
+    });
   }
 
 
   deleteSpedizione() {    // CRUD delete
 
-    //FIXME
+    // DEBUG only
     console.log('Sono in deleteSpedizione');
 
-/*  codice da testare
+    /*  codice da testare */
     // prepara la chiamata al server
     const dto: SpedizioneDeleteDto = new SpedizioneDeleteDto();
     dto.token = this.singleton.token;
@@ -614,7 +587,6 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
          console.log(risposta);
     });
-*/
   }
 
 
