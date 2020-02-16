@@ -38,10 +38,17 @@ public class TagliaServiceImpl implements TagliaService {
     @Override
     public TagliaSearchResultsDto searchTaglia(TagliaSearchDto dto) {
         TagliaSearchResultsDto result = new TagliaSearchResultsDto();
+        String ricerca = dto.getSearchKey();
         //verifico che il token sia registrato...
         if (ss.checkToken(dto.getToken())) {
-            //...se è registrato cerco le taglie che soddisfano la ricerca e le metto nella risposta
-            result.setResult(tr.findByCodiceOrDescrizione(dto.getSearchKey(), dto.getSearchKey()));
+            //...se è registrato controllo se la stringa di ricerca è vuota...
+            if (ricerca.equals("")) {
+                //...se è vuota ritorno tutte le taglie
+                result.setResult(tr.findAll());
+            } else {
+                //...atrimenti cerco solo quelle che soddisfano la ricerca
+                result.setResult(tr.findByCodiceOrDescrizione(ricerca, ricerca));
+            }
         } else {
             //...altrimenti ritorno una lista vuota 
             result.setResult(Collections.emptyList());
@@ -58,8 +65,8 @@ public class TagliaServiceImpl implements TagliaService {
 
     @Override
     public void updateTaglia(TagliaUpdateDto dto) {
-        if (ss.checkToken(dto.getToken())) {  
-            if (tr.findById(dto.getDati().getId()) != null ) {
+        if (ss.checkToken(dto.getToken())) {
+            if (tr.findById(dto.getDati().getId()) != null) {
                 tr.save(dto.getDati());
             }
         }

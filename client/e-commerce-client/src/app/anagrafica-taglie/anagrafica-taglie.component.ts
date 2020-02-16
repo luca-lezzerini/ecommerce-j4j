@@ -30,8 +30,7 @@ export class AnagraficaTaglieComponent implements OnInit {
   taglie: Taglia[] = [];
   inputDisabled: boolean;
   visPrecedente: string;
-  id: number;
-
+  id = 0;
 
   constructor(
     private http: HttpClient,
@@ -58,7 +57,7 @@ export class AnagraficaTaglieComponent implements OnInit {
     this.risultatoEnabled = false;
   }
 
-  visCercaSiRisultato() {
+  visCercaConRisultato() {
     this.panelEnabled = false;
     this.confermaEnabled = false;
     this.annullaEnabled = false;
@@ -70,8 +69,8 @@ export class AnagraficaTaglieComponent implements OnInit {
     this.risultatoEnabled = true;
   }
 
-  visCercaNoRisultato() {
-    this.visCercaSiRisultato();
+  visCercaSenzaRisultato() {
+    this.visCercaConRisultato();
     this.risultatoEnabled = false;
   }
 
@@ -96,7 +95,6 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.aggiungiEnabled = true;
         this.cerca();
         break;
-
       case 'delete':
         this.panelEnabled = true;
         this.confermaEnabled = false;
@@ -108,11 +106,7 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.aggiungiEnabled = true;
         this.inputDisabled = true;
         break;
-
     }
-
-
-
   }
 
   cerca() {
@@ -127,11 +121,11 @@ export class AnagraficaTaglieComponent implements OnInit {
     obs.subscribe(risposta => {
       this.taglie = risposta.result;
       if (this.taglie && this.taglie.length > 0) {
-        // se trova qualcosa imposta le visibilità su visCercaSiRisultato
-        this.visCercaSiRisultato();
+        // se trova qualcosa mostra il risultato
+        this.visCercaConRisultato();
       } else {
-        // altrimenti imposta le visibilità su visCercaNoRisultato
-        this.visCercaNoRisultato();
+        // altrimenti nasconde la tabella dei risultati
+        this.visCercaSenzaRisultato();
       }
     });
     this.visPrecedente = 'cerca';
@@ -152,18 +146,37 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.confermaCrea();
         break;
       case 'modifica':
-        this.confermaCrea();
         break;
       case 'edit':
-        this.confermaCrea();
         break;
       case 'rimuovi':
-        this.confermaCrea();
         break;
       case 'delete':
-        this.confermaCrea();
         break;
     }
+    this.codice = '';
+    this.descrizione = '';
+    this.id = 0;
+  }
+
+  annulla() {
+    switch (this.visPrecedente) {
+      case 'aggiungi':
+        break;
+      case 'crea':
+        break;
+      case 'modifica':
+        break;
+      case 'edit':
+        break;
+      case 'rimuovi':
+        break;
+      case 'delete':
+        break;
+    }
+    this.codice = '';
+    this.descrizione = '';
+    this.id = 0;
   }
 
   confermaCrea() {
@@ -181,10 +194,6 @@ export class AnagraficaTaglieComponent implements OnInit {
     });
   }
 
-  annulla() {
-    //
-  }
-
   crea() { }
 
   modifica() { }
@@ -193,9 +202,13 @@ export class AnagraficaTaglieComponent implements OnInit {
 
   view(id: number) {
     this.id = id;
-   }
+  }
 
-  edit(id: number) { }
+  edit(id: number) {
+    this.id = id;
+  }
 
-  delete(id: number) { }
+  delete(id: number) {
+    this.id = id;
+  }
 }
