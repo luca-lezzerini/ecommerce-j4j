@@ -1,7 +1,7 @@
 <div *ngIf="showPanel">
   <input type="text" [(ngModel)]="codice" [disabled]="inputDisabled">&nbsp;
   <input type="text" [(ngModel)]="descrizione" [disabled]="inputDisabled">&nbsp;
-  <input type="text" [(ngModel)]="prezzo" [disabled]="inputDisabled">
+  <input type="number" [(ngModel)]="prezzo" [disabled]="inputDisabled">
   <br>
   <button *ngIf="showConferma" (click)="conferma()">Conferma</button>&nbsp;
   <button *ngIf="showAnnulla" (click)="annulla()">Annulla</button>&nbsp;
@@ -18,7 +18,7 @@
 <button *ngIf="showAggiungi" (click)="crea()">Aggiungi</button>
 
 
-<div *ngIf="prodotti && prodotti.length > 0">
+<div *ngIf="showResults && prodotti && prodotti.length > 0">
   <br>
   <table>
     <tr>

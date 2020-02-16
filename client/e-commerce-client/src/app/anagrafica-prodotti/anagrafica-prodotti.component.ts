@@ -37,7 +37,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   statoPrecedente = '';
 
   constructor(private http: HttpClient,
-    private acService: AreaComuneService, ) {
+    private acService: AreaComuneService) {
     // imposta visibilità iniziale degli elementi dell'interfaccia
     this.showPanel = false;
     this.inputDisabled = true;
@@ -62,15 +62,11 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.inputDisabled = true;
     this.showConferma = false;
     this.showAnnulla = false;
-    this.showCrea = false;
-    this.showModifica = false;
-    this.showRimuovi = false;
+    this.showCrea = this.statoPrecedente == 'modifica';
+    this.showModifica = this.statoPrecedente == 'modifica';
+    this.showRimuovi = this.statoPrecedente == 'modifica';
     this.showSearchPanel = true;
-    this.showResults = this.trovatoQualcosa;
     this.showAggiungi = true;
-
-    // aggiorno lo stato
-    this.statoPrecedente = 'conferma';
 
     // TODO: se i campi sono vuoti non esegue
 
@@ -90,6 +86,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   private confermaCrea() {
     // prepara i dati da inviare al server
     let dto: ProdottoCreateDto = new ProdottoCreateDto();
+    dto.dati = new Prodotto();
     dto.dati.codice = this.codice;
     dto.dati.descrizione = this.descrizione;
     dto.dati.prezzo = this.prezzo;
@@ -110,6 +107,8 @@ export class AnagraficaProdottiComponent implements OnInit {
   private confermaModifica() {
     // prepara i dati da inviare al server
     let dto: ProdottoUpdateDto = new ProdottoUpdateDto();
+    dto.dati = new Prodotto();
+    dto.dati.id = this.id;
     dto.dati.codice = this.codice;
     dto.dati.descrizione = this.descrizione;
     dto.dati.prezzo = this.prezzo;
@@ -155,12 +154,13 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showSearchPanel = true;
     this.showResults = true;
     this.showAggiungi = true;
-
-    // aggiorno lo stato
-    this.statoPrecedente = 'annulla';
   }
 
   crea() {
+    // pulisci campi di input nel panel
+
+    this.annullaCampiPanel();
+
     // imposta visibilità degli elementi dell'interfaccia
     this.showPanel = true;
     this.inputDisabled = false;
@@ -178,8 +178,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   modifica(p: Prodotto) {
-
-    // copia i valori  del prodotto selezionato nei campi del panel
+    // imposta visibilità degli elementi dell'interfaccia
     this.popolaCampiPanel(p);
 
     // imposta visibilità degli elementi dell'interfaccia
@@ -211,9 +210,9 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showCrea = false;
     this.showModifica = false;
     this.showRimuovi = false;
-    this.showSearchPanel = true;
+    this.showSearchPanel = false;
     this.showResults = false;
-    this.showAggiungi = true;
+    this.showAggiungi = false;
 
     // aggiorno lo stato
     this.statoPrecedente = 'rimuovi';
@@ -229,7 +228,6 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showModifica = false;
     this.showRimuovi = false;
     this.showSearchPanel = true;
-    this.showResults = this.trovatoQualcosa;
     this.showAggiungi = true;
 
     // aggiorno lo stato
@@ -247,6 +245,7 @@ export class AnagraficaProdottiComponent implements OnInit {
     // invio la richiesta
     oss.subscribe(risposta => {
       this.prodotti = risposta.results;
+      this.showResults = risposta.results.length > 0;
     });
   }
 
@@ -271,10 +270,22 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.statoPrecedente = 'view';
   }
 
+  // copia i valori del prodotto selezionato nei campi di testo del panel
   private popolaCampiPanel(p: Prodotto) {
-    this.id = p.id;
-    this.codice = p.codice;
-    this.descrizione = p.descrizione;
-    this.prezzo = p.prezzo;
+
+    // controlla se i campi sono stato già avvalorati passando per view
+    if (this.statoPrecedente != 'view' && this.statoPrecedente != 'modifica') {
+      this.id = p.id;
+      this.codice = p.codice;
+      this.descrizione = p.descrizione;
+      this.prezzo = p.prezzo;
+    }
+  }
+
+  // pulisco i valori dei campi di input nel panel
+  private annullaCampiPanel() {
+    this.codice = '';
+    this.descrizione = '';
+    this.prezzo = 0;
   }
 }
