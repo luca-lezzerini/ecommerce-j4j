@@ -202,16 +202,108 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
   }
 
-  //TODO
-    daCreateAnnulla() { this.statoPrecedente = 'create'; }
-    daCreateConferma() { this.statoPrecedente = 'create'; }
-    daViewCreate() {}
-    daViewCerca() {}
-    daViewEdit() {}
-    daViewDelete() {}
-    daDeleteAnnullaView() {}
-    daDeleteAnnullaSearch() {}
-    daDeleteConferma() {}
+
+  // da CreateState a SearchState freccia "annulla" - parte Filippo -
+  daCreateAnnulla(){
+  this.panelEnabled = false;
+  this.cercaEnabled = true;
+  this.resultsEnabled = true;
+  this.aggiungiEnabled = true;
+
+  this.statoPrecedente = 'create';
+  }
+
+  // da CreateState a SearchState freccia "conferma" - parte Filippo -
+  daCreateConferma(){
+    this.panelEnabled = false;
+    this.cercaEnabled = true;
+    this.resultsEnabled = true;
+    this.aggiungiEnabled = true;
+
+    this.statoPrecedente = 'create';
+
+  }
+
+  // da ViewState a CreateState freccia "create" - parte Filippo -
+  daViewCreate(){
+    this.panelEnabled = true;
+    this.panelInputDisabled = false;
+    this.confermaEnabled = true;
+    this.annullaEnabled = true;
+    this.creaEnabled = false;
+    this.modificaEnabled = false;
+    this.rimuoviEnabled = false;
+    this.cercaEnabled = false;
+    this.resultsEnabled = false;
+    this.aggiungiEnabled = false;
+
+    this.statoPrecedente = 'view';
+
+  }
+
+  // da ViewState a EditState freccia "edit" - parte Filippo -
+  daViewEdit(){
+    this.panelEnabled = false;
+    this.cercaEnabled = true;
+    this.resultsEnabled = true;
+    this.aggiungiEnabled = true;
+
+    this.statoPrecedente = 'view';
+
+  }
+
+  // da ViewState a DeleteState freccia "delete" - parte Filippo -
+  daViewDelete(){
+    this.panelEnabled = false;
+    this.panelInputDisabled = true;
+    this.confermaEnabled = true;
+    this.annullaEnabled = true;
+    this.creaEnabled = false;
+    this.modificaEnabled = false;
+    this.rimuoviEnabled = false;
+    this.cercaEnabled = false;
+    this.resultsEnabled = false;
+    this.aggiungiEnabled = false;
+
+    this.statoPrecedente = 'view';
+  }
+
+  // da DeleteState a ViewState freccia "conferma" - parte Filippo -
+  daDeleteConferma(){
+    this.panelEnabled = false;
+    this.cercaEnabled = true;
+    this.resultsEnabled = true;
+    this.aggiungiEnabled = true;
+
+    this.statoPrecedente = 'delete';
+  }
+
+  // da DeleteState a ViewState freccia "annulla[venivo da view]" - parte Filippo -
+  daDeleteAnnullaView(){
+    this.panelEnabled = true;
+    this.panelInputDisabled = true;
+    this.confermaEnabled = false;
+    this.annullaEnabled = false;
+    this.creaEnabled = true;
+    this.modificaEnabled = true;
+    this.rimuoviEnabled = true;
+    this.cercaEnabled = true;
+    this.resultsEnabled = true;
+    this.aggiungiEnabled = true;
+
+    this.statoPrecedente = 'delete';
+  }
+
+  // da DeleteState a ViewState freccia "annulla[venivo da search]" - parte Filippo -
+  daDeleteAnnullaSearch(){
+    this.panelEnabled = false;
+    this.cercaEnabled = true;
+    this.resultsEnabled = true;
+    this.aggiungiEnabled = true;
+
+    this.statoPrecedente = 'delete';
+  }
+
 
 
   /* template
@@ -413,7 +505,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
         this.daSearchCerca();
         break;
       case 'view':
-        this.daViewCerca();
+        this.daViewCreate();
         break;
       default:
         console.log('Stato sbagliato!');
