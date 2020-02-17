@@ -21,6 +21,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   codice = '';
   descrizione = '';
   prezzo: number;
+  offerta = false;
   prodotti: Prodotto[] = [];
   showPanel: boolean;
   inputDisabled: boolean;
@@ -63,8 +64,11 @@ export class AnagraficaProdottiComponent implements OnInit {
     if (this.codice && this.descrizione && this.prezzo !== null) {
 
       // copia in prodottoSelezionato i dati dei campi di input
-      if(this.id) {
-      this.prodottoSelezionato.id = this.id;
+      if (this.id) {
+        this.prodottoSelezionato.id = this.id;
+      }
+      if (this.offerta) {
+        this.prodottoSelezionato.offerta = this.offerta;
       }
       this.prodottoSelezionato.codice = this.codice;
       this.prodottoSelezionato.descrizione = this.descrizione;
@@ -87,7 +91,9 @@ export class AnagraficaProdottiComponent implements OnInit {
           break;
         case 'modifica': this.confermaModifica();
           break;
-        case 'rimuovi': this.confermaRimuovi();
+        case 'rimuovicerca': this.confermaRimuovi();
+          break;
+        case 'rimuoviview': this.confermaRimuovi();
           break;
       }
     }
@@ -126,6 +132,7 @@ export class AnagraficaProdottiComponent implements OnInit {
     dto.dati.codice = this.codice;
     dto.dati.descrizione = this.descrizione;
     dto.dati.prezzo = this.prezzo;
+    dto.dati.offerta = this.offerta;
     dto.token = this.acService.token;
 
     // prepara la richiesta HTTP
@@ -162,13 +169,14 @@ export class AnagraficaProdottiComponent implements OnInit {
 
   annulla() {
     // imposta visibilità degli elementi dell'interfaccia
-    this.showPanel = this.statoPrecedente == 'modifica' || this.statoPrecedente == 'view';
+    let mostraPanel = this.statoPrecedente == 'modifica' || this.statoPrecedente == 'rimuoviview';
+    this.showPanel = mostraPanel;
     this.inputDisabled = true;
     this.showConferma = false;
     this.showAnnulla = false;
-    this.showCrea = false;
-    this.showModifica = false;
-    this.showRimuovi = false;
+    this.showCrea = mostraPanel;
+    this.showModifica = mostraPanel;
+    this.showRimuovi = mostraPanel;
     this.showSearchPanel = true;
     this.showResults = true;
     this.showAggiungi = true;
@@ -233,7 +241,7 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showAggiungi = false;
 
     // aggiorno lo stato
-    this.statoPrecedente = 'rimuovi';
+    this.statoPrecedente = 'rimuovi' + this.statoPrecedente;
   }
 
   cerca() {
@@ -312,6 +320,7 @@ export class AnagraficaProdottiComponent implements OnInit {
       this.codice = p.codice;
       this.descrizione = p.descrizione;
       this.prezzo = p.prezzo;
+      this.offerta = p.offerta;
 
       // salva il prodotto selezionato dalla tabella
       this.prodottoSelezionato = p;
@@ -322,6 +331,7 @@ export class AnagraficaProdottiComponent implements OnInit {
       this.codice = this.prodottoSelezionato.codice;
       this.descrizione = this.prodottoSelezionato.descrizione;
       this.prezzo = this.prodottoSelezionato.prezzo;
+      this.offerta = this.prodottoSelezionato.offerta;
     }
   }
 
