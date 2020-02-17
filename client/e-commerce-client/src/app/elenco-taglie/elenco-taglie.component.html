@@ -1,0 +1,19 @@
+<div>
+  <input type='text' [(ngModel)]='searchKey'>&nbsp;
+  <button (click)='searchTaglie()'>Cerca</button>
+  <a routerLink='/home-pubblica'>
+    <button>Home</button>
+  </a>
+</div>
+<div *ngIf='showResults || taglie && taglie.length > 0'>
+  <table>
+    <tr>
+      <th>Codice</th>
+      <th>Descrizione</th>
+    </tr>
+    <tr *ngFor="let t of taglie">
+      <td>{{t.codice}}</td>
+      <td>{{t.descrizione}}</td>
+    </tr>
+  </table>
+</div>
