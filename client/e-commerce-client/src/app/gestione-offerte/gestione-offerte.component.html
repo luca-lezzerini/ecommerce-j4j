@@ -12,8 +12,11 @@
         <th>Prezzo</th>
         <th>Offerta</th>
       </tr>
-      <tr>
-        <td>Prodotto</td>
+      <tr *ngFor="let p of prodotti">
+        <td>{{ p.codice }}</td>
+        <td>{{ p.descrizione }}</td>
+        <td>{{ p.prezzo }}</td>
+        <td>{{ p.offerta }}</td>
         <td><button (click)="seleziona()">Seleziona</button></td>
       </tr>
     </table>
