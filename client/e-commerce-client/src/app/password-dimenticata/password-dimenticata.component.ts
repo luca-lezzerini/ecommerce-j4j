@@ -15,7 +15,7 @@ export class PasswordDimenticataComponent implements OnInit {
 
   username: string;
   password: string;
-  token: string;
+  doi: string;
 
   constructor(private http: HttpClient, private router: Router, private ac: AreaComuneService) { }
 
@@ -31,15 +31,15 @@ export class PasswordDimenticataComponent implements OnInit {
       'http://localhost:8080/password-dimenticata',
       dto
     );
-    obs.subscribe(data => {
-      this.ac.token = data.token;
+    obs.subscribe(data => { // data.token è il doi generato dal service, NON LA SESSIONE
+      this.doi = data.token;
     });
   }
   // controllo sul token per verificare la ricezione della mail
   checkDoubleOptin() {
     // prepara i dati
     let dto: LoginResponseDto = new LoginResponseDto();
-    dto.token = this.token;
+    dto.token = this.doi;
 
     // prepara la richiesta
     let obs: Observable<void> = this.http.post<void>(
