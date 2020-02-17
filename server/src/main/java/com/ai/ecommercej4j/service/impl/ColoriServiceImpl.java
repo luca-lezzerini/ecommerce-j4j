@@ -22,9 +22,8 @@ public class ColoriServiceImpl implements ColoriService {
     @Override
     public void createColori(ColoriCreateDto dto) {
         Colori colore = new Colori();
-        colore.setDescrizione(colore.getDescrizione());
-        colore.setCodice(colore.getCodice());
-        colore.setId(colore.getId());
+        colore.setDescrizione(dto.getDati().getDescrizione());
+        colore.setCodice(dto.getDati().getCodice());
         coloriRepository.save(colore);
     }
 
