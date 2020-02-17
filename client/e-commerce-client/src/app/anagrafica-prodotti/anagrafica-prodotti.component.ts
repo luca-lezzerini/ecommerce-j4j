@@ -162,7 +162,7 @@ export class AnagraficaProdottiComponent implements OnInit {
 
   annulla() {
     // imposta visibilità degli elementi dell'interfaccia
-    this.showPanel = this.statoPrecedente == 'view';
+    this.showPanel = this.statoPrecedente == 'modifica' || this.statoPrecedente == 'view';
     this.inputDisabled = true;
     this.showConferma = false;
     this.showAnnulla = false;
