@@ -59,7 +59,7 @@ export class GestioneOfferteComponent implements OnInit {
     // invio richiesta al server
     obs.subscribe(response => {
       if (response) {
-        this.prodotti = response.results;
+        this.prodotti = response.result;
       }
     });
   }

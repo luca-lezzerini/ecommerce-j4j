@@ -651,7 +651,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
       //this.showResults = risposta.results.length > 0;
       //if (this.spedizioni && this.spedizioni.length > 0) {
 
-      if (risposta.results.length > 0) {
+      if (risposta.result.length > 0) {
        // se trova qualcosa lo fa vedere
        console.log('trovato!!!');
        this.showResults();

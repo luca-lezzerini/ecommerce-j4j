@@ -3,5 +3,5 @@ import { Prodotto } from './prodotto';
 
 
 export class ProdottoSearchResultsDto extends LoginResponseDto{
-  results: Prodotto[];
+  result: Prodotto[];
 }

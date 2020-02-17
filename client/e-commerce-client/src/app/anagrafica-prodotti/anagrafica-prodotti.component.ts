@@ -277,10 +277,10 @@ export class AnagraficaProdottiComponent implements OnInit {
     oss.subscribe(risposta => {
 
       // aggiorno lista prodotti
-      this.prodotti = risposta.results;
+      this.prodotti = risposta.result;
 
       // se ci sono risultati li visualizzo
-      this.showResults = risposta.results.length > 0;
+      this.showResults = risposta.result.length > 0;
 
       // salvo la chiave di ricerca
       this.searchKeyPrecedente = this.searchKey;

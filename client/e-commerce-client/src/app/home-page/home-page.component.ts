@@ -41,7 +41,7 @@ export class HomePageComponent implements OnInit {
 
     // Invio la richiesta
     oss.subscribe(risposta => {
-      this.prodotti = risposta.results;
+      this.prodotti = risposta.result;
       this.showResults = this.prodotti.length > 0;
     });
 

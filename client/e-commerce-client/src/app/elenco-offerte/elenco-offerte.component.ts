@@ -24,7 +24,7 @@ export class ElencoOfferteComponent implements OnInit {
     // preparo la richesta http
     let obs: Observable<ProdottoSearchResultsDto> = this.http.post<ProdottoSearchResultsDto>('http://localhost:8080/search-prodotti', dto);
     obs.subscribe(data =>{
-      this.prodotti = data.results;
+      this.prodotti = data.result;
     })
   }
 }
