@@ -1,1 +1,21 @@
-<p>gestione-offerte works!</p>
+<div *ngIf="!selezionaEnabled">
+  <div>
+    <input [(ngModel)]="searchCode">
+    &nbsp;
+    <button (click)="cercaCodice()">Cerca</button>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <th>Codice</th>
+        <th>Descrizione</th>
+        <th>Prezzo</th>
+        <th>Offerta</th>
+      </tr>
+      <tr>
+        <td>Prodotto</td>
+        <td><button (click)="seleziona()">Seleziona</button></td>
+      </tr>
+    </table>
+  </div>
+</div>
