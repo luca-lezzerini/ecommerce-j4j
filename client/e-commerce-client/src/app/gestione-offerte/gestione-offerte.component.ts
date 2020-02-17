@@ -15,9 +15,13 @@ export class GestioneOfferteComponent implements OnInit {
 
   newPrice: number;
   inOfferta: boolean;
-  searchCode: string;
+  searchCode = '';
   selezionaEnabled = false;
   prodotti: Prodotto[] = [];
+  codice: string;
+  descrizione: string;
+  prezzo: number;
+  offerta: boolean;
 
   constructor(
     private http: HttpClient,
@@ -55,7 +59,19 @@ export class GestioneOfferteComponent implements OnInit {
     });
   }
 
-  seleziona() {
+  seleziona(id: number) {
     this.selezionaEnabled = true;
+    this.getDettagli(id);
+  }
+
+  getDettagli(id: number) {
+    this.prodotti.forEach(p => {
+      if (p.id === id) {
+        this.codice = p.codice;
+        this.descrizione = p.descrizione;
+        this.prezzo = p.prezzo;
+        this.offerta = p.offerta;
+      }
+    });
   }
 }

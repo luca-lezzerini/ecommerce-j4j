@@ -16,8 +16,11 @@
         <td>{{ p.codice }}</td>
         <td>{{ p.descrizione }}</td>
         <td>{{ p.prezzo }}</td>
-        <td>{{ p.offerta }}</td>
-        <td><button (click)="seleziona()">Seleziona</button></td>
+        <td>
+          <span *ngIf="p.offerta">Si</span>
+          <span *ngIf="!p.offerta">No</span>
+        </td>
+        <td><button (click)="seleziona(p.id)">Seleziona</button></td>
       </tr>
     </table>
   </div>
