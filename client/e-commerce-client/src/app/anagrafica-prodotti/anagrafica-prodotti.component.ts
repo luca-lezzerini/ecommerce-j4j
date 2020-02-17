@@ -36,7 +36,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   searchKey = '';
   searchKeyPrecedente = '';
   statoPrecedente = '';
-  prodottoSelezionato: Prodotto;
+  prodottoSelezionato = new Prodotto();
 
   constructor(private http: HttpClient,
     private acService: AreaComuneService) {
@@ -63,8 +63,9 @@ export class AnagraficaProdottiComponent implements OnInit {
     if (this.codice && this.descrizione && this.prezzo !== null) {
 
       // copia in prodottoSelezionato i dati dei campi di input
-
+      if(this.id) {
       this.prodottoSelezionato.id = this.id;
+      }
       this.prodottoSelezionato.codice = this.codice;
       this.prodottoSelezionato.descrizione = this.descrizione;
       this.prodottoSelezionato.prezzo = this.prezzo;
