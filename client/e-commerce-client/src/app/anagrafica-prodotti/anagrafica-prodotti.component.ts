@@ -4,19 +4,24 @@ import { Component, OnInit } from '@angular/core';
 import { Prodotto } from '../classi/prodotto';
 import { ProdottoSearchResultsDto } from '../classi/prodotto-search-results';
 import { HttpClient } from '@angular/common/http';
+import { AreaComuneService } from '../area-comune.service';
+import { ProdottoCreateDto } from '../classi/prodotto-create-dto';
+import { ProdottoUpdateDto } from '../classi/prodotto-update-dto';
+import { ProdottoDeleteDto } from '../classi/prodotto-delete-dto';
 
 @Component({
   selector: 'app-anagrafica-prodotti',
   templateUrl: './anagrafica-prodotti.component.html',
   styleUrls: ['./anagrafica-prodotti.component.css']
 })
+
 export class AnagraficaProdottiComponent implements OnInit {
 
-  codice: '';
-  descrizione: '';
-  prezzo: '';
+  id: number;
+  codice = '';
+  descrizione = '';
+  prezzo: number;
   prodotti: Prodotto[] = [];
-  search: '';
   showPanel: boolean;
   inputDisabled: boolean;
   showConferma: boolean;
@@ -28,10 +33,13 @@ export class AnagraficaProdottiComponent implements OnInit {
   showResults: boolean;
   showAggiungi: boolean;
   trovatoQualcosa: boolean;
-  venivoDaView: boolean;
-  searchKey: string;
+  searchKey = '';
+  searchKeyPrecedente = '';
+  statoPrecedente = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private acService: AreaComuneService) {
+    // imposta visibilità iniziale degli elementi dell'interfaccia
     this.showPanel = false;
     this.inputDisabled = true;
     this.showConferma = false;
@@ -50,20 +58,102 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   conferma() {
-    this.showPanel = false;
-    this.inputDisabled = true;
-    this.showConferma = false;
-    this.showAnnulla = false;
-    this.showCrea = false;
-    this.showModifica = false;
-    this.showRimuovi = false;
-    this.showSearchPanel = true;
-    this.showResults = this.trovatoQualcosa;
-    this.showAggiungi = true;
+    // se i campi di input del panel sono vuoti non esegue
+    if (this.codice && this.descrizione && this.prezzo !== null) {
+
+      // imposta visibilità degli elementi dell'interfaccia
+      this.showPanel = this.statoPrecedente == 'modifica';
+      this.inputDisabled = true;
+      this.showConferma = false;
+      this.showAnnulla = false;
+      this.showCrea = this.statoPrecedente == 'modifica';
+      this.showModifica = this.statoPrecedente == 'modifica';
+      this.showRimuovi = this.statoPrecedente == 'modifica';
+      this.showSearchPanel = true;
+      this.showAggiungi = true;
+
+      // eseguo operazione confermata in base allo stato precedente
+      switch (this.statoPrecedente) {
+        case 'crea': this.confermaCrea();
+          break;
+        case 'modifica': this.confermaModifica();
+          break;
+        case 'rimuovi': this.confermaRimuovi();
+          break;
+      }
+    }
+  }
+
+  // esegue l'inserimento di un nuovo prodotto
+
+  private confermaCrea() {
+    // prepara i dati da inviare al server
+    let dto: ProdottoCreateDto = new ProdottoCreateDto();
+    dto.dati = new Prodotto();
+    dto.dati.codice = this.codice;
+    dto.dati.descrizione = this.descrizione;
+    dto.dati.prezzo = this.prezzo;
+    dto.token = this.acService.token;
+
+    // prepara la richiesta HTTP
+    let oss: Observable<any> =
+      this.http.post<any>('http://localhost:8080/create-prodotto', dto);
+
+    // invio la richiesta
+    oss.subscribe(risposta => {
+
+      // una volta eseguito l'inserimento, eseguo di nuovo l'ultima ricerca effettuata
+      this.eseguiRicerca(this.searchKeyPrecedente);
+    });
+  }
+
+  // esegue la modifica di un prodotto
+
+  private confermaModifica() {
+    // prepara i dati da inviare al server
+    let dto: ProdottoUpdateDto = new ProdottoUpdateDto();
+    dto.dati = new Prodotto();
+    dto.dati.id = this.id;
+    dto.dati.codice = this.codice;
+    dto.dati.descrizione = this.descrizione;
+    dto.dati.prezzo = this.prezzo;
+    dto.token = this.acService.token;
+
+    // prepara la richiesta HTTP
+    let oss: Observable<any> =
+      this.http.post<any>('http://localhost:8080/update-prodotto', dto);
+
+    // invio la richiesta
+    oss.subscribe(risposta => {
+
+      // una volta eseguita la modifica, eseguo di nuovo l'ultima ricerca effettuata
+      this.eseguiRicerca(this.searchKeyPrecedente);
+    });
+  }
+
+  // esegue la rimozione di un prodotto
+
+  private confermaRimuovi() {
+    // prepara i dati da inviare al server
+    let dto: ProdottoDeleteDto = new ProdottoDeleteDto();
+    dto.idToDelete = this.id;
+    dto.token = this.acService.token;
+
+    // prepara la richiesta HTTP
+    let oss: Observable<any> =
+      this.http.post<any>('http://localhost:8080/delete-prodotto', dto);
+
+    // invio la richiesta
+    oss.subscribe(risposta => {
+
+      // una volta eseguita la rimozione, eseguo di nuovo l'ultima ricerca effettuata
+      this.eseguiRicerca(this.searchKeyPrecedente);
+    });
   }
 
   annulla() {
-    this.showPanel = this.venivoDaView;
+    // imposta visibilità degli elementi dell'interfaccia
+    this.showPanel = this.statoPrecedente == 'view';
     this.inputDisabled = true;
     this.showConferma = false;
     this.showAnnulla = false;
@@ -76,6 +166,11 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   crea() {
+    // pulisci campi di input nel panel
+
+    this.annullaCampiPanel();
+
+    // imposta visibilità degli elementi dell'interfaccia
     this.showPanel = true;
     this.inputDisabled = false;
     this.showConferma = true;
@@ -86,9 +181,16 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showSearchPanel = false;
     this.showResults = false;
     this.showAggiungi = false;
+
+    // aggiorno lo stato
+    this.statoPrecedente = 'crea';
   }
 
-  modifica() {
+  modifica(p: Prodotto) {
+    // imposta visibilità degli elementi dell'interfaccia
+    this.popolaCampiPanel(p);
+
+    // imposta visibilità degli elementi dell'interfaccia
     this.showPanel = true;
     this.inputDisabled = false;
     this.showConferma = true;
@@ -99,9 +201,17 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showSearchPanel = false;
     this.showResults = false;
     this.showAggiungi = false;
+
+    // aggiorno lo stato
+    this.statoPrecedente = 'modifica';
   }
 
-  rimuovi() {
+  rimuovi(p: Prodotto) {
+
+    // copia i valori  del prodotto selezionato nei campi del panel
+    this.popolaCampiPanel(p);
+
+    // imposta visibilità degli elementi dell'interfaccia
     this.showPanel = true;
     this.inputDisabled = true;
     this.showConferma = true;
@@ -109,9 +219,12 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showCrea = false;
     this.showModifica = false;
     this.showRimuovi = false;
-    this.showSearchPanel = true;
+    this.showSearchPanel = false;
     this.showResults = false;
-    this.showAggiungi = true;
+    this.showAggiungi = false;
+
+    // aggiorno lo stato
+    this.statoPrecedente = 'rimuovi';
   }
 
   cerca() {
@@ -124,27 +237,48 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showModifica = false;
     this.showRimuovi = false;
     this.showSearchPanel = true;
-    this.showResults = this.trovatoQualcosa;
     this.showAggiungi = true;
 
+    // aggiorno lo stato
+    this.statoPrecedente = 'cerca';
+
+    // eseguo la ricerca con la searchKey attuale
+    this.eseguiRicerca(this.searchKey);
+  }
+
+  private eseguiRicerca(search: string) {
     // prepara i dati da inviare al server
     let dto: ProdottoSearchDto = new ProdottoSearchDto();
-    dto.searchKey = this.searchKey;
+    dto.searchKey = search;
+    dto.token = this.acService.token;
 
     // prepara la richiesta HTTP
     let oss: Observable<ProdottoSearchResultsDto> =
-      this.http
-        .post<ProdottoSearchResultsDto>('http://localhost:8080/search-prodotto', dto);
+      this.http.post<ProdottoSearchResultsDto>('http://localhost:8080/search-prodotto', dto);
 
-   // invio la richiesta
+    // invio la richiesta
     oss.subscribe(risposta => {
-      console.log(risposta);
+
+      // aggiorno lista prodotti
       this.prodotti = risposta.results;
-      console.log(this.prodotti);
+
+      // se ci sono risultati li visualizzo
+      this.showResults = risposta.results.length > 0;
+
+      // salvo la chiave di ricerca
+      this.searchKeyPrecedente = this.searchKey;
+
+      // pulisco il campo ricerca
+      this.searchKey = '';
     });
   }
 
-  view() {
+  view(p: Prodotto) {
+
+    // copia i valori  del prodotto selezionato nei campi del panel
+    this.popolaCampiPanel(p);
+
+    // imposta visibilità degli elementi dell'interfaccia
     this.showPanel = true;
     this.inputDisabled = true;
     this.showConferma = false;
@@ -155,5 +289,27 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showSearchPanel = true;
     this.showResults = true;
     this.showAggiungi = true;
+
+    // aggiorno lo stato
+    this.statoPrecedente = 'view';
+  }
+
+  // copia i valori del prodotto selezionato nei campi di testo del panel
+  private popolaCampiPanel(p: Prodotto) {
+
+    // controlla se i campi sono stato già avvalorati passando per view
+    if (this.statoPrecedente != 'view' && this.statoPrecedente != 'modifica') {
+      this.id = p.id;
+      this.codice = p.codice;
+      this.descrizione = p.descrizione;
+      this.prezzo = p.prezzo;
+    }
+  }
+
+  // pulisco i valori dei campi di input nel panel
+  private annullaCampiPanel() {
+    this.codice = '';
+    this.descrizione = '';
+    this.prezzo = null;
   }
 }

@@ -25,7 +25,6 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Utente implements Serializable {
-    @Column(nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

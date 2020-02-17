@@ -1,7 +1,8 @@
 <div *ngIf="showPanel">
   <input type="text" [(ngModel)]="codice" [disabled]="inputDisabled">&nbsp;
   <input type="text" [(ngModel)]="descrizione" [disabled]="inputDisabled">&nbsp;
-  <input type="text" [(ngModel)]="prezzo" [disabled]="inputDisabled">
+  <input type="number" [(ngModel)]="prezzo" [disabled]="inputDisabled">
+  <br>
   <br>
   <button *ngIf="showConferma" (click)="conferma()">Conferma</button>&nbsp;
   <button *ngIf="showAnnulla" (click)="annulla()">Annulla</button>&nbsp;
@@ -9,14 +10,16 @@
   <button *ngIf="showModifica" (click)="modifica()">Modifica</button>&nbsp;
   <button *ngIf="showRimuovi" (click)="rimuovi()">Rimuovi</button>
 </div>
-
+<br>
 <div>
-  <input *ngIf="showSearchPanel" type="text" [(ngModel)]="search">&nbsp;
+  <input *ngIf="showSearchPanel" type="text" [(ngModel)]="searchKey">&nbsp;
   <button *ngIf="showSearchPanel" (click)="cerca()">Cerca</button>&nbsp;
-  <button *ngIf="showAggiungi" (click)="crea()">Aggiungi</button>
 </div>
+<br>
+<button *ngIf="showAggiungi" (click)="crea()">Aggiungi</button>
 
-<div *ngIf="prodotti && prodotti.length > 0">
+
+<div *ngIf="showResults && prodotti && prodotti.length > 0">
   <br>
   <table>
     <tr>
@@ -32,13 +35,13 @@
       <td>{{p.descrizione}}</td>
       <td>{{p.prezzo}}</td>
       <td>
-        <button (click)="view()">View</button>>
+        <button (click)="view(p)">View</button>
       </td>
       <td>
-        <button (click)="modifica()">Edit</button>>
+        <button (click)="modifica(p)">Edit</button>
       </td>
       <td>
-        <button (click)="rimuovi()">Delete</button>>
+        <button (click)="rimuovi(p)">Delete</button>
       </td>
       </tr>
   </table>
