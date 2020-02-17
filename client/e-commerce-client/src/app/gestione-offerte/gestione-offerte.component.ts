@@ -45,6 +45,7 @@ export class GestioneOfferteComponent implements OnInit {
   }
 
   annulla() {
+    this.searchCode = '';
     this.selezionaEnabled = false;
   }
 

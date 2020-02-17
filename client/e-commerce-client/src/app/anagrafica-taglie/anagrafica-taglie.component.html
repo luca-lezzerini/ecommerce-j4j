@@ -1,16 +1,12 @@
 <div *ngIf="panelEnabled">
   <input type="hidden" [value]="id">
-  Codice
-  <input [(ngModel)]="codice" [disabled]="inputDisabled">
-  &nbsp;
-
-  Descrizione
-  <input [(ngModel)]="descrizione" [disabled]="inputDisabled">
-  &nbsp;
-
+  <label for="input-codice">Codice </label>
+  <input id="input-codice" [(ngModel)]="codice" [disabled]="inputDisabled">
+  <label for="input-descrizione"> Descrizione </label>
+  <input id="input-descrizione" [(ngModel)]="descrizione" [disabled]="inputDisabled">
   <br>
-  <button (click)="conferma()" *ngIf="confermaEnabled">Conferma</button>
-  <button (click)="annulla()" *ngIf="annullaEnabled">Annulla</button>
+  <button (click)="conferma()" *ngIf="confermaAndAnnullaEnabled">Conferma</button>
+  <button (click)="annulla()" *ngIf="confermaAndAnnullaEnabled">Annulla</button>
   <button (click)="crea()" *ngIf="creaEnabled">Crea</button>
   <button (click)="modifica()" *ngIf="modificaEnabled">Modifica</button>
   <button (click)="rimuovi()" *ngIf="rimuoviEnabled">Rimuovi</button>
@@ -36,6 +32,3 @@
     <td><button (click)="delete(item.id)">Delete</button></td>
   </tr>
 </table>
-
-
-
