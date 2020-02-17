@@ -17,7 +17,7 @@ public class SecurityServiceImpl implements SecurityService {
         String str = (Double.toString(d));
         return str;
     }
-    
+
     @Override
     public LoginResponseDto login(LoginRequestDto dto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -27,9 +27,8 @@ public class SecurityServiceImpl implements SecurityService {
     public void checkDoubleOptin(LoginResponseDto dto) {
         // cerco il doi dell'utente con la repository e lo associo a quello creato
         // se non trovo il doi la stringa sarà nulla
-        String doiUtente = ur.findByToken(dto.getToken()).getToken();
+        String doiUtente = ur.findByDoubleOptin(dto.getToken()).getDoubleOptin();
         // se è null perche non trova niente, torna un errore sul client
-        
     }
 
     @Override
@@ -41,11 +40,13 @@ public class SecurityServiceImpl implements SecurityService {
         //...creo l'oggetto utente e gli faccio puntare l'utente che trova con il metodo findByUsernameAndPassword...
         Utente utente = new Utente();
         utente = ur.findByUsername(dto.getUsername());
-        
+
         String doi = generateRandomString();
-        
-        utente.setToken(doi);
-        
+
+        // utilizzo il metodo setDoubleOptin in quanto in utente ho dichiarato la variabile doubleOptin
+        utente.setDoubleOptin(doi);
+
+        // token in questo caso sta per double optin
         rdto.setToken(doi);
 
         ur.save(utente);
@@ -55,22 +56,25 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public void reimpostaPassword(ChangePasswordRequestDto dto) {
-    
-    //Creazione oggetto utente...
-    Utente ut = new Utente();
-     
-    //...assegnazione utente esistente tramite metodo findByToken poiche ce l'ho da prima.
-    ut = ur.findByToken(dto.getToken());
-     
-            //Se la password nuova è diversa dalla vecchia...
-            if(!dto.getNewPassword().equals(ut.getPassword())){
-                
-                //...assegno quella nuova all'utente e la salvo
-               ut.setPassword(dto.getNewPassword());
-               ur.save(ut);
-            }else{
-                System.out.println("Errore Password Uguali");
-            }
+
+        //Creazione oggetto utente...
+        Utente ut = new Utente();
+
+        //...assegnazione utente esistente tramite metodo findByDoubleOptin poiche ce l'ho da prima.
+        ut = ur.findByDoubleOptin(dto.getDoiCode());
+        System.out.println(ut);
+        System.out.println(ut.getPassword());
+
+        //Se la password nuova è diversa dalla vecchia...
+        if (ut.getPassword().equals(dto.getNewPassword())) {
+            System.out.println("Errore Pass Uguali");
+
+        } else {
+            System.out.println("sono nell'if");
+            //...assegno quella nuova all'utente e la salvo
+            ut.setPassword(dto.getNewPassword());
+            ur.save(ut);
+        }
     }
 
     @Override
