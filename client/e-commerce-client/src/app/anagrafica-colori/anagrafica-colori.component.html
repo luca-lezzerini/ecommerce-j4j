@@ -1,5 +1,7 @@
 <div class="panel" *ngIf="showPanel">
+    codice
     <input type="text" [(ngModel)]="codice" name="codice" disabled="{{inputNotEditable}}">
+    descrizione
     <input type="text" [(ngModel)]="descrizione" name="descrizione" disabled="{{inputNotEditable}}">
     <button *ngIf="showConferma" (click)="confermaCheckState(state)" >Conferma</button>
     <button *ngIf="showAnnulla" (click)="annullaCheckState(state)" >Annulla</button>

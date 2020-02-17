@@ -1,0 +1,19 @@
+<div>
+    <input type = 'text' [(ngModel)] = 'searchKey'>&nbsp;
+    <button  (click) = 'searchColori()'>Cerca</button>
+    <a routerLink = '/home-pubblica'>
+    <button>Home</button>
+    </a>
+</div>
+<div *ngIf = 'showResults || colori && colori.length > 0'>
+  <table>
+    <tr>
+      <th>Codice</th>
+      <th>Descrizione</th>
+    </tr>
+    <tr *ngFor = "let c of colori">
+      <td>{{c.codice}}</td>
+      <td>{{c.descrizione}}</td>
+    </tr>
+  </table>
+</div>
