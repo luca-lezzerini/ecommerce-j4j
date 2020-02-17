@@ -13,9 +13,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GestioneOfferteComponent implements OnInit {
 
+  newPrice: number;
+  inOfferta: boolean;
   searchCode: string;
   selezionaEnabled = false;
-  prodotti: Prodotto [] = [];
+  prodotti: Prodotto[] = [];
 
   constructor(
     private http: HttpClient,
@@ -27,6 +29,14 @@ export class GestioneOfferteComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  conferma() {
+
+  }
+
+  annulla() {
+    this.selezionaEnabled = false;
   }
 
   cercaCodice() {
@@ -41,6 +51,6 @@ export class GestioneOfferteComponent implements OnInit {
   }
 
   seleziona() {
-    console.log("Seleziona");
+    this.selezionaEnabled = true;
   }
 }
