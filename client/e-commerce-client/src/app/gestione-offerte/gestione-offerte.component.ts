@@ -24,10 +24,7 @@ export class GestioneOfferteComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private sessione: AreaComuneService
-  ) {
-    // FIXME: stub
-    this.sessione.token = '123';
-  }
+  ) { }
 
   ngOnInit() {
 

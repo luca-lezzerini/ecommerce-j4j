@@ -41,8 +41,6 @@ export class AnagraficaTaglieComponent implements OnInit {
     private router: Router
   ) {
     this.initVis();
-    // FIXME : stub
-    this.sessione.token = '123';
   }
 
   ngOnInit() { }
@@ -221,6 +219,7 @@ export class AnagraficaTaglieComponent implements OnInit {
     // imposta la visibilità su visAggiungi
     this.visAttesaConferma();
     this.visPrecedente = 'crea';
+    this.pulisciCampi();
   }
 
   modifica(id: number) {
