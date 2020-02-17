@@ -163,11 +163,17 @@ export class AnagraficaProdottiComponent implements OnInit {
     oss.subscribe(risposta => {
 
       // una volta eseguita la rimozione, eseguo di nuovo l'ultima ricerca effettuata
+      //TODO
+      console.log('in confermarimuovi search: ' + this.searchKey);
+      console.log('in rimuovi prec: ' + this.searchKeyPrecedente);
       this.eseguiRicerca(this.searchKeyPrecedente);
     });
   }
 
   annulla() {
+    // copia i valori  del prodotto selezionato precedentemente nei campi del panel
+    this.popolaCampiPanel(null);
+
     // imposta visibilità degli elementi dell'interfaccia
     let mostraPanel = this.statoPrecedente == 'modifica' || this.statoPrecedente == 'rimuoviview';
     this.showPanel = mostraPanel;
@@ -204,7 +210,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   modifica(p: Prodotto) {
-    // imposta visibilità degli elementi dell'interfaccia
+    // copia i valori  del prodotto selezionato nei campi del panel
     this.popolaCampiPanel(p);
 
     // imposta visibilità degli elementi dell'interfaccia
@@ -242,6 +248,10 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // aggiorno lo stato
     this.statoPrecedente = 'rimuovi' + this.statoPrecedente;
+
+    //TODO
+    console.log('in rimuovi search: ' + this.searchKey);
+    console.log('in rimuovi prec: ' + this.searchKeyPrecedente);
   }
 
   cerca() {
@@ -314,7 +324,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   // copia i valori del prodotto selezionato nei campi di testo del panel
   private popolaCampiPanel(p: Prodotto) {
 
-    // se provengo dalla tabella, p è avvalorato
+    // se provengo dalla tabella, p è avvalorato...
     if (p) {
       this.id = p.id;
       this.codice = p.codice;
@@ -326,7 +336,7 @@ export class AnagraficaProdottiComponent implements OnInit {
       this.prodottoSelezionato = p;
     } else {
 
-      // usa i dati selezionati precedentemente
+      // ... altrimenti usa i dati del prodotto selezionato precedentemente
       this.id = this.prodottoSelezionato.id;
       this.codice = this.prodottoSelezionato.codice;
       this.descrizione = this.prodottoSelezionato.descrizione;
