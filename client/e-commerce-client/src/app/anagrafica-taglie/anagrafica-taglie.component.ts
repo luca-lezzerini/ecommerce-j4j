@@ -213,6 +213,7 @@ export class AnagraficaTaglieComponent implements OnInit {
     // imposta la visibilità su visAggiungi
     this.visAttesaConferma();
     this.visPrecedente = 'aggiungi';
+    this.pulisciCampi();
   }
 
   crea() {
