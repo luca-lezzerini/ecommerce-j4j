@@ -118,21 +118,10 @@ export class AnagraficaTaglieComponent implements OnInit {
       case 'edit':
         this.visView();
         break;
-      case 'delete':
-        this.panelEnabled = true;
-        this.confermaEnabled = false;
-        this.creaEnabled = true;
-        this.modificaEnabled = true;
-        this.rimuoviEnabled = true;
-        this.cercaEnabled = true;
-        this.risultatoEnabled = true;
-        this.aggiungiEnabled = true;
-        this.inputDisabled = true;
-        break;
     }
   }
 
-  visModifica(){
+  visModifica() {
     this.panelEnabled = true;
     this.inputDisabled = true;
     this.confermaEnabled = true;
@@ -170,12 +159,6 @@ export class AnagraficaTaglieComponent implements OnInit {
     });
   }
 
-  aggiungi() {
-    // imposta la visibilità su visAggiungi
-    this.visAttesaConferma();
-    this.visPrecedente = 'aggiungi';
-  }
-
   conferma() {
     switch (this.visPrecedente) {
       case 'aggiungi':
@@ -191,6 +174,7 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.confermaEdit();
         break;
       case 'rimuovi':
+        this.confermaDelete();
         break;
       case 'delete':
         this.confermaDelete();
@@ -215,6 +199,7 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.id = 0;
         break;
       case 'modifica':
+        this.view(this.id);
         break;
       case 'edit':
         this.view(this.id);
@@ -228,39 +213,28 @@ export class AnagraficaTaglieComponent implements OnInit {
     }
   }
 
-  confermaAggiungi() {
-    if (this.codice && this.descrizione) {
-      // prepara la chiamata al server
-      const dto: TagliaCreateDto = new TagliaCreateDto();
-      dto.token = this.sessione.token;
-      dto.dati = new Taglia();
-      dto.dati.codice = this.codice;
-      dto.dati.descrizione = this.descrizione;
-      const obs: Observable<any> = this.http.post('http://localhost:8080/create-taglia', dto);
-      // invia la richiesta al server
-      obs.subscribe(risposta => {
-        // ripete ultima ricerca
-        this.cerca();
-      });
-    }
+  aggiungi() {
+    // imposta la visibilità su visAggiungi
+    this.visAttesaConferma();
+    this.visPrecedente = 'aggiungi';
   }
 
   crea() {
     // imposta la visibilità su visAggiungi
     this.visAttesaConferma();
     this.visPrecedente = 'crea';
-    }
-    
-   
+  }
 
   modifica(id: number) {
     // imposta la visibilità su VisAggiungi
     this.visAttesaConferma();
-    this.getDettagli(id);
-    this.visPrecedente = 'modifica'; 
-   }
+    this.visPrecedente = 'modifica';
+  }
 
-  rimuovi() { }
+  rimuovi() {
+    this.visAttesaConfermaDelete();
+    this.visPrecedente = 'rimuovi';
+  }
 
   view(id: number) {
     this.visView();
@@ -289,20 +263,39 @@ export class AnagraficaTaglieComponent implements OnInit {
     });
   }
 
+  confermaAggiungi() {
+    if (this.checkCampi()) {
+      // prepara la chiamata al server
+      const dto: TagliaCreateDto = new TagliaCreateDto();
+      dto.token = this.sessione.token;
+      dto.dati = new Taglia();
+      dto.dati.codice = this.codice;
+      dto.dati.descrizione = this.descrizione;
+      const obs: Observable<any> = this.http.post('http://localhost:8080/create-taglia', dto);
+      // invia la richiesta al server
+      obs.subscribe(risposta => {
+        // ripete ultima ricerca
+        this.cerca();
+      });
+    }
+  }
+
   confermaEdit() {
-    // creo un oggetto da passare al server
-    const dto: TagliaUpdateDto = new TagliaUpdateDto();
-    dto.token = this.sessione.token;
-    dto.dati = new Taglia();
-    dto.dati.id = this.id;
-    dto.dati.codice = this.codice;
-    dto.dati.descrizione = this.descrizione;
-    // preparo la richiesta al server
-    const obs: Observable<any> = this.http.post('http://localhost:8080/update-taglia', dto);
-    // invia la richiesta al server
-    obs.subscribe(response => {
-      this.cerca();
-    });
+    if (this.checkCampi()) {
+      // creo un oggetto da passare al server
+      const dto: TagliaUpdateDto = new TagliaUpdateDto();
+      dto.token = this.sessione.token;
+      dto.dati = new Taglia();
+      dto.dati.id = this.id;
+      dto.dati.codice = this.codice;
+      dto.dati.descrizione = this.descrizione;
+      // preparo la richiesta al server
+      const obs: Observable<any> = this.http.post('http://localhost:8080/update-taglia', dto);
+      // invia la richiesta al server
+      obs.subscribe(response => {
+        this.cerca();
+      });
+    }
   }
 
   confermaDelete() {
@@ -313,5 +306,12 @@ export class AnagraficaTaglieComponent implements OnInit {
     obs.subscribe(reponse => {
       this.cerca();
     });
+  }
+
+  checkCampi(): boolean {
+    if (this.codice && this.descrizione) {
+      return true;
+    }
+    return false;
   }
 }
