@@ -28,6 +28,7 @@ import { Incrementatore02Component } from './esercizio/esercizio02/incrementator
 import { Visualizzatore08Component } from './esercizio/esercizio08/visualizzatore08/visualizzatore08.component';
 import { Incrementatore08Component } from './esercizio/esercizio08/incrementatore08/incrementatore08.component';
 import { GestioneOfferteComponent } from './gestione-offerte/gestione-offerte.component';
+import { ElencoOfferteComponent } from './elenco-offerte/elenco-offerte.component';
 
 const appRoutes: Routes = [
   { path: 'anagrafica-prodotti', component: AnagraficaProdottiComponent },
@@ -52,7 +53,9 @@ const appRoutes: Routes = [
   { path: 'password-dimenticata', component: PasswordDimenticataComponent },
   { path: 'reimposta-password', component: ReimpostaPasswordComponent },
   { path: 'visualizzatore06', component: Visualizzatore06Component },
-  { path: 'anagrafica-colori', component: AnagraficaColoriComponent }
+  { path: 'anagrafica-colori', component: AnagraficaColoriComponent },
+  { path: 'elenco-offerte', component: ElencoOfferteComponent },
+
 ];
 
 @NgModule({
@@ -79,6 +82,7 @@ const appRoutes: Routes = [
     Visualizzatore08Component,
     Incrementatore08Component,
     GestioneOfferteComponent,
+    ElencoOfferteComponent,
   ],
   imports: [
     RouterModule.forRoot(

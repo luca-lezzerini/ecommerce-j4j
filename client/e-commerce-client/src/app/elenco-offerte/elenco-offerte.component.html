@@ -1,0 +1,18 @@
+<input type="text" [(ngModel)]="prezzoSearch" name="prezzoSearch">
+<button value="ricerca" (click)="ricerca()"></button>
+<button value="home" routerLink="/"></button>
+<table>
+
+  <tr>
+    <th>Codice</th>
+    <th>Descrizione</th>
+    <th>Prezzo</th>
+  </tr>
+
+  <tr *ngFor="let p of prodotti">
+    <td>{{ p.codice }}</td>
+    <td>{{ p.descrizione }}</td>
+    <td>{{ p.prezzo }}</td>
+  </tr>
+
+</table>
