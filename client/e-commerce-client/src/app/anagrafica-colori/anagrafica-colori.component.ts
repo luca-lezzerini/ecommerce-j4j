@@ -16,15 +16,12 @@ import { Observable } from 'rxjs';
 export class AnagraficaColoriComponent implements OnInit {
   codice: string;
   descrizione: string;
+  id: number;
   colore: Colori = new Colori();
   ricerca: string;
   result: Colori[] = [];
   state: string;
   olderState: string;
-  id = 0;
-
-  // solo per test
-  globalList: Colori[] = [];
 
   // variabili per mostrare o nascondere componenti UI
   showPanel: boolean;
@@ -46,6 +43,7 @@ export class AnagraficaColoriComponent implements OnInit {
   statoCancella = 'Cancella';
   statoAggiungi = 'Aggiungi';
 
+  // inizializzo le variabili UI
   constructor(private http: HttpClient) {
     this.showPanel = false;
     this.showCerca = true;
@@ -54,10 +52,17 @@ export class AnagraficaColoriComponent implements OnInit {
     this.state = this.statoCerca;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
-  // cambia lo stato quando si clicca conferma e invoca diversi metodi in base allo stato precedente
+  // cambia lo stato quando si clicca conferma, invoca diversi metodi in base allo stato precedente
   confermaCheckState(stato: string) {
+    // Salva i dati del colore selezionato
+    this.colore = {
+      id: this.id,
+      codice: this.codice,
+      descrizione: this.descrizione,
+    };
     if (stato === this.statoAggiungi) {
       this.olderState = this.state;
       this.state = this.statoCerca;
@@ -66,12 +71,12 @@ export class AnagraficaColoriComponent implements OnInit {
     } else if (stato === this.statoModifica) {
       this.olderState = this.state;
       this.state = this.statoVisualizza;
-      this.updateColori();
-      this.visualizzaState(null);
+      this.updateColori(this.colore);
+      this.visualizzaState(this.colore);
     } else if (stato === this.statoCancella) {
       this.olderState = this.state;
       this.state = this.statoCerca;
-      this.deleteColori();
+      this.deleteColori(this.colore);
       this.cercaState();
     }
   }
@@ -85,7 +90,7 @@ export class AnagraficaColoriComponent implements OnInit {
     } else if (stato === this.statoModifica) {
       this.olderState = this.state;
       this.state = this.statoVisualizza;
-      this.visualizzaState(null);
+      this.visualizzaState(this.colore);
     } else if (stato === this.statoCancella) {
       if (this.olderState === this.statoCerca) {
         this.olderState = this.state;
@@ -94,11 +99,11 @@ export class AnagraficaColoriComponent implements OnInit {
       } else if (this.olderState === this.statoVisualizza) {
         this.olderState = this.state;
         this.state = this.statoVisualizza;
-        this.visualizzaState(null);
+        this.visualizzaState(this.colore);
       }
     }
   }
-
+// cambia lo stato quando si clicca crea: se sto visualizzando passa alla creazione di un nuovo elemento
   creaCheckState(stato: string) {
     if (stato === this.statoAggiungi) {
       this.olderState = this.state;
@@ -111,9 +116,22 @@ export class AnagraficaColoriComponent implements OnInit {
     }
   }
 
-  // cambia stato quando si preme modifica
+  // cambia stato quando si preme modifica nel panel
   modificaCheckState(stato: string) {
-    if ((stato === this.statoCerca) || (stato === this.statoVisualizza)) {
+    if (stato === this.statoCerca || stato === this.statoVisualizza) {
+      this.olderState = this.state;
+      this.state = this.statoModifica;
+      this.CUDState();
+      this.inputNotEditable = false;
+    }
+  }
+  // cambia stato quando si preme modifica nella tabella
+  modificaInTableCheckState(stato: string, c: Colori) {
+    if (stato === this.statoCerca || stato === this.statoVisualizza) {
+      // salva le proprietà dell'elemento selezionato nelle proprietà dichiarate localmente
+      this.id = c.id;
+      this.descrizione = c.descrizione;
+      this.codice = c.codice;
       this.olderState = this.state;
       this.state = this.statoModifica;
       this.CUDState();
@@ -121,9 +139,22 @@ export class AnagraficaColoriComponent implements OnInit {
     }
   }
 
-  // cambia stato quando si preme cancella
+  // cambia stato quando si preme cancella nel panel
   cancellaCheckState(stato: string) {
-    if ((stato === this.statoCerca) || (stato === this.statoVisualizza)) {
+    if (stato === this.statoCerca || stato === this.statoVisualizza) {
+      this.olderState = this.state;
+      this.state = this.statoCancella;
+      this.CUDState();
+      this.inputNotEditable = true;
+    }
+  }
+  // cambia stato quando si preme cancella nella tabella
+  cancellaInTableCheckState(stato: string, c: Colori) {
+    if (stato === this.statoCerca || stato === this.statoVisualizza) {
+      // salva le proprietà dell'elemento selezionato nelle proprietà dichiarate localmente
+      this.id = c.id;
+      this.descrizione = c.descrizione;
+      this.codice = c.codice;
       this.olderState = this.state;
       this.state = this.statoCancella;
       this.CUDState();
@@ -133,7 +164,7 @@ export class AnagraficaColoriComponent implements OnInit {
 
   // cambia stato quando si preme cerca e esegue la ricerca
   cercaCheckState(stato: string) {
-    if ((stato === this.statoCerca) || (stato === this.statoVisualizza)) {
+    if (stato === this.statoCerca || stato === this.statoVisualizza) {
       this.olderState = this.state;
       this.state = this.statoCerca;
       this.searchColori();
@@ -206,75 +237,78 @@ export class AnagraficaColoriComponent implements OnInit {
   }
 
   createColori(): void {
-    // TODO Fare check dei campi se sono vuoti o meno
+    // Fare check dei campi se sono vuoti o meno
     if (this.codice.trim() !== '' && this.descrizione.trim() !== '') {
-      const coloreTest: Colori = {
+      this.colore = {
         id: this.id,
         codice: this.codice,
         descrizione: this.descrizione
       };
-      this.globalList.push(coloreTest);
-      this.id++;
-      this.ricerca = '';
-      this.searchColori();
-      // // preparo i dati da inviare al server
-      // const dto: ColoriCreateDto = new ColoriCreateDto();
-      // this.colore.codice = this.codice;
-      // this.colore.descrizione = this.descrizione;
-      // dto.dati = this.colore;
-      // // preparo la richiesta http
-      // const obs: Observable<void> = this.http.post<void>(
-      //   'http://localhost:8080/create-colori',
-      //   dto
-      // );
-      // obs.subscribe(data => {});
+
+      // preparo i dati da inviare al server
+      const dto: ColoriCreateDto = new ColoriCreateDto();
+      this.colore.codice = this.codice;
+      this.colore.descrizione = this.descrizione;
+      dto.dati = this.colore;
+      // preparo la richiesta http
+      const obs: Observable<void> = this.http.post<void>(
+        'http://localhost:8080/create-colori',
+        dto
+      );
+      obs.subscribe(data => {
+        // dopo la risposta del server visualizza gli elementi salvati nel database
+        this.searchColori();
+      });
     }
   }
   searchColori(): void {
-    if (this.ricerca.trim() !== '') {
-      this.result = this.globalList.filter(
-        c => c.codice === this.ricerca || c.descrizione === this.ricerca
-      );
-    } else {
-      this.result = this.globalList;
+    // se il campo è vuoto o sono stati inseriti solo spazi imposta ricerca ad una stringa vuota
+    if (this.ricerca === undefined) {
+      this.ricerca = '';
     }
-    // // preparo i dati da inviare al server
-    // const dto: ColoriSearchDto = new ColoriSearchDto();
-    // dto.searchKey = this.ricerca;
-    // // preparo la richiesta http
-    // const obs: Observable<ColoriSearchResultsDto> = this.http.post<
-    //   ColoriSearchResultsDto
-    // >('http://localhost:8080/search-colori', dto);
-    // obs.subscribe(data => {
-    //   this.result = data.result;
-    // });
+    if (this.ricerca.trim() === '') {
+      this.ricerca = '';
+    }
+    // preparo i dati da inviare al server
+    const dto: ColoriSearchDto = new ColoriSearchDto();
+    dto.searchKey = this.ricerca;
+    // preparo la richiesta http
+    const obs: Observable<ColoriSearchResultsDto> = this.http.post<
+      ColoriSearchResultsDto
+    >('http://localhost:8080/search-colori', dto);
+    obs.subscribe(data => {
+      // salva la lista di risultati ottenuti dal server nell' array locale che viene visualizzato
+      this.result = data.result;
+      this.codice = '';
+      this.descrizione = '';
+    });
   }
-  deleteColori(): void {
-    this.globalList.splice(
-      this.globalList.indexOf(
-        this.globalList.find(c => c.id === this.colore.id)
-      )
+  deleteColori(c: Colori): void {
+    // preparo i dati da inviare al server
+    const dto: ColoriDeleteDto = new ColoriDeleteDto();
+    dto.idToDelete = c.id;
+    // preparo la richiesta http
+    const obs: Observable<void> = this.http.post<void>(
+      'http://localhost:8080/delete-colori',
+      dto
     );
-    // // preparo i dati da inviare al server
-    // const dto: ColoriDeleteDto = new ColoriDeleteDto();
-    // dto.idToDelete = this.colore.id;
-    // // preparo la richiesta http
-    // const obs: Observable<void> = this.http.post<void>(
-    //   'http://localhost:8080/delete-colori',
-    //   dto
-    // );
-    // obs.subscribe(data => {});
+    obs.subscribe(data => {
+      // dopo la risposta del server visualizza gli elementi salvati nel database
+      this.searchColori();
+    });
   }
-  updateColori(): void {
-
-    // // preparo i dati da inviare al server
-    // const dto: ColoriUpdateDto = new ColoriUpdateDto();
-    // dto.dati = this.colore;
-    // // preparo la richiesta http
-    // const obs: Observable<void> = this.http.post<void>(
-    //   'http://localhost:8080/update-colori',
-    //   dto
-    // );
-    // obs.subscribe(data => {});
+  updateColori(c: Colori): void {
+    // preparo i dati da inviare al server
+    const dto: ColoriUpdateDto = new ColoriUpdateDto();
+    dto.dati = c;
+    // preparo la richiesta http
+    const obs: Observable<void> = this.http.post<void>(
+      'http://localhost:8080/update-colori',
+      dto
+    );
+    obs.subscribe(data => {
+      // dopo la risposta del server visualizza gli elementi salvati nel database
+      this.searchColori();
+    });
   }
 }

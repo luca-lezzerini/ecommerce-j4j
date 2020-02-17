@@ -29,7 +29,14 @@ public class ColoriServiceImpl implements ColoriService {
 
     @Override
     public ColoriSearchResultsDto searchColori(ColoriSearchDto dto) {
-        List<Colori> ace = coloriRepository.findByCodice(dto.getSearchKey());
+        List<Colori> ace;
+        // se la stringa ricevuta è vuota recupera dal db tutti gli elementi...
+        if((dto.getSearchKey()).equals("")){
+            ace = coloriRepository.findAll();
+            // ... altrimenti recupera solo quelli il cui codice è quello cercato
+        } else {
+            ace = coloriRepository.findByCodice(dto.getSearchKey());
+        }
         ColoriSearchResultsDto dto2 = new ColoriSearchResultsDto(ace);
         return dto2;
     }
@@ -41,7 +48,10 @@ public class ColoriServiceImpl implements ColoriService {
 
     @Override
     public void updateColori(ColoriUpdateDto dto) {
-    coloriRepository.save(dto.getDati());
+        Colori c = coloriRepository.findById(dto.getDati().getId()).orElse(null);
+        c.setCodice(dto.getDati().getCodice());
+        c.setDescrizione(dto.getDati().getDescrizione());
+        coloriRepository.save(c);
     }
     
 }

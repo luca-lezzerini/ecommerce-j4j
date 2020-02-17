@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins="*")
+@CrossOrigin("*")
 public class ColoriController {
     @Autowired
     ColoriService cs;
