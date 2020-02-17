@@ -7,10 +7,6 @@ import { ProdottoSearchResultsDto } from '../classi/prodotto-search-results';
 import { HttpClient } from '@angular/common/http';
 import { AreaComuneService } from '../area-comune.service';
 
-
-
-
-
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -19,9 +15,8 @@ import { AreaComuneService } from '../area-comune.service';
 export class HomePageComponent implements OnInit {
 
   prodotti: Prodotto[] = [];
-  ricerca: string;
+  ricerca = '';
   showResults: boolean;
-
 
   constructor(private router: Router, private acService: AreaComuneService, private http: HttpClient) { }
 
@@ -42,9 +37,9 @@ export class HomePageComponent implements OnInit {
     // Invio la richiesta
     oss.subscribe(risposta => {
       this.prodotti = risposta.result;
-      this.showResults = this.prodotti.length > 0;
+      console.log(risposta.result)
+      this.showResults = true; //this.prodotti.length > 0;
     });
-
   }
 
   aggiungiAlCarrello() {

@@ -84,10 +84,10 @@ public class ProdottoServiceImpl implements ProdottoService {
                 
                 // ordino i risultati per codice
                 Collections.sort(lp,(p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
-                resultDto.setResults(lp);           
+                resultDto.setResult(lp);           
         } else {
             // ... se il dto non esiste, restituisce un ArrayList vuoto
-            resultDto.setResults(Collections.emptyList());
+            resultDto.setResult(Collections.emptyList());
         }
         return resultDto;
     }
