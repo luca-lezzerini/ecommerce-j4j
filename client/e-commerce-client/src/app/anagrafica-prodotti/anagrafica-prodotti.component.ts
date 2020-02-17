@@ -163,9 +163,6 @@ export class AnagraficaProdottiComponent implements OnInit {
     oss.subscribe(risposta => {
 
       // una volta eseguita la rimozione, eseguo di nuovo l'ultima ricerca effettuata
-      //TODO
-      console.log('in confermarimuovi search: ' + this.searchKey);
-      console.log('in rimuovi prec: ' + this.searchKeyPrecedente);
       this.eseguiRicerca(this.searchKeyPrecedente);
     });
   }
@@ -247,11 +244,11 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showAggiungi = false;
 
     // aggiorno lo stato
-    this.statoPrecedente = 'rimuovi' + this.statoPrecedente;
-
-    //TODO
-    console.log('in rimuovi search: ' + this.searchKey);
-    console.log('in rimuovi prec: ' + this.searchKeyPrecedente);
+    if (this.statoPrecedente == 'view') {
+      this.statoPrecedente = 'rimuoviview';
+    } else {
+      this.statoPrecedente = 'rimuovicerca';
+    }
   }
 
   cerca() {
