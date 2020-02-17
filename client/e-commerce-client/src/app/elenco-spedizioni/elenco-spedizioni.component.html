@@ -1,13 +1,12 @@
-
-<div *ngIf="searchPanelEnabled">
-  <input type="text" [(ngModel)]="prezzo" [disabled]="searchPanelEnabled" placeholder="prezzoSearch">
-  <button (click)="cercaSpedizione()" *ngIf="cercaEnabled">Cerca</button>&nbsp;
-  // verifica tipo di home
+<h1> Siamo in Elenco Spedizioni Component</h1>
+  <hr>
+  <input type="text" [(ngModel)]="prezzo" placeholder="prezzoSearch">
+  &nbsp;
+  <button (click)="searchSpedizione()">Cerca</button>&nbsp;
   <button [routerLink]="['/home-riservata']">Home</button>&nbsp;
-</div>
 <hr>
 <br>
-<table *ngIf="resultsEnabled">
+<table>
   <tr *ngFor="let s of spedizioni">
       <td>{{s.codice}}</td>
       <td>{{s.descrizione}}</td>

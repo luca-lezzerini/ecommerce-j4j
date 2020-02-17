@@ -24,6 +24,8 @@ public interface SpedizioneService {
     void deleteSpedizione(SpedizioneDeleteDto dto);
 
     void updateSpedizione(SpedizioneUpdateDto dto);
+    
+    SpedizioneSearchResultsDto prezzoSearch(SpedizioneSearchDto dto);
 }
 
     
