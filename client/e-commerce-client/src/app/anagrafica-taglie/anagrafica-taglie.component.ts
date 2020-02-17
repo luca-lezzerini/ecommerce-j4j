@@ -1,3 +1,4 @@
+import { TagliaDeleteDto } from './../classi/taglia-delete-dto';
 import { TagliaUpdateDto } from './../classi/taglia-update-dto';
 import { TagliaCreateDto } from './../classi/taglia-create-dto';
 import { AreaComuneService } from './../area-comune.service';
@@ -88,6 +89,11 @@ export class AnagraficaTaglieComponent implements OnInit {
     this.aggiungiEnabled = false;
   }
 
+  visAttesaConfermaDelete() {
+    this.visAttesaConferma();
+    this.inputDisabled = true;
+  }
+
   visView() {
     this.panelEnabled = true;
     this.inputDisabled = true;
@@ -144,7 +150,6 @@ export class AnagraficaTaglieComponent implements OnInit {
         // altrimenti nasconde la tabella dei risultati
         this.visCercaSenzaRisultato();
       }
-      console.log(this.visPrecedente);
       if (this.visPrecedente === 'edit') {
         this.view(this.id);
       }
@@ -173,6 +178,7 @@ export class AnagraficaTaglieComponent implements OnInit {
       case 'rimuovi':
         break;
       case 'delete':
+        this.confermaDelete();
         break;
     }
     this.codice = '';
@@ -195,8 +201,10 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.view(this.id);
         break;
       case 'rimuovi':
+        this.view(this.id);
         break;
       case 'delete':
+        this.cerca();
         break;
     }
   }
@@ -236,6 +244,9 @@ export class AnagraficaTaglieComponent implements OnInit {
   }
 
   delete(id: number) {
+    this.visAttesaConfermaDelete();
+    this.getDettagli(id);
+    this.visPrecedente = 'delete';
   }
 
   getDettagli(id: number) {
@@ -264,4 +275,13 @@ export class AnagraficaTaglieComponent implements OnInit {
     });
   }
 
+  confermaDelete() {
+    const dto: TagliaDeleteDto = new TagliaDeleteDto();
+    dto.token = this.sessione.token;
+    dto.idToDelete = this.id;
+    const obs: Observable<any> = this.http.post<any>('http://localhost:8080/delete-taglia', dto);
+    obs.subscribe(reponse => {
+      this.cerca();
+    });
+  }
 }
