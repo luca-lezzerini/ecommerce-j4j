@@ -28,12 +28,9 @@ import { Incrementatore02Component } from './esercizio/esercizio02/incrementator
 import { Visualizzatore08Component } from './esercizio/esercizio08/visualizzatore08/visualizzatore08.component';
 import { Incrementatore08Component } from './esercizio/esercizio08/incrementatore08/incrementatore08.component';
 import { GestioneOfferteComponent } from './gestione-offerte/gestione-offerte.component';
-<<<<<<< HEAD
 import { ElencoOfferteComponent } from './elenco-offerte/elenco-offerte.component';
 import { ElencoSpedizioniComponent } from './elenco-spedizioni/elenco-spedizioni.component';
-=======
-import { ElencoSpedizioniComponent } from './elenco-spedizioni/elenco-spedizioni.component';
->>>>>>> 657c03ea098a1da9f4dbeca9f68608a1f5e1d9cb
+
 
 const appRoutes: Routes = [
   { path: 'anagrafica-prodotti', component: AnagraficaProdottiComponent },
@@ -87,11 +84,8 @@ const appRoutes: Routes = [
     Visualizzatore08Component,
     Incrementatore08Component,
     GestioneOfferteComponent,
-<<<<<<< HEAD
     ElencoOfferteComponent,
-=======
     ElencoSpedizioniComponent
->>>>>>> 657c03ea098a1da9f4dbeca9f68608a1f5e1d9cb
   ],
   imports: [
     RouterModule.forRoot(
