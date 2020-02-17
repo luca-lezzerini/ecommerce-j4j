@@ -1,0 +1,6 @@
+tocTab[tocTab.length] = new Array("0.15.10:1", "", "UI Elenco Spedizioni", "EARoot/EA15/EA10/EA777.htm", "188.png", "65", "0", "", "Custom diagram0","{22C376C6-FAAB-4930-997F-EC9A7C8A0E0C}");
+tocTab[tocTab.length] = new Array("0.15.10:2", "", "«WireframeWebsite» Webpage1", "EARoot/EA15/EA10/EA781.htm", "11.png", "E773", "0", "", "Screen0","{A21C023D-BC2E-4c27-B3DD-F5CF19DF98F9}");
+tocTab[tocTab.length] = new Array("0.15.10:3", "", "«WireframeButton» Cerca", "EARoot/EA15/EA10/EA782.htm", "16.png", "E775", "E773", "", "GUIElement0","{F18DB025-F1E0-4352-8320-3426D6D2B57A}");
+tocTab[tocTab.length] = new Array("0.15.10:4", "", "«WireframeButton» Home", "EARoot/EA15/EA10/EA783.htm", "16.png", "E777", "E773", "", "GUIElement0","{B17C9F3C-F3BD-4029-9908-F1F87F9F5F46}");
+tocTab[tocTab.length] = new Array("0.15.10:5", "", "«WireframeTextField» prezzoSearch", "EARoot/EA15/EA10/EA784.htm", "16.png", "E774", "E773", "", "GUIElement0","{31DD0DA7-390B-4711-A768-6667A183786A}");
+tocTab[tocTab.length] = new Array("0.15.10:6", "", "«WireframeTable» Table", "EARoot/EA15/EA10/EA785.htm", "16.png", "E776", "E773", "", "GUIElement0","{30A3F9AA-A9FE-4c06-9A09-470A5AC663E6}");
