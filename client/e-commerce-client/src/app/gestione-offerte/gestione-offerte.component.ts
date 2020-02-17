@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GestioneOfferteComponent implements OnInit {
 
+  newPrice: number;
+  inOfferta: boolean;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  conferma() {
+
+  }
+
+  annulla() {
+    // this.selezionaEnabled = false;
   }
 
 }
