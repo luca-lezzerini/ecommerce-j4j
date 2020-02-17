@@ -126,6 +126,19 @@ export class AnagraficaTaglieComponent implements OnInit {
     }
   }
 
+  visModifica(){
+    this.panelEnabled = true;
+    this.inputDisabled = true;
+    this.confermaEnabled = true;
+    this.annullaEnabled = true;
+    this.creaEnabled = false;
+    this.modificaEnabled = false;
+    this.rimuoviEnabled = false;
+    this.cercaEnabled = false;
+    this.risultatoEnabled = false;
+    this.aggiungiEnabled = false;
+  }
+
   cerca() {
     // prepara la chiamata al server
     const dto: TagliaSearchDto = new TagliaSearchDto();
@@ -164,8 +177,10 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.confermaAggiungi();
         break;
       case 'crea':
+        this.confermaAggiungi();
         break;
       case 'modifica':
+        this.confermaEdit();
         break;
       case 'edit':
         this.confermaEdit();
@@ -188,6 +203,10 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.id = 0;
         break;
       case 'crea':
+        this.visAnnulla();
+        this.codice = '';
+        this.descrizione = '';
+        this.id = 0;
         break;
       case 'modifica':
         break;
@@ -218,9 +237,20 @@ export class AnagraficaTaglieComponent implements OnInit {
     }
   }
 
-  crea() { }
+  crea() {
+    // imposta la visibilità su visAggiungi
+    this.visAttesaConferma();
+    this.visPrecedente = 'crea';
+    }
+    
+   
 
-  modifica() { }
+  modifica(id: number) {
+    // imposta la visibilità su VisAggiungi
+    this.visAttesaConferma();
+    this.getDettagli(id);
+    this.visPrecedente = 'modifica'; 
+   }
 
   rimuovi() { }
 
