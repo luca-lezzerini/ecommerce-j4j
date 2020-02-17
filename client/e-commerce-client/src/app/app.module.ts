@@ -30,6 +30,8 @@ import { Incrementatore08Component } from './esercizio/esercizio08/incrementator
 import { GestioneOfferteComponent } from './gestione-offerte/gestione-offerte.component';
 import { ElencoOfferteComponent } from './elenco-offerte/elenco-offerte.component';
 import { ElencoSpedizioniComponent } from './elenco-spedizioni/elenco-spedizioni.component';
+import { ElencoColoriComponent } from './elenco-colori/elenco-colori.component';
+import { ElencoTaglieComponent } from './elenco-taglie/elenco-taglie.component';
 
 
 const appRoutes: Routes = [
@@ -57,7 +59,9 @@ const appRoutes: Routes = [
   { path: 'visualizzatore06', component: Visualizzatore06Component },
   { path: 'anagrafica-colori', component: AnagraficaColoriComponent },
   { path: 'elenco-offerte', component: ElencoOfferteComponent },
-  { path: 'elenco-spedizioni', component: ElencoSpedizioniComponent }
+  { path: 'elenco-spedizioni', component: ElencoSpedizioniComponent},
+  { path: 'elenco-colori', component: ElencoColoriComponent},
+  { path: 'elenco-taglie', component: ElencoTaglieComponent},
 ];
 
 @NgModule({
@@ -85,7 +89,9 @@ const appRoutes: Routes = [
     Incrementatore08Component,
     GestioneOfferteComponent,
     ElencoOfferteComponent,
-    ElencoSpedizioniComponent
+    ElencoSpedizioniComponent,
+    ElencoColoriComponent,
+    ElencoTaglieComponent,
   ],
   imports: [
     RouterModule.forRoot(

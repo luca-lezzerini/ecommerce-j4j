@@ -15,7 +15,7 @@
       <tr *ngFor="let p of prodotti">
         <td>{{ p.codice }}</td>
         <td>{{ p.descrizione }}</td>
-        <td>{{ p.prezzo }}</td>
+        <td>€ {{ p.prezzo }}</td>
         <td>
           <span *ngIf="p.offerta">Si</span>
           <span *ngIf="!p.offerta">No</span>
