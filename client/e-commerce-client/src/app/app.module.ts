@@ -27,9 +27,11 @@ import { Visualizzatore02Component } from './esercizio/esercizio02/visualizzator
 import { Incrementatore02Component } from './esercizio/esercizio02/incrementatore02/incrementatore02.component';
 import { Visualizzatore08Component } from './esercizio/esercizio08/visualizzatore08/visualizzatore08.component';
 import { Incrementatore08Component } from './esercizio/esercizio08/incrementatore08/incrementatore08.component';
+import { GestioneOfferteComponent } from './gestione-offerte/gestione-offerte.component';
 
 const appRoutes: Routes = [
   { path: 'anagrafica-prodotti', component: AnagraficaProdottiComponent },
+  { path: 'gestione-offerte', component: GestioneOfferteComponent },
   { path: 'anagrafica-spedizioni', component: AnagraficaSpedizioniComponent },
   { path: 'home-pubblica', component: HomePageComponent },
   { path: 'home-riservata', component: HomeRiservataComponent },
@@ -76,6 +78,7 @@ const appRoutes: Routes = [
     Incrementatore02Component,
     Visualizzatore08Component,
     Incrementatore08Component,
+    GestioneOfferteComponent,
   ],
   imports: [
     RouterModule.forRoot(

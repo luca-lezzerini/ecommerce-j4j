@@ -24,29 +24,34 @@ public class SpedizioneController {
 
     @Autowired
     SpedizioneService ss;
-
+    
+ 
     @RequestMapping("/create-spedizione")
     @ResponseBody
     public void createSpedizione(@RequestBody SpedizioneCreateDto dto) {
         ss.createSpedizione(dto);
+        System.out.println("controller");
     }
 
     @RequestMapping("/search-spedizione")
     @ResponseBody
     public SpedizioneSearchResultsDto searchSpedizione(@RequestBody SpedizioneSearchDto dto) {
+              System.out.println("search");
         return ss.searchSpedizione(dto);
-
+       
     }
 
     @RequestMapping("/delete-spedizione")
     @ResponseBody
     public void deleteSpedizione(@RequestBody SpedizioneDeleteDto dto) {
         ss.deleteSpedizione(dto);
+         System.out.println("delete");
     }
 
     @RequestMapping("/update-spedizione")
     @ResponseBody
-    public void updateSpedizione(SpedizioneUpdateDto dto) {
+    public void updateSpedizione(@RequestBody SpedizioneUpdateDto dto) {
+         System.out.println("update");
         ss.updateSpedizione(dto);
     }
 

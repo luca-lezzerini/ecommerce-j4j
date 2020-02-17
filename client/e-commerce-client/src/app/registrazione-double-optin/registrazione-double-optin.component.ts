@@ -20,9 +20,9 @@ export class RegistrazioneDoubleOptinComponent implements OnInit {
   }
 
   checkDoubleOptin() {
-    this.codiceDoubleOptin = '12345';
+
     const obs: Observable<RegistrazioneResponseDto> =
-      this.http.post<RegistrazioneResponseDto>('http://localhost:8080/registrazione-successo', this.codiceDoubleOptin);
+      this.http.post<RegistrazioneResponseDto>('http://localhost:8080/check-double-optin', this.codiceDoubleOptin);
   }
 
 }

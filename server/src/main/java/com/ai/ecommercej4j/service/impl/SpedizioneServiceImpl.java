@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ai.ecommercej4j.repository.SpedizioneRepository;
 import com.ai.ecommercej4j.service.SecurityService;
+import java.util.Collections;
 
 @Service
 public class SpedizioneServiceImpl implements SpedizioneService {
@@ -29,18 +30,32 @@ public class SpedizioneServiceImpl implements SpedizioneService {
     @Override
     public void createSpedizione(SpedizioneCreateDto dto) {
         //Verifica esistenza token
+        System.out.println("server, createdto");
         while (securityService.checkToken(dto.getToken())) {
-            if (spedizioneRepository.findByCodice(dto.getDati().getCodice()) == null) {
-                //Dopo aver verificato l'esistenza,salvo nel database
-                spedizioneRepository.save(dto.getDati());
+            if (spedizioneRepository.findByCodiceContainingIgnoreCase(dto.getDati().getCodice()) != null) {
+                List<Spedizione> ls = spedizioneRepository
+                        .findByCodiceContainingIgnoreCase(dto.getDati().getCodice());
+                //Dopo aver verificato l'esistenza o meno,salvo nel database
+                if (ls.isEmpty()) {
+                    spedizioneRepository.save(dto.getDati());
+                }
             }
         }
     }
 
     @Override
     public SpedizioneSearchResultsDto searchSpedizione(SpedizioneSearchDto dto) {
-        List<Spedizione> ls = spedizioneRepository.findByCodice(dto.getSearchKey());
-        SpedizioneSearchResultsDto dtossr = new SpedizioneSearchResultsDto(ls);
+            System.out.println("server, searchdto");
+        SpedizioneSearchResultsDto dtossr = new SpedizioneSearchResultsDto();
+        //Verifico l'esistenza del dto in ingresso e la validità del token
+        if (dto != null && securityService.checkToken(dto.getToken())) {
+     System.out.println("token " +dto.getToken());
+            List<Spedizione> ls = spedizioneRepository.findByCodiceContainingIgnoreCase(dto.getSearchKey());
+        } else {
+            System.out.println("token non esiste" +dto.getToken());
+            //Se non esiste restituisco lista vuota
+            dtossr.setResults(Collections.emptyList());
+        }
         return dtossr;
     }
 
@@ -48,18 +63,21 @@ public class SpedizioneServiceImpl implements SpedizioneService {
     public void deleteSpedizione(SpedizioneDeleteDto dto) {
         /* 1-Verifico se esiste già un dto rispetto a quello che ho 
          Elimino spedizione relativa all'ID*/
-        if (securityService.checkToken(dto.getToken())) {
-            spedizioneRepository.deleteById(dto.getIdToDelete());
+            System.out.println("server, deletedto");
+        if (dto != null) {
+            if (securityService.checkToken(dto.getToken())) {
+                spedizioneRepository.deleteById(dto.getIdToDelete());
+            }
         }
     }
 
     @Override
     public void updateSpedizione(SpedizioneUpdateDto dto) {
         //Metodo per aggiornare/salvare dati previsto da repository
-
+    System.out.println("server, updatedto");
         // Verifico esistenza dto e codice spedizione non vuoto
         while (dto != null && dto.getDati() != null && dto.getDati().getCodice() != null) {
-            // Verifico vaalidità token
+            // Verifico validità token
             if (securityService.checkToken(dto.getToken())) {
                 // controllo se l'id del dto non è vuoto                
                 if (dto.getDati().getId() != null) {

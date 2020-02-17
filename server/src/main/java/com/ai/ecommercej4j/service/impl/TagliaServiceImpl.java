@@ -26,7 +26,7 @@ public class TagliaServiceImpl implements TagliaService {
         //verifico che il token sia registrato...
         if (ss.checkToken(dto.getToken())) {
             //...se è registrato verifico che non esista una taglia con lo stesso codice...   
-            if (tr.findByCodice(dto.getDati().getCodice()) == null) {
+            if (tr.findByCodiceIgnoreCase(dto.getDati().getCodice()) == null) {
                 //...se non esiste la salvo nel db
                 tr.save(dto.getDati());
             }
@@ -47,7 +47,7 @@ public class TagliaServiceImpl implements TagliaService {
                 result.setResult(tr.findAll());
             } else {
                 //...atrimenti cerco solo quelle che soddisfano la ricerca
-                result.setResult(tr.findByCodiceOrDescrizione(ricerca, ricerca));
+                result.setResult(tr.findByCodiceOrDescrizioneIgnoreCase(ricerca, ricerca));
             }
         } else {
             //...altrimenti ritorno una lista vuota 

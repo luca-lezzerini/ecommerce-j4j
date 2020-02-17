@@ -9,7 +9,8 @@ public class LoginResponseDto {
 
     public LoginResponseDto() {
     }
-
+    
+    //token in SecurityServiceImpl viene considerato come doi
     public LoginResponseDto(String token) {
         this.token = token;
     }
