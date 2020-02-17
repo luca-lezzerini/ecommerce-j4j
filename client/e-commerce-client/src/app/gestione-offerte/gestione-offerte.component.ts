@@ -40,14 +40,19 @@ export class GestioneOfferteComponent implements OnInit {
   }
 
   cercaCodice() {
+    // prepara richiesta http
     const dto: ProdottoSearchDto = new ProdottoSearchDto();
     dto.searchKey = this.searchCode;
     dto.token = this.sessione.token;
-
+    // preparo richiesta al server
     const obs: Observable<ProdottoSearchResultsDto> =
       this.http.post<ProdottoSearchResultsDto>('http://localhost:8080/search-prodotto', dto);
-
-
+    // invio richiesta al server
+    obs.subscribe(response => {
+      if (response) {
+        this.prodotti = response.results;
+      }
+    });
   }
 
   seleziona() {
