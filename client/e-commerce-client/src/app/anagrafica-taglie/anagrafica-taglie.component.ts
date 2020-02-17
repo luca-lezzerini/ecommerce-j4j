@@ -180,8 +180,6 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.confermaDelete();
         break;
     }
-    this.codice = '';
-    this.descrizione = '';
   }
 
   annulla() {
@@ -277,6 +275,7 @@ export class AnagraficaTaglieComponent implements OnInit {
         // ripete ultima ricerca
         this.cerca();
       });
+      this.pulisciCampi();
     }
   }
 
@@ -295,6 +294,7 @@ export class AnagraficaTaglieComponent implements OnInit {
       obs.subscribe(response => {
         this.cerca();
       });
+      this.pulisciCampi();
     }
   }
 
@@ -306,6 +306,7 @@ export class AnagraficaTaglieComponent implements OnInit {
     obs.subscribe(reponse => {
       this.cerca();
     });
+    this.pulisciCampi();
   }
 
   checkCampi(): boolean {
@@ -313,5 +314,10 @@ export class AnagraficaTaglieComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  pulisciCampi() {
+    this.codice = '';
+    this.descrizione = '';
   }
 }
