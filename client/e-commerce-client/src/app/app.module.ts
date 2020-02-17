@@ -31,6 +31,7 @@ import { GestioneOfferteComponent } from './gestione-offerte/gestione-offerte.co
 
 const appRoutes: Routes = [
   { path: 'anagrafica-prodotti', component: AnagraficaProdottiComponent },
+  { path: 'gestione-offerte', component: GestioneOfferteComponent },
   { path: 'anagrafica-spedizioni', component: AnagraficaSpedizioniComponent },
   { path: 'home-pubblica', component: HomePageComponent },
   { path: 'home-riservata', component: HomeRiservataComponent },
