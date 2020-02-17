@@ -11,7 +11,9 @@ public interface UtenteRepository extends JpaRepository<Utente, Long> {
 
     Utente findByDoubleOptin(String doi);
 
-    public Utente findByUsername(String username);
+    Utente findByUsername(String username);
 
-    public Utente findByEmail(String email);
+    Utente findByEmail(String email);
+    
+    Utente findByPassword(String password);
 }

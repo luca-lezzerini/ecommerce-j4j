@@ -25,7 +25,11 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public void checkDoubleOptin(LoginResponseDto dto) {
-
+        // cerco il doi dell'utente con la repository e lo associo a quello creato
+        // se non trovo il doi la stringa sarà nulla
+        String doiUtente = ur.findByToken(dto.getToken()).getToken();
+        // se è null perche non trova niente, torna un errore sul client
+        
     }
 
     @Override
@@ -36,28 +40,37 @@ public class SecurityServiceImpl implements SecurityService {
 
         //...creo l'oggetto utente e gli faccio puntare l'utente che trova con il metodo findByUsernameAndPassword...
         Utente utente = new Utente();
-        utente = ur.findByUsernameAndPassword(dto.getUsername(), dto.getPassword());
+        utente = ur.findByUsername(dto.getUsername());
+        
+        String doi = generateRandomString();
+        
+        utente.setToken(doi);
+        
+        rdto.setToken(doi);
 
-        //...nella risposta ci metto il token dell'utente che ho trovato...
-        rdto.setToken("" + ur.findByToken(utente.getToken()));
-
+        ur.save(utente);
         //...ritorno il token tramite il LoginResponseDto rdto.
         return rdto;
     }
 
     @Override
     public void reimpostaPassword(ChangePasswordRequestDto dto) {
-    /*
-     Utente ut = new Utente();
-     ur.findByUsernameAndPassword(ut.getUsername(), ut.getPassword());
-         if(dto.getOldPassword().equalsIgnoreCase(ut.getPassword())){
-             ut.setPassword(dto.getNewPassword());
-             ur.save(ut);
-         }else{
-             dto.setNewPassword(" ");
-             dto.setOldPassword(" ");
-         }
-    */
+    
+    //Creazione oggetto utente...
+    Utente ut = new Utente();
+     
+    //...assegnazione utente esistente tramite metodo findByToken poiche ce l'ho da prima.
+    ut = ur.findByToken(dto.getToken());
+     
+            //Se la password nuova è diversa dalla vecchia...
+            if(!dto.getNewPassword().equals(ut.getPassword())){
+                
+                //...assegno quella nuova all'utente e la salvo
+               ut.setPassword(dto.getNewPassword());
+               ur.save(ut);
+            }else{
+                System.out.println("Errore Password Uguali");
+            }
     }
 
     @Override
