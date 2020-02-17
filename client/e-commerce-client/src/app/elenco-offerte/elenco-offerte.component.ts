@@ -18,6 +18,7 @@ export class ElencoOfferteComponent implements OnInit {
   ngOnInit() {}
   ricerca() {
     // preparo i dati da inviare al service
+    this.prezzoSearch += '&offerta';
     let dto: ProdottoSearchDto = new ProdottoSearchDto();
     dto.searchKey = this.prezzoSearch;
     // preparo la richesta http

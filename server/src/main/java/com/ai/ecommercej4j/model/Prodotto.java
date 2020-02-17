@@ -26,15 +26,17 @@ public class Prodotto implements Serializable{
     private String codice;
     private String descrizione;
     private double prezzo;
+    private boolean offerta;
 
     public Prodotto() {
     }
 
-    public Prodotto(Long id, String codice, String descrizione, double prezzo) {
+    public Prodotto(Long id, String codice, String descrizione, double prezzo, boolean offerta) {
         this.id = id;
         this.codice = codice;
         this.descrizione = descrizione;
         this.prezzo = prezzo;
+        this.offerta = offerta;
     }
 
     public Long getId() {
@@ -69,6 +71,14 @@ public class Prodotto implements Serializable{
         this.prezzo = prezzo;
     }
 
+    public boolean isOfferta() {
+        return offerta;
+    }
+
+    public void setOfferta(boolean offerta) {
+        this.offerta = offerta;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -76,6 +86,7 @@ public class Prodotto implements Serializable{
         hash = 97 * hash + Objects.hashCode(this.codice);
         hash = 97 * hash + Objects.hashCode(this.descrizione);
         hash = 97 * hash + (int) (Double.doubleToLongBits(this.prezzo) ^ (Double.doubleToLongBits(this.prezzo) >>> 32));
+        hash = 97 * hash + (this.offerta ? 1 : 0);
         return hash;
     }
 
@@ -94,6 +105,9 @@ public class Prodotto implements Serializable{
         if (Double.doubleToLongBits(this.prezzo) != Double.doubleToLongBits(other.prezzo)) {
             return false;
         }
+        if (this.offerta != other.offerta) {
+            return false;
+        }
         if (!Objects.equals(this.codice, other.codice)) {
             return false;
         }
@@ -105,9 +119,5 @@ public class Prodotto implements Serializable{
         }
         return true;
     }
-    
-    
-    
-    
     
 }

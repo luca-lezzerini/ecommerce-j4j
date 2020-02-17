@@ -1,1 +1,38 @@
-<p>gestione-offerte works!</p>
+<div *ngIf="!selezionaEnabled">
+  <div>
+    <input [(ngModel)]="searchCode">
+    &nbsp;
+    <button (click)="cercaCodice()">Cerca</button>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <th>Codice</th>
+        <th>Descrizione</th>
+        <th>Prezzo</th>
+        <th>Offerta</th>
+      </tr>
+      <tr *ngFor="let p of prodotti">
+        <td>{{ p.codice }}</td>
+        <td>{{ p.descrizione }}</td>
+        <td>{{ p.prezzo }}</td>
+        <td>
+          <span *ngIf="p.offerta">Si</span>
+          <span *ngIf="!p.offerta">No</span>
+        </td>
+        <td><button (click)="seleziona(p.id)">Seleziona</button></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="selezionaEnabled">
+  <label for="new-price">Nuovo prezzo</label>
+  <input type="number" id="new-price" [(ngModel)]="newPrice">
+  <br>
+  <label for="in-offerta">In offerta</label>
+  <input type="checkbox" id="in-offerta" [(ngModel)]="inOfferta">
+  <br>
+  <button (click)="conferma()">Conferma</button>
+  <button (click)="annulla()">Annulla</button>
+</div>

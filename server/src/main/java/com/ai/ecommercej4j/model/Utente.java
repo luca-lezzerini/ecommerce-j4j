@@ -28,11 +28,17 @@ public class Utente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column
     private String username;
+    @Column
     private String password;
+    @Column
     private String token;
+    @Column
     private String email;
+    @Column
     private String doubleOptin;
+    @Column
     private LocalDateTime dOptinTimestamp;
 
     public Utente() {

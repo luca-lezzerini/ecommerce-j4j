@@ -48,10 +48,12 @@ export class PasswordDimenticataComponent implements OnInit {
     );
 
     obs.subscribe(data => {
+      this.ac.doi = this.doi;
       // 0cambia se non riceve un errore
-      // if (data.token) {
-      //   this.router.navigateByUrl('/reimposta-password')
-      // }
+      if (this.ac.doi) {
+        console.log(this.doi);
+        this.router.navigateByUrl('/reimposta-password')
+      }
     });
   }
 }

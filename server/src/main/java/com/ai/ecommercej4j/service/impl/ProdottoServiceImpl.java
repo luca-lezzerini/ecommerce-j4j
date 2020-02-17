@@ -28,7 +28,7 @@ public class ProdottoServiceImpl implements ProdottoService {
      * non viene inserito nei casi in cui: 
      * il parametro dto è null; 
      * la proprietà dati del dto è null;  
-     * il codice del prodotto da inserire è una stringa vuota; 
+     * il codice del prodotto da inserire è una stringa vuota o null; 
      * il token non è valido; 
      * il codice del prodotto da inserire esiste già
      *
@@ -37,8 +37,10 @@ public class ProdottoServiceImpl implements ProdottoService {
     @Override
     public void createProdotto(ProdottoCreateDto dto) {
 
-        // controllo se il dto esiste e se il codice del prodotto non è una stringa vuota
-        if (dto != null && dto.getDati() != null && dto.getDati().getCodice().length() > 0) {
+        // controllo validità del dto e dei suoi dati
+        if (dto != null && dto.getDati() != null && 
+                dto.getDati().getCodice()!=null && 
+                dto.getDati().getCodice().length() > 0) {
 
             // controllo se il token è valido
             if (securityService.checkToken(dto.getToken())) {
@@ -71,8 +73,10 @@ public class ProdottoServiceImpl implements ProdottoService {
         // istanzio il dto di ritorno
         ProdottoSearchResultsDto resultDto = new ProdottoSearchResultsDto();
 
-        // controllo se il dto in ingresso esiste e se il token è valido
-        if (dto != null && securityService.checkToken(dto.getToken())) {
+        // controllo se il dto e la chiave di ricerca sono diversi da null
+        // e se il token è valido
+        if (dto != null && dto.getSearchKey()!=null && 
+                securityService.checkToken(dto.getToken())) {
 
                 //recupero i risultati e avvaloro il dto di ritorno                
                 List<Prodotto> lp = prodottoRepository.
@@ -105,7 +109,7 @@ public class ProdottoServiceImpl implements ProdottoService {
             if (securityService.checkToken(dto.getToken())) {
 
             }
-            // controllo se l'id del dto non è vuoto                
+            // controllo se l'id del dto non è null                
             if (dto.getIdToDelete() != null) {
 
                 // elimino il prodotto
@@ -126,8 +130,10 @@ public class ProdottoServiceImpl implements ProdottoService {
     @Override
     public void updateProdotto(ProdottoUpdateDto dto) {
 
-        // controllo se il dto esiste e se il codice del prodotto non è una stringa vuota
-        if (dto != null && dto.getDati() != null && dto.getDati().getCodice().length() > 0) {
+        // controllo validità del dto e dei suoi dati
+        if (dto != null && dto.getDati() != null && 
+                dto.getDati().getCodice()!=null && 
+                dto.getDati().getCodice().length() > 0) {
 
             // controllo se il token è valido
             if (securityService.checkToken(dto.getToken())) {

@@ -1,7 +1,7 @@
 <div *ngIf="showPanel">
-  <input type="text" [(ngModel)]="codice" [disabled]="inputDisabled">&nbsp;
-  <input type="text" [(ngModel)]="descrizione" [disabled]="inputDisabled">&nbsp;
-  <input type="number" [(ngModel)]="prezzo" [disabled]="inputDisabled">
+  <input type="text" placeholder = "Codice" [(ngModel)]="codice" [disabled]="inputDisabled">&nbsp;
+  <input type="text" placeholder = "Descrizione" [(ngModel)]="descrizione" [disabled]="inputDisabled">&nbsp;
+  <input type="number" placeholder = "Prezzo" [(ngModel)]="prezzo" [disabled]="inputDisabled">
   <br>
   <br>
   <button *ngIf="showConferma" (click)="conferma()">Conferma</button>&nbsp;

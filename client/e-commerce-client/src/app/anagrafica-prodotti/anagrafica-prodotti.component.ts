@@ -36,6 +36,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   searchKey = '';
   searchKeyPrecedente = '';
   statoPrecedente = '';
+  prodottoSelezionato = new Prodotto();
 
   constructor(private http: HttpClient,
     private acService: AreaComuneService) {
@@ -60,6 +61,14 @@ export class AnagraficaProdottiComponent implements OnInit {
   conferma() {
     // se i campi di input del panel sono vuoti non esegue
     if (this.codice && this.descrizione && this.prezzo !== null) {
+
+      // copia in prodottoSelezionato i dati dei campi di input
+      if(this.id) {
+      this.prodottoSelezionato.id = this.id;
+      }
+      this.prodottoSelezionato.codice = this.codice;
+      this.prodottoSelezionato.descrizione = this.descrizione;
+      this.prodottoSelezionato.prezzo = this.prezzo;
 
       // imposta visibilità degli elementi dell'interfaccia
       this.showPanel = this.statoPrecedente == 'modifica';
@@ -153,7 +162,7 @@ export class AnagraficaProdottiComponent implements OnInit {
 
   annulla() {
     // imposta visibilità degli elementi dell'interfaccia
-    this.showPanel = this.statoPrecedente == 'view';
+    this.showPanel = this.statoPrecedente == 'modifica' || this.statoPrecedente == 'view';
     this.inputDisabled = true;
     this.showConferma = false;
     this.showAnnulla = false;
@@ -297,12 +306,22 @@ export class AnagraficaProdottiComponent implements OnInit {
   // copia i valori del prodotto selezionato nei campi di testo del panel
   private popolaCampiPanel(p: Prodotto) {
 
-    // controlla se i campi sono stato già avvalorati passando per view
-    if (this.statoPrecedente != 'view' && this.statoPrecedente != 'modifica') {
+    // se provengo dalla tabella, p è avvalorato
+    if (p) {
       this.id = p.id;
       this.codice = p.codice;
       this.descrizione = p.descrizione;
       this.prezzo = p.prezzo;
+
+      // salva il prodotto selezionato dalla tabella
+      this.prodottoSelezionato = p;
+    } else {
+
+      // usa i dati selezionati precedentemente
+      this.id = this.prodottoSelezionato.id;
+      this.codice = this.prodottoSelezionato.codice;
+      this.descrizione = this.prodottoSelezionato.descrizione;
+      this.prezzo = this.prodottoSelezionato.prezzo;
     }
   }
 
