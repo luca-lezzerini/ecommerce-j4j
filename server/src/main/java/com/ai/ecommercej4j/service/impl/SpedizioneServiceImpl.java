@@ -51,6 +51,15 @@ public class SpedizioneServiceImpl implements SpedizioneService {
         if (dto != null && securityService.checkToken(dto.getToken())) {
             System.out.println("token " + dto.getToken());
             List<Spedizione> ls = spedizioneRepository.findByCodiceContainingIgnoreCase(dto.getSearchKey());
+            ls.forEach(ob -> {
+                System.out.println("Codice" + ob.getCodice());
+                System.out.println("Descrizione" + ob.getDescrizione());
+                System.out.println("Prezzo" + ob.getPrezzo());
+            }
+            );
+            // ordino i risultati per codice
+            Collections.sort(ls, (s1, s2) -> s1.getCodice().compareTo(s2.getCodice()));
+            dtossr.setResults(ls);
         } else {
             System.out.println("token non esiste" + dto.getToken());
             //Se non esiste restituisco lista vuota

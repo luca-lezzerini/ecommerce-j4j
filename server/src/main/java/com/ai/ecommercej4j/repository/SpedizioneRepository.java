@@ -16,7 +16,11 @@ import org.springframework.stereotype.Repository;
  */
 public interface SpedizioneRepository extends JpaRepository<Spedizione, Long> {
 
+
     List<Spedizione> findByCodiceContainingIgnoreCase(String codice);
     List<Spedizione> findByPrezzoLessThan(double prezzo);
+
+
+    
 
 }

@@ -1,11 +1,11 @@
 <div class="panel" *ngIf="showPanel">
-    codice
+    <label>codice</label>
     <input type="text" [(ngModel)]="codice" name="codice" disabled="{{inputNotEditable}}">
-    descrizione
+    <label>descrizione</label>
     <input type="text" [(ngModel)]="descrizione" name="descrizione" disabled="{{inputNotEditable}}">
     <button *ngIf="showConferma" (click)="confermaCheckState(state)" >Conferma</button>
     <button *ngIf="showAnnulla" (click)="annullaCheckState(state)" >Annulla</button>
-    <button *ngIf="showCrea" (click)="creaCheckState()">Crea</button>
+    <button *ngIf="showCrea" (click)="creaCheckState(state)">Crea</button>
     <button *ngIf="showModifica" (click)="modificaCheckState(state)">Modifica</button>
     <button *ngIf="showRimuovi" (click)="cancellaCheckState(state)">Rimuovi</button>
 </div>
