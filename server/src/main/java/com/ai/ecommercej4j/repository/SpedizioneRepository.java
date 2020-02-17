@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author utente
  */
 public interface SpedizioneRepository extends JpaRepository<Spedizione, Long> {
-    List<Spedizione> findByCodice(String codice);
+    List<Spedizione> findByCodiceContainingIgnoreCase(String codice);
     
 }

@@ -46,7 +46,7 @@ public class SpedizioneController {
 
     @RequestMapping("/update-spedizione")
     @ResponseBody
-    public void updateSpedizione(SpedizioneUpdateDto dto) {
+    public void updateSpedizione(@RequestBody SpedizioneUpdateDto dto) {
         ss.updateSpedizione(dto);
     }
 
