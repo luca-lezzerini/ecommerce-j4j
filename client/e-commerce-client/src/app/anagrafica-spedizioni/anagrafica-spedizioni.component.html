@@ -23,7 +23,7 @@
 <hr>
 <br>
 <div  *ngIf="resultsEnabled">
-<table>  <!--</table> *ngIf="resultsEnabled">-->
+<table>
   <tr>
     <th>Codice Spedizione</th>
     <th>Descrizione</th>
@@ -33,9 +33,9 @@
     <th>Delete</th>
   </tr>
   <tr *ngFor="let s of spedizioni">
-      <td>cod {{s.codice}}</td>
-      <td>des {{s.descrizione}}</td>
-      <td>prz {{s.prezzo}}</td>
+      <td>{{s.codice}}</td>
+      <td>{{s.descrizione}}</td>
+      <td>{{s.prezzo}}</td>
       <td>
         <button (click)="view()" *ngIf="viewEnabled">View</button>
       </td>

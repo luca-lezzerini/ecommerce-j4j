@@ -20,8 +20,9 @@ export class AnagraficaSpedizioniComponent implements OnInit {
   codice: '';
   descrizione: '';
   prezzo: '';
-
+  id: number;
   spedizioni: Spedizione[] = [];
+  spedizioneDaRimuovere = new Spedizione();
 
   searchKey: '';
   idToDelete: number;
@@ -48,11 +49,14 @@ export class AnagraficaSpedizioniComponent implements OnInit {
   trovatoQualcosa = false;
   vieneDaSearch = false;
   statoPrecedente: string;
+  statoAttuale: string;
+  searchKeyPrecedente: string;
 
-  constructor(private http: HttpClient, private singleton: AreaComuneService, private root: ActivatedRoute) {
+  constructor(private http: HttpClient, private acService: AreaComuneService, private root: ActivatedRoute) {
+
     this.initView();
     //DEBUG only
-    this.singleton.token = '1234';
+    this.acService.token = '1234';
   }
 
 
@@ -399,17 +403,17 @@ export class AnagraficaSpedizioniComponent implements OnInit {
       case 'create':
         this.daCreateConferma(); // vissualiza cambiamenti su UI
         this.creaSpedizione();   // crea una nuova spedizione e la manda a DB
-        this.statoPrecedente = 'create';
+        this.statoAttuale = 'create';
         break;
       case 'delete':
         this.daDeleteConferma();  // vissualiza cambiamenti su UI
         this.deleteSpedizione();  // cancella dati da DB
-        this.statoPrecedente = 'delete';
+        this.statoAttuale = 'delete';
         break;
       case 'edit':
         this.daEditView();              // vissualiza cambiamenti su UI
         this.modificaSpedizione();      // manda i dati dal panel (codice, descrizione e prezzo) a DB
-        this.statoPrecedente = 'edit';
+        this.statoAttuale = 'view';
         break;
       default:
         console.log('Stato sbagliato: ' + this.statoPrecedente);
@@ -430,25 +434,25 @@ export class AnagraficaSpedizioniComponent implements OnInit {
       case 'create':
         this.daCreateAnnulla();
         this.annullaEdit();
-        this.statoPrecedente = 'create';
+        this.statoAttuale = 'create';
         break;
       case 'delete':
         if (this.vieneDaSearch) {
 
           this.vieneDaSearch = false;
           this.daDeleteAnnullaSearch();
-          this.statoPrecedente = 'search';
+          this.statoAttuale = 'search';
 
         } else {    // viene da view
           this.daDeleteAnnullaView();
-          this.statoPrecedente = 'view';
+          this.statoAttuale = 'view';
         }
 
         break;
       case 'edit':
         this.daEditView();
         this.annullaEdit();
-        this.statoPrecedente = 'edit';
+        this.statoAttuale = 'edit';
         break;
       default:
         console.log('Stato sbagliato: ' + this.statoPrecedente);
@@ -459,8 +463,8 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
   // Metodo invocato dal bottone crea
   crea() {
-
-    // DEBUG only
+    this.statoAttuale = 'create';
+    // DEBUG  only
     console.log('sono in crea, vengo da ' + this.statoPrecedente);
 
     // da quale stato viene invocato?
@@ -468,7 +472,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
       case 'view':
         this.daViewCreate();
-        this.statoPrecedente = 'view';
+        // this.statoPrecedente = 'view';
         break;
       default:
         console.log('Stato sbagliato: '  + this.statoPrecedente);
@@ -479,7 +483,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
   // Metodo invocato dal bottone edit
   edit() {
-
+      this.statoAttuale ='edit';
       // DEBUG only
       console.log('sono in edit, vengo da ' + this.statoPrecedente);
 
@@ -488,11 +492,11 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
         case 'search':
           this.daSearchEdit();
-          this.statoPrecedente = 'search';
+          //this.statoPrecedente = '';
           break;
         case 'view':
           this.daViewEdit();
-          this.statoPrecedente = 'view';
+          //this.statoAttuale = 'edit';
           break;
         default:
           console.log('Stato sbagliato:  + this.statoPrecedente');
@@ -507,7 +511,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
      console.log('sono in modificaa, vengo da ' + this.statoPrecedente);
 
      this.edit();
-     this.statoPrecedente = 'edit';
+     //this.statoAttuale = 'edit';
   }
 
   // Metodo invocato dal bottone delete
@@ -521,12 +525,17 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
         case 'search':
           this.daSearchDelete();
-          this.statoPrecedente = 'search';
+          this.statoAttuale = 'delete';
+          this.deleteSpedizione();
           break;
         case 'view':
           this.daViewDelete();
-          this.statoPrecedente = 'view';
+          this.statoAttuale = 'delete';
+          this.deleteSpedizione();
           break;
+        case 'delete':
+            this.deleteSpedizione();
+            break;
         default:
           console.log('Stato sbagliato: ' + this.statoPrecedente );
           break;
@@ -541,6 +550,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
     this.delete();
     this.statoPrecedente = 'delete';
+
   }
 
   // Metodo invocato dal bottone view
@@ -603,7 +613,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
     // prepara la chiamata al server
     const dto: SpedizioneCreateDto = new SpedizioneCreateDto();
-    dto.token = this.singleton.token;
+    dto.token = this.acService.token;
     dto.dati = new Spedizione();
     dto.dati.codice = this.codice;
     dto.dati.descrizione = this.descrizione;
@@ -611,8 +621,8 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     // DEBUG only
     console.log('siamo prima di observable, ho token ' + dto.token);
 
-    const obs: Observable<SpedizioneCreateDto> =
-          this.http.post<SpedizioneCreateDto>('http://localhost:8080/create-spedizione', dto);
+    const obs: Observable<any> =
+          this.http.post<any>('http://localhost:8080/create-spedizione', dto);
 
     console.log('siamo dopo di observable, ho token ' + dto.token);
 
@@ -620,8 +630,8 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     obs.subscribe(risposta => {
       // ripete ultima ricerca
       // una volta eseguito l'inserimento, eseguo di nuovo l'ultima ricerca effettuata
-
-      this.cercaSpedizione();
+      // this.searchKeyPrecedente
+      // this.cercaSpedizione();
 
       console.log(risposta);
     });
@@ -636,11 +646,11 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     /*  codice da testare */
     // prepara la chiamata al server
     const dto: SpedizioneSearchDto = new SpedizioneSearchDto();
-    dto.token = this.singleton.token;
+    dto.token = this.acService.token;
     dto.searchKey = this.searchKey;
     const obs: Observable<SpedizioneSearchResultsDto> =
       this.http.post<SpedizioneSearchResultsDto>('http://localhost:8080/search-spedizione', dto);
-      console.log('mandato post ');
+    console.log('mandato post ');
     // invia la richiesta al server
     obs.subscribe(risposta => {
       this.spedizioni = risposta.result;
@@ -661,11 +671,11 @@ export class AnagraficaSpedizioniComponent implements OnInit {
       }
     });
 
- // salvo la chiave di ricerca
- //this.searchKeyPrecedente = this.searchKey;
+    // salvo la chiave di ricerca
+    this.searchKeyPrecedente = this.searchKey;
 
- // pulisco il campo ricerca
- //this.searchKey = '';
+    // pulisco il campo ricerca
+    this.searchKey = '';
 
 
   }
@@ -678,13 +688,16 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     /*  codice da testare  */
     // prepara la chiamata al server
     const dto: SpedizioneUpdateDto = new SpedizioneUpdateDto();
-    dto.token = this.singleton.token;
+    dto.dati = new Spedizione();
+    dto.dati.id = this.id;
+    dto.dati.descrizione = this.descrizione;
+
+    dto.token = this.acService.token;
 
     dto.dati.codice = this.codice;
-    dto.dati.descrizione = this.descrizione;
     dto.dati.prezzo = +this.prezzo;  // qui + converte string in number
-    const obs: Observable<SpedizioneUpdateDto> =
-          this.http.post<SpedizioneUpdateDto>('http://localhost:8080/update-spedizione', dto);
+    const obs: Observable<any> =
+          this.http.post<any>('http://localhost:8080/update-spedizione', dto);
 
     // invia la richiesta al server
     obs.subscribe(risposta => {
@@ -701,21 +714,34 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     // DEBUG only
     console.log('Sono in deleteSpedizione');
 
-    /*  codice da testare */
-    // prepara la chiamata al server
-    const dto: SpedizioneDeleteDto = new SpedizioneDeleteDto();
-    dto.token = this.singleton.token;
-    dto.idToDelete = this.idToDelete;
-    const obs: Observable<SpedizioneDeleteDto> =
-      this.http.post<SpedizioneDeleteDto>('http://localhost:8080/search-spedizione', dto);
+    // se i campi di input del panel sono vuoti non esegue
+   /*
+    if (this.codice && this.descrizione && this.prezzo !== null) {
 
-    // invia la richiesta al server
-    obs.subscribe(risposta => {
+      // copia in SpedizioneDaRimuovere i dati dei campi di input
+      if (this.id) {
+       this.spedizioneDaRimuovere.id = this.id;
+      }
+      this.spedizioneDaRimuovere.codice = this.codice;
+      this.spedizioneDaRimuovere.descrizione = this.descrizione;
+      this.spedizioneDaRimuovere.prezzo = +this.prezzo;
+*/
+      /*  codice da testare */
+      // prepara la chiamata al server
+      const dto: SpedizioneDeleteDto = new SpedizioneDeleteDto();
+      dto.token = this.acService.token;
+      dto.idToDelete = this.id;
+      const obs: Observable<any> =
+       this.http.post<any>('http://localhost:8080/delete-spedizione', dto);
+      console.log('fatto post');
+      // invia la richiesta al server
+      obs.subscribe(risposta => {
         // ripete ultima ricerca
         // this.cercaSpedizione();
 
-         console.log(risposta);
-    });
+        console.log(risposta);
+      });
+    //}
   }
 
 
