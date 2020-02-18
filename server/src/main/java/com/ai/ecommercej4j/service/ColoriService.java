@@ -11,7 +11,7 @@ import com.ai.ecommercej4j.model.ColoriUpdateDto;
 public interface ColoriService {
     public void createColori(ColoriCreateDto dto);
     public ColoriSearchResultsDto searchColori(ColoriSearchDto dto);
-    public ColoriSearchResultsDto searchColoriXDescrizione(ColoriSearchDto dto);
+    public ColoriSearchResultsDto searchColoriPerDescrizione(ColoriSearchDto dto);
     public void deleteColori(ColoriDeleteDto dto);
     public void updateColori(ColoriUpdateDto dto);
 }

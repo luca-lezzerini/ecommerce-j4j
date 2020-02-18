@@ -46,7 +46,7 @@ public class ColoriController {
     
     @RequestMapping("/search-colori-per-descrizione")
     @ResponseBody
-    public ColoriSearchResultsDto searchColoriXDescrizione(@RequestBody ColoriSearchDto dto){
-        return cs.searchColoriXDescrizione(dto);
+    public ColoriSearchResultsDto searchColoriPerDescrizione(@RequestBody ColoriSearchDto dto){
+        return cs.searchColoriPerDescrizione(dto);
     }
 }

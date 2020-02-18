@@ -71,4 +71,26 @@ public class TagliaServiceImpl implements TagliaService {
             }
         }
     }
+
+    @Override
+    public TagliaSearchResultsDto searchTagliaPerDescrizione(TagliaSearchDto dto) {
+         TagliaSearchResultsDto result = new TagliaSearchResultsDto();
+        String ricerca = dto.getSearchKey();
+        //verifico che il token sia registrato...
+        if (ss.checkToken(dto.getToken())) {
+            //...se è registrato controllo se la stringa di ricerca è vuota...
+            if (ricerca.equals("")) {
+                //...se è vuota ritorno tutte le taglie
+                result.setResult(tr.findAll());
+            } else {
+                //...atrimenti cerco solo quelle che soddisfano la ricerca
+                result.setResult(tr.findByDescrizioneContainingIgnoreCase(dto.getSearchKey()));
+            }
+        } else {
+            //...altrimenti ritorno una lista vuota 
+            result.setResult(Collections.emptyList());
+        }
+        return result;
+    
+    }
 }
