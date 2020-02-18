@@ -7,6 +7,7 @@ import { ColoriSearchResultsDto } from '../classi/colori-search-results-dto';
 import { ColoriDeleteDto } from '../classi/colori-delete-dto';
 import { Colori } from '../classi/colori';
 import { Observable } from 'rxjs';
+import { AreaComuneService } from '../area-comune.service';
 
 @Component({
   selector: 'app-anagrafica-colori',
@@ -44,7 +45,7 @@ export class AnagraficaColoriComponent implements OnInit {
   statoAggiungi = 'Aggiungi';
 
   // inizializzo le variabili UI
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private ac: AreaComuneService) {
     this.showPanel = false;
     this.showCerca = true;
     this.showRisultati = false;
@@ -103,7 +104,7 @@ export class AnagraficaColoriComponent implements OnInit {
       }
     }
   }
-// cambia lo stato quando si clicca crea: se sto visualizzando passa alla creazione di un nuovo elemento
+  // cambia lo stato quando si clicca crea: se sto visualizzando passa alla creazione di un nuovo elemento
   creaCheckState(stato: string) {
     if (stato === this.statoAggiungi) {
       this.olderState = this.state;
@@ -250,6 +251,7 @@ export class AnagraficaColoriComponent implements OnInit {
       this.colore.codice = this.codice;
       this.colore.descrizione = this.descrizione;
       dto.dati = this.colore;
+      dto.token = this.ac.token;
       // preparo la richiesta http
       const obs: Observable<void> = this.http.post<void>(
         'http://localhost:8080/create-colori',
@@ -272,6 +274,7 @@ export class AnagraficaColoriComponent implements OnInit {
     // preparo i dati da inviare al server
     const dto: ColoriSearchDto = new ColoriSearchDto();
     dto.searchKey = this.ricerca;
+    dto.token = this.ac.token;
     // preparo la richiesta http
     const obs: Observable<ColoriSearchResultsDto> = this.http.post<
       ColoriSearchResultsDto
@@ -285,6 +288,7 @@ export class AnagraficaColoriComponent implements OnInit {
     // preparo i dati da inviare al server
     const dto: ColoriDeleteDto = new ColoriDeleteDto();
     dto.idToDelete = c.id;
+    dto.token = this.ac.token;
     // preparo la richiesta http
     const obs: Observable<void> = this.http.post<void>(
       'http://localhost:8080/delete-colori',
@@ -299,6 +303,7 @@ export class AnagraficaColoriComponent implements OnInit {
     // preparo i dati da inviare al server
     const dto: ColoriUpdateDto = new ColoriUpdateDto();
     dto.dati = c;
+    dto.token = this.ac.token;
     // preparo la richiesta http
     const obs: Observable<void> = this.http.post<void>(
       'http://localhost:8080/update-colori',
