@@ -36,13 +36,17 @@ export class AnagraficaTaglieComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private sessione: AreaComuneService,
-    private root: ActivatedRoute,
     private router: Router
   ) {
     this.initVis();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.sessione);
+    if (! this.sessione.token) {
+      this.router.navigateByUrl('login');
+    }
+  }
 
   initVis() {
     this.panelEnabled = false;
