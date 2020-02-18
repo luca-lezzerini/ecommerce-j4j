@@ -6,7 +6,6 @@ import { LoginRequestDto } from '../classi/login-request-dto';
 import { AreaComuneService } from '../area-comune.service';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,48 +16,49 @@ export class LoginComponent implements OnInit {
   password: string;
   token: string;
 
-  constructor(private http: HttpClient, private ac: AreaComuneService,
-    private router:Router) { }
+  constructor(
+    private http: HttpClient,
+    private ac: AreaComuneService,
+    private router: Router
+  ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  login() {
+    if (this.username && this.password) {
+      // preparo i dati da inviare al server
+      const lg: LoginRequestDto = new LoginRequestDto();
+      lg.username = this.username;
+      lg.password = this.password;
+
+      // invio i dati al server
+      const og: Observable<LoginResponseDto> = this.http.post<LoginResponseDto>('http://localhost:8080/login', lg);
+
+      // creo la callback
+      og.subscribe(data => {
+        this.ac.token = data.token;
+        if (data.token) {
+          this.router.navigateByUrl('/home-riservata');
+        } else {
+          this.username = '';
+          this.password = '';
+        }
+      });
+    }
   }
 
-  login(){
+  passwordDimenticata() {
     // preparo i dati da inviare al server
-    let lg: LoginRequestDto = new LoginRequestDto();
-    lg.username = this.username;
-    lg.password = this.password;
-
-    // invio i dati al server
-    let og: Observable<LoginResponseDto> =
-      this.http.
-      post<LoginResponseDto>('http://localhost:8080/login', lg);
-
-    // creo la callback
-    og.subscribe(data => {
-      this.ac.token = data.token;
-      if (data.token){
-        this.router.navigateByUrl('/home-riservata');
-      }
-    });
-  }
-
-  passwordDimenticata(){
-    // preparo i dati da inviare al server
-    let pd: LoginRequestDto = new LoginRequestDto();
+    const pd: LoginRequestDto = new LoginRequestDto();
     pd.username = this.username;
     pd.password = this.password;
 
-
     // invio i dati al server
-    let op: Observable<LoginResponseDto> =
-    this.http.
-    post<LoginResponseDto>('http://localhost:8080/passwordDimenticata', pd);
+    const op: Observable<LoginResponseDto> = this.http.post<LoginResponseDto>('http://localhost:8080/passwordDimenticata', pd);
 
     // creo al callback
     op.subscribe(data => {
       this.token = data.token;
     });
   }
-
 }
