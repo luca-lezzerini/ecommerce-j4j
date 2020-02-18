@@ -1,7 +1,6 @@
 package com.ai.ecommercej4j.service.impl;
 
 import com.ai.ecommercej4j.model.Prodotto;
-import com.ai.ecommercej4j.model.Utente;
 import com.ai.ecommercej4j.repository.*;
 import com.ai.ecommercej4j.service.DevelopmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,26 +21,7 @@ public class DevelopmentServiceImpl implements DevelopmentService{
     ColoriRepository cr;
     
     @Override
-    public void generateTestData() {
-        // elimina tutti dati dal db
-        pr.deleteAllInBatch();
-        ur.deleteAllInBatch();
-        sr.deleteAllInBatch();
-        tr.deleteAllInBatch();
-        cr.deleteAllInBatch();
-        
-        //crea cliente
-        Utente cliente = new Utente();
-        cliente.setUsername("cliente");
-        cliente.setPassword("cliente");
-        
-        // crea gestore
-        Utente gestore = new Utente();
-        gestore.setUsername("gestore");
-        gestore.setPassword("gestore");
-        //salva
-        ur.save(cliente);
-        ur.save(gestore);
+    public void generateTestData() {   
         
         Prodotto p1 = new Prodotto();
         p1.setPrezzo(12.50);
@@ -69,8 +49,17 @@ public class DevelopmentServiceImpl implements DevelopmentService{
         p4.setCodice("31");
         p4.setDescrizione("no offerta");
         p4.setOfferta(false);
-        pr.save(p4);
-        
+        pr.save(p4);        
+    }
+
+    @Override
+    public void dropDataBase() {
+        // elimina tutti dati dal db
+        pr.deleteAllInBatch();
+        ur.deleteAllInBatch();
+        sr.deleteAllInBatch();
+        tr.deleteAllInBatch();
+        cr.deleteAllInBatch();        
     }
     
 }
