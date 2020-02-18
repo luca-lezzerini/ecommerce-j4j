@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ColoriRepository extends JpaRepository<Colori, Long>{
 
-    List<Colori> findByCodice(String dto);
-
+    List<Colori> findByCodiceContainingIgnoreCase(String dto);
+    
     
 
 }

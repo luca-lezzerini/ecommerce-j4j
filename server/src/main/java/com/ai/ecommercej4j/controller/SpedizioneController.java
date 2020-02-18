@@ -40,6 +40,14 @@ public class SpedizioneController {
         return ss.searchSpedizione(dto);
        
     }
+    
+      @RequestMapping("/search-prezzo-spedizione")
+    @ResponseBody
+    public SpedizioneSearchResultsDto searchPrezzoSpedizione(@RequestBody SpedizioneSearchDto dto) {
+              System.out.println("search-prezzo-spedizione");
+        return ss.prezzoSearch(dto);
+       
+    }
 
     @RequestMapping("/delete-spedizione")
     @ResponseBody

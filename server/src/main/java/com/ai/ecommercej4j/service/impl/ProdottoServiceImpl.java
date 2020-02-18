@@ -72,6 +72,7 @@ public class ProdottoServiceImpl implements ProdottoService {
 
         // controllo se il dto e la chiave di ricerca sono diversi da null
         // e se il token è valido
+<<<<<<< HEAD
         if (dto != null && dto.getSearchKey() != null
                 && securityService.checkToken(dto.getToken())) {
 
@@ -82,9 +83,21 @@ public class ProdottoServiceImpl implements ProdottoService {
             // ordino i risultati per codice
             Collections.sort(lp, (p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
             resultDto.setResults(lp);
+=======
+        if (dto != null && dto.getSearchKey()!=null && 
+                securityService.checkToken(dto.getToken())) {
+
+                //recupero i risultati e avvaloro il dto di ritorno                
+                List<Prodotto> lp = prodottoRepository.
+                        findByCodiceContainingIgnoreCase(dto.getSearchKey());
+                
+                // ordino i risultati per codice
+                Collections.sort(lp,(p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
+                resultDto.setResult(lp);           
+>>>>>>> f6a29583ef7fc1578ffc821a150fc36ffe407d8d
         } else {
             // ... se il dto non esiste, restituisce un ArrayList vuoto
-            resultDto.setResults(Collections.emptyList());
+            resultDto.setResult(Collections.emptyList());
         }
         return resultDto;
     }

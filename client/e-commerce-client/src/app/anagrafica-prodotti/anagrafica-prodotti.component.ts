@@ -168,6 +168,9 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   annulla() {
+    // copia i valori  del prodotto selezionato precedentemente nei campi del panel
+    this.popolaCampiPanel(null);
+
     // imposta visibilità degli elementi dell'interfaccia
     let mostraPanel = this.statoPrecedente == 'modifica' || this.statoPrecedente == 'rimuoviview';
     this.showPanel = mostraPanel;
@@ -204,7 +207,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   modifica(p: Prodotto) {
-    // imposta visibilità degli elementi dell'interfaccia
+    // copia i valori  del prodotto selezionato nei campi del panel
     this.popolaCampiPanel(p);
 
     // imposta visibilità degli elementi dell'interfaccia
@@ -241,7 +244,11 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showAggiungi = false;
 
     // aggiorno lo stato
-    this.statoPrecedente = 'rimuovi' + this.statoPrecedente;
+    if (this.statoPrecedente == 'view') {
+      this.statoPrecedente = 'rimuoviview';
+    } else {
+      this.statoPrecedente = 'rimuovicerca';
+    }
   }
 
   cerca() {
@@ -277,10 +284,10 @@ export class AnagraficaProdottiComponent implements OnInit {
     oss.subscribe(risposta => {
 
       // aggiorno lista prodotti
-      this.prodotti = risposta.results;
+      this.prodotti = risposta.result;
 
       // se ci sono risultati li visualizzo
-      this.showResults = risposta.results.length > 0;
+      this.showResults = risposta.result.length > 0;
 
       // salvo la chiave di ricerca
       this.searchKeyPrecedente = this.searchKey;
@@ -314,7 +321,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   // copia i valori del prodotto selezionato nei campi di testo del panel
   private popolaCampiPanel(p: Prodotto) {
 
-    // se provengo dalla tabella, p è avvalorato
+    // se provengo dalla tabella, p è avvalorato...
     if (p) {
       this.id = p.id;
       this.codice = p.codice;
@@ -326,7 +333,7 @@ export class AnagraficaProdottiComponent implements OnInit {
       this.prodottoSelezionato = p;
     } else {
 
-      // usa i dati selezionati precedentemente
+      // ... altrimenti usa i dati del prodotto selezionato precedentemente
       this.id = this.prodottoSelezionato.id;
       this.codice = this.prodottoSelezionato.codice;
       this.descrizione = this.prodottoSelezionato.descrizione;

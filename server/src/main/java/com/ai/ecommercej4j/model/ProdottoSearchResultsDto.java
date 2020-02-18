@@ -15,19 +15,19 @@ public class ProdottoSearchResultsDto {
 
     private List<Prodotto> result;
 
-    public ProdottoSearchResultsDto(List<Prodotto> results) {
-        this.result = results;
+    public ProdottoSearchResultsDto(List<Prodotto> result) {
+        this.result = result;
     }
 
     public ProdottoSearchResultsDto() {
     }
 
-    public List<Prodotto> getResults() {
+    public List<Prodotto> getResult() {
         return result;
     }
 
-    public void setResults(List<Prodotto> results) {
-        this.result = results;
+    public void setResult(List<Prodotto> result) {
+        this.result = result;
     }
 
 }

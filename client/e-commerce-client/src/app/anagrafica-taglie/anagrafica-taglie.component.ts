@@ -21,8 +21,7 @@ export class AnagraficaTaglieComponent implements OnInit {
   descrizione = '';
   searchKey = '';
   panelEnabled: boolean;
-  confermaEnabled: boolean;
-  annullaEnabled: boolean;
+  confermaAndAnnullaEnabled: boolean;
   creaEnabled: boolean;
   modificaEnabled: boolean;
   rimuoviEnabled: boolean;
@@ -41,16 +40,13 @@ export class AnagraficaTaglieComponent implements OnInit {
     private router: Router
   ) {
     this.initVis();
-    // FIXME : stub
-    this.sessione.token = '123';
   }
 
   ngOnInit() { }
 
   initVis() {
     this.panelEnabled = false;
-    this.confermaEnabled = false;
-    this.annullaEnabled = false;
+    this.confermaAndAnnullaEnabled = false;
     this.creaEnabled = false;
     this.modificaEnabled = false;
     this.rimuoviEnabled = false;
@@ -61,8 +57,7 @@ export class AnagraficaTaglieComponent implements OnInit {
 
   visCercaConRisultato() {
     this.panelEnabled = false;
-    this.confermaEnabled = false;
-    this.annullaEnabled = false;
+    this.confermaAndAnnullaEnabled = false;
     this.creaEnabled = false;
     this.modificaEnabled = false;
     this.rimuoviEnabled = false;
@@ -79,8 +74,7 @@ export class AnagraficaTaglieComponent implements OnInit {
   visAttesaConferma() {
     this.panelEnabled = true;
     this.inputDisabled = false;
-    this.confermaEnabled = true;
-    this.annullaEnabled = true;
+    this.confermaAndAnnullaEnabled = true;
     this.creaEnabled = false;
     this.modificaEnabled = false;
     this.rimuoviEnabled = false;
@@ -97,8 +91,7 @@ export class AnagraficaTaglieComponent implements OnInit {
   visView() {
     this.panelEnabled = true;
     this.inputDisabled = true;
-    this.confermaEnabled = false;
-    this.annullaEnabled = false;
+    this.confermaAndAnnullaEnabled = false;
     this.creaEnabled = true;
     this.modificaEnabled = true;
     this.rimuoviEnabled = true;
@@ -124,8 +117,7 @@ export class AnagraficaTaglieComponent implements OnInit {
   visModifica() {
     this.panelEnabled = true;
     this.inputDisabled = true;
-    this.confermaEnabled = true;
-    this.annullaEnabled = true;
+    this.confermaAndAnnullaEnabled = true;
     this.creaEnabled = false;
     this.modificaEnabled = false;
     this.rimuoviEnabled = false;
@@ -215,12 +207,14 @@ export class AnagraficaTaglieComponent implements OnInit {
     // imposta la visibilità su visAggiungi
     this.visAttesaConferma();
     this.visPrecedente = 'aggiungi';
+    this.pulisciCampi();
   }
 
   crea() {
     // imposta la visibilità su visAggiungi
     this.visAttesaConferma();
     this.visPrecedente = 'crea';
+    this.pulisciCampi();
   }
 
   modifica(id: number) {

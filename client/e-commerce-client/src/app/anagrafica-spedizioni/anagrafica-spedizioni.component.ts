@@ -74,7 +74,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
   }
 
   daSearchCerca() {
-
+    console.log( 'daSearcCerca ' );
     this.panelEnabled = false;
 
     this.searchPanelEnabled = true;
@@ -95,9 +95,11 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
     }
     this.statoPrecedente = 'search';
+
   }
 
   daSearchDelete() {
+    console.log( 'daSearchDelete ' );
 
     this.panelEnabled = true;
     this.panelInputDisabled = true;
@@ -119,6 +121,8 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
   daSearchEdit() {
 
+    console.log( 'daSearcEdit' );
+
     this.panelEnabled = true;
     this.panelInputDisabled = false;
     this.confermaEnabled = true;
@@ -136,6 +140,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
   }
 
   daSearchView()  {
+    console.log( 'daSearcView ' );
 
     this.panelEnabled = true;
     this.panelInputDisabled = true;
@@ -156,11 +161,18 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     this.editEnabled = true;
     this.deleteEnabled = true;
 
+    // DEBUG only
+    if( this.resultsEnabled ) {
+       console.log('devo disegnare la tabela' );
+    }
+
     this.statoPrecedente = 'search';
 
   }
 
   daSearchAggiungi(){
+
+    console.log( 'daSearcAggiungi ' );
 
     this.panelEnabled = true;
     this.panelInputDisabled = false;
@@ -180,6 +192,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
   }
 
   daEditView(){
+    console.log( 'daEditView' );
 
     this.panelEnabled = true;
     this.panelInputDisabled = true;
@@ -207,20 +220,40 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
   // da CreateState a SearchState freccia "annulla" - parte Filippo -
   daCreateAnnulla(){
-  this.panelEnabled = false;
-  this.cercaEnabled = true;
-  this.resultsEnabled = true;
-  this.aggiungiEnabled = true;
+   console.log( 'daCreateAnnulla ' );
 
-  this.statoPrecedente = 'create';
+   this.panelEnabled = false;
+
+   this.searchPanelEnabled = true;
+   this.cercaInputDisabled = false;
+   this.cercaEnabled = true;
+
+   this.aggiungiEnabled = true;
+
+   this.resultsEnabled = true;
+   this.viewEnabled = true;
+   this.editEnabled = true;
+   this.deleteEnabled = true;
+
+   this.statoPrecedente = 'create';
   }
 
   // da CreateState a SearchState freccia "conferma" - parte Filippo -
   daCreateConferma(){
+
+    console.log( 'daCreateConferma ' );
+
     this.panelEnabled = false;
+
+    this.searchPanelEnabled = true;
+    this.cercaInputDisabled = false;
     this.cercaEnabled = true;
-    this.resultsEnabled = true;
     this.aggiungiEnabled = true;
+
+    this.resultsEnabled = true;
+    this.viewEnabled = true;
+    this.editEnabled = true;
+    this.deleteEnabled = true;
 
     this.statoPrecedente = 'create';
 
@@ -228,6 +261,9 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
   // da ViewState a CreateState freccia "create" - parte Filippo -
   daViewCreate(){
+
+    console.log( 'daViewCreate ' );
+
     this.panelEnabled = true;
     this.panelInputDisabled = false;
     this.confermaEnabled = true;
@@ -235,20 +271,30 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     this.creaEnabled = false;
     this.modificaEnabled = false;
     this.rimuoviEnabled = false;
-    this.cercaEnabled = false;
-    this.resultsEnabled = false;
+
+    this.searchPanelEnabled = false;
     this.aggiungiEnabled = false;
 
+    this.resultsEnabled = false;
     this.statoPrecedente = 'view';
 
   }
 
   // da ViewState a EditState freccia "edit" - parte Filippo -
   daViewEdit(){
+    console.log( 'daViewEdit ' );
     this.panelEnabled = false;
+
+    this.searchPanelEnabled = true;
+    this.cercaInputDisabled = false;
     this.cercaEnabled = true;
-    this.resultsEnabled = true;
     this.aggiungiEnabled = true;
+
+
+    this.resultsEnabled = true;
+    this.viewEnabled = true;
+    this.editEnabled = true;
+    this.deleteEnabled = true;
 
     this.statoPrecedente = 'view';
 
@@ -256,32 +302,47 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
   // da ViewState a DeleteState freccia "delete" - parte Filippo -
   daViewDelete(){
-    this.panelEnabled = false;
+    console.log( 'daViewDelete ' );
+
+    this.panelEnabled = true;
     this.panelInputDisabled = true;
     this.confermaEnabled = true;
     this.annullaEnabled = true;
     this.creaEnabled = false;
     this.modificaEnabled = false;
     this.rimuoviEnabled = false;
-    this.cercaEnabled = false;
+
+    this.searchPanelEnabled = false;
+    this.aggiungiEnabled = true;
+
     this.resultsEnabled = false;
-    this.aggiungiEnabled = false;
 
     this.statoPrecedente = 'view';
   }
 
-  // da DeleteState a ViewState freccia "conferma" - parte Filippo -
+  // da DeleteState a SearchState freccia "conferma" - parte Filippo -
   daDeleteConferma(){
+    console.log( 'daDeleteConferma ' );
     this.panelEnabled = false;
+
+    this.searchPanelEnabled = true;
+    this.cercaInputDisabled = false;
     this.cercaEnabled = true;
-    this.resultsEnabled = true;
     this.aggiungiEnabled = true;
+
+    this.resultsEnabled = true;
+    this.viewEnabled = true;
+    this.editEnabled = true;
+    this.deleteEnabled = true;
 
     this.statoPrecedente = 'delete';
   }
 
   // da DeleteState a ViewState freccia "annulla[venivo da view]" - parte Filippo -
   daDeleteAnnullaView(){
+
+    console.log( 'daDeleteAnnullaView' );
+
     this.panelEnabled = true;
     this.panelInputDisabled = true;
     this.confermaEnabled = false;
@@ -289,19 +350,38 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     this.creaEnabled = true;
     this.modificaEnabled = true;
     this.rimuoviEnabled = true;
+
+    this.searchPanelEnabled = true;
+    this.cercaInputDisabled = false;
     this.cercaEnabled = true;
-    this.resultsEnabled = true;
     this.aggiungiEnabled = true;
+
+
+    this.resultsEnabled = true;
+    this.resultsEnabled = true;
+    this.viewEnabled = true;
+    this.editEnabled = true;
+    this.deleteEnabled = true;
 
     this.statoPrecedente = 'delete';
   }
 
   // da DeleteState a ViewState freccia "annulla[venivo da search]" - parte Filippo -
   daDeleteAnnullaSearch(){
+
+    console.log( 'daDeleteAnnullaSearch' );
+
     this.panelEnabled = false;
+
+    this.searchPanelEnabled = true;
+    this.cercaInputDisabled = false;
     this.cercaEnabled = true;
-    this.resultsEnabled = true;
     this.aggiungiEnabled = true;
+
+    this.resultsEnabled = true;
+    this.viewEnabled = true;
+    this.editEnabled = true;
+    this.deleteEnabled = true;
 
     this.statoPrecedente = 'delete';
   }
@@ -470,7 +550,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     console.log('sono in view, vengo da ' + this.statoPrecedente);
 
     this.daSearchView();
-    this.statoPrecedente = 'view';
+    this.statoPrecedente = 'search';
   }
 
   // Metodo invocato dal bottone aggiungi
@@ -506,6 +586,12 @@ export class AnagraficaSpedizioniComponent implements OnInit {
         break;
     }
     this.cercaSpedizione();   // cerca spedizione nel db e vissualizza se trova qualcosa
+    console.log('dopo cerca ne db sono in stato ' + this.statoPrecedente );
+    //this.view();
+    this.daSearchView();
+    //DEBUG only
+    //his.statoPrecedente =
+    //console.log('dopo cerca ne db sono in stato ' + this.statoPrecedente);
   }
 
   creaSpedizione(){     // CRUD create
@@ -533,7 +619,9 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     // invia la richiesta al server
     obs.subscribe(risposta => {
       // ripete ultima ricerca
-      // this.cercaSpedizione();
+      // una volta eseguito l'inserimento, eseguo di nuovo l'ultima ricerca effettuata
+
+      this.cercaSpedizione();
 
       console.log(risposta);
     });
@@ -552,17 +640,34 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     dto.searchKey = this.searchKey;
     const obs: Observable<SpedizioneSearchResultsDto> =
       this.http.post<SpedizioneSearchResultsDto>('http://localhost:8080/search-spedizione', dto);
-
+      console.log('mandato post ');
     // invia la richiesta al server
     obs.subscribe(risposta => {
       this.spedizioni = risposta.result;
-      if (this.spedizioni && this.spedizioni.length > 0) {
+
+      //console.log('SpedCodice ' + this.spedizioni[0].codice);
+
+      // se ci sono risultati li visualizzo
+      //this.showResults = risposta.results.length > 0;
+      //if (this.spedizioni && this.spedizioni.length > 0) {
+
+      if (risposta.result.length > 0) {
        // se trova qualcosa lo fa vedere
+       console.log('trovato!!!');
        this.showResults();
       } else {
         this.resultsEnabled = false;
+        console.log('non ho trovato!!!');
       }
     });
+
+ // salvo la chiave di ricerca
+ //this.searchKeyPrecedente = this.searchKey;
+
+ // pulisco il campo ricerca
+ //this.searchKey = '';
+
+
   }
 
   modificaSpedizione() {    // CRUD update

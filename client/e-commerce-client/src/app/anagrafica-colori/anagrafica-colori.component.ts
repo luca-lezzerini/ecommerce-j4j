@@ -182,7 +182,7 @@ export class AnagraficaColoriComponent implements OnInit {
     this.descrizione = colore.descrizione;
 
     this.showPanel = true;
-    this.inputNotEditable = false;
+    this.inputNotEditable = true;
     this.showConferma = false;
     this.showAnnulla = false;
     this.showCrea = true;

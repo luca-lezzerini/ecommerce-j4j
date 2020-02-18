@@ -1,11 +1,13 @@
+import { Spedizione } from './../classi/spedizione';
 import { Component, OnInit } from '@angular/core';
-import { Spedizione } from '../classi/spedizione';
+
 import { HttpClient } from '@angular/common/http';
 import { AreaComuneService } from '../area-comune.service';
 import { ActivatedRoute } from '@angular/router';
 import { SpedizioneSearchDto } from '../classi/spedizione-search-dto';
 import { Observable } from 'rxjs';
 import { SpedizioneSearchResultsDto } from '../classi/spedizione-search-results-dto';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-elenco-spedizioni',
@@ -13,61 +15,48 @@ import { SpedizioneSearchResultsDto } from '../classi/spedizione-search-results-
   styleUrls: ['./elenco-spedizioni.component.css']
 })
 export class ElencoSpedizioniComponent implements OnInit {
-  codice: '';
-  descrizione: '';
-  prezzo: '';
-
   spedizioni: Spedizione[] = [];
+  searchKey = '';
+  showResults: boolean;
+  prezzo: number;
 
-  searchKey: '';
-  idToDelete: number;
+  constructor(private http: HttpClient, private singleton: AreaComuneService) {
 
-  searchPanelEnabled: boolean;
-  cercaInputDisabled: boolean;
-
-  cercaEnabled: boolean;
-  resultsEnabled: boolean;
-  homeEnabled: boolean;
-
-  viewEnabled: boolean;
-  editEnabled: boolean;
-  deleteEnabled: boolean;
-
-
-  constructor(private http: HttpClient, private singleton: AreaComuneService, private root: ActivatedRoute) { }
+  }
 
   ngOnInit() {
   }
 
-  showResults() {
-    this.resultsEnabled = true;
-    this.viewEnabled = true;
-    this.editEnabled = true;
-    this.deleteEnabled = true;
+  searchSpedizione() {
+    console.log('siamo in search spedizione');
+    if (this.searchKey === '') {
+      this.showResults = true;
+      this.eseguiRicerca(this.searchKey);
+    } else {
+      this.eseguiRicerca(this.searchKey);
+    }
   }
 
-  cercaSpedizione() {    // CRUD read
-
-    // DEBUG only
-    console.log('Sono in cercaSpedizione');
-
-    /*  codice da testare */
-    // prepara la chiamata al server
+  eseguiRicerca(search: string) {
+    console.log('siamo in esegui ricerca');
+    // Preparo il dto
     const dto: SpedizioneSearchDto = new SpedizioneSearchDto();
-    dto.token = this.singleton.token;
     dto.searchKey = this.searchKey;
+    dto.token = this.singleton.token;
+
+    // Preparo la richiesta http
     const obs: Observable<SpedizioneSearchResultsDto> =
       this.http.post<SpedizioneSearchResultsDto>('http://localhost:8080/search-spedizione', dto);
 
-    // invia la richiesta al server
+    // Callback
     obs.subscribe(risposta => {
+      console.log('siamo in observable'); //FIX ME : Entra in observable ma non elabora risposta
+      // Aggiorno la lista spedizione
       this.spedizioni = risposta.result;
-      if (this.spedizioni && this.spedizioni.length > 0) {
-       // se trova qualcosa lo fa vedere
-       this.showResults();
-      } else {
-        this.resultsEnabled = false;
-      }
+      // Se ci sono risultati li visualizzo
+      this.showResults = risposta.result.length > 0;
+      // pulisco il campo ricerca
+      this.searchKey = '';
     });
   }
 }

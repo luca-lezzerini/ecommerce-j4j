@@ -1,3 +1,4 @@
+import { ProdottoUpdateDto } from './../classi/prodotto-update-dto';
 import { ProdottoSearchResultsDto } from './../classi/prodotto-search-results';
 import { Observable } from 'rxjs';
 import { AreaComuneService } from './../area-comune.service';
@@ -18,28 +19,33 @@ export class GestioneOfferteComponent implements OnInit {
   searchCode = '';
   selezionaEnabled = false;
   prodotti: Prodotto[] = [];
-  codice: string;
-  descrizione: string;
-  prezzo: number;
-  offerta: boolean;
+  prodottoSelezionato = new Prodotto();
 
   constructor(
     private http: HttpClient,
     private sessione: AreaComuneService
-  ) {
-    // FIXME: stub
-    this.sessione.token = '123';
-  }
+  ) { }
 
   ngOnInit() {
 
   }
 
   conferma() {
-
+    const dto: ProdottoUpdateDto = new ProdottoUpdateDto();
+    dto.token = this.sessione.token;
+    dto.dati = this.prodottoSelezionato;
+    dto.dati.prezzo = this.newPrice;
+    dto.dati.offerta = this.inOfferta;
+    console.log(dto);
+    const obs: Observable<any> = this.http.post<any>('http://localhost:8080/update-prodotto', dto);
+    obs.subscribe(risp => {
+      this.cercaCodice();
+      this.selezionaEnabled = false;
+    });
   }
 
   annulla() {
+    this.searchCode = '';
     this.selezionaEnabled = false;
   }
 
@@ -54,7 +60,7 @@ export class GestioneOfferteComponent implements OnInit {
     // invio richiesta al server
     obs.subscribe(response => {
       if (response) {
-        this.prodotti = response.results;
+        this.prodotti = response.result;
       }
     });
   }
@@ -62,15 +68,18 @@ export class GestioneOfferteComponent implements OnInit {
   seleziona(id: number) {
     this.selezionaEnabled = true;
     this.getDettagli(id);
+    this.newPrice = this.prodottoSelezionato.prezzo;
+    this.inOfferta = this.prodottoSelezionato.offerta;
   }
 
   getDettagli(id: number) {
     this.prodotti.forEach(p => {
       if (p.id === id) {
-        this.codice = p.codice;
-        this.descrizione = p.descrizione;
-        this.prezzo = p.prezzo;
-        this.offerta = p.offerta;
+        this.prodottoSelezionato.id = p.id;
+        this.prodottoSelezionato.codice = p.codice;
+        this.prodottoSelezionato.descrizione = p.descrizione;
+        this.prodottoSelezionato.prezzo = p.prezzo;
+        this.prodottoSelezionato.offerta = p.offerta;
       }
     });
   }

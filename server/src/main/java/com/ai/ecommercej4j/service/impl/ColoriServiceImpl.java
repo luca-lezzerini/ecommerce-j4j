@@ -35,7 +35,7 @@ public class ColoriServiceImpl implements ColoriService {
             ace = coloriRepository.findAll();
             // ... altrimenti recupera solo quelli il cui codice è quello cercato
         } else {
-            ace = coloriRepository.findByCodice(dto.getSearchKey());
+            ace = coloriRepository.findByCodiceContainingIgnoreCase(dto.getSearchKey());
         }
         ColoriSearchResultsDto dto2 = new ColoriSearchResultsDto(ace);
         return dto2;
