@@ -43,4 +43,10 @@ public class ColoriController {
     public void updateColori(@RequestBody ColoriUpdateDto dto) {
          cs.updateColori(dto);
     }
+    
+    @RequestMapping("/search-colori-per-descrizione")
+    @ResponseBody
+    public ColoriSearchResultsDto searchColoriPerDescrizione(@RequestBody ColoriSearchDto dto){
+        return cs.searchColoriPerDescrizione(dto);
+    }
 }

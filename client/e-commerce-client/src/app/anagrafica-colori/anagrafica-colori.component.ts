@@ -229,7 +229,7 @@ export class AnagraficaColoriComponent implements OnInit {
     this.showModifica = false;
     this.showRimuovi = false;
     this.showCerca = false;
-    this.showRisultati = true;
+    this.showRisultati = false;
     this.showAggiungi = true;
     this.state = this.statoAggiungi;
     this.codice = '';
@@ -279,8 +279,6 @@ export class AnagraficaColoriComponent implements OnInit {
     obs.subscribe(data => {
       // salva la lista di risultati ottenuti dal server nell' array locale che viene visualizzato
       this.result = data.result;
-      this.codice = '';
-      this.descrizione = '';
     });
   }
   deleteColori(c: Colori): void {

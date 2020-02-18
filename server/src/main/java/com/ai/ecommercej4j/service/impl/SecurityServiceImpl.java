@@ -20,14 +20,26 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public LoginResponseDto login(LoginRequestDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Utente utente = ur.findByUsernameAndPassword(dto.getUsername(), dto.getPassword());;
+        LoginResponseDto response = new LoginResponseDto();
+        if (utente != null) {
+            String token = generateRandomString();
+            utente.setToken(token);
+            ur.save(utente);
+            response.setToken(utente.getToken());
+        }
+        return response;
     }
 
     @Override
     public void checkDoubleOptin(LoginResponseDto dto) {
         // cerco il doi dell'utente con la repository e lo associo a quello creato
         // se non trovo il doi la stringa sarà nulla
+        if(dto.getToken() != null){
         String doiUtente = ur.findByDoubleOptin(dto.getToken()).getDoubleOptin();
+        }else{
+            System.out.println("il token non esiste");
+        }
         // se è null perche non trova niente, torna un errore sul client
     }
 
@@ -40,18 +52,24 @@ public class SecurityServiceImpl implements SecurityService {
         //...creo l'oggetto utente e gli faccio puntare l'utente che trova con il metodo findByUsernameAndPassword...
         Utente utente = new Utente();
         utente = ur.findByUsername(dto.getUsername());
+        System.out.println(utente);
+        if (utente != null) {
+            String doi = generateRandomString();
 
-        String doi = generateRandomString();
+            // utilizzo il metodo setDoubleOptin in quanto in utente ho dichiarato la variabile doubleOptin
+            utente.setDoubleOptin(doi);
 
-        // utilizzo il metodo setDoubleOptin in quanto in utente ho dichiarato la variabile doubleOptin
-        utente.setDoubleOptin(doi);
+            // token in questo caso sta per double optin
+            rdto.setToken(doi);
 
-        // token in questo caso sta per double optin
-        rdto.setToken(doi);
+            ur.save(utente);
+            //...ritorno il token tramite il LoginResponseDto rdto.
+            return rdto;
+        } else {
+            System.out.println("l'username non esiste");
+            return rdto;
+        }
 
-        ur.save(utente);
-        //...ritorno il token tramite il LoginResponseDto rdto.
-        return rdto;
     }
 
     @Override
@@ -62,18 +80,22 @@ public class SecurityServiceImpl implements SecurityService {
 
         //...assegnazione utente esistente tramite metodo findByDoubleOptin poiche ce l'ho da prima.
         ut = ur.findByDoubleOptin(dto.getDoiCode());
-        System.out.println(ut);
-        System.out.println(ut.getPassword());
+        if (ut.getDoubleOptin() != null) {
+            System.out.println(ut);
+            System.out.println(ut.getPassword());
 
-        //Se la password nuova è diversa dalla vecchia...
-        if (ut.getPassword().equals(dto.getNewPassword())) {
-            System.out.println("Errore Pass Uguali");
+            //Se la password nuova è diversa dalla vecchia...
+            if (ut.getPassword().equals(dto.getNewPassword())) {
+                System.out.println("Errore Pass Uguali");
 
-        } else {
-            System.out.println("sono nell'if");
-            //...assegno quella nuova all'utente e la salvo
-            ut.setPassword(dto.getNewPassword());
-            ur.save(ut);
+            } else {
+                System.out.println("sono nell'if");
+                //...assegno quella nuova all'utente e la salvo
+                ut.setPassword(dto.getNewPassword());
+                ur.save(ut);
+            }
+        }else{
+            System.out.println("il doubleOptIn non esiste");
         }
     }
 

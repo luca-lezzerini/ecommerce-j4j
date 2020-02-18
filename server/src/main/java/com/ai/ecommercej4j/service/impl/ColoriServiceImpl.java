@@ -53,5 +53,17 @@ public class ColoriServiceImpl implements ColoriService {
         c.setDescrizione(dto.getDati().getDescrizione());
         coloriRepository.save(c);
     }
-    
+
+    @Override
+    public ColoriSearchResultsDto searchColoriPerDescrizione(ColoriSearchDto dto) {
+        List<Colori> ace;
+        //se la stringa è vuota recupera dal db tutti gli elementi
+        if((dto.getSearchKey()).equals("")){
+            ace = coloriRepository.findAll();
+    }else {
+            ace = coloriRepository.findByDescrizioneContainingIgnoreCase(dto.getSearchKey());
+        }
+        ColoriSearchResultsDto dto2 = new ColoriSearchResultsDto(ace);
+        return dto2;
+    }
 }

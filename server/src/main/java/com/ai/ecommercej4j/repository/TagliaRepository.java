@@ -9,5 +9,7 @@ public interface TagliaRepository extends JpaRepository<Taglia, Long> {
     List<Taglia> findByCodiceOrDescrizioneIgnoreCase(String codice, String descrizione);
 
     Taglia findByCodiceIgnoreCase(String codice);
+    
+    List<Taglia> findByDescrizioneContainingIgnoreCase(String dto);
 
 }

@@ -9,10 +9,10 @@
             </p>
             <p>
                 <label> Password </label> &nbsp;
-                <input type="text" [(ngModel)]="password" class="password" placeholder=" Password" />
+                <input type="password" [(ngModel)]="password" class="password" placeholder=" Password" />
             </p>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="L" [routerLink]="['/home-riservata']">Login</button>
+                <button class="L" (click)="login()">Login</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="P" [routerLink]="['/password-dimenticata']">Password dimenticata</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

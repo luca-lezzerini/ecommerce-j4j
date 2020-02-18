@@ -11,6 +11,8 @@ public interface TagliaService {
     void createTaglia(TagliaCreateDto dto);
 
     TagliaSearchResultsDto searchTaglia(TagliaSearchDto dto);
+    
+    TagliaSearchResultsDto searchTagliaPerDescrizione(TagliaSearchDto dto);
 
     void deleteTaglia(TagliaDeleteDto dto);
 
