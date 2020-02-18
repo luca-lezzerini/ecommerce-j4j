@@ -8,6 +8,7 @@ import { ColoriDeleteDto } from '../classi/colori-delete-dto';
 import { Colori } from '../classi/colori';
 import { Observable } from 'rxjs';
 import { AreaComuneService } from '../area-comune.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-anagrafica-colori',
@@ -45,7 +46,7 @@ export class AnagraficaColoriComponent implements OnInit {
   statoAggiungi = 'Aggiungi';
 
   // inizializzo le variabili UI
-  constructor(private http: HttpClient, private ac: AreaComuneService) {
+  constructor(private http: HttpClient, private ac: AreaComuneService, private router: Router) {
     this.showPanel = false;
     this.showCerca = true;
     this.showRisultati = false;
@@ -54,6 +55,9 @@ export class AnagraficaColoriComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (! this.ac.token) {
+      this.router.navigateByUrl('login');
+    }
   }
 
   // cambia lo stato quando si clicca conferma, invoca diversi metodi in base allo stato precedente

@@ -25,32 +25,23 @@ public class ColoriServiceImpl implements ColoriService {
 
     @Override
     public void createColori(ColoriCreateDto dto) {
-        if (securityService.checkToken(dto.getToken())) {
-            Colori colore = new Colori();
-            colore.setDescrizione(dto.getDati().getDescrizione());
-            colore.setCodice(dto.getDati().getCodice());
-            coloriRepository.save(colore);
-        } else {
-            System.out.println("il token non esiste");
-        }
+        Colori colore = new Colori();
+        colore.setDescrizione(dto.getDati().getDescrizione());
+        colore.setCodice(dto.getDati().getCodice());
+        coloriRepository.save(colore);
     }
 
     @Override
     public ColoriSearchResultsDto searchColori(ColoriSearchDto dto) {
         List<Colori> ace = null;
         ColoriSearchResultsDto dto2 = new ColoriSearchResultsDto(ace);
-        if (securityService.checkToken(dto.getToken())) {
-            // se la stringa ricevuta è vuota recupera dal db tutti gli elementi...
-            if ((dto.getSearchKey()).equals("")) {
-                ace = coloriRepository.findAll();
-                // ... altrimenti recupera solo quelli il cui codice è quello cercato
-            } else {
-                ace = coloriRepository.findByCodiceContainingIgnoreCase(dto.getSearchKey());
-            }
 
-            return dto2;
+        // se la stringa ricevuta è vuota recupera dal db tutti gli elementi...
+        if ((dto.getSearchKey()).equals("")) {
+            ace = coloriRepository.findAll();
+            // ... altrimenti recupera solo quelli il cui codice è quello cercato
         } else {
-           dto2.setResult(Collections.emptyList());
+            ace = coloriRepository.findByCodiceContainingIgnoreCase(dto.getSearchKey());
         }
         return dto2;
     }
@@ -72,10 +63,10 @@ public class ColoriServiceImpl implements ColoriService {
     public ColoriSearchResultsDto searchColoriPerDescrizione(ColoriSearchDto dto) {
         List<Colori> ace;
         //Se la stringa è vuota recupera dal db tutti gli elementi
-        if((dto.getSearchKey()).equals("")){
+        if ((dto.getSearchKey()).equals("")) {
             ace = coloriRepository.findAll();
             //Altrimenti recupera solo quelli la cui descrizione è quella cercata
-    }else {
+        } else {
 
             ace = coloriRepository.findByDescrizioneContainingIgnoreCase(dto.getSearchKey());
         }
