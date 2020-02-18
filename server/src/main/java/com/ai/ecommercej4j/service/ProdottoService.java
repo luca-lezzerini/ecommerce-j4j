@@ -15,4 +15,7 @@ public interface ProdottoService {
     void deleteProdotto(ProdottoDeleteDto dto);
 
     void updateProdotto(ProdottoUpdateDto dto);
+
+    ProdottoSearchResultsDto searchOfferte(ProdottoSearchDto dto);
+
 }
