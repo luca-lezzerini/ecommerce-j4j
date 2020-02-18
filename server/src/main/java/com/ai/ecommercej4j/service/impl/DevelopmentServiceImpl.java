@@ -1,5 +1,6 @@
 package com.ai.ecommercej4j.service.impl;
 
+import com.ai.ecommercej4j.model.Colori;
 import com.ai.ecommercej4j.model.Prodotto;
 import com.ai.ecommercej4j.model.Taglia;
 import com.ai.ecommercej4j.repository.*;
@@ -38,6 +39,9 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         
         // inserimento taglie
         generateTaglie();
+        
+        // inserimento colori
+        generateColori();
     }
 
     @Override
@@ -54,6 +58,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
     public void generateProdotti() {
 
         Prodotto p = new Prodotto();
+        
         p.setPrezzo(12.50);
         p.setCodice("32");
         p.setDescrizione("calzini");
@@ -141,7 +146,9 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 
     @Override
     public void generateTaglie() {
+        
         Taglia t = new Taglia();
+        
         t.setCodice("20");
         t.setDescrizione("XL");
         tr.save(t);
@@ -177,5 +184,51 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         t.setCodice("47");
         t.setDescrizione("XXXS");
         tr.save(t);
+    }
+
+    @Override
+    public void generateColori() {
+        
+        Colori c = new Colori();
+        
+        c.setCodice("32");
+        c.setDescrizione("blu");
+        cr.save(c);
+        
+        c.setCodice("35");
+        c.setDescrizione("bianco");
+        cr.save(c);
+        
+        c.setCodice("11");
+        c.setDescrizione("rosso");
+        cr.save(c);
+        
+        c.setCodice("78");
+        c.setDescrizione("nero");
+        cr.save(c);
+        
+        c.setCodice("56");
+        c.setDescrizione("giallo");
+        cr.save(c);
+        
+        c.setCodice("77");
+        c.setDescrizione("blu");
+        cr.save(c);
+        
+        c.setCodice("47");
+        c.setDescrizione("verde");
+        cr.save(c);
+        
+        c.setCodice("32");
+        c.setDescrizione("arancione");
+        cr.save(c);
+        
+        c.setCodice("51");
+        c.setDescrizione("viola");
+        cr.save(c);
+        
+        c.setCodice("90");
+        c.setDescrizione("lilla");
+        cr.save(c);
     }
 }

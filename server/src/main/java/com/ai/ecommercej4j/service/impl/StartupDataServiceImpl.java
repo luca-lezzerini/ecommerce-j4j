@@ -4,7 +4,9 @@ import com.ai.ecommercej4j.model.Utente;
 import com.ai.ecommercej4j.repository.UtenteRepository;
 import com.ai.ecommercej4j.service.StartupDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StartupDataServiceImpl implements StartupDataService{
     @Autowired
     UtenteRepository ur;

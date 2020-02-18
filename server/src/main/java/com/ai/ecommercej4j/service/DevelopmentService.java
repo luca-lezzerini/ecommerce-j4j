@@ -6,4 +6,5 @@ public interface DevelopmentService {
     void dropDataBase();
     void generateProdotti();
     void generateTaglie();
+    void generateColori();
 }
