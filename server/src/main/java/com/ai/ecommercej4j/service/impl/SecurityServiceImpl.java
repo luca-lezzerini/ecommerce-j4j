@@ -3,6 +3,7 @@ package com.ai.ecommercej4j.service.impl;
 import com.ai.ecommercej4j.model.*;
 import com.ai.ecommercej4j.repository.UtenteRepository;
 import com.ai.ecommercej4j.service.SecurityService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -154,7 +155,9 @@ public class SecurityServiceImpl implements SecurityService {
      */
     @Override
     public Boolean checkToken(String tok) {
+        //per ora il metodo accetta token = null
         return ur.findByToken(tok) != null;
+        
     }
 
 }
