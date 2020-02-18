@@ -4,5 +4,6 @@ public interface DevelopmentService {
     
     void generateTestData();
     void dropDataBase();
+    void generateProdotti();
     
 }

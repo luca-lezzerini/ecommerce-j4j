@@ -3,6 +3,7 @@ package com.ai.ecommercej4j.service.impl;
 import com.ai.ecommercej4j.model.Prodotto;
 import com.ai.ecommercej4j.repository.*;
 import com.ai.ecommercej4j.service.DevelopmentService;
+import com.ai.ecommercej4j.service.StartupDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,37 +20,20 @@ public class DevelopmentServiceImpl implements DevelopmentService{
     TagliaRepository tr;
     @Autowired
     ColoriRepository cr;
+    @Autowired
+    StartupDataService sds;
     
     @Override
     public void generateTestData() {   
         
-        Prodotto p1 = new Prodotto();
-        p1.setPrezzo(12.50);
-        p1.setCodice("32");
-        p1.setDescrizione("offerta");
-        p1.setOfferta(true);
-        pr.save(p1);
+        // elimina tutti i dati presenti sul db
+        dropDataBase();
         
-        Prodotto p2 = new Prodotto();
-        p2.setPrezzo(25.90);
-        p2.setCodice("31");
-        p2.setDescrizione("no offerta");
-        p2.setOfferta(false);
-        pr.save(p2);
+        // inserimento dati di startup
+        sds.createAllStartupData();  
         
-        Prodotto p3 = new Prodotto();
-        p3.setPrezzo(6.50);
-        p3.setCodice("32");
-        p3.setDescrizione("offerta");
-        p3.setOfferta(true);
-        pr.save(p3);
-        
-        Prodotto p4 = new Prodotto();
-        p4.setPrezzo(39.64);
-        p4.setCodice("31");
-        p4.setDescrizione("no offerta");
-        p4.setOfferta(false);
-        pr.save(p4);        
+        // inserimento prodotti
+        generateProdotti();
     }
 
     @Override
@@ -61,5 +45,93 @@ public class DevelopmentServiceImpl implements DevelopmentService{
         tr.deleteAllInBatch();
         cr.deleteAllInBatch();        
     }
-    
+
+    @Override
+    public void generateProdotti() {
+        
+        Prodotto p = new Prodotto();
+        p.setPrezzo(12.50);
+        p.setCodice("32");
+        p.setDescrizione("calzini");
+        p.setOfferta(true);
+        pr.save(p);
+        
+        p.setPrezzo(25.90);
+        p.setCodice("15");
+        p.setDescrizione("maglia");
+        p.setOfferta(false);
+        pr.save(p);
+        
+        p.setPrezzo(6.50);
+        p.setCodice("88");
+        p.setDescrizione("felpa");
+        p.setOfferta(true);
+        pr.save(p);
+        
+        p.setPrezzo(39.64);
+        p.setCodice("51");
+        p.setDescrizione("jeans");
+        p.setOfferta(true);
+        pr.save(p);      
+        
+        p.setPrezzo(9.00);
+        p.setCodice("34");
+        p.setDescrizione("calzini");
+        p.setOfferta(true);
+        pr.save(p);
+        
+        p.setPrezzo(29.99);
+        p.setCodice("19");
+        p.setDescrizione("cappello");
+        p.setOfferta(false);
+        pr.save(p);        
+        
+        p.setPrezzo(54.01);
+        p.setCodice("60");
+        p.setDescrizione("jeans slim");
+        p.setOfferta(true);
+        pr.save(p);
+        
+        p.setPrezzo(9.89);
+        p.setCodice("77");
+        p.setDescrizione("sciarpa");
+        p.setOfferta(true);
+        pr.save(p);     
+        
+        p.setPrezzo(4.02);
+        p.setCodice("42");
+        p.setDescrizione("maglioncino");
+        p.setOfferta(false);
+        pr.save(p);
+        
+        p.setPrezzo(269.99);
+        p.setCodice("27");
+        p.setDescrizione("felpa con cappuccio");
+        p.setOfferta(false);
+        pr.save(p);        
+        
+        p.setPrezzo(152.00);
+        p.setCodice("43");
+        p.setDescrizione("scarpe sportive");
+        p.setOfferta(true);
+        pr.save(p);
+        
+        p.setPrezzo(44.64);
+        p.setCodice("84");
+        p.setDescrizione("scarpe di pelle");
+        p.setOfferta(false);
+        pr.save(p);        
+        
+        p.setPrezzo(85.50);
+        p.setCodice("21");
+        p.setDescrizione("camicia");
+        p.setOfferta(false);
+        pr.save(p);
+        
+        p.setPrezzo(10.00);
+        p.setCodice("30");
+        p.setDescrizione("cravatta");
+        p.setOfferta(false);
+        pr.save(p);        
+    }
 }
