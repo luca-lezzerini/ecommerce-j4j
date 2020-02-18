@@ -24,12 +24,9 @@ public class ProdottoServiceImpl implements ProdottoService {
     private SecurityService securityService;
 
     /**
-     * inserisce un nuovo Prodotto 
-     * non viene inserito nei casi in cui: 
-     * il parametro dto è null; 
-     * la proprietà dati del dto è null;  
-     * il codice del prodotto da inserire è una stringa vuota o null; 
-     * il token non è valido; 
+     * inserisce un nuovo Prodotto non viene inserito nei casi in cui: il
+     * parametro dto è null; la proprietà dati del dto è null; il codice del
+     * prodotto da inserire è una stringa vuota o null; il token non è valido;
      * il codice del prodotto da inserire esiste già
      *
      * @param dto contiene il token e il prodotto da inserire
@@ -38,9 +35,9 @@ public class ProdottoServiceImpl implements ProdottoService {
     public void createProdotto(ProdottoCreateDto dto) {
 
         // controllo validità del dto e dei suoi dati
-        if (dto != null && dto.getDati() != null && 
-                dto.getDati().getCodice()!=null && 
-                dto.getDati().getCodice().length() > 0) {
+        if (dto != null && dto.getDati() != null
+                && dto.getDati().getCodice() != null
+                && dto.getDati().getCodice().length() > 0) {
 
             // controllo se il token è valido
             if (securityService.checkToken(dto.getToken())) {
@@ -59,10 +56,10 @@ public class ProdottoServiceImpl implements ProdottoService {
 
     /**
      * ricerca Prodotto in base al valore della proprietà searchKey di dto.
-     * restituisce un dto la cui proprietà results contiene un ArrayList di 
-     * Prodotto, il cui codice contiene la searchKey
-     * restituisce una lista vuota se il parametro dto è null, o se non trova 
-     * risultati, o se il token non è valido
+     * restituisce un dto la cui proprietà results contiene un ArrayList di
+     * Prodotto, il cui codice contiene la searchKey restituisce una lista vuota
+     * se il parametro dto è null, o se non trova risultati, o se il token non è
+     * valido
      *
      * @param dto contiene il token e la chiave di ricerca
      * @return ArrayList<Prodotto>
@@ -75,16 +72,16 @@ public class ProdottoServiceImpl implements ProdottoService {
 
         // controllo se il dto e la chiave di ricerca sono diversi da null
         // e se il token è valido
-        if (dto != null && dto.getSearchKey()!=null && 
-                securityService.checkToken(dto.getToken())) {
+        if (dto != null && dto.getSearchKey() != null
+                && securityService.checkToken(dto.getToken())) {
 
-                //recupero i risultati e avvaloro il dto di ritorno                
-                List<Prodotto> lp = prodottoRepository.
-                        findByCodiceContainingIgnoreCase(dto.getSearchKey());
-                
-                // ordino i risultati per codice
-                Collections.sort(lp,(p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
-                resultDto.setResults(lp);           
+            //recupero i risultati e avvaloro il dto di ritorno                
+            List<Prodotto> lp = prodottoRepository.
+                    findByCodiceContainingIgnoreCase(dto.getSearchKey());
+
+            // ordino i risultati per codice
+            Collections.sort(lp, (p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
+            resultDto.setResults(lp);
         } else {
             // ... se il dto non esiste, restituisce un ArrayList vuoto
             resultDto.setResults(Collections.emptyList());
@@ -96,7 +93,7 @@ public class ProdottoServiceImpl implements ProdottoService {
      * elimina un Prodotto avente id uguale alla proprietà idToDelete del dto.
      * non elimina nulla se il parametro dto è null, o se il token non è valido,
      * o se la proprietà idToDelete del dto è null
-     * 
+     *
      * @param dto contiene il token e l'id del prodotto da eliminare
      */
     @Override
@@ -120,20 +117,19 @@ public class ProdottoServiceImpl implements ProdottoService {
 
     /**
      * modifica i valori di un Prodotto corrispondente che ha id uguale a
-     * dto.dati.id
-     * non esegue la modifica se il dto o dto.dati sono null, o se dto.codice è 
-     * null o stringa vuota, o se il token non è valido, o se dto.dati.id è una 
-     * stringa vuota
-     * 
+     * dto.dati.id non esegue la modifica se il dto o dto.dati sono null, o se
+     * dto.codice è null o stringa vuota, o se il token non è valido, o se
+     * dto.dati.id è una stringa vuota
+     *
      * @param dto contiene il token e il prodotto da modificare
      */
     @Override
     public void updateProdotto(ProdottoUpdateDto dto) {
 
         // controllo validità del dto e dei suoi dati
-        if (dto != null && dto.getDati() != null && 
-                dto.getDati().getCodice()!=null && 
-                dto.getDati().getCodice().length() > 0) {
+        if (dto != null && dto.getDati() != null
+                && dto.getDati().getCodice() != null
+                && dto.getDati().getCodice().length() > 0) {
 
             // controllo se il token è valido
             if (securityService.checkToken(dto.getToken())) {
