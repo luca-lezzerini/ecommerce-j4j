@@ -8,6 +8,8 @@ package com.ai.ecommercej4j.controller;
 import com.ai.ecommercej4j.model.SpedizioneCreateDto;
 import com.ai.ecommercej4j.model.SpedizioneDeleteDto;
 import com.ai.ecommercej4j.model.SpedizioneSearchDto;
+import com.ai.ecommercej4j.model.SpedizioneSearchPrezzoDto;
+import com.ai.ecommercej4j.model.SpedizioneSearchPrezzoResultsDto;
 import com.ai.ecommercej4j.model.SpedizioneSearchResultsDto;
 import com.ai.ecommercej4j.model.SpedizioneUpdateDto;
 import com.ai.ecommercej4j.service.SpedizioneService;
@@ -43,7 +45,7 @@ public class SpedizioneController {
     
       @RequestMapping("/search-prezzo-spedizione")
     @ResponseBody
-    public SpedizioneSearchResultsDto searchPrezzoSpedizione(@RequestBody SpedizioneSearchDto dto) {
+    public SpedizioneSearchPrezzoResultsDto searchPrezzoSpedizione(@RequestBody SpedizioneSearchPrezzoDto dto) {
               System.out.println("search-prezzo-spedizione");
         return ss.prezzoSearch(dto);
        

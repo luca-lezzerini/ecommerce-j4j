@@ -152,19 +152,26 @@ public class ProdottoServiceImpl implements ProdottoService {
 
         // controllo se il dto e la chiave di ricerca sono diversi da null
         // e se il token è valido
-        if (dto != null && dto.getSearchKey() != null
-                && securityService.checkToken(dto.getToken())) {
-            //trasformo la chiave di ricerca da string a double
-            double prezzo = Double.parseDouble(dto.getSearchKey());
+        if (dto != null && dto.getSearchKey() != null // FIXME il token può essere null
+                /*&& securityService.checkToken(dto.getToken())*/) {
+            List<Prodotto> lp;
+            // se la key che riceve è vuota restituisce tutti i prodotti in offerta...
+            if (dto.getSearchKey().equals("")) {
+                lp = prodottoRepository.findByOfferta(true);
+            //...altrimenti ricerca i prodotti in offerta con prezzo inferiore a quello dato
+            } else {
+                //trasformo la chiave di ricerca da string a double
+                double prezzo = Double.parseDouble(dto.getSearchKey());
 
-            //recupero i risultati e avvaloro il dto di ritorno
-            //prende i prodotti che hanno prezzo minore della search key e offerta "attiva"(true)
-            List<Prodotto> lp = prodottoRepository.
-                    findByPrezzoLessThanEqualAndOfferta(prezzo, true);
+                //recupero i risultati e avvaloro il dto di ritorno
+                lp = prodottoRepository.
+                        findByPrezzoLessThanEqualAndOfferta(prezzo, true);
 
-            // ordino i risultati per codice
+                // ordino i risultati per codice
 //                Collections.sort(lp,(p1, p2) -> p1.getPrezzo().compareTo(p2.getPrezzo()));
+            }
             resultDto.setResult(lp);
+
         } else {
             // ... se il dto non esiste, restituisce un ArrayList vuoto
             resultDto.setResult(Collections.emptyList());

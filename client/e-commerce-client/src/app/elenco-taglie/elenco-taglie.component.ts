@@ -22,16 +22,18 @@ export class ElencoTaglieComponent implements OnInit {
   ngOnInit() {
   }
 
-  searchTaglie(){
-    if(this.searchKey === ''){
-    this.showResults = true;
-    this.eseguiRicerca(this.searchKey);
-    }else{
-    this.eseguiRicerca(this.searchKey);
+  searchTaglie() {
+    // Se la stringa di ricerca è vuota ritorna tutti gli elementi della lista
+    if (this.searchKey === '') {
+      this.showResults = true;
+      this.eseguiRicerca(this.searchKey);
+      // Se invece è piena esegue la ricerca
+    } else {
+      this.eseguiRicerca(this.searchKey);
     }
   }
 
-  eseguiRicerca(search: string){
+  eseguiRicerca(search: string) {
     // Preparo il dto
     let dto: TagliaSearchDto = new TagliaSearchDto();
     dto.searchKey = this.searchKey;
@@ -39,16 +41,16 @@ export class ElencoTaglieComponent implements OnInit {
 
     // Preparo la richiesta http
     let oss: Observable<TagliaSearchResultsDto> =
-    this.http.post<TagliaSearchResultsDto>('http://localhost:8080/search-taglia-per-descrizione', dto);
+      this.http.post<TagliaSearchResultsDto>('http://localhost:8080/search-taglia-per-descrizione', dto);
 
     // Callback
     oss.subscribe(risposta => {
-      // Aggiorno la lista dei colori
+      // Aggiorno la lista delle taglie
       this.taglie = risposta.result;
       // Se ci sono risultati li visualizzo
       this.showResults = risposta.result.length > 0;
-       // pulisco il campo ricerca
-       this.searchKey = '';
+      // pulisco il campo ricerca
+      this.searchKey = '';
     })
   }
 

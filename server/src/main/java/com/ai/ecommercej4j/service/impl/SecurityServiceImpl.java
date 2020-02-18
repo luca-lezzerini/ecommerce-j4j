@@ -24,7 +24,15 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public LoginResponseDto login(LoginRequestDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Utente utente = ur.findByUsernameAndPassword(dto.getUsername(), dto.getPassword());;
+        LoginResponseDto response = new LoginResponseDto();
+        if (utente != null) {
+            String token = generateRandomString();
+            utente.setToken(token);
+            ur.save(utente);
+            response.setToken(utente.getToken());
+        }
+        return response;
     }
 
     /**

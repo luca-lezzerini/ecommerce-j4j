@@ -71,10 +71,12 @@ public class ColoriServiceImpl implements ColoriService {
     @Override
     public ColoriSearchResultsDto searchColoriPerDescrizione(ColoriSearchDto dto) {
         List<Colori> ace;
-        //se la stringa è vuota recupera dal db tutti gli elementi
-        if ((dto.getSearchKey()).equals("")) {
+        //Se la stringa è vuota recupera dal db tutti gli elementi
+        if((dto.getSearchKey()).equals("")){
             ace = coloriRepository.findAll();
-        } else {
+            //Altrimenti recupera solo quelli la cui descrizione è quella cercata
+    }else {
+
             ace = coloriRepository.findByDescrizioneContainingIgnoreCase(dto.getSearchKey());
         }
         ColoriSearchResultsDto dto2 = new ColoriSearchResultsDto(ace);

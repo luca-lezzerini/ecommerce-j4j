@@ -8,6 +8,8 @@ package com.ai.ecommercej4j.service;
 import com.ai.ecommercej4j.model.SpedizioneCreateDto;
 import com.ai.ecommercej4j.model.SpedizioneDeleteDto;
 import com.ai.ecommercej4j.model.SpedizioneSearchDto;
+import com.ai.ecommercej4j.model.SpedizioneSearchPrezzoDto;
+import com.ai.ecommercej4j.model.SpedizioneSearchPrezzoResultsDto;
 import com.ai.ecommercej4j.model.SpedizioneSearchResultsDto;
 import com.ai.ecommercej4j.model.SpedizioneUpdateDto;
 
@@ -25,7 +27,7 @@ public interface SpedizioneService {
 
     void updateSpedizione(SpedizioneUpdateDto dto);
     
-    SpedizioneSearchResultsDto prezzoSearch(SpedizioneSearchDto dto);
+    SpedizioneSearchPrezzoResultsDto prezzoSearch(SpedizioneSearchPrezzoDto dto);
 }
 
     

@@ -23,16 +23,18 @@ export class ElencoColoriComponent implements OnInit {
   ngOnInit() {
   }
 
-  searchColori(){
-    if(this.searchKey === ''){
-    this.showResults = true;
-    this.eseguiRicerca(this.searchKey);
-    }else{
-    this.eseguiRicerca(this.searchKey);
+  searchColori() {
+    // Se la stringa di ricerca è vuota ritorna tutti gli elementi della lista
+    if (this.searchKey === '') {
+      this.showResults = true;
+      this.eseguiRicerca(this.searchKey);
+      // Se invece è piena esegue la ricerca
+    } else {
+      this.eseguiRicerca(this.searchKey);
     }
   }
 
-  eseguiRicerca(search: string){
+  eseguiRicerca(search: string) {
     // Preparo il dto
     let dto: ColoriSearchDto = new ColoriSearchDto();
     dto.searchKey = this.searchKey;
@@ -40,7 +42,7 @@ export class ElencoColoriComponent implements OnInit {
 
     // Preparo la richiesta http
     let oss: Observable<ColoriSearchResultsDto> =
-    this.http.post<ColoriSearchResultsDto>('http://localhost:8080/search-colori-per-descrizione', dto);
+      this.http.post<ColoriSearchResultsDto>('http://localhost:8080/search-colori-per-descrizione', dto);
 
     // Callback
     oss.subscribe(risposta => {
@@ -48,8 +50,8 @@ export class ElencoColoriComponent implements OnInit {
       this.colori = risposta.result;
       // Se ci sono risultati li visualizzo
       this.showResults = risposta.result.length > 0;
-       // pulisco il campo ricerca
-       this.searchKey = '';
+      // pulisco il campo ricerca
+      this.searchKey = '';
     })
   }
 

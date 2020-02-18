@@ -9,5 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface ProdottoRepository extends JpaRepository<Prodotto, Long>{
     List<Prodotto> findByCodiceContainingIgnoreCase(String codice);
     
-    List<Prodotto> findByPrezzoLessThanEqualAndOfferta(Double prezzo, Boolean offerta);
+    List<Prodotto> findByPrezzoLessThanEqualAndOfferta(double prezzo, boolean offerta);
+    
+    List<Prodotto> findByOfferta(boolean offerta);
 }
