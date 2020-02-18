@@ -7,9 +7,9 @@ package com.ai.ecommercej4j.model;
 
 public class SpedizioneSearchPrezzoDto extends LoginResponseDto {
 
-   double searchKey;
+   Double searchKey;
 
-    public SpedizioneSearchPrezzoDto(double searchKey, String token) {
+    public SpedizioneSearchPrezzoDto(Double searchKey, String token) {
         super(token);
         this.searchKey = searchKey;
     }
@@ -17,11 +17,11 @@ public class SpedizioneSearchPrezzoDto extends LoginResponseDto {
     public SpedizioneSearchPrezzoDto() {
     }
 
-    public double getSearchKey() {
+    public Double getSearchKey() {
         return searchKey;
     }
 
-    public void setSearchKey(double searchKey) {
+    public void setSearchKey(Double searchKey) {
         this.searchKey = searchKey;
     }
 

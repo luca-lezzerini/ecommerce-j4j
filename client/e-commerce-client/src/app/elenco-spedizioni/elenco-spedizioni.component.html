@@ -7,7 +7,13 @@
 <hr>
 <br>
 <table>
+  <tr *ngIf="tableHeaderEnabled">
+    <th>Descrizione</th>
+    <th>Prezzo</th>
+    <th>Codice</th>
+  </tr>
   <tr *ngFor="let s of spedizioni">
+
       <td>{{s.codice}}</td>
       <td>{{s.descrizione}}</td>
       <td>{{s.prezzo}}</td>

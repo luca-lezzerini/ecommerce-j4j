@@ -7,5 +7,6 @@ export class AreaComuneService {
 
   token: string;
   doi: string;
+  
   constructor() { }
 }

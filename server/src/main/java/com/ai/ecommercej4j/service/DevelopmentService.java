@@ -7,4 +7,5 @@ public interface DevelopmentService {
     void generateProdotti();
     void generateTaglie();
     void generateColori();
+    void generateSpedizioni();
 }

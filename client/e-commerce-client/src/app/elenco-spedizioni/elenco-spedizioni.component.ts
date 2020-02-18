@@ -21,6 +21,7 @@ export class ElencoSpedizioniComponent implements OnInit {
   searchKey: number;
   showResults: boolean;
   prezzo: number;
+  tableHeaderEnabled: boolean;
 
   constructor(private http: HttpClient, private singleton: AreaComuneService) {
 
@@ -30,8 +31,8 @@ export class ElencoSpedizioniComponent implements OnInit {
   }
 
   searchSpedizione() {
-    console.log('siamo in search spedizione');
-    if (this.searchKey === NaN) {
+    // console.log('siamo in search spedizione');
+    if (this.searchKey === null) {
       this.showResults = true;
       this.eseguiRicerca(this.searchKey);
     } else {
@@ -41,7 +42,8 @@ export class ElencoSpedizioniComponent implements OnInit {
   }
 
   eseguiRicerca(search: number) {
-    console.log('siamo in esegui ricerca per prezzo');
+    this.tableHeaderEnabled = true;
+    // console.log('siamo in esegui ricerca per prezzo');
     // Preparo il dto
     const dto: SpedizioneSearchPrezzoDto = new SpedizioneSearchPrezzoDto();
     dto.searchKey = this.searchKey;
@@ -53,12 +55,12 @@ export class ElencoSpedizioniComponent implements OnInit {
 
     // Callback
     obs.subscribe(risposta => {
-      console.log('siamo in observable'); //FIX ME : Entra in observable ma non elabora risposta
+      // console.log('siamo in observable'); //FIX ME : Entra in observable ma non elabora risposta
       // Aggiorno la lista spedizione
-      console.log(this.spedizioni);
-      console.log(risposta);
+      // console.log(this.spedizioni);
+      // console.log(risposta);
       this.spedizioni = risposta.result;
-      console.log(this.spedizioni);
+      // console.log(this.spedizioni);
       // Se ci sono risultati li visualizzo
       this.showResults = risposta.result.length > 0;
       // pulisco il campo ricerca

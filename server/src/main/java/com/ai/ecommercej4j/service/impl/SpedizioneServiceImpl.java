@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ai.ecommercej4j.repository.SpedizioneRepository;
 import com.ai.ecommercej4j.service.SecurityService;
+import static java.lang.Double.NaN;
 import java.util.Collections;
 
 @Service
@@ -102,17 +103,17 @@ public class SpedizioneServiceImpl implements SpedizioneService {
     @Override
     public SpedizioneSearchPrezzoResultsDto prezzoSearch(SpedizioneSearchPrezzoDto dtoPrezzo) {
         System.out.println("server, ricerca per prezzo");
-        List<Spedizione> gig;
+        List<Spedizione> gig = null;
         SpedizioneSearchPrezzoResultsDto dtoPr = new SpedizioneSearchPrezzoResultsDto();
         System.out.println("dto creato");
-        /*if (dtoPrezzo.getSearchKey()=true) {
+        if (dtoPrezzo.getSearchKey()==null){
              gig=spedizioneRepository.findAll();
-        }*/
-        //else if (dtoPrezzo.getSearchKey()>0){
+        }
+        else if (dtoPrezzo.getSearchKey()>0){
         gig = spedizioneRepository.findByPrezzoLessThan(dtoPrezzo.getSearchKey());
         System.out.println(gig);
         System.out.println("SearchKey=" + dtoPrezzo.getSearchKey());
-        //}
+        }
         dtoPr.setResult(gig);
         return dtoPr;
     }
