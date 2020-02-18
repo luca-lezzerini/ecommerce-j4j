@@ -1,3 +1,4 @@
+import { AreaComuneService } from './../area-comune.service';
 import { Observable } from 'rxjs';
 import { ChangePasswordRequestDto } from './../classi/change-password-request-dto';
 import { HttpClient } from '@angular/common/http';
@@ -13,14 +14,15 @@ export class ReimpostaPasswordComponent implements OnInit {
   confermaPassword: string;
   doiCode: string;
   err: string;
-  constructor(private http: HttpClient) { }
 
+  constructor(private http: HttpClient, private ac: AreaComuneService) { }
   ngOnInit() { }
   // invio richiesta al server di cambio password
   conferma() {
     if (this.nuovaPassword === this.confermaPassword) {
       // preparo i dati da inviare
-
+      this.doiCode = this.ac.doi;
+      console.log(this.doiCode);
       let dto: ChangePasswordRequestDto = new ChangePasswordRequestDto();
       // il doi verrà preso dalla pagina precedente del client(codice DoubleOptin)
       dto.doiCode = this.doiCode;

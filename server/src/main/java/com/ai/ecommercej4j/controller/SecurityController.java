@@ -30,7 +30,7 @@ public class SecurityController {
         ss.checkDoubleOptin(dto);
     }
 
-    @RequestMapping("/registrazione")
+    @RequestMapping("/registrami")
     @ResponseBody
     public RegistrazioneResponseDto registrami(@RequestBody RegistrazioneRequestDto dto) {
         return ss.registrami(dto);

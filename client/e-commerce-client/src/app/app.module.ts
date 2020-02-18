@@ -20,15 +20,23 @@ import { ViewCarrelloComponent } from './view-carrello/view-carrello.component';
 import { RegistrazioneDoubleOptinComponent } from './registrazione-double-optin/registrazione-double-optin.component';
 import { RegistrazioneSuccessoComponent } from './registrazione-successo/registrazione-successo.component';
 import { RegistrazioneErroreComponent } from './registrazione-errore/registrazione-errore.component';
+import { AnagraficaColoriComponent } from './anagrafica-colori/anagrafica-colori.component';
 import { Visualizzatore06Component } from './esercizio/esercizio06/visualizzatore06/visualizzatore06.component';
 import { Incrementatore06Component } from './esercizio/esercizio06/incrementatore06/incrementatore06.component';
 import { Visualizzatore02Component } from './esercizio/esercizio02/visualizzatore02/visualizzatore02.component';
 import { Incrementatore02Component } from './esercizio/esercizio02/incrementatore02/incrementatore02.component';
 import { Visualizzatore08Component } from './esercizio/esercizio08/visualizzatore08/visualizzatore08.component';
 import { Incrementatore08Component } from './esercizio/esercizio08/incrementatore08/incrementatore08.component';
+import { GestioneOfferteComponent } from './gestione-offerte/gestione-offerte.component';
+import { ElencoOfferteComponent } from './elenco-offerte/elenco-offerte.component';
+import { ElencoSpedizioniComponent } from './elenco-spedizioni/elenco-spedizioni.component';
+import { ElencoColoriComponent } from './elenco-colori/elenco-colori.component';
+import { ElencoTaglieComponent } from './elenco-taglie/elenco-taglie.component';
+
 
 const appRoutes: Routes = [
   { path: 'anagrafica-prodotti', component: AnagraficaProdottiComponent },
+  { path: 'gestione-offerte', component: GestioneOfferteComponent },
   { path: 'anagrafica-spedizioni', component: AnagraficaSpedizioniComponent },
   { path: 'home-pubblica', component: HomePageComponent },
   { path: 'home-riservata', component: HomeRiservataComponent },
@@ -48,7 +56,12 @@ const appRoutes: Routes = [
   },
   { path: 'password-dimenticata', component: PasswordDimenticataComponent },
   { path: 'reimposta-password', component: ReimpostaPasswordComponent },
-  { path: 'esercizio06', component: Visualizzatore06Component }
+  { path: 'visualizzatore06', component: Visualizzatore06Component },
+  { path: 'anagrafica-colori', component: AnagraficaColoriComponent },
+  { path: 'elenco-offerte', component: ElencoOfferteComponent },
+  { path: 'elenco-spedizioni', component: ElencoSpedizioniComponent},
+  { path: 'elenco-colori', component: ElencoColoriComponent},
+  { path: 'elenco-taglie', component: ElencoTaglieComponent},
 ];
 
 @NgModule({
@@ -65,6 +78,7 @@ const appRoutes: Routes = [
     RegistrazioneSuccessoComponent,
     RegistrazioneErroreComponent,
     AnagraficaTaglieComponent,
+    AnagraficaColoriComponent,
     AnagraficaProdottiComponent,
     AnagraficaSpedizioniComponent,
     Visualizzatore06Component,
@@ -73,6 +87,11 @@ const appRoutes: Routes = [
     Incrementatore02Component,
     Visualizzatore08Component,
     Incrementatore08Component,
+    GestioneOfferteComponent,
+    ElencoOfferteComponent,
+    ElencoSpedizioniComponent,
+    ElencoColoriComponent,
+    ElencoTaglieComponent,
   ],
   imports: [
     RouterModule.forRoot(

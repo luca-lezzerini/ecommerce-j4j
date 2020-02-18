@@ -1,3 +1,5 @@
+import { AreaComuneService } from './../area-comune.service';
+import { Router } from '@angular/router';
 import { LoginRequestDto } from './../classi/login-request-dto';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -13,9 +15,9 @@ export class PasswordDimenticataComponent implements OnInit {
 
   username: string;
   password: string;
-  token: string;
+  doi: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router, private ac: AreaComuneService) { }
 
   ngOnInit() { }
 
@@ -29,15 +31,15 @@ export class PasswordDimenticataComponent implements OnInit {
       'http://localhost:8080/password-dimenticata',
       dto
     );
-    obs.subscribe(data => {
-      this.token = data.token;
+    obs.subscribe(data => { // data.token è il doi generato dal service, NON LA SESSIONE
+      this.doi = data.token;
     });
   }
   // controllo sul token per verificare la ricezione della mail
   checkDoubleOptin() {
     // prepara i dati
     let dto: LoginResponseDto = new LoginResponseDto();
-    dto.token = this.token;
+    dto.token = this.doi;
 
     // prepara la richiesta
     let obs: Observable<void> = this.http.post<void>(
@@ -45,6 +47,13 @@ export class PasswordDimenticataComponent implements OnInit {
       dto
     );
 
-    obs.subscribe(data => {});
+    obs.subscribe(data => {
+      this.ac.doi = this.doi;
+      // 0cambia se non riceve un errore
+      if (this.ac.doi) {
+        console.log(this.doi);
+        this.router.navigateByUrl('/reimposta-password')
+      }
+    });
   }
 }

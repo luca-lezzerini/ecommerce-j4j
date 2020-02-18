@@ -1,27 +1,24 @@
 <div *ngIf="panelEnabled">
-  Codice
-  <input [(ngModel)]="codice" [disabled]="inputEditable">
-  &nbsp;
-
-  Descrizione
-  <input [(ngModel)]="descrizione" [disabled]="inputEditable">
-  &nbsp;
-
+  <input type="hidden" [value]="id">
+  <label for="input-codice">Codice </label>
+  <input id="input-codice" [(ngModel)]="codice" [disabled]="inputDisabled">
+  <label for="input-descrizione"> Descrizione </label>
+  <input id="input-descrizione" [(ngModel)]="descrizione" [disabled]="inputDisabled">
   <br>
-  <button (click)="conferma()" *ngIf="confermaEnabled">Conferma</button>&nbsp;
-  <button (click)="annulla()" *ngIf="annullaEnabled">Annulla</button>&nbsp;
-  <button (click)="crea()" *ngIf="creaEnabled">Crea</button>&nbsp;
-  <button (click)="modifica()" *ngIf="modificaEnabled">Modifica</button>&nbsp;
+  <button (click)="conferma()" *ngIf="confermaAndAnnullaEnabled">Conferma</button>
+  <button (click)="annulla()" *ngIf="confermaAndAnnullaEnabled">Annulla</button>
+  <button (click)="crea()" *ngIf="creaEnabled">Crea</button>
+  <button (click)="modifica()" *ngIf="modificaEnabled">Modifica</button>
   <button (click)="rimuovi()" *ngIf="rimuoviEnabled">Rimuovi</button>
 </div>
-
+<br>
 <div *ngIf="cercaEnabled">
   <input [(ngModel)]="searchKey">&nbsp;
-  <button (click)="cerca()" *ngIf="cercaEnabled">Cerca</button>
+  <button (click)="cerca()">Cerca</button>
   &nbsp;
   <button (click)="aggiungi()" *ngIf="aggiungiEnabled">Aggiungi</button>
 </div>
-
+<br>
 <table *ngIf="risultatoEnabled">
   <tr>
     <th>CODICE</th>
@@ -30,8 +27,8 @@
   <tr *ngFor="let item of taglie">
     <td>{{item.codice}}</td>
     <td>{{item.descrizione}}</td>
+    <td><button (click)="view(item.id)">View</button></td>
+    <td><button (click)="edit(item.id)">Edit</button></td>
+    <td><button (click)="delete(item.id)">Delete</button></td>
   </tr>
 </table>
-
-
-

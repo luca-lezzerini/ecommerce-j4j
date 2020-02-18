@@ -25,27 +25,32 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Utente implements Serializable {
-    @Column(nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column
     private String username;
+    @Column
     private String password;
+    @Column
     private String token;
+    @Column
     private String email;
-    private String doubleOptineCode;
+    @Column
+    private String doubleOptin;
+    @Column
     private LocalDateTime dOptinTimestamp;
 
     public Utente() {
     }
 
-    public Utente(Long id, String username, String password, String token, String email, String doubleOptineCode, LocalDateTime dOptinTimestamp) {
+    public Utente(Long id, String username, String password, String token, String email, String doubleOptin, LocalDateTime dOptinTimestamp) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.token = token;
         this.email = email;
-        this.doubleOptineCode = doubleOptineCode;
+        this.doubleOptin = doubleOptin;
         this.dOptinTimestamp = dOptinTimestamp;
     }
    
@@ -89,12 +94,12 @@ public class Utente implements Serializable {
         this.email = email;
     }
 
-    public String getDoubleOptineCode() {
-        return doubleOptineCode;
+    public String getDoubleOptin() {
+        return doubleOptin;
     }
 
-    public void setDoubleOptineCode(String doubleOptineCode) {
-        this.doubleOptineCode = doubleOptineCode;
+    public void setDoubleOptin(String doubleOptin) {
+        this.doubleOptin = doubleOptin;
     }
 
     public LocalDateTime getdOptinTimestamp() {
@@ -113,7 +118,7 @@ public class Utente implements Serializable {
         hash = 59 * hash + Objects.hashCode(this.password);
         hash = 59 * hash + Objects.hashCode(this.token);
         hash = 59 * hash + Objects.hashCode(this.email);
-        hash = 59 * hash + Objects.hashCode(this.doubleOptineCode);
+        hash = 59 * hash + Objects.hashCode(this.doubleOptin);
         hash = 59 * hash + Objects.hashCode(this.dOptinTimestamp);
         return hash;
     }
@@ -142,7 +147,7 @@ public class Utente implements Serializable {
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
-        if (!Objects.equals(this.doubleOptineCode, other.doubleOptineCode)) {
+        if (!Objects.equals(this.doubleOptin, other.doubleOptin)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {

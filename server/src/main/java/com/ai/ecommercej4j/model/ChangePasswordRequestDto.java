@@ -1,6 +1,6 @@
 package com.ai.ecommercej4j.model;
 
-public class ChangePasswordRequestDto extends LoginRequestDto {
+public class ChangePasswordRequestDto extends LoginResponseDto {
     private String doiCode;
     private String oldPassword;
     private String newPassword;

@@ -1,3 +1,3 @@
-tocTab[tocTab.length] = new Array("0.16.1:1", "", "Actors", "EARoot/EA16/EA1/EA700.htm", "180.png", "46", "0", "", "Use Case diagram0","{0E313596-47B4-4950-925F-EF953D592A6E}");
-tocTab[tocTab.length] = new Array("0.16.1:2", "", "Cliente", "EARoot/EA16/EA1/EA703.htm", "6.png", "E604", "0", "", "Actor0","{1EE72047-9125-4be8-9AE2-C0273E2CEF3D}");
-tocTab[tocTab.length] = new Array("0.16.1:3", "", "Gestore Negozio", "EARoot/EA16/EA1/EA704.htm", "6.png", "E605", "0", "", "Actor0","{E956DCF3-7F19-4016-BF61-89AECAA5FDB5}");
+tocTab[tocTab.length] = new Array("0.16.1:1", "", "Actors", "EARoot/EA16/EA1/EA805.htm", "180.png", "46", "0", "", "Use Case diagram0","{0E313596-47B4-4950-925F-EF953D592A6E}");
+tocTab[tocTab.length] = new Array("0.16.1:2", "", "Cliente", "EARoot/EA16/EA1/EA808.htm", "6.png", "E604", "0", "", "Actor0","{1EE72047-9125-4be8-9AE2-C0273E2CEF3D}");
+tocTab[tocTab.length] = new Array("0.16.1:3", "", "Gestore Negozio", "EARoot/EA16/EA1/EA809.htm", "6.png", "E605", "0", "", "Actor0","{E956DCF3-7F19-4016-BF61-89AECAA5FDB5}");

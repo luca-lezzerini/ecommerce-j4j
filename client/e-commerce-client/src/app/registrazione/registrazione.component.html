@@ -15,6 +15,7 @@
   <input [(ngModel)]="email">
 
   <br><br>
+  <div *ngIf="messaggioErrore">{{ messaggioErrore }}</div>
   <button (click)="registrami()">Conferma</button>
 
   &nbsp;

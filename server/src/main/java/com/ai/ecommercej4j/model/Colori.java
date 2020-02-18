@@ -1,9 +1,21 @@
 
 package com.ai.ecommercej4j.model;
 
-public class Colori {
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Colori implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column
     private String codice;
+    @Column
     private String descrizione;
 
     public Colori(Long id, String codice, String descrizione) {
