@@ -17,5 +17,4 @@ public interface ProdottoService {
     void updateProdotto(ProdottoUpdateDto dto);
 
     ProdottoSearchResultsDto searchOfferte(ProdottoSearchDto dto);
-
 }

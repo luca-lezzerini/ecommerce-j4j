@@ -12,14 +12,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./elenco-offerte.component.css']
 })
 export class ElencoOfferteComponent implements OnInit {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
   prezzoSearch: string;
   prodotti: Prodotto[] = [];
-  ngOnInit() {}
+  ngOnInit() { }
   ricerca() {
+
     // preparo i dati da inviare al service
     let dto: ProdottoSearchDto = new ProdottoSearchDto();
     dto.searchKey = this.prezzoSearch;
+
     // preparo la richesta http
     let obs: Observable<ProdottoSearchResultsDto> = this.http.post<ProdottoSearchResultsDto>('http://localhost:8080/search-offerte', dto);
     obs.subscribe(data => {
