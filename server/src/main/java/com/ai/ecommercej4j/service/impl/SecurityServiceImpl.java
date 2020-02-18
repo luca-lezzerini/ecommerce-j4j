@@ -12,7 +12,11 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Autowired
     private UtenteRepository ur;
-
+    
+    /**
+     * genera una stringa casuale utilizzata dal double opt in
+     * @return stringa
+     */
     private String generateRandomString() {
         double d = Math.random();
         String str = (Double.toString(d));
@@ -32,18 +36,29 @@ public class SecurityServiceImpl implements SecurityService {
         return response;
     }
 
+    /**
+     * cerca il doi dell'utente con la repository 
+     * e lo associa ad un utente appena creato
+     * se non trova il doi la stringa sarà nulla 
+     * e ritornera un errorenella console 
+     * @param dto che rappresenta il token di risposta del login 
+     */
     @Override
     public void checkDoubleOptin(LoginResponseDto dto) {
-        // cerco il doi dell'utente con la repository e lo associo a quello creato
-        // se non trovo il doi la stringa sarà nulla
         if(dto.getToken() != null){
         String doiUtente = ur.findByDoubleOptin(dto.getToken()).getDoubleOptin();
         }else{
             System.out.println("il token non esiste");
         }
-        // se è null perche non trova niente, torna un errore sul client
     }
-
+    
+    /**
+     * ricerca l'utenta nella repository, gli assegna il double opt in 
+     * e salva l'utente.
+     * Se l'utente non esiste genera un errore nella console
+     * @param dto rappresenta i campi di username e password per la login
+     * @return un dto di risposta contenente il double optin assegnato in caso di errore sarà vuota
+     */
     @Override
     public LoginResponseDto passwordDimenticata(LoginRequestDto dto) {
 
@@ -53,7 +68,6 @@ public class SecurityServiceImpl implements SecurityService {
         //...creo l'oggetto utente e gli faccio puntare l'utente che trova con il metodo findByUsernameAndPassword...
         Utente utente = new Utente();
         utente = ur.findByUsername(dto.getUsername());
-        System.out.println(utente);
         if (utente != null) {
             String doi = generateRandomString();
 
@@ -73,6 +87,12 @@ public class SecurityServiceImpl implements SecurityService {
 
     }
 
+    /**
+     * prende l' utente dalla repository e confronta la password nuova con la vecchia
+     * se le password coincidono genera un errore in console altrimenti 
+     * imposta la nuova password e salva l'utente.
+     * @param dto 
+     */
     @Override
     public void reimpostaPassword(ChangePasswordRequestDto dto) {
 
@@ -81,24 +101,17 @@ public class SecurityServiceImpl implements SecurityService {
 
         //...assegnazione utente esistente tramite metodo findByDoubleOptin poiche ce l'ho da prima.
         ut = ur.findByDoubleOptin(dto.getDoiCode());
-        if (ut.getDoubleOptin() != null) {
-            System.out.println(ut);
-            System.out.println(ut.getPassword());
-
+       
             //Se la password nuova è diversa dalla vecchia...
             if (ut.getPassword().equals(dto.getNewPassword())) {
                 System.out.println("Errore Pass Uguali");
 
             } else {
-                System.out.println("sono nell'if");
                 //...assegno quella nuova all'utente e la salvo
                 ut.setPassword(dto.getNewPassword());
                 ur.save(ut);
             }
-        }else{
-            System.out.println("il doubleOptIn non esiste");
         }
-    }
 
     @Override
     public RegistrazioneResponseDto registrami(RegistrazioneRequestDto dto) {
@@ -135,6 +148,11 @@ public class SecurityServiceImpl implements SecurityService {
         return resp;
     }
 
+    /**
+     * Controlla se il token esiste
+     * @param tok
+     * @return vero se è diverso da null, falso in caso contrario.
+     */
     @Override
     public Boolean checkToken(String tok) {
         //per ora il metodo accetta token = null

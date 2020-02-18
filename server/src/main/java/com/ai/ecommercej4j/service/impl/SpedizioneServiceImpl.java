@@ -9,6 +9,8 @@ import com.ai.ecommercej4j.model.Spedizione;
 import com.ai.ecommercej4j.model.SpedizioneCreateDto;
 import com.ai.ecommercej4j.model.SpedizioneDeleteDto;
 import com.ai.ecommercej4j.model.SpedizioneSearchDto;
+import com.ai.ecommercej4j.model.SpedizioneSearchPrezzoDto;
+import com.ai.ecommercej4j.model.SpedizioneSearchPrezzoResultsDto;
 import com.ai.ecommercej4j.model.SpedizioneSearchResultsDto;
 import com.ai.ecommercej4j.model.SpedizioneUpdateDto;
 import com.ai.ecommercej4j.service.SpedizioneService;
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ai.ecommercej4j.repository.SpedizioneRepository;
 import com.ai.ecommercej4j.service.SecurityService;
+import static java.lang.Double.NaN;
 import java.util.Collections;
 
 @Service
@@ -98,15 +101,20 @@ public class SpedizioneServiceImpl implements SpedizioneService {
     }
 
     @Override
-    public SpedizioneSearchResultsDto prezzoSearch(SpedizioneSearchDto dtoPrezzo) {
+    public SpedizioneSearchPrezzoResultsDto prezzoSearch(SpedizioneSearchPrezzoDto dtoPrezzo) {
         System.out.println("server, ricerca per prezzo");
-        SpedizioneSearchResultsDto dtoPr= new SpedizioneSearchResultsDto();
-        if (dtoPrezzo != null && securityService.checkToken(dtoPrezzo.getToken())) {
-             System.out.println("token " + dtoPrezzo.getToken());
+        List<Spedizione> gig = null;
+        SpedizioneSearchPrezzoResultsDto dtoPr = new SpedizioneSearchPrezzoResultsDto();
+        System.out.println("dto creato");
+        if (dtoPrezzo.getSearchKey()==null){
+             gig=spedizioneRepository.findAll();
         }
-
+        else if (dtoPrezzo.getSearchKey()>0){
+        gig = spedizioneRepository.findByPrezzoLessThan(dtoPrezzo.getSearchKey());
+        System.out.println(gig);
+        System.out.println("SearchKey=" + dtoPrezzo.getSearchKey());
+        }
+        dtoPr.setResult(gig);
         return dtoPr;
     }
 }
-
-

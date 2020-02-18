@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProdottoSearchDto } from './../classi/prodotto-search-dto';
 import { Component, OnInit } from '@angular/core';
@@ -40,7 +41,8 @@ export class AnagraficaProdottiComponent implements OnInit {
   prodottoSelezionato = new Prodotto();
 
   constructor(private http: HttpClient,
-    private acService: AreaComuneService) {
+    private acService: AreaComuneService,
+    private router: Router) {
     // imposta visibilità iniziale degli elementi dell'interfaccia
     this.showPanel = false;
     this.inputDisabled = true;
@@ -56,7 +58,9 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    if(!this.acService.token){
+      this.router.navigateByUrl('/login');
+    }
   }
 
   conferma() {
