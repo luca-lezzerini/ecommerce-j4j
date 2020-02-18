@@ -43,4 +43,10 @@ public class ProdottoController {
     public void updateProdotto(@RequestBody ProdottoUpdateDto dto) {
         ps.updateProdotto(dto);
     }
+    
+    @RequestMapping(value = "/search-offerte")
+    @ResponseBody
+    public ProdottoSearchResultsDto searchOfferte(@RequestBody ProdottoSearchDto dto) {
+       return ps.searchOfferte(dto);
+    }
 }

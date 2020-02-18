@@ -19,14 +19,13 @@ export class ElencoOfferteComponent implements OnInit {
   ricerca() {
 
     // preparo i dati da inviare al service
-    this.prezzoSearch += '&offerta';
     let dto: ProdottoSearchDto = new ProdottoSearchDto();
     dto.searchKey = this.prezzoSearch;
 
     // preparo la richesta http
-    let obs: Observable<ProdottoSearchResultsDto> = this.http.post<ProdottoSearchResultsDto>('http://localhost:8080/search-prodotti', dto);
-    obs.subscribe(data =>{
+    let obs: Observable<ProdottoSearchResultsDto> = this.http.post<ProdottoSearchResultsDto>('http://localhost:8080/search-offerte', dto);
+    obs.subscribe(data => {
       this.prodotti = data.result;
-    })
+    });
   }
 }
