@@ -18,7 +18,7 @@ public interface SpedizioneRepository extends JpaRepository<Spedizione, Long> {
 
 
     List<Spedizione> findByCodiceContainingIgnoreCase(String codice);
-    List<Spedizione> findByPrezzoLessThan(double prezzo);
+    List<Spedizione> findByPrezzoLessThan(Double prezzo);
 
 
     

@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
 
       // creo la callback
       og.subscribe(data => {
+        console.log(data);
         this.ac.token = data.token;
         if (data.token) {
           this.router.navigateByUrl('/home-riservata');

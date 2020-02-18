@@ -1,3 +1,4 @@
+import { AreaComuneService } from './../area-comune.service';
 import { ProdottoSearchResultsDto } from './../classi/prodotto-search-results';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./elenco-offerte.component.css']
 })
 export class ElencoOfferteComponent implements OnInit {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private ac: AreaComuneService) {}
   prezzoSearch: string;
   prodotti: Prodotto[];
   ngOnInit() {}
@@ -22,6 +23,7 @@ export class ElencoOfferteComponent implements OnInit {
     }
     // preparo i dati da inviare al service
     let dto: ProdottoSearchDto = new ProdottoSearchDto();
+    dto.token = this.ac.token;
     dto.searchKey = this.prezzoSearch;
 
     // preparo la richesta http
