@@ -1,0 +1,26 @@
+<div>
+<label for="n-order">Nuovo ordine</label>
+<input type="text" id="n-order" [(ngModel)]="newOrder">
+
+<label for="data">Nuovo ordine</label>
+<input type="text" id="data" [(ngModel)]="newData">
+
+<button (click)="cerca()"> Cerca </button>
+</div>
+
+<div *ngIf='showResults || ordini && ordini.length > 0'>
+    <table>
+      <tr>
+        <th>Data ordine</th>
+        <th>Numero</th>
+        <th>Stato</th>
+      </tr>
+      <tr *ngFor="let ordine of ordini">
+        <td>{{ordine.data}}</td>
+        <td>{{ordine.numero}}</td>
+        <td>{{ordine.stato}}</td>
+        <td><button (click)="dettagli(ordine)">Dettagli</button></td>
+        <td><button (click)="spedisci(ordine)">Spedisci</button></td>
+      </tr>
+    </table>
+  </div>
