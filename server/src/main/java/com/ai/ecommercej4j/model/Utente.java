@@ -7,20 +7,22 @@ package com.ai.ecommercej4j.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author utente
  */
 @Entity
-@Table
 public class Utente implements Serializable {
 
     @Id
@@ -40,6 +42,16 @@ public class Utente implements Serializable {
     private LocalDateTime dOptinTimestamp;
     @Column
     private Boolean anonimo;
+    @OneToMany(mappedBy = "utente", fetch = FetchType.LAZY)
+    private List<Ordine> ordini = new ArrayList<>();
+
+    public List<Ordine> getOrdini() {
+        return ordini;
+    }
+
+    public void setOrdini(List<Ordine> ordini) {
+        this.ordini = ordini;
+    }
 
     public Utente(Long id, String username, String password, String token, String email, String doubleOptin, LocalDateTime dOptinTimestamp, Boolean anonimo) {
         this.id = id;

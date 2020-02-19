@@ -6,6 +6,7 @@ import com.ai.ecommercej4j.model.Prodotto;
 import com.ai.ecommercej4j.model.RigaOrdine;
 import com.ai.ecommercej4j.model.Spedizione;
 import com.ai.ecommercej4j.model.Taglia;
+import com.ai.ecommercej4j.model.Utente;
 import com.ai.ecommercej4j.repository.*;
 import com.ai.ecommercej4j.service.DevelopmentService;
 import com.ai.ecommercej4j.service.StartupDataService;
@@ -56,7 +57,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         generateSpedizioni();
 
         // Generazione ordini e righe associate
-        generateOrdiniRighe();
+        generateUtentiProdottiOrdiniRighe();
     }
 
     private void dropDataBase() {
@@ -340,18 +341,36 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         spedizioneRespository.save(s10);
     }
 
-    private void generateOrdiniRighe() {
-        // Creo l'ordine ...
+    private void generateUtentiProdottiOrdiniRighe() {
+        // Creo l'utente...
+        Utente u1 = new Utente();
+        u1.setUsername("relazione");
+        u1.setPassword("relazione");
+        utenteRepository.save(u1);
+
+        // Creo il prodotto...
+        Prodotto p1 = new Prodotto();
+        p1.setDescrizione("Maglione per relazione");
+        p1.setCodice("593");
+        p1.setPrezzo(19.99);
+        p1.setOfferta(false);
+        prodottoRepository.save(p1);
+
+        // Creo gli ordini ...
         Ordine o1 = new Ordine(LocalDate.now(), 1);
         ordineRepository.save(o1);
+        Ordine o2 = new Ordine(LocalDate.now(), 2);
+        ordineRepository.save(o2);
 
         // Creo le righe ...
         RigaOrdine r11 = new RigaOrdine(5);
         rigaOrdineRepository.save(r11);
         RigaOrdine r12 = new RigaOrdine(7);
         rigaOrdineRepository.save(r12);
+        RigaOrdine r13 = new RigaOrdine(34);
+        rigaOrdineRepository.save(r13);
 
-        // ... li associo
+        // ... associo le righe all'ordine
         o1.getRighe().add(r11);
         o1.getRighe().add(r12);
         ordineRepository.save(o1);
@@ -359,9 +378,30 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         rigaOrdineRepository.save(r11);
         r12.setOrdine(o1);
         rigaOrdineRepository.save(r12);
+        o2.getRighe().add(r13);
+        ordineRepository.save(o2);
+        r13.setOrdine(o2);
+        rigaOrdineRepository.save(r13);
 
-        Ordine o2 = ordineRepository.getOne(o1.getId());
-        List<RigaOrdine> lista = o2.getRighe();
-        lista.stream().forEach(rx -> System.out.println(rx));
+        // ... associo gli ordini all'utente
+        u1.getOrdini().add(o1);
+        u1.getOrdini().add(o2);
+        utenteRepository.save(u1);
+        o1.setUtente(u1);
+        o2.setUtente(u1);
+        ordineRepository.save(o1);
+        ordineRepository.save(o2);
+
+        // ... associo le righe ai prodotti
+        p1.getRighe().add(r11);
+        p1.getRighe().add(r12);
+        p1.getRighe().add(r13);
+        prodottoRepository.save(p1);
+        r11.setProdotto(p1);
+        r12.setProdotto(p1);
+        r13.setProdotto(p1);
+        rigaOrdineRepository.save(r11);
+        rigaOrdineRepository.save(r12);
+        rigaOrdineRepository.save(r13);
     }
 }

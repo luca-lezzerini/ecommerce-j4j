@@ -17,10 +17,14 @@ public class RigaOrdine {
     private Long id;
     @Column
     private int qta;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="fkIdOrdine", referencedColumnName = "id")
+    @JoinColumn(name = "fkIdOrdine", referencedColumnName = "id")
     public Ordine ordine;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fkIdProdotto", referencedColumnName = "id")
+    public Prodotto prodotto;
 
     public RigaOrdine() {
 
@@ -42,6 +46,14 @@ public class RigaOrdine {
         return qta;
     }
 
+    public Prodotto getProdotto() {
+        return prodotto;
+    }
+
+    public void setProdotto(Prodotto prodotto) {
+        this.prodotto = prodotto;
+    }
+
     public void setQta(int qta) {
         this.qta = qta;
     }
@@ -58,5 +70,5 @@ public class RigaOrdine {
     public String toString() {
         return "RigaOrdine{" + "id=" + id + ", qta=" + qta + ", ordine=" + ordine + '}';
     }
-    
+
 }

@@ -1,16 +1,19 @@
 package com.ai.ecommercej4j.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 @Entity
-@Table
-public class Prodotto implements Serializable{
+public class Prodotto implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,6 +21,16 @@ public class Prodotto implements Serializable{
     private String descrizione;
     private double prezzo;
     private boolean offerta;
+    @OneToMany(mappedBy = "prodotto", fetch = FetchType.LAZY)
+    private List<RigaOrdine> righe = new ArrayList<>();
+
+    public List<RigaOrdine> getRighe() {
+        return righe;
+    }
+
+    public void setRighe(List<RigaOrdine> righe) {
+        this.righe = righe;
+    }
 
     public Prodotto() {
     }
@@ -110,5 +123,5 @@ public class Prodotto implements Serializable{
         }
         return true;
     }
-    
+
 }
