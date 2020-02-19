@@ -1,0 +1,9 @@
+tocTab[tocTab.length] = new Array("0.11.5:1", "", "UI Home Area Gestore", "EARoot/EA11/EA5/EA609.htm", "188.png", "95", "0", "", "Custom diagram0","{DBA1988E-5738-4cc5-BD2A-329A6CDF72EF}");
+tocTab[tocTab.length] = new Array("0.11.5:2", "", "«WireframeWebsite» Webpage1", "EARoot/EA11/EA5/EA612.htm", "11.png", "E905", "0", "", "Screen0","{1CC419C4-C44E-4784-AD86-F7259DDFB84D}");
+tocTab[tocTab.length] = new Array("0.11.5:3", "", "«WireframeButton» Anagrafica Colori", "EARoot/EA11/EA5/EA613.htm", "16.png", "E907", "E905", "", "GUIElement0","{EA6F30C4-A999-4fb6-85F9-DAEFE1BDA8A1}");
+tocTab[tocTab.length] = new Array("0.11.5:4", "", "«WireframeButton» Anagrafica Prodotti", "EARoot/EA11/EA5/EA614.htm", "16.png", "E906", "E905", "", "GUIElement0","{B10412FE-0B99-4132-B078-E3FE37E3D71E}");
+tocTab[tocTab.length] = new Array("0.11.5:5", "", "«WireframeButton» Anagrafica Spedizioni", "EARoot/EA11/EA5/EA615.htm", "16.png", "E909", "E905", "", "GUIElement0","{22523F4D-E67A-455f-8462-447D11B12145}");
+tocTab[tocTab.length] = new Array("0.11.5:6", "", "«WireframeButton» Anagrafica Taglie", "EARoot/EA11/EA5/EA616.htm", "16.png", "E908", "E905", "", "GUIElement0","{6309404F-DBC2-4fc8-A2C9-52E3B513B872}");
+tocTab[tocTab.length] = new Array("0.11.5:7", "", "«WireframeButton» Gestione Offerte", "EARoot/EA11/EA5/EA617.htm", "16.png", "E910", "E905", "", "GUIElement0","{FDF8938A-E589-4ae1-BA60-53BB688C7AD7}");
+tocTab[tocTab.length] = new Array("0.11.5:8", "", "«WireframeButton» Visualizza Ordini", "EARoot/EA11/EA5/EA618.htm", "16.png", "E912", "E905", "", "GUIElement0","{A204F72D-5459-4943-BADA-5D52B8E3B9BD}");
+tocTab[tocTab.length] = new Array("0.11.5:9", "", "«WireframeButton» Visualizza Ordini da Spedire", "EARoot/EA11/EA5/EA619.htm", "16.png", "E911", "E905", "", "GUIElement0","{A28EB43C-AA4C-415e-B9A0-009410D2CCB7}");
