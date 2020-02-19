@@ -365,8 +365,8 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         ordineRepository.save(o1);
         Ordine o2 = new Ordine();
         o1.setData(LocalDate.now());
-        o1.setNumero(2);
-        o1.setStato("carrello");
+        o2.setNumero(2);
+        o2.setStato("carrello");
         ordineRepository.save(o2);
 
         // Creo le righe ...
