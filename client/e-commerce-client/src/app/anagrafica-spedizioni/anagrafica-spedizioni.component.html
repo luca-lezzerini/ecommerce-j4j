@@ -22,7 +22,7 @@
 <br>
 <hr>
 <br>
-<div  *ngIf="resultsEnabled">
+<div  *ngIf="resultsEnabled && spedizioni.length > 0">
 <table>
   <tr>
     <th>Codice Spedizione</th>
@@ -37,13 +37,13 @@
       <td>{{s.descrizione}}</td>
       <td>{{s.prezzo}}</td>
       <td>
-        <button (click)="view()" *ngIf="viewEnabled">View</button>
+        <button (click)="view(s)" *ngIf="viewEnabled">View</button>
       </td>
       <td>
-        <button (click)="edit()" *ngIf="editEnabled">Edit</button>
+        <button (click)="edit(s)" *ngIf="editEnabled">Edit</button>
       </td>
       <td>
-        <button (click)="delete()" *ngIf="deleteEnabled">Delete</button>
+        <button (click)="delete(s)" *ngIf="deleteEnabled">Delete</button>
       </td>
   </tr>
 </table>
