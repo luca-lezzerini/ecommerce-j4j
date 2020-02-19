@@ -16,7 +16,9 @@
 <div *ngIf="searchPanelEnabled">
   <input type="text" [(ngModel)]="searchKey" [disabled]="cercaInputDisabled">&nbsp;
   <button (click)="cerca()" *ngIf="cercaEnabled">Cerca</button>
+
 </div>
+<br>
   <button (click)="aggiungi()" *ngIf="aggiungiEnabled">Aggiungi</button>&nbsp;
 
 <br>
