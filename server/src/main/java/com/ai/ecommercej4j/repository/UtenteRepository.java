@@ -17,4 +17,6 @@ public interface UtenteRepository extends JpaRepository<Utente, Long> {
     Utente findByEmail(String email);
     
     Utente findByPassword(String password);
+    
+    Utente findByTokenAndAnonimo (String tk, Boolean bool);
 }

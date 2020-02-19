@@ -1,5 +1,6 @@
 package com.ai.ecommercej4j.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Prodotto implements Serializable {
     private double prezzo;
     private boolean offerta;
     @OneToMany(mappedBy = "prodotto", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = "prodotto", allowSetters = true)
     private List<RigaOrdine> righe = new ArrayList<>();
 
     public List<RigaOrdine> getRighe() {
