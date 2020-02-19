@@ -147,7 +147,7 @@ export class AnagraficaTaglieComponent implements OnInit {
     dto.token = this.sessione.token;
     dto.searchKey = this.searchKey;
     const obs: Observable<TagliaSearchResultsDto> =
-      this.http.post<TagliaSearchResultsDto>('http://localhost:8080/search-taglia', dto);
+      this.http.post<TagliaSearchResultsDto>(this.sessione.hostUrl + '/search-taglia', dto);
 
     // invia la richiesta al server
     obs.subscribe(risposta => {
@@ -284,7 +284,7 @@ export class AnagraficaTaglieComponent implements OnInit {
       dto.dati = new Taglia();
       dto.dati.codice = this.codice;
       dto.dati.descrizione = this.descrizione;
-      const obs: Observable<any> = this.http.post('http://localhost:8080/create-taglia', dto);
+      const obs: Observable<any> = this.http.post(this.sessione.hostUrl + '/create-taglia', dto);
       // invia la richiesta al server
       obs.subscribe(risposta => {
         // ripete ultima ricerca
@@ -309,7 +309,7 @@ export class AnagraficaTaglieComponent implements OnInit {
       dto.dati.codice = this.codice;
       dto.dati.descrizione = this.descrizione;
       // preparo la richiesta al server
-      const obs: Observable<any> = this.http.post('http://localhost:8080/update-taglia', dto);
+      const obs: Observable<any> = this.http.post(this.sessione.hostUrl + '/update-taglia', dto);
       // invia la richiesta al server
       obs.subscribe(response => {
         this.cerca();
@@ -327,7 +327,7 @@ export class AnagraficaTaglieComponent implements OnInit {
     const dto: TagliaDeleteDto = new TagliaDeleteDto();
     dto.token = this.sessione.token;
     dto.idToDelete = this.id;
-    const obs: Observable<any> = this.http.post<any>('http://localhost:8080/delete-taglia', dto);
+    const obs: Observable<any> = this.http.post<any>(this.sessione.hostUrl + '/delete-taglia', dto);
     obs.subscribe(reponse => {
       this.cerca();
     });

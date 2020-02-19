@@ -13,22 +13,24 @@ import com.ai.ecommercej4j.model.SpedizioneSearchPrezzoResultsDto;
 import com.ai.ecommercej4j.model.SpedizioneSearchResultsDto;
 import com.ai.ecommercej4j.model.SpedizioneUpdateDto;
 
-/**
- *
- * @author feder
- */
+// creo l'interfaccia del service spedizioni contenente i metodi utilizzati
 public interface SpedizioneService {
-       
+    
+    // richiamo il metodo crea spedizione dal service impl
     void createSpedizione(SpedizioneCreateDto dto);
 
+    // richiamo il metodo cerca spedizione dal service impl
     SpedizioneSearchResultsDto searchSpedizione(SpedizioneSearchDto dto);
 
+    // richiamo il metodo cancella spedizione dal service impl
     void deleteSpedizione(SpedizioneDeleteDto dto);
 
+    // richiamo il metodo aggiorna spedizione dal service impl
     void updateSpedizione(SpedizioneUpdateDto dto);
     
+    //richiamo il metodo ricerca per prezzo dal service impl
     SpedizioneSearchPrezzoResultsDto prezzoSearch(SpedizioneSearchPrezzoDto dto);
 }
 
-    
+
 

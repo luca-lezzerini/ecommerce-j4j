@@ -51,7 +51,7 @@ export class ElencoSpedizioniComponent implements OnInit {
 
     // Preparo la richiesta http
     const obs: Observable<SpedizioneSearchPrezzoResultsDto> =
-      this.http.post<SpedizioneSearchPrezzoResultsDto>('http://localhost:8080/search-prezzo-spedizione', dto);
+      this.http.post<SpedizioneSearchPrezzoResultsDto>(this.singleton.hostUrl + '/search-prezzo-spedizione', dto);
 
     // Callback
     obs.subscribe(risposta => {

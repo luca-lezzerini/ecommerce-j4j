@@ -41,7 +41,7 @@ export class ElencoTaglieComponent implements OnInit {
 
     // Preparo la richiesta http
     let oss: Observable<TagliaSearchResultsDto> =
-      this.http.post<TagliaSearchResultsDto>('http://localhost:8080/search-taglia-per-descrizione', dto);
+      this.http.post<TagliaSearchResultsDto>(this.acService.hostUrl + '/search-taglia-per-descrizione', dto);
 
     // Callback
     oss.subscribe(risposta => {

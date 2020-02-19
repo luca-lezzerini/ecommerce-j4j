@@ -1,0 +1,26 @@
+
+<div>
+  <label>
+    Numero ordine <input type = "text" [(ngModel)] = "numeroOrdine">&nbsp;
+    Data <input type = "text" [(ngModel)] = "data">&nbsp;
+    <button type="button" (click) = "searchOrdine()"> Cerca </button>&nbsp;
+    <select id = "stato">&nbsp;
+      <option>Carrello</option>
+      <option>In checkout</option>
+      <option>Pagato</option>
+      <option>Spedito</option>
+    </select>
+  </label>
+</div>
+<div>
+  <table>
+    <th>Data</th>
+    <th>Numero Ordine</th>
+    <th>Stato</th>
+    <tr *ngFor="let o of ordini">
+      <td>{{o.data}}</td>
+      <td>{{o.numero}}</td>
+      <td>{{o.stato}}</td>
+    </tr>
+  </table>
+</div>

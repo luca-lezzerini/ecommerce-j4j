@@ -7,6 +7,7 @@ package com.ai.ecommercej4j.model;
 
 import java.util.List;
 
+// creo il data transfer object dell'array delle spedizioni risultante dalla ricerca per prezzo
 public class SpedizioneSearchPrezzoResultsDto extends LoginResponseDto  {
     private List<Spedizione> result;
 
@@ -17,6 +18,7 @@ public class SpedizioneSearchPrezzoResultsDto extends LoginResponseDto  {
     public SpedizioneSearchPrezzoResultsDto() {
     }
 
+    // metto i getter e i setter
     public List<Spedizione> getResult() {
         return result;
     }

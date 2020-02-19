@@ -5,26 +5,27 @@
  */
 package com.ai.ecommercej4j.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author utente
  */
-
-
-
 @Entity
-@Table
 public class Utente implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -40,11 +41,21 @@ public class Utente implements Serializable {
     private String doubleOptin;
     @Column
     private LocalDateTime dOptinTimestamp;
+    @Column
+    private Boolean anonimo;
+    @OneToMany(mappedBy = "utente", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = "utente", allowSetters = true)
+    private List<Ordine> ordini = new ArrayList<>();
 
-    public Utente() {
+    public List<Ordine> getOrdini() {
+        return ordini;
     }
 
-    public Utente(Long id, String username, String password, String token, String email, String doubleOptin, LocalDateTime dOptinTimestamp) {
+    public void setOrdini(List<Ordine> ordini) {
+        this.ordini = ordini;
+    }
+
+    public Utente(Long id, String username, String password, String token, String email, String doubleOptin, LocalDateTime dOptinTimestamp, Boolean anonimo) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -52,8 +63,12 @@ public class Utente implements Serializable {
         this.email = email;
         this.doubleOptin = doubleOptin;
         this.dOptinTimestamp = dOptinTimestamp;
+        this.anonimo = anonimo;
     }
-   
+
+    public Utente() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -110,9 +125,17 @@ public class Utente implements Serializable {
         this.dOptinTimestamp = dOptinTimestamp;
     }
 
+    public Boolean getAnonimo() {
+        return anonimo;
+    }
+
+    public void setAnonimo(Boolean anonimo) {
+        this.anonimo = anonimo;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 3;
         hash = 59 * hash + Objects.hashCode(this.id);
         hash = 59 * hash + Objects.hashCode(this.username);
         hash = 59 * hash + Objects.hashCode(this.password);
@@ -120,6 +143,7 @@ public class Utente implements Serializable {
         hash = 59 * hash + Objects.hashCode(this.email);
         hash = 59 * hash + Objects.hashCode(this.doubleOptin);
         hash = 59 * hash + Objects.hashCode(this.dOptinTimestamp);
+        hash = 59 * hash + Objects.hashCode(this.anonimo);
         return hash;
     }
 
@@ -156,11 +180,10 @@ public class Utente implements Serializable {
         if (!Objects.equals(this.dOptinTimestamp, other.dOptinTimestamp)) {
             return false;
         }
+        if (!Objects.equals(this.anonimo, other.anonimo)) {
+            return false;
+        }
         return true;
     }
-    
-    
-    
-    
-    
+
 }

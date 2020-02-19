@@ -1,3 +1,4 @@
+import { AreaComuneService } from './../area-comune.service';
 import { RegistrazioneResponseDto } from './../classi/registrazione-response-dto';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -12,7 +13,7 @@ export class RegistrazioneDoubleOptinComponent implements OnInit {
 
   codiceDoubleOptin: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private ac: AreaComuneService) {
     this.checkDoubleOptin();
   }
 
@@ -22,7 +23,7 @@ export class RegistrazioneDoubleOptinComponent implements OnInit {
   checkDoubleOptin() {
 
     const obs: Observable<RegistrazioneResponseDto> =
-      this.http.post<RegistrazioneResponseDto>('http://localhost:8080/check-double-optin', this.codiceDoubleOptin);
+      this.http.post<RegistrazioneResponseDto>(this.ac.hostUrl + '/check-double-optin', this.codiceDoubleOptin);
   }
 
 }

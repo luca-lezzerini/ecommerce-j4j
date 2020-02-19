@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       lg.password = this.password;
 
       // invio i dati al server
-      const og: Observable<LoginResponseDto> = this.http.post<LoginResponseDto>('http://localhost:8080/login', lg);
+      const og: Observable<LoginResponseDto> = this.http.post<LoginResponseDto>(this.ac.hostUrl + '/login', lg);
 
       // creo la callback
       og.subscribe(data => {
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     pd.password = this.password;
 
     // invio i dati al server
-    const op: Observable<LoginResponseDto> = this.http.post<LoginResponseDto>('http://localhost:8080/passwordDimenticata', pd);
+    const op: Observable<LoginResponseDto> = this.http.post<LoginResponseDto>(this.ac.hostUrl + '/passwordDimenticata', pd);
 
     // creo al callback
     op.subscribe(data => {

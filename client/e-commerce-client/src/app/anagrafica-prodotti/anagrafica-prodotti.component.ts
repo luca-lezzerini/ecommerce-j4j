@@ -62,7 +62,7 @@ export class AnagraficaProdottiComponent implements OnInit {
       this.router.navigateByUrl('/login');
     }
   }
-   
+
   conferma() {
     // se i campi di input del panel sono vuoti non esegue
     if (this.codice && this.descrizione && this.prezzo !== null) {
@@ -115,7 +115,7 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // prepara la richiesta HTTP
     let oss: Observable<any> =
-      this.http.post<any>('http://localhost:8080/create-prodotto', dto);
+      this.http.post<any>(this.acService.hostUrl + '/create-prodotto', dto);
 
     // invio la richiesta
     oss.subscribe(risposta => {
@@ -139,7 +139,7 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // prepara la richiesta HTTP
     let oss: Observable<any> =
-      this.http.post<any>('http://localhost:8080/update-prodotto', dto);
+      this.http.post<any>(this.acService.hostUrl + '/update-prodotto', dto);
 
     // invio la richiesta
     oss.subscribe(risposta => {
@@ -158,7 +158,7 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // prepara la richiesta HTTP
     let oss: Observable<any> =
-      this.http.post<any>('http://localhost:8080/delete-prodotto', dto);
+      this.http.post<any>(this.acService.hostUrl + '/delete-prodotto', dto);
 
     // invio la richiesta
     oss.subscribe(risposta => {
@@ -277,7 +277,7 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // prepara la richiesta HTTP
     let oss: Observable<ProdottoSearchResultsDto> =
-      this.http.post<ProdottoSearchResultsDto>('http://localhost:8080/search-prodotto', dto);
+      this.http.post<ProdottoSearchResultsDto>(this.acService.hostUrl + '/search-prodotto', dto);
 
     // invio la richiesta
     oss.subscribe(risposta => {

@@ -131,12 +131,22 @@ public class SecurityServiceImpl implements SecurityService {
         return resp;
     }
 
-    
+    //ricerca anche che l'utente non sia anonimo
     @Override
     public Boolean checkToken(String tok) {
-        //per ora il metodo accetta token = null
-        return ur.findByToken(tok) != null;
+        return ur.findByTokenAndAnonimo(tok, false) != null;
+        // Utente utente = ur.findByToken(tok)
+        // return (utente.getToken() != null && utente.getAnonimo == false)
         
+    }
+
+    @Override
+    public LoginResponseDto generateTokenAnonimo() {
+        //Creo la risposta...
+        LoginResponseDto rdto = new LoginResponseDto();
+        Utente anonimo = new Utente();
+        rdto.setToken(generateRandomString());
+        return rdto;
     }
 
 }

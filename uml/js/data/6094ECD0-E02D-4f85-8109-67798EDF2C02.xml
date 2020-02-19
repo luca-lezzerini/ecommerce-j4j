@@ -1,6 +1,6 @@
-tocTab[tocTab.length] = new Array("0.13.1:1", "", "Security", "EARoot/EA13/EA1/EA772.htm", "175.png", "29", "0", "", "Logical diagram0","{E05007E2-C5AD-49bd-8BAB-D284247D6595}");
-tocTab[tocTab.length] = new Array("0.13.1:2", "", "ChangePasswordRequestDto", "EARoot/EA13/EA1/EA775.htm", "5.png", "E732", "0", "", "Class0","{9E322003-D190-4ebe-AABA-7B3FA7AF133C}");
-tocTab[tocTab.length] = new Array("0.13.1:3", "", "LoginRequestDto", "EARoot/EA13/EA1/EA776.htm", "5.png", "E530", "0", "", "Class0","{683D7750-767A-4249-830E-A170D39E1607}");
-tocTab[tocTab.length] = new Array("0.13.1:4", "", "LoginResponseDto", "EARoot/EA13/EA1/EA777.htm", "5.png", "E531", "0", "", "Class0","{7F6C12EB-A3EB-4854-BA3D-D7252CEB8F9B}");
-tocTab[tocTab.length] = new Array("0.13.1:5", "", "RegistrazioneRequestDto", "EARoot/EA13/EA1/EA778.htm", "5.png", "E589", "0", "", "Class0","{6F490CD8-87D7-4e20-A653-1316F82AE75C}");
-tocTab[tocTab.length] = new Array("0.13.1:6", "", "RegistrazioneResponseDto", "EARoot/EA13/EA1/EA779.htm", "5.png", "E590", "0", "", "Class0","{10332D6E-9B3F-4796-82B8-0BA5EE221219}");
+tocTab[tocTab.length] = new Array("0.13.1:1", "", "Security", "EARoot/EA13/EA1/EA824.htm", "175.png", "29", "0", "", "Logical diagram0","{E05007E2-C5AD-49bd-8BAB-D284247D6595}");
+tocTab[tocTab.length] = new Array("0.13.1:2", "", "ChangePasswordRequestDto", "EARoot/EA13/EA1/EA827.htm", "5.png", "E732", "0", "", "Class0","{9E322003-D190-4ebe-AABA-7B3FA7AF133C}");
+tocTab[tocTab.length] = new Array("0.13.1:3", "", "LoginRequestDto", "EARoot/EA13/EA1/EA828.htm", "5.png", "E530", "0", "", "Class0","{683D7750-767A-4249-830E-A170D39E1607}");
+tocTab[tocTab.length] = new Array("0.13.1:4", "", "LoginResponseDto", "EARoot/EA13/EA1/EA829.htm", "5.png", "E531", "0", "", "Class0","{7F6C12EB-A3EB-4854-BA3D-D7252CEB8F9B}");
+tocTab[tocTab.length] = new Array("0.13.1:5", "", "RegistrazioneRequestDto", "EARoot/EA13/EA1/EA830.htm", "5.png", "E589", "0", "", "Class0","{6F490CD8-87D7-4e20-A653-1316F82AE75C}");
+tocTab[tocTab.length] = new Array("0.13.1:6", "", "RegistrazioneResponseDto", "EARoot/EA13/EA1/EA831.htm", "5.png", "E590", "0", "", "Class0","{10332D6E-9B3F-4796-82B8-0BA5EE221219}");
