@@ -370,11 +370,14 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         ordineRepository.save(o2);
 
         // Creo le righe ...
-        RigaOrdine r11 = new RigaOrdine(5);
+        RigaOrdine r11 = new RigaOrdine();
+        r11.setQta(5);
         rigaOrdineRepository.save(r11);
-        RigaOrdine r12 = new RigaOrdine(7);
+        RigaOrdine r12 = new RigaOrdine();
+        r12.setQta(5);
         rigaOrdineRepository.save(r12);
-        RigaOrdine r13 = new RigaOrdine(34);
+        RigaOrdine r13 = new RigaOrdine();
+        r13.setQta(5);
         rigaOrdineRepository.save(r13);
 
         // ... associo le righe all'ordine
