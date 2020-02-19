@@ -1,8 +1,8 @@
 tocTab[tocTab.length] = new Array("0.2:1", "", "020 - Conversation", "EARoot/EA2/EA38.htm", "189.png", "4", "0", "", "Analysis diagram0","{8888DE57-D676-4cb4-B1F6-2E4924312399}");
 tocTab[tocTab.length] = new Array("0.2:4", "", "«ConversationModel» Gestione cliente", "EARoot/EA2/EA45.htm", "4C9380A5-0_ConversationModel.png", "E70", "0", "", "Activity0","{F1FAC0DD-2545-4506-B18C-B41F49569F84}");
 tocTab[tocTab.length] = new Array("0.2:5", "", "«ConversationModel» Gestione fornitore", "EARoot/EA2/EA46.htm", "4C9380A5-0_ConversationModel.png", "E94", "0", "", "Activity0","{5B043506-B630-495e-8FA9-24CDAEE9FD9C}");
-tocTab[tocTab.length] = new Array("0.2:2", "", "ConversationModel1", "EARoot/EA2/EA40.htm", "189.png", "7", "E70", "", "Analysis diagram0","{13BE4963-4D55-40a5-9A83-B897965E2335}");
-tocTab[tocTab.length] = new Array("0.2:3", "", "ConversationModel1", "EARoot/EA2/EA42.htm", "189.png", "9", "E94", "", "Analysis diagram0","{4AC77410-C9E7-4ed5-BCF0-4FE49B81E716}");
+tocTab[tocTab.length] = new Array("0.2:2", "", "ConversationModel1", "EARoot/EA2/EA40.htm", "189.png", "9", "E94", "", "Analysis diagram0","{4AC77410-C9E7-4ed5-BCF0-4FE49B81E716}");
+tocTab[tocTab.length] = new Array("0.2:3", "", "ConversationModel1", "EARoot/EA2/EA42.htm", "189.png", "7", "E70", "", "Analysis diagram0","{13BE4963-4D55-40a5-9A83-B897965E2335}");
 tocTab[tocTab.length] = new Array("0.2:6", "", "«Participant» Addetto assistenza cliente", "EARoot/EA2/EA48.htm", "5.png", "E72", "E70", "", "Class0","{D8F6E4B0-ABF3-405a-A685-0975F9881EAC}");
 tocTab[tocTab.length] = new Array("0.2:7", "", "«Participant» Amministratore", "EARoot/EA2/EA49.htm", "5.png", "E92", "E70", "", "Class0","{05F0FE85-4FFE-47e4-8D7D-3F876EBC31DA}");
 tocTab[tocTab.length] = new Array("0.2:8", "", "«Participant» Cliente", "EARoot/EA2/EA50.htm", "5.png", "E71", "E70", "", "Class0","{6BAB4015-1CED-4eb8-BDBB-8303C2CA37FE}");

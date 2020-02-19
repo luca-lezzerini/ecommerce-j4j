@@ -42,7 +42,7 @@ function nameClassifier(name, separator)
 		</tr>
 		<tr>
 			<td class="ObjectDetailsTopic">Modified:</td>
-			<td class="ObjectDetailsValue">19/02/2020 12:34:41</td>
+			<td class="ObjectDetailsValue">19/02/2020 14:23:39</td>
 		</tr>
 		<tr style="height: 10px"><td colspan="2"></td></tr>
 		<tr>
@@ -91,10 +91,11 @@ function nameClassifier(name, separator)
 		</tr>
 		<tr id="adv01" style="display: none;">
 			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Appears In:</td>
-			<td class="ObjectDetailsValue"><a href="EA529.htm">UCs Gestore Negozio</a></td>
+			<td class="ObjectDetailsValue"><a href="EA529.htm">UCs Gestore Negozio</a>, <a href="../../EA16/EA20/EA945.htm">UC Visualizza Ordini da Spedire</a></td>
 		</tr>
 	</table>
-	
+	<div class="ObjectDetailsNotes">Questo caso d&#39;uso mostra tutti gli ordini da spedire, ossia nello stato Pagato.&lt;br/&gt;</div>
+
 	<div class="TableGroup" id="TableGroup">
 		<ul class="ItemTitle">
 			<li onClick="parent.toggleItem('AssociationsFrom');" id="AssociationsFromTitle">Associations From</li>
@@ -149,7 +150,7 @@ function nameClassifier(name, separator)
 					<td class="TableRowBottomDashed"  colspan="2">
 						<div class="DetailsDivParent"><img src="../../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario1911" onclick="parent.toggleDiv('detailsDIVScenario1911','DetailsImageScenario1911')" />Details:
 							<div id="detailsDIVScenario1911" class="DetailsDiv" >
-							<div class="ObjectDetailsNotes">Appena entra nella finestra, l&#39;utente vede l&#39;elenco di tutti gli ordini con i rispettivi stati.&lt;br/&gt;L&#39;utente inserisce il numero dell&#39;ordine nel campo apposito e poi clicca cerca. Il sistema visualizza nella tabella solo l&#39;ordine con il numero indicato oppure il messaggio &quot;Ordine non trovato&quot; se non esiste alcun ordine con quel numero.&lt;br/&gt;</div>
+							<div class="ObjectDetailsNotes">Appena entra nella finestra, l&#39;utente vede l&#39;elenco di tutti gli ordini da spedire, ossia nello stato Pagato.&lt;br/&gt;L&#39;utente inserisce il numero dell&#39;ordine nel campo apposito e poi clicca cerca. Il sistema visualizza nella tabella solo l&#39;ordine con il numero indicato oppure il messaggio &quot;Ordine non trovato&quot; se non esiste alcun ordine con quel numero.&lt;br/&gt;</div>
 
 							</div>
 						</div>
@@ -165,23 +166,7 @@ function nameClassifier(name, separator)
 					<td class="TableRowBottomDashed"  colspan="2">
 						<div class="DetailsDivParent"><img src="../../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario1912" onclick="parent.toggleDiv('detailsDIVScenario1912','DetailsImageScenario1912')" />Details:
 							<div id="detailsDIVScenario1912" class="DetailsDiv" >
-							<div class="ObjectDetailsNotes">Appena entra nella finestra, l&#39;utente vede l&#39;elenco di tutti gli ordini con i rispettivi stati.&lt;br/&gt;L&#39;utente inserisce la data dell&#39;ordine nel campo apposito e poi clicca cerca. Il sistema visualizza nella tabella tutti gli ordini con la data indicata oppure il messaggio &quot;Ordine non trovato&quot; se non esiste alcun ordine con quella data.&lt;br/&gt;</div>
-
-							</div>
-						</div>
-						
-						
-					</td>
-				</tr>
-				<tr>
-					<td width="90%" class="TableRow">Filtro per stato</td>
-					<td width="10%" class="TableRow">Alternate</td>
-				</tr>
-				<tr>
-					<td class="TableRowBottomDashed"  colspan="2">
-						<div class="DetailsDivParent"><img src="../../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario1913" onclick="parent.toggleDiv('detailsDIVScenario1913','DetailsImageScenario1913')" />Details:
-							<div id="detailsDIVScenario1913" class="DetailsDiv" >
-							<div class="ObjectDetailsNotes">Appena entra nella finestra, l&#39;utente vede l&#39;elenco di tutti gli ordini con i rispettivi stati.&lt;br/&gt;L&#39;utente seleziona da una combo lo stato dell&#39;ordine dell&#39;ordine&#160;&#160;e il sistema visualizza nella tabella tutti gli ordini con lo stato indicato oppure il messaggio &quot;Nessun ordine nello stato desiderato&quot; se non esiste alcun ordine con quello stato.&lt;br/&gt;</div>
+							<div class="ObjectDetailsNotes">Appena entra nella finestra, l&#39;utente vede l&#39;elenco di tutti gli ordini da spedire, ossia nello stato Pagato.&lt;br/&gt;L&#39;utente inserisce la data dell&#39;ordine nel campo apposito e poi clicca cerca. Il sistema visualizza nella tabella tutti gli ordini con la data indicata oppure il messaggio &quot;Ordine non trovato&quot; se non esiste alcun ordine con quella data.&lt;br/&gt;</div>
 
 							</div>
 						</div>
@@ -216,6 +201,13 @@ function nameClassifier(name, separator)
 				</tr>
 				<tr>
 					<td width="30%" class="TableRow" valign="top"><a href="EA539.htm">Spedisci Ordine</a></td>
+					<td width="10%" class="TableRow" valign="top">UseCase</td>
+					<td width="10%" class="TableRow" valign="top">Extends</td>
+					<td width="10%" class="TableRow" valign="top">From</td>
+					<td width="40%" class="TableRow" valign="top">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="30%" class="TableRow" valign="top"><a href="EA540.htm">Visualizza Dettagli Ordine</a></td>
 					<td width="10%" class="TableRow" valign="top">UseCase</td>
 					<td width="10%" class="TableRow" valign="top">Extends</td>
 					<td width="10%" class="TableRow" valign="top">From</td>
