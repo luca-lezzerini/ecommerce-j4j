@@ -105,10 +105,12 @@ public class SpedizioneServiceImpl implements SpedizioneService {
 
     @Override
     public SpedizioneSearchPrezzoResultsDto prezzoSearch(SpedizioneSearchPrezzoDto dtoPrezzo) {
+        //Metodo per cercare per prezzo le spedizioni nel repository
         System.out.println("server, ricerca per prezzo");
         List<Spedizione> gig = null;
         SpedizioneSearchPrezzoResultsDto dtoPr = new SpedizioneSearchPrezzoResultsDto();
         System.out.println("dto creato");
+        //Verifico che la searchKey non sia uguale a null
         if (dtoPrezzo.getSearchKey()==null){
              gig=spedizioneRepository.findAll();
         }

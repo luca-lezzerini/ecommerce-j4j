@@ -13,25 +13,49 @@ import { Observable } from 'rxjs';
   styleUrls: ['./elenco-offerte.component.css']
 })
 export class ElencoOfferteComponent implements OnInit {
-  constructor(private http: HttpClient, private router: Router, private ac: AreaComuneService) {}
-  prezzoSearch: string;
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private ac: AreaComuneService
+  ) {}
+
+  prezzoSearch: number;
   prodotti: Prodotto[];
-  ngOnInit() {}
+  msg: string;
+
+  ngOnInit() {
+    if (!this.ac.token) {
+      this.router.navigateByUrl('login');
+    }
+  }
+  /**
+   * Effettua la ricerca per prezzo sui prodotti in offerta.
+   * prezzoSearch è la chiave di ricerca, verranno tornati solo i prodotti con prezzo inferiore a quello dato.
+   * Se il campo viene lasciato vuoto, cerca tutti i prodotti in offerta.
+   */
   ricerca() {
-    if (this.prezzoSearch === undefined) {
-      this.prezzoSearch = '';
+    if (this.prezzoSearch === undefined || this.prezzoSearch === null) {
+      this.prezzoSearch = Number.MAX_VALUE;
     }
     // preparo i dati da inviare al service
-    let dto: ProdottoSearchDto = new ProdottoSearchDto();
+    const dto: ProdottoSearchDto = new ProdottoSearchDto();
     dto.token = this.ac.token;
-    dto.searchKey = this.prezzoSearch;
+    // converte prezzoSearch a string in quanto searchKey è una stringa
+    dto.searchKey = this.prezzoSearch.toString();
 
     // preparo la richesta http
-    let obs: Observable<ProdottoSearchResultsDto> = this.http.post<
-      ProdottoSearchResultsDto
-    >('http://localhost:8080/search-offerte', dto);
+    const obs: Observable<ProdottoSearchResultsDto> = this.http.post<ProdottoSearchResultsDto>
+      (this.ac.hostUrl + '/search-offerte', dto);
+
     obs.subscribe(data => {
-      this.prodotti = data.result;
+      if (data.result.length == 0) {
+        this.msg = 'Nessun risultato trovato';
+        this.prodotti = null;
+      } else {
+        this.prodotti = data.result;
+        this.msg = 'Risultati trovati: ' + data.result.length;
+      }
     });
+    this.prezzoSearch = null;
   }
 }

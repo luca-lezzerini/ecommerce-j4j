@@ -23,14 +23,6 @@ public class ProdottoServiceImpl implements ProdottoService {
     @Autowired
     private SecurityService securityService;
 
-    /**
-     * inserisce un nuovo Prodotto non viene inserito nei casi in cui: il
-     * parametro dto è null; la proprietà dati del dto è null; il codice del
-     * prodotto da inserire è una stringa vuota o null; il token non è valido;
-     * il codice del prodotto da inserire esiste già
-     *
-     * @param dto contiene il token e il prodotto da inserire
-     */
     @Override
     public void createProdotto(ProdottoCreateDto dto) {
 
@@ -54,16 +46,6 @@ public class ProdottoServiceImpl implements ProdottoService {
         }
     }
 
-    /**
-     * ricerca Prodotto in base al valore della proprietà searchKey di dto.
-     * restituisce un dto la cui proprietà results contiene un ArrayList di
-     * Prodotto, il cui codice contiene la searchKey restituisce una lista vuota
-     * se il parametro dto è null, o se non trova risultati, o se il token non è
-     * valido
-     *
-     * @param dto contiene il token e la chiave di ricerca
-     * @return ArrayList<Prodotto>
-     */
     @Override
     public ProdottoSearchResultsDto searchProdotto(ProdottoSearchDto dto) {
 
@@ -71,9 +53,7 @@ public class ProdottoServiceImpl implements ProdottoService {
         ProdottoSearchResultsDto resultDto = new ProdottoSearchResultsDto();
 
         // controllo se il dto e la chiave di ricerca sono diversi da null
-        // e se il token è valido
-        if (dto != null && dto.getSearchKey() != null
-                && securityService.checkToken(dto.getToken())) {
+        if (dto != null && dto.getSearchKey() != null) {
 
             //recupero i risultati e avvaloro il dto di ritorno                
             List<Prodotto> lp = prodottoRepository.
@@ -89,13 +69,6 @@ public class ProdottoServiceImpl implements ProdottoService {
         return resultDto;
     }
 
-    /**
-     * elimina un Prodotto avente id uguale alla proprietà idToDelete del dto.
-     * non elimina nulla se il parametro dto è null, o se il token non è valido,
-     * o se la proprietà idToDelete del dto è null
-     *
-     * @param dto contiene il token e l'id del prodotto da eliminare
-     */
     @Override
     public void deleteProdotto(ProdottoDeleteDto dto) {
 
@@ -115,14 +88,6 @@ public class ProdottoServiceImpl implements ProdottoService {
         }
     }
 
-    /**
-     * modifica i valori di un Prodotto corrispondente che ha id uguale a
-     * dto.dati.id non esegue la modifica se il dto o dto.dati sono null, o se
-     * dto.codice è null o stringa vuota, o se il token non è valido, o se
-     * dto.dati.id è una stringa vuota
-     *
-     * @param dto contiene il token e il prodotto da modificare
-     */
     @Override
     public void updateProdotto(ProdottoUpdateDto dto) {
 
@@ -144,17 +109,6 @@ public class ProdottoServiceImpl implements ProdottoService {
         }
     }
 
-    /**
-     * Ricerca prodotti in offerta con prezzo minore a quello inserito
-     * restituisce un dto la cui proprietà results contiene un ArrayList di
-     * Prodotto, il cui codice contiene la searchKey restituisce una lista vuota
-     * se il parametro dto è null, o se non trova risultati, o se il token non è
-     * valido
-     *
-     * @param dto contiene il token e la chiave di ricerca (il prezzo)
-     * @return ArrayList<Prodotto>
-     * */
-    
     @Override
     public ProdottoSearchResultsDto searchOfferte(ProdottoSearchDto dto) {
 
@@ -167,7 +121,7 @@ public class ProdottoServiceImpl implements ProdottoService {
                 && securityService.checkToken(dto.getToken())) {
             List<Prodotto> lp;
             // se la key che riceve è vuota restituisce tutti i prodotti in offerta...
-            if ((dto.getSearchKey().trim()).equals("")) {
+            if ((dto.getSearchKey().trim()).equals(Double.MAX_VALUE)) {
                 lp = prodottoRepository.findByOfferta(true);
                 //...altrimenti ricerca i prodotti in offerta con prezzo inferiore a quello dato
             } else {
@@ -183,6 +137,65 @@ public class ProdottoServiceImpl implements ProdottoService {
             }
             resultDto.setResult(lp);
 
+        } else {
+            // ... se il dto non esiste, restituisce un ArrayList vuoto
+            resultDto.setResult(Collections.emptyList());
+        }
+        return resultDto;
+    }
+
+    @Override
+    public ProdottoSearchResultsDto searchProdottoPerDescrizione(ProdottoSearchDto dto) {
+
+        // istanzio il dto di ritorno
+        ProdottoSearchResultsDto resultDto = new ProdottoSearchResultsDto();
+
+        // controllo se il dto e la chiave di ricerca sono diversi da null
+        // e se il token è valido
+        if (dto != null && dto.getSearchKey() != null
+                && securityService.checkToken(dto.getToken())) {
+
+            //recupero i risultati e avvaloro il dto di ritorno                
+            List<Prodotto> lp = prodottoRepository.
+                    findByDescrizioneContainingIgnoreCase(dto.getSearchKey());
+
+            // ordino i risultati per codice
+            Collections.sort(lp, (p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
+            resultDto.setResult(lp);
+        } else if (dto.getSearchKey() == null && dto.getSearchKey() == ""
+                && securityService.checkToken(dto.getToken())) {
+            //recupero i risultati e avvaloro il dto di ritorno                
+            List<Prodotto> lp = prodottoRepository.
+                    findByDescrizioneContainingIgnoreCase(dto.getSearchKey());
+
+            // ordino i risultati per codice
+            Collections.sort(lp, (p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
+            resultDto.setResult(lp);
+        } else {
+            // ... se il dto non esiste, restituisce un ArrayList vuoto
+            resultDto.setResult(Collections.emptyList());
+            System.out.println("impossibile cercare");
+        }
+        return resultDto;
+    }
+
+    @Override
+    public ProdottoSearchResultsDto searchProdottoRiservato(ProdottoSearchDto dto) {
+        // istanzio il dto di ritorno
+        ProdottoSearchResultsDto resultDto = new ProdottoSearchResultsDto();
+
+        // controllo se il dto e la chiave di ricerca sono diversi da null
+        // e se il token è valido
+        if (dto != null && dto.getSearchKey() != null
+                && securityService.checkToken(dto.getToken())) {
+
+            //recupero i risultati e avvaloro il dto di ritorno                
+            List<Prodotto> lp = prodottoRepository.
+                    findByCodiceContainingIgnoreCase(dto.getSearchKey());
+
+            // ordino i risultati per codice
+            Collections.sort(lp, (p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
+            resultDto.setResult(lp);
         } else {
             // ... se il dto non esiste, restituisce un ArrayList vuoto
             resultDto.setResult(Collections.emptyList());

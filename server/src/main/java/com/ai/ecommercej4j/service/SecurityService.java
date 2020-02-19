@@ -5,22 +5,23 @@ import com.ai.ecommercej4j.model.*;
 public interface SecurityService {
 
     LoginResponseDto login(LoginRequestDto dto);
-    
+
     /**
-     * cerca il doi dell'utente con la repository 
-     * e lo associa ad un utente appena creato
-     * se non trova il doi la stringa sarà nulla 
-     * e ritornera un errorenella console 
-     * @param dto che rappresenta il token di risposta del login 
+     * cerca il doi dell'utente con la repository e lo associa ad un utente
+     * appena creato se non trova il doi la stringa sarà nulla e ritornera un
+     * errorenella console
+     *
+     * @param dto che rappresenta il token di risposta del login
      */
     void checkDoubleOptin(LoginResponseDto dto);
-    
-     /**
-     * ricerca l'utenta nella repository, gli assegna il double opt in 
-     * e salva l'utente.
-     * Se l'utente non esiste genera un errore nella console
+
+    /**
+     * ricerca l'utenta nella repository, gli assegna il double opt in e salva
+     * l'utente. Se l'utente non esiste genera un errore nella console
+     *
      * @param dto rappresenta i campi di username e password per la login
-     * @return un dto di risposta contenente il double optin assegnato in caso di errore sarà vuota
+     * @return un dto di risposta contenente il double optin assegnato in caso
+     * di errore sarà vuota
      */
     LoginResponseDto passwordDimenticata(LoginRequestDto dto);
 
@@ -42,5 +43,19 @@ public interface SecurityService {
      * @return vero se è diverso da null, falso in caso contrario.
      */
     Boolean checkToken(String tok);
+    
+    /**
+     * Crea un token per l'utente anonimo usando il metodo generateRandomString
+     *
+     * @return un dto di risposta contenente il token
+     */
+    LoginResponseDto generateTokenAnonimo();
+    
+    /**
+     * Controlla che l'utente non sia anonimo
+     * @param token il token dell'utente
+     * @return true se l'utente è registrato, false se anonimo
+     */
+    Boolean checkAnonimo(String token);
 
 }

@@ -32,6 +32,7 @@ export class AnagraficaTaglieComponent implements OnInit {
   inputDisabled: boolean;
   visPrecedente: string;
   id = 0;
+  tagliaSelezionata: Taglia = new Taglia();
 
   constructor(
     private http: HttpClient,
@@ -41,9 +42,11 @@ export class AnagraficaTaglieComponent implements OnInit {
     this.initVis();
   }
 
+  /**
+   * Se il token è nullo vieni reindirizzato alla pagina di login.
+   */
   ngOnInit() {
-    console.log(this.sessione);
-    if (! this.sessione.token) {
+    if (!this.sessione.token) {
       this.router.navigateByUrl('login');
     }
   }
@@ -104,6 +107,9 @@ export class AnagraficaTaglieComponent implements OnInit {
     this.aggiungiEnabled = true;
   }
 
+  /**
+   * Imposta la visibilità in base allo stato precedente.
+   */
   visAnnulla() {
     switch (this.visPrecedente) {
       case 'aggiungi':
@@ -130,13 +136,18 @@ export class AnagraficaTaglieComponent implements OnInit {
     this.aggiungiEnabled = false;
   }
 
+  /**
+   * Manda una richiesta al server con un oggetto contenente il token per poter
+   * verificare l'accesso e la stringa contenente il parametro di ricerca. Se
+   * il server ritorna una lista di prodotti non nulla, mostro il suo contenuto.
+   */
   cerca() {
     // prepara la chiamata al server
     const dto: TagliaSearchDto = new TagliaSearchDto();
     dto.token = this.sessione.token;
     dto.searchKey = this.searchKey;
     const obs: Observable<TagliaSearchResultsDto> =
-      this.http.post<TagliaSearchResultsDto>('http://localhost:8080/search-taglia', dto);
+      this.http.post<TagliaSearchResultsDto>(this.sessione.hostUrl + '/search-taglia', dto);
 
     // invia la richiesta al server
     obs.subscribe(risposta => {
@@ -149,7 +160,7 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.visCercaSenzaRisultato();
       }
       if (this.visPrecedente === 'edit') {
-        this.view(this.id);
+        this.view(this.tagliaSelezionata);
       }
       this.visPrecedente = 'cerca';
     });
@@ -193,13 +204,13 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.id = 0;
         break;
       case 'modifica':
-        this.view(this.id);
+        this.view(this.tagliaSelezionata);
         break;
       case 'edit':
-        this.view(this.id);
+        this.view(this.tagliaSelezionata);
         break;
       case 'rimuovi':
-        this.view(this.id);
+        this.view(this.tagliaSelezionata);
         break;
       case 'delete':
         this.cerca();
@@ -232,33 +243,39 @@ export class AnagraficaTaglieComponent implements OnInit {
     this.visPrecedente = 'rimuovi';
   }
 
-  view(id: number) {
+  view(t: Taglia) {
     this.visView();
-    this.getDettagli(id);
+    this.setDettagli(t);
   }
 
-  edit(id: number) {
+  edit(t: Taglia) {
     this.visAttesaConferma();
-    this.getDettagli(id);
+    this.setDettagli(t);
     this.visPrecedente = 'edit';
   }
 
-  delete(id: number) {
+  delete(t: Taglia) {
     this.visAttesaConfermaDelete();
-    this.getDettagli(id);
+    this.setDettagli(t);
     this.visPrecedente = 'delete';
   }
 
-  getDettagli(id: number) {
-    this.id = id;
-    this.taglie.forEach(element => {
-      if (element.id === id) {
-        this.codice = element.codice;
-        this.descrizione = element.descrizione;
-      }
-    });
+  /**
+   * Prende una taglia e popola i campi di testo con i suoi valori.
+   * @param id Viene passata la taglia selezionata.
+   */
+  setDettagli(t: Taglia) {
+    this.tagliaSelezionata = t;
+    this.id = t.id;
+    this.codice = t.codice;
+    this.descrizione = t.descrizione;
   }
 
+  /**
+   * Manda una richiesta al server con un oggetto contenente il token per poter
+   * verificare l'accesso e la taglia da registrare. Dopodoché ripete l'ultima
+   * ricerca effettuata e pulisce i campi.
+   */
   confermaAggiungi() {
     if (this.checkCampi()) {
       // prepara la chiamata al server
@@ -267,7 +284,7 @@ export class AnagraficaTaglieComponent implements OnInit {
       dto.dati = new Taglia();
       dto.dati.codice = this.codice;
       dto.dati.descrizione = this.descrizione;
-      const obs: Observable<any> = this.http.post('http://localhost:8080/create-taglia', dto);
+      const obs: Observable<any> = this.http.post(this.sessione.hostUrl + '/create-taglia', dto);
       // invia la richiesta al server
       obs.subscribe(risposta => {
         // ripete ultima ricerca
@@ -277,6 +294,11 @@ export class AnagraficaTaglieComponent implements OnInit {
     }
   }
 
+  /**
+   * Manda una richiesta al server con un oggetto contenente il token per poter
+   * verificare l'accesso e la taglia da modificare. Dopodoché ripete l'ultima
+   * ricerca effettuata e pulisce i campi.
+   */
   confermaEdit() {
     if (this.checkCampi()) {
       // creo un oggetto da passare al server
@@ -287,7 +309,7 @@ export class AnagraficaTaglieComponent implements OnInit {
       dto.dati.codice = this.codice;
       dto.dati.descrizione = this.descrizione;
       // preparo la richiesta al server
-      const obs: Observable<any> = this.http.post('http://localhost:8080/update-taglia', dto);
+      const obs: Observable<any> = this.http.post(this.sessione.hostUrl + '/update-taglia', dto);
       // invia la richiesta al server
       obs.subscribe(response => {
         this.cerca();
@@ -296,17 +318,25 @@ export class AnagraficaTaglieComponent implements OnInit {
     }
   }
 
+  /**
+   * Manda una richiesta al server con un oggetto contenente il token per poter
+   * verificare l'accesso e la taglia da rimuovere. Dopodoché ripete l'ultima
+   * ricerca effettuata e pulisce i campi.
+   */
   confermaDelete() {
     const dto: TagliaDeleteDto = new TagliaDeleteDto();
     dto.token = this.sessione.token;
     dto.idToDelete = this.id;
-    const obs: Observable<any> = this.http.post<any>('http://localhost:8080/delete-taglia', dto);
+    const obs: Observable<any> = this.http.post<any>(this.sessione.hostUrl + '/delete-taglia', dto);
     obs.subscribe(reponse => {
       this.cerca();
     });
     this.pulisciCampi();
   }
 
+  /**
+   * Verica che i campi siano popolati
+   */
   checkCampi(): boolean {
     if (this.codice && this.descrizione) {
       return true;

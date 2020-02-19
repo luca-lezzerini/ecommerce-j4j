@@ -1,0 +1,6 @@
+tocTab[tocTab.length] = new Array("0.11.10:1", "", "UI Visualizza Carrello", "EARoot/EA11/EA10/EA736.htm", "188.png", "89", "0", "", "Custom diagram0","{C878AA5E-7469-44c9-AC07-6584ACE420BA}");
+tocTab[tocTab.length] = new Array("0.11.10:2", "", "«WireframeWebsite» Webpage1", "EARoot/EA11/EA10/EA740.htm", "11.png", "E873", "0", "", "Screen0","{ED301FDF-2762-4357-861C-62B0809A2CBA}");
+tocTab[tocTab.length] = new Array("0.11.10:3", "", "«WireframeLabel» del 14/02/2020", "EARoot/EA11/EA10/EA741.htm", "16.png", "E875", "E873", "", "GUIElement0","{E6E882AA-175A-4425-BA3E-89A2660AC72C}");
+tocTab[tocTab.length] = new Array("0.11.10:4", "", "«WireframeLabel» Ordine n. 123", "EARoot/EA11/EA10/EA742.htm", "16.png", "E874", "E873", "", "GUIElement0","{38EC419D-DDF8-42a2-B8B1-EBABE1DEB47C}");
+tocTab[tocTab.length] = new Array("0.11.10:5", "", "«WireframeTable» Table", "EARoot/EA11/EA10/EA743.htm", "16.png", "E876", "E873", "", "GUIElement0","{EF118021-C8EB-467a-A80F-69040304EF1C}");
+tocTab[tocTab.length] = new Array("0.11.10:6", "", "«WireframeLabel» Totale 150 €", "EARoot/EA11/EA10/EA744.htm", "16.png", "E877", "E873", "", "GUIElement0","{CB38D15C-510B-4b17-AB6F-A5DDDB4C9214}");

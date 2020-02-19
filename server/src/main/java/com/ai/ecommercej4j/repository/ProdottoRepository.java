@@ -6,10 +6,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProdottoRepository extends JpaRepository<Prodotto, Long>{
+public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
+
     List<Prodotto> findByCodiceContainingIgnoreCase(String codice);
-    
+   
+    List<Prodotto> findByDescrizioneContainingIgnoreCase(String descrizione);
+
     List<Prodotto> findByPrezzoLessThanEqualAndOfferta(double prezzo, boolean offerta);
-    
+
     List<Prodotto> findByOfferta(boolean offerta);
+    
+    
 }

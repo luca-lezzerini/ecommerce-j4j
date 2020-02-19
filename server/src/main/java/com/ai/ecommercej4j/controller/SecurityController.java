@@ -42,4 +42,9 @@ public class SecurityController {
         ss.reimpostaPassword(dto);
     }
 
+    @RequestMapping("/generate-token-anonimo")
+    @ResponseBody
+    public LoginResponseDto generateTokenAnonimo() {
+        return ss.generateTokenAnonimo();
+    }
 }

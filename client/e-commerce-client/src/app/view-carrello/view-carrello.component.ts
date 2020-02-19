@@ -1,4 +1,7 @@
+import { Prodotto } from './../classi/prodotto';
 import { Component, OnInit } from '@angular/core';
+import { AreaComuneService } from '../area-comune.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-view-carrello',
@@ -7,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewCarrelloComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient, private ac: AreaComuneService) { }
+  prodotti: Prodotto[] = [];
+  nOrdine: string;
+  nData: string;
+  nTotale: string;
+
 
   ngOnInit() {
   }

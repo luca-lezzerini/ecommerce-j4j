@@ -32,6 +32,9 @@ import { ElencoOfferteComponent } from './elenco-offerte/elenco-offerte.componen
 import { ElencoSpedizioniComponent } from './elenco-spedizioni/elenco-spedizioni.component';
 import { ElencoColoriComponent } from './elenco-colori/elenco-colori.component';
 import { ElencoTaglieComponent } from './elenco-taglie/elenco-taglie.component';
+import { VisualizzaOrdiniComponent } from './visualizza-ordini/visualizza-ordini.component';
+import { OrdiniDaSpedireComponent } from './ordini-da-spedire/ordini-da-spedire.component';
+import { HomeAreaGestoreComponent } from './home-area-gestore/home-area-gestore.component';
 
 
 const appRoutes: Routes = [
@@ -62,6 +65,8 @@ const appRoutes: Routes = [
   { path: 'elenco-spedizioni', component: ElencoSpedizioniComponent},
   { path: 'elenco-colori', component: ElencoColoriComponent},
   { path: 'elenco-taglie', component: ElencoTaglieComponent},
+  { path: 'visualizza-ordini', component: VisualizzaOrdiniComponent},
+  { path: 'home-area-gestore', component: HomeAreaGestoreComponent},
 ];
 
 @NgModule({
@@ -92,6 +97,9 @@ const appRoutes: Routes = [
     ElencoSpedizioniComponent,
     ElencoColoriComponent,
     ElencoTaglieComponent,
+    VisualizzaOrdiniComponent,
+    OrdiniDaSpedireComponent,
+    HomeAreaGestoreComponent,
   ],
   imports: [
     RouterModule.forRoot(

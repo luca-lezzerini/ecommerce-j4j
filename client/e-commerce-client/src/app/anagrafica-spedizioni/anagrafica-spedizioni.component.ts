@@ -156,6 +156,10 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     this.deleteEnabled = true;
 
     this.statoPrecedente = 'search';
+<<<<<<< HEAD
+=======
+    console.log ('stato precedente');
+>>>>>>> 9de6c0c632d19d74bc3e39197d823b0410967d51
   }
 // Transizione in uscita da stato search tramite bottone Aggiungi
   daSearchAggiungi() {
@@ -521,8 +525,15 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     const dto: SpedizioneSearchDto = new SpedizioneSearchDto();
     dto.searchKey = search;
     dto.token = this.acService.token;
+<<<<<<< HEAD
     const obs: Observable<SpedizioneSearchResultsDto> =
       this.http.post<SpedizioneSearchResultsDto>('http://localhost:8080/search-spedizione', dto);
+=======
+    dto.searchKey = this.searchKey;
+    const obs: Observable<any> =
+      this.http.post<any>('http://localhost:8080/search-spedizione', dto);
+    console.log('mandato post ');
+>>>>>>> 9de6c0c632d19d74bc3e39197d823b0410967d51
     // invia la richiesta al server
     obs.subscribe(risposta => {
       this.spedizioni = risposta.result;

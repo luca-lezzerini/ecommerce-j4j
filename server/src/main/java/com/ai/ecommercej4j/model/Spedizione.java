@@ -4,18 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 
-/*Per Fabio : Inserire  @Entity & @Table nello spazio sottostante e 
-in seguito relativi import -Io non riesco ad importarli-
- */
 @Entity
-@Table
 public class Spedizione {
 
-    //X Fabio : nello spazio sottostante inserire annotazioni id  e generated value con relativi import
-    //Da valutare l'insert di equals
+    // con @Id indico la primary key
+    // con @GeneratedValue assegno un valore in automatico in caso di null
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
@@ -29,10 +24,12 @@ public class Spedizione {
         this.descrizione = descrizione;
         this.prezzo = prezzo;
     }
-
+    
+    // creiamo un costruttore vuoto
     public Spedizione() {
     }
-
+    
+    // metto i getter e i setter
     public Long getId() {
         return id;
     }

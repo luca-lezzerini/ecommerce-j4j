@@ -31,6 +31,18 @@ public class ProdottoController {
     public ProdottoSearchResultsDto searchProdotto(@RequestBody ProdottoSearchDto dto) {
         return ps.searchProdotto(dto);
     }
+    
+    @RequestMapping(value = "/search-prodotto-riservato")
+    @ResponseBody
+    public ProdottoSearchResultsDto searchProdottoRiservato(@RequestBody ProdottoSearchDto dto) {
+        return ps.searchProdottoRiservato(dto);
+    }
+    
+    @RequestMapping(value = "/search-prodotto-descrizione")
+    @ResponseBody
+    public ProdottoSearchResultsDto searchProdottoDescrizione(@RequestBody ProdottoSearchDto dto) {
+        return ps.searchProdottoPerDescrizione(dto);
+    }
 
     @RequestMapping(value = "/delete-prodotto")
     @ResponseBody

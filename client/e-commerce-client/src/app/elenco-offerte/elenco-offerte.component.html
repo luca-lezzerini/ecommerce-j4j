@@ -1,9 +1,15 @@
-<button value="home" routerLink="/">Home</button>
+<button value="home" routerLink="/home-riservata">Home</button>
 <hr>
-<label>Ricerca per prezzo</label>
-<input type="text" [(ngModel)]="prezzoSearch" name="prezzoSearch">
+<label>Ricerca per prezzo </label>
+<input type="number" [(ngModel)]="prezzoSearch" name="prezzoSearch" placeholder="Prezzo massimo prodotti"
+onkeydown="javascript:
+return event.keyCode === 8
+|| event.keyCode === 46
+|| event.keyCode === 190 ? true : !isNaN(Number(event.key))" >
+<!-- Conttrollo sui tasti cliccati: ammessi solo numeri, punto e tasti di canecllazione-->
 <button value="ricerca" (click)="ricerca()">Cerca</button>
 <br>
+<p>{{ msg }}</p>
 <table *ngIf="prodotti">
 
   <tr>

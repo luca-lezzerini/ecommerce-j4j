@@ -104,7 +104,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   // esegue l'inserimento di un nuovo prodotto
-
   private confermaCrea() {
     // prepara i dati da inviare al server
     let dto: ProdottoCreateDto = new ProdottoCreateDto();
@@ -116,7 +115,7 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // prepara la richiesta HTTP
     let oss: Observable<any> =
-      this.http.post<any>('http://localhost:8080/create-prodotto', dto);
+      this.http.post<any>(this.acService.hostUrl + '/create-prodotto', dto);
 
     // invio la richiesta
     oss.subscribe(risposta => {
@@ -127,7 +126,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   // esegue la modifica di un prodotto
-
   private confermaModifica() {
     // prepara i dati da inviare al server
     let dto: ProdottoUpdateDto = new ProdottoUpdateDto();
@@ -141,7 +139,7 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // prepara la richiesta HTTP
     let oss: Observable<any> =
-      this.http.post<any>('http://localhost:8080/update-prodotto', dto);
+      this.http.post<any>(this.acService.hostUrl + '/update-prodotto', dto);
 
     // invio la richiesta
     oss.subscribe(risposta => {
@@ -152,7 +150,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   // esegue la rimozione di un prodotto
-
   private confermaRimuovi() {
     // prepara i dati da inviare al server
     let dto: ProdottoDeleteDto = new ProdottoDeleteDto();
@@ -161,7 +158,7 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // prepara la richiesta HTTP
     let oss: Observable<any> =
-      this.http.post<any>('http://localhost:8080/delete-prodotto', dto);
+      this.http.post<any>(this.acService.hostUrl + '/delete-prodotto', dto);
 
     // invio la richiesta
     oss.subscribe(risposta => {
@@ -191,7 +188,6 @@ export class AnagraficaProdottiComponent implements OnInit {
 
   crea() {
     // pulisci campi di input nel panel
-
     this.annullaCampiPanel();
 
     // imposta visibilità degli elementi dell'interfaccia
@@ -231,7 +227,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   rimuovi(p: Prodotto) {
-
     // copia i valori  del prodotto selezionato nei campi del panel
     this.popolaCampiPanel(p);
 
@@ -282,7 +277,7 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // prepara la richiesta HTTP
     let oss: Observable<ProdottoSearchResultsDto> =
-      this.http.post<ProdottoSearchResultsDto>('http://localhost:8080/search-prodotto', dto);
+      this.http.post<ProdottoSearchResultsDto>(this.acService.hostUrl + '/search-prodotto', dto);
 
     // invio la richiesta
     oss.subscribe(risposta => {
@@ -302,7 +297,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   view(p: Prodotto) {
-
     // copia i valori  del prodotto selezionato nei campi del panel
     this.popolaCampiPanel(p);
 
