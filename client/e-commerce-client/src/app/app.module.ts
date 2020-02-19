@@ -32,6 +32,7 @@ import { ElencoOfferteComponent } from './elenco-offerte/elenco-offerte.componen
 import { ElencoSpedizioniComponent } from './elenco-spedizioni/elenco-spedizioni.component';
 import { ElencoColoriComponent } from './elenco-colori/elenco-colori.component';
 import { ElencoTaglieComponent } from './elenco-taglie/elenco-taglie.component';
+import { OrdiniDaSpedireComponent } from './ordini-da-spedire/ordini-da-spedire.component';
 
 
 const appRoutes: Routes = [
@@ -92,6 +93,7 @@ const appRoutes: Routes = [
     ElencoSpedizioniComponent,
     ElencoColoriComponent,
     ElencoTaglieComponent,
+    OrdiniDaSpedireComponent,
   ],
   imports: [
     RouterModule.forRoot(
