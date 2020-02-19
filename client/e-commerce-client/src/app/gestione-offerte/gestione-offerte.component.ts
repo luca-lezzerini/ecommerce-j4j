@@ -26,17 +26,19 @@ export class GestioneOfferteComponent implements OnInit {
     private sessione: AreaComuneService
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
 
-  }
-
+  /**
+   * Manda una richiesta al server un oggetto contenente il token per poter
+   * verificare l'accesso e i nuovi dati immessi dal cliente. Dopodiché,
+   * ripete la ricerca e mostra la visuale della selezione dei prodotti
+   */
   conferma() {
     const dto: ProdottoUpdateDto = new ProdottoUpdateDto();
     dto.token = this.sessione.token;
     dto.dati = this.prodottoSelezionato;
     dto.dati.prezzo = this.newPrice;
     dto.dati.offerta = this.inOfferta;
-    console.log(dto);
     const obs: Observable<any> = this.http.post<any>('http://localhost:8080/update-prodotto', dto);
     obs.subscribe(risp => {
       this.cercaCodice();
@@ -44,11 +46,20 @@ export class GestioneOfferteComponent implements OnInit {
     });
   }
 
+  /**
+   * Mostra la visuale della selezione dei prodotti e pulisce
+   * il campo di ricerda del prodotto
+   */
   annulla() {
     this.searchCode = '';
     this.selezionaEnabled = false;
   }
 
+  /**
+   * Manda una richiesta al server un oggetto contenente il token per poter
+   * verificare l'accesso e la stringa contenente il parametro di ricerca. Se
+   * il server ritorna una lista di prodotti non nulla, mostro il suo contenuto
+   */
   cercaCodice() {
     // prepara richiesta http
     const dto: ProdottoSearchDto = new ProdottoSearchDto();
@@ -65,22 +76,15 @@ export class GestioneOfferteComponent implements OnInit {
     });
   }
 
-  seleziona(id: number) {
+  /**
+   * Nasconte la visuale precedente e mostra il prodotto selezionato
+   * in maniera da poterlo gestire dal lato delle offerte
+   * @param p Viene passato il prodotto selezionato
+   */
+  seleziona(p: Prodotto) {
     this.selezionaEnabled = true;
-    this.getDettagli(id);
+    this.prodottoSelezionato = p;
     this.newPrice = this.prodottoSelezionato.prezzo;
     this.inOfferta = this.prodottoSelezionato.offerta;
-  }
-
-  getDettagli(id: number) {
-    this.prodotti.forEach(p => {
-      if (p.id === id) {
-        this.prodottoSelezionato.id = p.id;
-        this.prodottoSelezionato.codice = p.codice;
-        this.prodottoSelezionato.descrizione = p.descrizione;
-        this.prodottoSelezionato.prezzo = p.prezzo;
-        this.prodottoSelezionato.offerta = p.offerta;
-      }
-    });
   }
 }

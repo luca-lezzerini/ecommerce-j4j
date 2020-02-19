@@ -144,6 +144,17 @@ public class ProdottoServiceImpl implements ProdottoService {
         }
     }
 
+    /**
+     * Ricerca prodotti in offerta con prezzo minore a quello inserito
+     * restituisce un dto la cui proprietà results contiene un ArrayList di
+     * Prodotto, il cui codice contiene la searchKey restituisce una lista vuota
+     * se il parametro dto è null, o se non trova risultati, o se il token non è
+     * valido
+     *
+     * @param dto contiene il token e la chiave di ricerca (il prezzo)
+     * @return ArrayList<Prodotto>
+     * */
+    
     @Override
     public ProdottoSearchResultsDto searchOfferte(ProdottoSearchDto dto) {
 
@@ -152,13 +163,13 @@ public class ProdottoServiceImpl implements ProdottoService {
 
         // controllo se il dto e la chiave di ricerca sono diversi da null
         // e se il token è valido
-        if (dto != null && dto.getSearchKey() != null // FIXME il token può essere null
-                /*&& securityService.checkToken(dto.getToken())*/) {
+        if (dto != null && dto.getSearchKey() != null
+                && securityService.checkToken(dto.getToken())) {
             List<Prodotto> lp;
             // se la key che riceve è vuota restituisce tutti i prodotti in offerta...
-            if (dto.getSearchKey().equals("")) {
+            if ((dto.getSearchKey().trim()).equals("")) {
                 lp = prodottoRepository.findByOfferta(true);
-            //...altrimenti ricerca i prodotti in offerta con prezzo inferiore a quello dato
+                //...altrimenti ricerca i prodotti in offerta con prezzo inferiore a quello dato
             } else {
                 //trasformo la chiave di ricerca da string a double
                 double prezzo = Double.parseDouble(dto.getSearchKey());

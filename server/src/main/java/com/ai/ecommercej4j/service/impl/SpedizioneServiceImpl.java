@@ -62,11 +62,11 @@ public class SpedizioneServiceImpl implements SpedizioneService {
             );
             // ordino i risultati per codice
             Collections.sort(ls, (s1, s2) -> s1.getCodice().compareTo(s2.getCodice()));
-            dtossr.setResults(ls);
+            dtossr.setResult(ls);
         } else {
             System.out.println("token non esiste" + dto.getToken());
             //Se non esiste restituisco lista vuota
-            dtossr.setResults(Collections.emptyList());
+            dtossr.setResult(Collections.emptyList());
         }
         return dtossr;
     }

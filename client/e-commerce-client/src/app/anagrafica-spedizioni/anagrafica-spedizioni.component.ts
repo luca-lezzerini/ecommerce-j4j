@@ -17,11 +17,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./anagrafica-spedizioni.component.css']
 })
 export class AnagraficaSpedizioniComponent implements OnInit {
-  codice: '';
-  descrizione: '';
-  prezzo: '';
-
+  codice: string;
+  descrizione: string;
+  prezzo: number;
+  id: number;
   spedizioni: Spedizione[] = [];
+  spedizioneDaRimuovere = new Spedizione();
+  spedizioneSelezionata = new Spedizione();
 
   searchKey: '';
   idToDelete: number;
@@ -48,11 +50,14 @@ export class AnagraficaSpedizioniComponent implements OnInit {
   trovatoQualcosa = false;
   vieneDaSearch = false;
   statoPrecedente: string;
+  statoAttuale: string;
+  searchKeyPrecedente: string;
 
-  constructor(private http: HttpClient, private singleton: AreaComuneService, private root: ActivatedRoute) {
+  constructor(private http: HttpClient, private acService: AreaComuneService, private root: ActivatedRoute) {
+
     this.initView();
     //DEBUG only
-    this.singleton.token = '1234';
+    this.acService.token = '1234';
   }
 
 
@@ -70,7 +75,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
     this.resultsEnabled = false;
 
-    this.statoPrecedente = 'search';
+    this.statoAttuale = 'search';
   }
 
   daSearchCerca() {
@@ -95,7 +100,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
     }
     this.statoPrecedente = 'search';
-
+    this.statoAttuale = 'search';
   }
 
   daSearchDelete() {
@@ -219,7 +224,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
 
   // da CreateState a SearchState freccia "annulla" - parte Filippo -
-  daCreateAnnulla(){
+  daCreateAnnulla() {
    console.log( 'daCreateAnnulla ' );
 
    this.panelEnabled = false;
@@ -236,6 +241,9 @@ export class AnagraficaSpedizioniComponent implements OnInit {
    this.deleteEnabled = true;
 
    this.statoPrecedente = 'create';
+
+   // ??? da vedere
+   this.statoAttuale = 'create';
   }
 
   // da CreateState a SearchState freccia "conferma" - parte Filippo -
@@ -398,18 +406,21 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
       case 'create':
         this.daCreateConferma(); // vissualiza cambiamenti su UI
+
         this.creaSpedizione();   // crea una nuova spedizione e la manda a DB
-        this.statoPrecedente = 'create';
+        this.statoAttuale = 'create';
         break;
       case 'delete':
         this.daDeleteConferma();  // vissualiza cambiamenti su UI
-        this.deleteSpedizione();  // cancella dati da DB
-        this.statoPrecedente = 'delete';
+        this.idToDelete = this.spedizioneDaRimuovere.id;
+        this.deleteSpedizione();  // cancella i dati dal db
+        //this.deleteRiga(this.spedizioneDaRimuovere);
+        this.statoAttuale = 'search';
         break;
       case 'edit':
         this.daEditView();              // vissualiza cambiamenti su UI
         this.modificaSpedizione();      // manda i dati dal panel (codice, descrizione e prezzo) a DB
-        this.statoPrecedente = 'edit';
+        this.statoAttuale = 'view';
         break;
       default:
         console.log('Stato sbagliato: ' + this.statoPrecedente);
@@ -430,25 +441,25 @@ export class AnagraficaSpedizioniComponent implements OnInit {
       case 'create':
         this.daCreateAnnulla();
         this.annullaEdit();
-        this.statoPrecedente = 'create';
+        this.statoAttuale = 'create';
         break;
       case 'delete':
         if (this.vieneDaSearch) {
 
           this.vieneDaSearch = false;
           this.daDeleteAnnullaSearch();
-          this.statoPrecedente = 'search';
+          this.statoAttuale = 'search';
 
         } else {    // viene da view
           this.daDeleteAnnullaView();
-          this.statoPrecedente = 'view';
+          this.statoAttuale = 'view';
         }
 
         break;
       case 'edit':
         this.daEditView();
         this.annullaEdit();
-        this.statoPrecedente = 'edit';
+        this.statoAttuale = 'edit';
         break;
       default:
         console.log('Stato sbagliato: ' + this.statoPrecedente);
@@ -459,8 +470,8 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
   // Metodo invocato dal bottone crea
   crea() {
-
-    // DEBUG only
+    this.statoAttuale = 'create';
+    // DEBUG  only
     console.log('sono in crea, vengo da ' + this.statoPrecedente);
 
     // da quale stato viene invocato?
@@ -468,7 +479,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
       case 'view':
         this.daViewCreate();
-        this.statoPrecedente = 'view';
+        // this.statoPrecedente = 'view';
         break;
       default:
         console.log('Stato sbagliato: '  + this.statoPrecedente);
@@ -478,21 +489,22 @@ export class AnagraficaSpedizioniComponent implements OnInit {
   }
 
   // Metodo invocato dal bottone edit
-  edit() {
-
+  edit( selezionata: Spedizione) {
+      this.statoAttuale = 'edit';
       // DEBUG only
       console.log('sono in edit, vengo da ' + this.statoPrecedente);
+      //this.codice = selezionata.codice;
 
       // da quale stato viene invocato?
       switch (this.statoPrecedente) {
 
         case 'search':
           this.daSearchEdit();
-          this.statoPrecedente = 'search';
+          //this.statoPrecedente = '';
           break;
         case 'view':
           this.daViewEdit();
-          this.statoPrecedente = 'view';
+          //this.statoAttuale = 'edit';
           break;
         default:
           console.log('Stato sbagliato:  + this.statoPrecedente');
@@ -504,14 +516,14 @@ export class AnagraficaSpedizioniComponent implements OnInit {
   modifica() {
 
      // DEBUG only
-     console.log('sono in modificaa, vengo da ' + this.statoPrecedente);
-
-     this.edit();
-     this.statoPrecedente = 'edit';
+     console.log('sono in modifica, vengo da ' + this.statoPrecedente);
+     this.panelInputDisabled = false;
+     //this.edit(selezionata: Spedizione);
+     this.statoAttuale = 'edit';
   }
 
   // Metodo invocato dal bottone delete
-  delete() {
+  delete( selezionata: Spedizione ) {
 
       // DEBUG only
       console.log('sono in delete, vengo da ' + this.statoPrecedente);
@@ -521,12 +533,23 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
         case 'search':
           this.daSearchDelete();
-          this.statoPrecedente = 'search';
+          this.statoAttuale = 'delete';
+          this.idToDelete = selezionata.id;
+          console.log('id to delete (search) = ' + this.idToDelete);
+          this.deleteSpedizione();
           break;
         case 'view':
           this.daViewDelete();
-          this.statoPrecedente = 'view';
+          this.statoPrecedente = 'delete';
+          this.idToDelete = selezionata.id;
+          console.log('id to delete (view) = ' + this.idToDelete);
+          this.deleteSpedizione();
           break;
+        case 'delete':
+            this.idToDelete = selezionata.id;
+            console.log('id to delete (delete) = ' + this.idToDelete);
+            // non fa delete, aspetta conferma
+            break;
         default:
           console.log('Stato sbagliato: ' + this.statoPrecedente );
           break;
@@ -536,25 +559,40 @@ export class AnagraficaSpedizioniComponent implements OnInit {
   // Metodo invocato dal bottone rimuovi
   rimuovi() {
 
-    // DEBUG only
-    console.log('sono in rimuovi, vengo da ' + this.statoPrecedente);
+     // se i campi di input del panel sono vuoti non esegue
 
-    this.delete();
-    this.statoPrecedente = 'delete';
+    if (this.codice && this.descrizione && this.prezzo !== null) {
+
+      // copia in SpedizioneDaRimuovere i dati dei campi di input
+      if (this.id) {
+       this.spedizioneDaRimuovere.id = this.id;
+      }
+      this.spedizioneDaRimuovere.codice = this.codice;
+      this.spedizioneDaRimuovere.descrizione = this.descrizione;
+      this.spedizioneDaRimuovere.prezzo = +this.prezzo;
+   // DEBUG only
+      console.log('sono in rimuovi, vengo da ' + this.statoPrecedente);
+      this.daViewDelete();
+      this.annullaEdit();
+      this.statoPrecedente = 'delete';
+    }
   }
 
   // Metodo invocato dal bottone view
-  view() {
+    view(selezionata: Spedizione) {
 
     // DEBUG only
     console.log('sono in view, vengo da ' + this.statoPrecedente);
-
+    this.id = selezionata.id;
+    this.codice = selezionata.codice;
+    this.descrizione = selezionata.descrizione;
+    this.prezzo =  selezionata.prezzo;
     this.daSearchView();
     this.statoPrecedente = 'search';
   }
 
   // Metodo invocato dal bottone aggiungi
-  aggiungi() {
+    aggiungi() {
 
     // DEBUG only
     console.log('sono in aggiungi, vengo da ' + this.statoPrecedente);
@@ -565,8 +603,9 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
 
   // Metodo invocato dal bottone cerca
-  cerca() {
+    cerca() {
 
+    this.statoAttuale = 'search';
     // DEBUG only
     console.log('sono in cerca, vengo da ' + this.statoPrecedente);
 
@@ -575,18 +614,17 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
       case 'search':
         this.daSearchCerca();
-        this.statoPrecedente = 'search';
         break;
       case 'view':
         this.daViewCreate();
-        this.statoPrecedente = 'view';
         break;
       default:
         console.log('Stato sbagliato!');
         break;
     }
+    this.statoPrecedente = 'search';
     this.cercaSpedizione();   // cerca spedizione nel db e vissualizza se trova qualcosa
-    console.log('dopo cerca ne db sono in stato ' + this.statoPrecedente );
+    console.log('dopo cerca nel db sono in stato ' + this.statoPrecedente );
     //this.view();
     this.daSearchView();
     //DEBUG only
@@ -598,12 +636,15 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
     // DEBUG only
     console.log('Sono in creaSpedizione');
+    // Fare check dei campi se sono vuoti o meno
+    //if (this.codice.trim() !== '' && this.descrizione.trim() !== '') {
+    //
+    //}
 
-    /*  codice da testare */
 
     // prepara la chiamata al server
     const dto: SpedizioneCreateDto = new SpedizioneCreateDto();
-    dto.token = this.singleton.token;
+    dto.token = this.acService.token;
     dto.dati = new Spedizione();
     dto.dati.codice = this.codice;
     dto.dati.descrizione = this.descrizione;
@@ -611,8 +652,8 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     // DEBUG only
     console.log('siamo prima di observable, ho token ' + dto.token);
 
-    const obs: Observable<SpedizioneCreateDto> =
-          this.http.post<SpedizioneCreateDto>('http://localhost:8080/create-spedizione', dto);
+    const obs: Observable<any> =
+          this.http.post<any>('http://localhost:8080/create-spedizione', dto);
 
     console.log('siamo dopo di observable, ho token ' + dto.token);
 
@@ -620,15 +661,15 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     obs.subscribe(risposta => {
       // ripete ultima ricerca
       // una volta eseguito l'inserimento, eseguo di nuovo l'ultima ricerca effettuata
+      // this.searchKeyPrecedente
+      // this.cercaSpedizione();
 
-      this.cercaSpedizione();
-
-      console.log(risposta);
+      // console.log(risposta);
     });
 
   }
 
-  cercaSpedizione(){    // CRUD read
+    cercaSpedizione(){    // CRUD read
 
     // DEBUG only
     console.log('Sono in cercaSpedizione');
@@ -636,11 +677,11 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     /*  codice da testare */
     // prepara la chiamata al server
     const dto: SpedizioneSearchDto = new SpedizioneSearchDto();
-    dto.token = this.singleton.token;
+    dto.token = this.acService.token;
     dto.searchKey = this.searchKey;
     const obs: Observable<SpedizioneSearchResultsDto> =
       this.http.post<SpedizioneSearchResultsDto>('http://localhost:8080/search-spedizione', dto);
-      console.log('mandato post ');
+    console.log('mandato post ');
     // invia la richiesta al server
     obs.subscribe(risposta => {
       this.spedizioni = risposta.result;
@@ -661,16 +702,16 @@ export class AnagraficaSpedizioniComponent implements OnInit {
       }
     });
 
- // salvo la chiave di ricerca
- //this.searchKeyPrecedente = this.searchKey;
+    // salvo la chiave di ricerca
+    this.searchKeyPrecedente = this.searchKey;
 
- // pulisco il campo ricerca
- //this.searchKey = '';
+    // pulisco il campo ricerca
+    this.searchKey = '';
 
 
   }
 
-  modificaSpedizione() {    // CRUD update
+    modificaSpedizione() {    // CRUD update
 
     // DEBUG only
     console.log('Sono in modificaSpedizione');
@@ -678,13 +719,16 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     /*  codice da testare  */
     // prepara la chiamata al server
     const dto: SpedizioneUpdateDto = new SpedizioneUpdateDto();
-    dto.token = this.singleton.token;
+    dto.dati = new Spedizione();
+    dto.dati.id = this.id;
+    dto.dati.descrizione = this.descrizione;
+
+    dto.token = this.acService.token;
 
     dto.dati.codice = this.codice;
-    dto.dati.descrizione = this.descrizione;
     dto.dati.prezzo = +this.prezzo;  // qui + converte string in number
-    const obs: Observable<SpedizioneUpdateDto> =
-          this.http.post<SpedizioneUpdateDto>('http://localhost:8080/update-spedizione', dto);
+    const obs: Observable<any> =
+          this.http.post<any>('http://localhost:8080/update-spedizione', dto);
 
     // invia la richiesta al server
     obs.subscribe(risposta => {
@@ -696,44 +740,48 @@ export class AnagraficaSpedizioniComponent implements OnInit {
   }
 
 
-  deleteSpedizione() {    // CRUD delete
+    deleteSpedizione() {    // CRUD delete
 
     // DEBUG only
     console.log('Sono in deleteSpedizione');
 
-    /*  codice da testare */
     // prepara la chiamata al server
     const dto: SpedizioneDeleteDto = new SpedizioneDeleteDto();
-    dto.token = this.singleton.token;
+    dto.token = this.acService.token;
     dto.idToDelete = this.idToDelete;
-    const obs: Observable<SpedizioneDeleteDto> =
-      this.http.post<SpedizioneDeleteDto>('http://localhost:8080/search-spedizione', dto);
-
-    // invia la richiesta al server
+    const obs: Observable<any> =
+       this.http.post<any>('http://localhost:8080/delete-spedizione', dto);
+    console.log('fatto post delete');
+      // invia la richiesta al server
     obs.subscribe(risposta => {
         // ripete ultima ricerca
         // this.cercaSpedizione();
 
-         console.log(risposta);
-    });
+        console.log(risposta);
+      });
+
   }
 
 
-  showResults() {
+    showResults() {
     this.resultsEnabled = true;
     this.viewEnabled = true;
     this.editEnabled = true;
     this.deleteEnabled = true;
   }
 
-
-
-  annullaEdit() {
+    annullaEdit() {
     // reset input fields nel panel
     this.codice = '';
     this.descrizione = '';
-    this.prezzo = '';
+    this.prezzo = +'';
   }
+
+    deleteRiga(selezionata: Spedizione){
+
+
+  }
+
 
 }
 

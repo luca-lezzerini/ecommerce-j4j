@@ -3,6 +3,7 @@ package com.ai.ecommercej4j.service.impl;
 import com.ai.ecommercej4j.model.*;
 import com.ai.ecommercej4j.repository.UtenteRepository;
 import com.ai.ecommercej4j.service.SecurityService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,13 +36,7 @@ public class SecurityServiceImpl implements SecurityService {
         return response;
     }
 
-    /**
-     * cerca il doi dell'utente con la repository 
-     * e lo associa ad un utente appena creato
-     * se non trova il doi la stringa sarà nulla 
-     * e ritornera un errorenella console 
-     * @param dto che rappresenta il token di risposta del login 
-     */
+    
     @Override
     public void checkDoubleOptin(LoginResponseDto dto) {
         if(dto.getToken() != null){
@@ -51,13 +46,7 @@ public class SecurityServiceImpl implements SecurityService {
         }
     }
     
-    /**
-     * ricerca l'utenta nella repository, gli assegna il double opt in 
-     * e salva l'utente.
-     * Se l'utente non esiste genera un errore nella console
-     * @param dto rappresenta i campi di username e password per la login
-     * @return un dto di risposta contenente il double optin assegnato in caso di errore sarà vuota
-     */
+   
     @Override
     public LoginResponseDto passwordDimenticata(LoginRequestDto dto) {
 
@@ -86,12 +75,7 @@ public class SecurityServiceImpl implements SecurityService {
 
     }
 
-    /**
-     * prende l' utente dalla repository e confronta la password nuova con la vecchia
-     * se le password coincidono genera un errore in console altrimenti 
-     * imposta la nuova password e salva l'utente.
-     * @param dto 
-     */
+   
     @Override
     public void reimpostaPassword(ChangePasswordRequestDto dto) {
 
@@ -147,14 +131,12 @@ public class SecurityServiceImpl implements SecurityService {
         return resp;
     }
 
-    /**
-     * Controlla se il token esiste
-     * @param tok
-     * @return vero se è diverso da null, falso in caso contrario.
-     */
+    
     @Override
     public Boolean checkToken(String tok) {
+        //per ora il metodo accetta token = null
         return ur.findByToken(tok) != null;
+        
     }
 
 }

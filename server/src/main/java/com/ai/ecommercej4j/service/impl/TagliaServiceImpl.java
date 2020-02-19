@@ -58,15 +58,20 @@ public class TagliaServiceImpl implements TagliaService {
 
     @Override
     public void deleteTaglia(TagliaDeleteDto dto) {
+        //verifico che il token sia registrato...
         if (ss.checkToken(dto.getToken())) {
+            //...se è registrato cancella la taglia tramite l'id
             tr.deleteById(dto.getidToDelete());
         }
     }
 
     @Override
     public void updateTaglia(TagliaUpdateDto dto) {
+        //verifico che il token sia registrato...
         if (ss.checkToken(dto.getToken())) {
+            //verifico se l'id è diverso da null
             if (tr.findById(dto.getDati().getId()) != null) {
+                //...se si modifica la taglia nel db
                 tr.save(dto.getDati());
             }
         }
