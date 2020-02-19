@@ -1,9 +1,10 @@
-<button value="home" routerLink="/">Home</button>
+<button value="home" routerLink="/home-riservata">Home</button>
 <hr>
-<label>Ricerca per prezzo</label>
-<input type="text" [(ngModel)]="prezzoSearch" name="prezzoSearch">
+<label>Ricerca per prezzo </label>
+<input type="number" [(ngModel)]="prezzoSearch" name="prezzoSearch" placeholder="Prezzo massimo prodotti">
 <button value="ricerca" (click)="ricerca()">Cerca</button>
 <br>
+<p>{{ msg }}</p>
 <table *ngIf="prodotti">
 
   <tr>

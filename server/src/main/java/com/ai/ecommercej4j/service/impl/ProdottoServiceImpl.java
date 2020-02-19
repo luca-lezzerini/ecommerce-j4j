@@ -154,7 +154,6 @@ public class ProdottoServiceImpl implements ProdottoService {
      * @param dto contiene il token e la chiave di ricerca (il prezzo)
      * @return ArrayList<Prodotto>
      * */
-    
     @Override
     public ProdottoSearchResultsDto searchOfferte(ProdottoSearchDto dto) {
 
@@ -167,7 +166,7 @@ public class ProdottoServiceImpl implements ProdottoService {
                 && securityService.checkToken(dto.getToken())) {
             List<Prodotto> lp;
             // se la key che riceve è vuota restituisce tutti i prodotti in offerta...
-            if ((dto.getSearchKey().trim()).equals("")) {
+            if ((dto.getSearchKey().trim()).equals(Double.MAX_VALUE)) {
                 lp = prodottoRepository.findByOfferta(true);
                 //...altrimenti ricerca i prodotti in offerta con prezzo inferiore a quello dato
             } else {
