@@ -10,7 +10,7 @@ export class AreaComuneService {
   constructor() { }
 
   // const hostUrl: string = 'http://84.22.108.21.8080';
-   readonly hostUrl: string = 'http://localhost:4200';
+ public readonly hostUrl: string = 'http://localhost:8080';
 
 
 }
