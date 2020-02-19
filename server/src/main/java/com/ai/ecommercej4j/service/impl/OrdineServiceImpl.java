@@ -11,7 +11,6 @@ import com.ai.ecommercej4j.repository.RigaOrdineRepository;
 import com.ai.ecommercej4j.repository.UtenteRepository;
 import com.ai.ecommercej4j.service.OrdineService;
 import com.ai.ecommercej4j.service.SecurityService;
-import java.time.LocalDate;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,11 +44,7 @@ public class OrdineServiceImpl implements OrdineService {
             Optional<Ordine> optional = utente.getOrdini().stream().filter(o -> o.getStato().equals("carrello")).findFirst();
             Ordine ordine;
             if (optional.isEmpty()) {
-                ordine = new Ordine();
-                ordine.setData(LocalDate.now());
-                ordine.setStato("carrello");
-                ordine.setNumero((int) (Math.random() * 10000 + 1));
-                ordine.setUtente(utente);
+                ordine = new Ordine(utente);
                 ordineRepository.save(ordine);
                 utente.getOrdini().add(ordine);
                 utenteRepository.save(utente);
