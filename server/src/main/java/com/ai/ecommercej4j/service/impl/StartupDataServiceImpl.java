@@ -7,24 +7,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StartupDataServiceImpl implements StartupDataService{
+public class StartupDataServiceImpl implements StartupDataService {
+
     @Autowired
     UtenteRepository ur;
+
     @Override
     public void createAllStartupData() {
-         //crea cliente
+        //crea cliente
         Utente cliente = new Utente();
         cliente.setUsername("cliente");
         cliente.setPassword("cliente");
-        
+        cliente.setAnonimo(false);
+
         // crea gestore
         Utente gestore = new Utente();
         gestore.setUsername("gestore");
         gestore.setPassword("gestore");
-        
+        cliente.setAnonimo(false);
+
         //salva
         ur.save(cliente);
         ur.save(gestore);
     }
-    
+
 }
