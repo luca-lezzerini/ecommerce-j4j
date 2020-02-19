@@ -34,7 +34,7 @@ public class SpedizioneServiceImpl implements SpedizioneService {
     public void createSpedizione(SpedizioneCreateDto dto) {
         //Verifica esistenza token
         System.out.println("server, createdto");
-        while (securityService.checkToken(dto.getToken())) {
+        if (securityService.checkToken(dto.getToken())) {
             if (spedizioneRepository.findByCodiceContainingIgnoreCase(dto.getDati().getCodice()) != null) {
                 List<Spedizione> ls = spedizioneRepository
                         .findByCodiceContainingIgnoreCase(dto.getDati().getCodice());
@@ -54,6 +54,7 @@ public class SpedizioneServiceImpl implements SpedizioneService {
         if (dto != null && securityService.checkToken(dto.getToken())) {
             System.out.println("token " + dto.getToken());
             List<Spedizione> ls = spedizioneRepository.findByCodiceContainingIgnoreCase(dto.getSearchKey());
+             System.out.println(dto.getSearchKey());
             ls.forEach(ob -> {
                 System.out.println("Codice" + ob.getCodice());
                 System.out.println("Descrizione" + ob.getDescrizione());
@@ -88,7 +89,9 @@ public class SpedizioneServiceImpl implements SpedizioneService {
         //Metodo per aggiornare/salvare dati previsto da repository
         System.out.println("server, updatedto");
         // Verifico esistenza dto e codice spedizione non vuoto
-        while (dto != null && dto.getDati() != null && dto.getDati().getCodice() != null) {
+        if (dto != null && dto.getDati() != null 
+                && dto.getDati().getCodice() != null 
+                && dto.getDati().getCodice().length() > 0) {
             // Verifico validità token
             if (securityService.checkToken(dto.getToken())) {
                 // controllo se l'id del dto non è vuoto                
