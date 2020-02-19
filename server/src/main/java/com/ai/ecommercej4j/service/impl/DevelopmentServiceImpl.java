@@ -357,9 +357,15 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         prodottoRepository.save(p1);
 
         // Creo gli ordini ...
-        Ordine o1 = new Ordine(LocalDate.now(), 1);
+        Ordine o1 = new Ordine();
+        o1.setData(LocalDate.now());
+        o1.setNumero(1);
+        o1.setStato("carrello");
         ordineRepository.save(o1);
-        Ordine o2 = new Ordine(LocalDate.now(), 2);
+        Ordine o2 = new Ordine();
+        o1.setData(LocalDate.now());
+        o1.setNumero(2);
+        o1.setStato("carrello");
         ordineRepository.save(o2);
 
         // Creo le righe ...

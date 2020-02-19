@@ -23,10 +23,20 @@ public class Ordine {
     private LocalDate data;
     @Column
     private int numero;
-    
+    @Column
+    private String stato;
+
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
+    }
+
     @OneToMany(mappedBy = "ordine", fetch = FetchType.LAZY)
     List<RigaOrdine> righe = new ArrayList<>();
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fkIdUtente", referencedColumnName = "id")
     private Utente utente;
@@ -42,9 +52,11 @@ public class Ordine {
     public Ordine() {
     }
 
-    public Ordine(LocalDate data, int numero) {
+    public Ordine(LocalDate data, int numero, String stato, Utente utente) {
         this.data = data;
         this.numero = numero;
+        this.stato = stato;
+        this.utente = utente;
     }
 
     public Long getId() {
