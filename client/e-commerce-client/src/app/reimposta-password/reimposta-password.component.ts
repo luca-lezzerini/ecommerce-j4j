@@ -31,7 +31,7 @@ export class ReimpostaPasswordComponent implements OnInit {
       dto.doiCode = this.doiCode;
       dto.newPassword = this.nuovaPassword;
       // preparo la richiesta
-      let cp: Observable<void> = this.http.post<void>('http://localhost:8080/reimposta-password', dto);
+      let cp: Observable<void> = this.http.post<void>(this.ac.hostUrl + '/reimposta-password', dto);
       cp.subscribe(data => {
        });
 

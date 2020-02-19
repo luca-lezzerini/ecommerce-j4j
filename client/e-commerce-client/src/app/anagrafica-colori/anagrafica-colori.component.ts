@@ -302,9 +302,8 @@ export class AnagraficaColoriComponent implements OnInit {
       dto.token = this.ac.token;
       // preparo la richiesta http
       const obs: Observable<void> = this.http.post<void>(
-        'http://localhost:8080/create-colori',
-        dto
-      );
+        this.ac.hostUrl + '/create-colori', dto
+        );
       obs.subscribe(data => {
         // dopo la risposta del server visualizza gli elementi salvati nel database
         this.searchColori();
@@ -331,7 +330,7 @@ export class AnagraficaColoriComponent implements OnInit {
     // preparo la richiesta http
     const obs: Observable<ColoriSearchResultsDto> = this.http.post<
       ColoriSearchResultsDto
-    >('http://localhost:8080/search-colori', dto);
+    >(this.ac.hostUrl +'/search-colori', dto);
     obs.subscribe(data => {
       // salva la lista di risultati ottenuti dal server nell' array locale che viene visualizzato
       this.result = data.result;
@@ -349,7 +348,7 @@ export class AnagraficaColoriComponent implements OnInit {
     dto.token = this.ac.token;
     // preparo la richiesta http
     const obs: Observable<void> = this.http.post<void>(
-      'http://localhost:8080/delete-colori',
+      this.ac.hostUrl + '/delete-colori',
       dto
     );
     obs.subscribe(data => {
@@ -369,7 +368,7 @@ export class AnagraficaColoriComponent implements OnInit {
     dto.token = this.ac.token;
     // preparo la richiesta http
     const obs: Observable<void> = this.http.post<void>(
-      'http://localhost:8080/update-colori',
+      this.ac.hostUrl + '/update-colori',
       dto
     );
     obs.subscribe(data => {

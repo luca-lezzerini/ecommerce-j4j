@@ -30,7 +30,7 @@ export class PasswordDimenticataComponent implements OnInit {
     dto.username = this.username;
     // preparo la richiesta http
     let obs: Observable<LoginResponseDto> = this.http.post<LoginResponseDto>(
-      'http://localhost:8080/password-dimenticata',
+      this.ac.hostUrl + '/password-dimenticata',
       dto
     );
     obs.subscribe(data => { // data.token è il doi generato dal service, NON LA SESSIONE
@@ -48,7 +48,7 @@ export class PasswordDimenticataComponent implements OnInit {
 
     // prepara la richiesta
     let obs: Observable<void> = this.http.post<void>(
-      'http://localhost:8080/check-double-optin',
+      this.ac.hostUrl + '/check-double-optin',
       dto
     );
 
