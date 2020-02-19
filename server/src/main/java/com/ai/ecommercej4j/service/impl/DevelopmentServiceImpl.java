@@ -62,13 +62,13 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 
     private void dropDataBase() {
         // elimina tutti dati dal db
+        rigaOrdineRepository.deleteAllInBatch();
+        ordineRepository.deleteAllInBatch();
         prodottoRepository.deleteAllInBatch();
         utenteRepository.deleteAllInBatch();
         spedizioneRespository.deleteAllInBatch();
         tagliaRepository.deleteAllInBatch();
         coloriRepository.deleteAllInBatch();
-        rigaOrdineRepository.deleteAllInBatch();
-        ordineRepository.deleteAllInBatch();
     }
 
     private void generateProdotti() {
