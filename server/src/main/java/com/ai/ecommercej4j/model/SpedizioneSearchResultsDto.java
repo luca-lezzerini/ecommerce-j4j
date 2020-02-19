@@ -13,11 +13,11 @@ public class SpedizioneSearchResultsDto extends LoginResponseDto  {
     public SpedizioneSearchResultsDto() {
     }
 
-    public List<Spedizione> getResults() {
+    public List<Spedizione> getResult() {
         return result;
     }
 
-    public void setResults(List<Spedizione> results) {
+    public void setResult(List<Spedizione> results) {
         this.result = results;
     }
 }

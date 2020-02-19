@@ -1,5 +1,5 @@
-package com.ai.ecommercej4j.service;
+ package com.ai.ecommercej4j.service;
 
-public interface StartupDataService {
-    void createAllStartupData();
+    public interface StartupDataService {
+   void createAllStartupData();
 }

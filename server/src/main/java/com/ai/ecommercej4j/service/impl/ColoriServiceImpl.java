@@ -8,8 +8,6 @@ import com.ai.ecommercej4j.model.ColoriSearchResultsDto;
 import com.ai.ecommercej4j.model.ColoriUpdateDto;
 import com.ai.ecommercej4j.repository.ColoriRepository;
 import com.ai.ecommercej4j.service.ColoriService;
-import com.ai.ecommercej4j.service.SecurityService;
-import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +17,6 @@ public class ColoriServiceImpl implements ColoriService {
 
     @Autowired
     private ColoriRepository coloriRepository;
-
-    @Autowired
-    private SecurityService securityService;
 
     @Override
     public void createColori(ColoriCreateDto dto) {
@@ -34,8 +29,6 @@ public class ColoriServiceImpl implements ColoriService {
     @Override
     public ColoriSearchResultsDto searchColori(ColoriSearchDto dto) {
         List<Colori> ace = null;
-        ColoriSearchResultsDto dto2 = new ColoriSearchResultsDto(ace);
-
         // se la stringa ricevuta è vuota recupera dal db tutti gli elementi...
         if ((dto.getSearchKey()).equals("")) {
             ace = coloriRepository.findAll();
@@ -43,6 +36,7 @@ public class ColoriServiceImpl implements ColoriService {
         } else {
             ace = coloriRepository.findByCodiceContainingIgnoreCase(dto.getSearchKey());
         }
+        ColoriSearchResultsDto dto2 = new ColoriSearchResultsDto(ace);
         return dto2;
     }
 
@@ -53,6 +47,7 @@ public class ColoriServiceImpl implements ColoriService {
 
     @Override
     public void updateColori(ColoriUpdateDto dto) {
+        // ricerco l'id se non lo trovo il valore è null
         Colori c = coloriRepository.findById(dto.getDati().getId()).orElse(null);
         c.setCodice(dto.getDati().getCodice());
         c.setDescrizione(dto.getDati().getDescrizione());
