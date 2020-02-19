@@ -1,0 +1,7 @@
+tocTab[tocTab.length] = new Array("0.8.1:1", "", "Ciclo di vita Ordine", "EARoot/EA8/EA1/EA428.htm", "183.png", "84", "0", "", "Statechart diagram0","{0E81EC16-FA7E-4511-B539-9B1358179750}");
+tocTab[tocTab.length] = new Array("0.8.1:2", "", "Carrello", "EARoot/EA8/EA1/EA431.htm", "20.png", "E845", "0", "", "State0","{0CFC2179-397B-473b-BB83-10F0B350414A}");
+tocTab[tocTab.length] = new Array("0.8.1:3", "", "Final", "EARoot/EA8/EA1/EA432.htm", "69.png", "E849", "0", "", "StateNode0","{7A702498-37A2-4749-8840-B742193B2340}");
+tocTab[tocTab.length] = new Array("0.8.1:4", "", "In Checkout", "EARoot/EA8/EA1/EA433.htm", "20.png", "E846", "0", "", "State0","{8569AE65-F4AB-420d-B344-BC92713A0613}");
+tocTab[tocTab.length] = new Array("0.8.1:5", "", "Initial", "EARoot/EA8/EA1/EA434.htm", "68.png", "E844", "0", "", "StateNode0","{1695BE29-EDB0-421f-AB47-7F32CE509A10}");
+tocTab[tocTab.length] = new Array("0.8.1:6", "", "Pagato", "EARoot/EA8/EA1/EA435.htm", "20.png", "E847", "0", "", "State0","{6B615BB1-92C2-46aa-9834-9EF98EF921DD}");
+tocTab[tocTab.length] = new Array("0.8.1:7", "", "Spedito", "EARoot/EA8/EA1/EA436.htm", "20.png", "E848", "0", "", "State0","{C1C81AC2-38F8-450a-9A75-A1140E4B0C9E}");
