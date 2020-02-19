@@ -24,11 +24,11 @@
     <th>CODICE</th>
     <th>DESCRIZIONE</th>
   </tr>
-  <tr *ngFor="let item of taglie">
-    <td>{{item.codice}}</td>
-    <td>{{item.descrizione}}</td>
-    <td><button (click)="view(item.id)">View</button></td>
-    <td><button (click)="edit(item.id)">Edit</button></td>
-    <td><button (click)="delete(item.id)">Delete</button></td>
+  <tr *ngFor="let taglia of taglie">
+    <td>{{taglia.codice}}</td>
+    <td>{{taglia.descrizione}}</td>
+    <td><button (click)="view(taglia)">View</button></td>
+    <td><button (click)="edit(taglia)">Edit</button></td>
+    <td><button (click)="delete(taglia)">Delete</button></td>
   </tr>
 </table>

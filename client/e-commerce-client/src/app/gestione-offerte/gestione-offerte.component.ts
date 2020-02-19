@@ -29,7 +29,7 @@ export class GestioneOfferteComponent implements OnInit {
   ngOnInit() { }
 
   /**
-   * Manda una richiesta al server un oggetto contenente il token per poter
+   * Manda una richiesta al server con un oggetto contenente il token per poter
    * verificare l'accesso e i nuovi dati immessi dal cliente. Dopodiché,
    * ripete la ricerca e mostra la visuale della selezione dei prodotti
    */

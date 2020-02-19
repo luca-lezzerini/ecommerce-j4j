@@ -9,9 +9,36 @@ import com.ai.ecommercej4j.model.ColoriUpdateDto;
 
 
 public interface ColoriService {
-    public void createColori(ColoriCreateDto dto);
-    public ColoriSearchResultsDto searchColori(ColoriSearchDto dto);
-    public ColoriSearchResultsDto searchColoriPerDescrizione(ColoriSearchDto dto);
-    public void deleteColori(ColoriDeleteDto dto);
-    public void updateColori(ColoriUpdateDto dto);
+    
+    /**
+     * Crea un nuovo elemento colore e lo salva in repository 
+     * @param dto che contiene i parametri di colore.
+     */
+    void createColori(ColoriCreateDto dto);
+    
+    /**
+     * Cerca i colori salvati nella repository e li salva in una lista 
+     * @param dto contiene il parametro su cui viene effettuata la ricerca
+     * @return una lista di risultati
+     */
+    ColoriSearchResultsDto searchColori(ColoriSearchDto dto);
+    
+    /**
+     * Cerca i colori salvati nella repository tramite la descrizione e li salva in una lista 
+     * @param dto contiene il parametro su cui viene effettuata la ricerca
+     * @return una lista di risultati
+     */
+    ColoriSearchResultsDto searchColoriPerDescrizione(ColoriSearchDto dto);
+    
+    /**
+     * cancella il colore tramite l'id
+     * @param dto contiene l'id dell'elemento da eliminare
+     */
+    void deleteColori(ColoriDeleteDto dto);
+    
+    /**
+     * Cerca il colore tramite l'id, apporta le modifiche e lo salva in repository
+     * @param dto contiene i parametri modificati di colore
+     */
+    void updateColori(ColoriUpdateDto dto);
 }

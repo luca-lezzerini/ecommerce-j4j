@@ -1,3 +1,3 @@
-tocTab[tocTab.length] = new Array("0.15.7.1", "1", "Mappa di Navigazione", "EARoot/EA15/EA7/EA1/EA686.htm", "4.png", "", "", "{671731BB-8392-4762-8C3D-38B655A5403F}", "Package");
-tocTab[tocTab.length] = new Array("0.15.7.2", "1", "Richiesta nuova password", "EARoot/EA15/EA7/EA2/EA697.htm", "4.png", "", "", "{6C41C69E-0B8C-4ade-B42F-087A6EB40D5B}", "Package");
-tocTab[tocTab.length] = new Array("0.15.7.3", "1", "Inserimento nuova password", "EARoot/EA15/EA7/EA3/EA706.htm", "4.png", "", "", "{BC670560-ECC5-4584-ACE6-213EB1817737}", "Package");
+tocTab[tocTab.length] = new Array("0.11.7.1", "1", "Mappa di Navigazione", "EARoot/EA11/EA7/EA1/EA632.htm", "4.png", "", "", "{671731BB-8392-4762-8C3D-38B655A5403F}", "Package");
+tocTab[tocTab.length] = new Array("0.11.7.2", "1", "Richiesta nuova password", "EARoot/EA11/EA7/EA2/EA643.htm", "4.png", "", "", "{6C41C69E-0B8C-4ade-B42F-087A6EB40D5B}", "Package");
+tocTab[tocTab.length] = new Array("0.11.7.3", "1", "Inserimento nuova password", "EARoot/EA11/EA7/EA3/EA652.htm", "4.png", "", "", "{BC670560-ECC5-4584-ACE6-213EB1817737}", "Package");

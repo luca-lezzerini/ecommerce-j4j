@@ -1,4 +1,4 @@
-tocTab[tocTab.length] = new Array("0.15.8.4:1", "", "UI Registrazione-Errore", "EARoot/EA15/EA8/EA4/EA759.htm", "188.png", "40", "0", "", "Custom diagram0","{C985469A-174A-46bc-A225-0EAD232665AA}");
-tocTab[tocTab.length] = new Array("0.15.8.4:2", "", "«WireframeWebsite» Webpage1", "EARoot/EA15/EA8/EA4/EA763.htm", "11.png", "E700", "0", "", "Screen0","{1421FFE9-297D-4c90-BFDF-DB21DF8BF03B}");
-tocTab[tocTab.length] = new Array("0.15.8.4:3", "", "«WireframeLabel» Siamo spiacenti, nella registrazione si sono verificati dei problemi", "EARoot/EA15/EA8/EA4/EA764.htm", "16.png", "E701", "E700", "", "GUIElement0","{480B2ACB-EA93-47a2-A7FC-519B1A37537B}");
-tocTab[tocTab.length] = new Array("0.15.8.4:4", "", "«WireframeTable» Table", "EARoot/EA15/EA8/EA4/EA765.htm", "16.png", "E703", "E700", "", "GUIElement0","{F3AED6A2-2E9B-475f-AE6B-587FF55393FE}");
+tocTab[tocTab.length] = new Array("0.11.8.4:1", "", "UI Registrazione-Errore", "EARoot/EA11/EA8/EA4/EA705.htm", "188.png", "40", "0", "", "Custom diagram0","{C985469A-174A-46bc-A225-0EAD232665AA}");
+tocTab[tocTab.length] = new Array("0.11.8.4:2", "", "«WireframeWebsite» Webpage1", "EARoot/EA11/EA8/EA4/EA709.htm", "11.png", "E700", "0", "", "Screen0","{1421FFE9-297D-4c90-BFDF-DB21DF8BF03B}");
+tocTab[tocTab.length] = new Array("0.11.8.4:3", "", "«WireframeLabel» Siamo spiacenti, nella registrazione si sono verificati dei problemi", "EARoot/EA11/EA8/EA4/EA710.htm", "16.png", "E701", "E700", "", "GUIElement0","{480B2ACB-EA93-47a2-A7FC-519B1A37537B}");
+tocTab[tocTab.length] = new Array("0.11.8.4:4", "", "«WireframeTable» Table", "EARoot/EA11/EA8/EA4/EA711.htm", "16.png", "E703", "E700", "", "GUIElement0","{F3AED6A2-2E9B-475f-AE6B-587FF55393FE}");

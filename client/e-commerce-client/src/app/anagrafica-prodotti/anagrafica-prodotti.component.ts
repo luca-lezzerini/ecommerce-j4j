@@ -62,7 +62,7 @@ export class AnagraficaProdottiComponent implements OnInit {
       this.router.navigateByUrl('/login');
     }
   }
-
+   
   conferma() {
     // se i campi di input del panel sono vuoti non esegue
     if (this.codice && this.descrizione && this.prezzo !== null) {
@@ -104,7 +104,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   // esegue l'inserimento di un nuovo prodotto
-
   private confermaCrea() {
     // prepara i dati da inviare al server
     let dto: ProdottoCreateDto = new ProdottoCreateDto();
@@ -127,7 +126,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   // esegue la modifica di un prodotto
-
   private confermaModifica() {
     // prepara i dati da inviare al server
     let dto: ProdottoUpdateDto = new ProdottoUpdateDto();
@@ -152,7 +150,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   // esegue la rimozione di un prodotto
-
   private confermaRimuovi() {
     // prepara i dati da inviare al server
     let dto: ProdottoDeleteDto = new ProdottoDeleteDto();
@@ -191,7 +188,6 @@ export class AnagraficaProdottiComponent implements OnInit {
 
   crea() {
     // pulisci campi di input nel panel
-
     this.annullaCampiPanel();
 
     // imposta visibilità degli elementi dell'interfaccia
@@ -231,7 +227,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   rimuovi(p: Prodotto) {
-
     // copia i valori  del prodotto selezionato nei campi del panel
     this.popolaCampiPanel(p);
 
@@ -302,7 +297,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   view(p: Prodotto) {
-
     // copia i valori  del prodotto selezionato nei campi del panel
     this.popolaCampiPanel(p);
 
