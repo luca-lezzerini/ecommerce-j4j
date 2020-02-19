@@ -50,5 +50,12 @@ public interface SecurityService {
      * @return un dto di risposta contenente il token
      */
     LoginResponseDto generateTokenAnonimo();
+    
+    /**
+     * Controlla che l'utente non sia anonimo
+     * @param token il token dell'utente
+     * @return true se l'utente è registrato, false se anonimo
+     */
+    Boolean checkAnonimo(String token);
 
 }

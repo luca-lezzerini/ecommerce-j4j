@@ -342,6 +342,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
     }
 
     private void generateUtentiProdottiOrdiniRighe() {
+
         // Creo l'utente...
         Utente u1 = new Utente();
         u1.setUsername("relazione");
