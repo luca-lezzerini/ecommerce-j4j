@@ -1,1 +1,12 @@
-<p>view-carrello works!</p>
+<label>Ordine numero {{nOrdine}}</label> &nbsp;&nbsp;&nbsp;
+<label>Del {{nData}}</label> &nbsp;&nbsp;&nbsp;
+<label>Totale {{nTotale}}</label>
+<br>
+<table>
+  <tr *ngFor="let p of Prodotto">
+    <td>{{p.quantita}}</td>
+    <td>{{p.descrizione}}</td>
+    <td>{{p.prezzo}}</td>
+  </tr>
+</table>
+
