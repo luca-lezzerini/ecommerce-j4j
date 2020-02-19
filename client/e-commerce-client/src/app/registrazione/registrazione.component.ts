@@ -1,3 +1,4 @@
+import { AreaComuneService } from './../area-comune.service';
 import { RegistrazioneResponseDto } from './../classi/registrazione-response-dto';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -19,7 +20,7 @@ export class RegistrazioneComponent implements OnInit {
   messaggioErrore = '';
 
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, private ac: AreaComuneService) { }
 
   ngOnInit() {
   }
@@ -48,7 +49,7 @@ export class RegistrazioneComponent implements OnInit {
     dto.password = this.password;
     dto.username = this.username;
     const obs: Observable<RegistrazioneResponseDto> =
-      this.http.post<RegistrazioneResponseDto>('http://localhost:8080/registrami', dto);
+      this.http.post<RegistrazioneResponseDto>(this.ac.hostUrl + '/registrami', dto);
     // invia la richiesta al server
     obs.subscribe(risposta => {
       if (risposta.registrato) {

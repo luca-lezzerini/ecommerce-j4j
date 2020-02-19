@@ -172,7 +172,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     }
 
     this.statoPrecedente = 'search';
-
+    console.log ('stato precedente');
   }
 
   daSearchAggiungi(){
@@ -679,8 +679,8 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     const dto: SpedizioneSearchDto = new SpedizioneSearchDto();
     dto.token = this.acService.token;
     dto.searchKey = this.searchKey;
-    const obs: Observable<SpedizioneSearchResultsDto> =
-      this.http.post<SpedizioneSearchResultsDto>('http://localhost:8080/search-spedizione', dto);
+    const obs: Observable<any> =
+      this.http.post<any>('http://localhost:8080/search-spedizione', dto);
     console.log('mandato post ');
     // invia la richiesta al server
     obs.subscribe(risposta => {

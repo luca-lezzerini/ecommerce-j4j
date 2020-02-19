@@ -17,20 +17,21 @@ export class ReimpostaPasswordComponent implements OnInit {
 
   constructor(private http: HttpClient, private ac: AreaComuneService) { }
   ngOnInit() { }
-  // invio richiesta al server di cambio password
+
+  /**
+   * Genera il Double Optin e imposta la nuova Password
+   * Se le due password inserite non coincidono genera un errore e blanka i campi
+   */
   conferma() {
     if (this.nuovaPassword === this.confermaPassword) {
       // preparo i dati da inviare
       this.doiCode = this.ac.doi;
-      console.log(this.doiCode);
       let dto: ChangePasswordRequestDto = new ChangePasswordRequestDto();
       // il doi verrà preso dalla pagina precedente del client(codice DoubleOptin)
       dto.doiCode = this.doiCode;
       dto.newPassword = this.nuovaPassword;
-      // da aggiungere ?
-      // dto.oldPassword = this.vecchiaPassword
       // preparo la richiesta
-      let cp: Observable<void> = this.http.post<void>('http://localhost:8080/reimposta-password', dto);
+      let cp: Observable<void> = this.http.post<void>(this.ac.hostUrl + '/reimposta-password', dto);
       cp.subscribe(data => {
        });
 

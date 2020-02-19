@@ -21,21 +21,26 @@ export class PasswordDimenticataComponent implements OnInit {
 
   ngOnInit() { }
 
-  // richiesta per password dimenticata
+  /**
+   * invio il Dto contenente lo username al server e recupera il Double Optin dal server
+   */
   passDimenticata() {
     // preparo i dati da inviare al server
     let dto: LoginRequestDto = new LoginRequestDto();
     dto.username = this.username;
     // preparo la richiesta http
     let obs: Observable<LoginResponseDto> = this.http.post<LoginResponseDto>(
-      'http://localhost:8080/password-dimenticata',
+      this.ac.hostUrl + '/password-dimenticata',
       dto
     );
     obs.subscribe(data => { // data.token è il doi generato dal service, NON LA SESSIONE
       this.doi = data.token;
     });
   }
-  // controllo sul token per verificare la ricezione della mail
+
+  /**
+   * controllo sul Double Optin per verificare la ricezione della mail
+   */
   checkDoubleOptin() {
     // prepara i dati
     let dto: LoginResponseDto = new LoginResponseDto();
@@ -43,13 +48,13 @@ export class PasswordDimenticataComponent implements OnInit {
 
     // prepara la richiesta
     let obs: Observable<void> = this.http.post<void>(
-      'http://localhost:8080/check-double-optin',
+      this.ac.hostUrl + '/check-double-optin',
       dto
     );
 
     obs.subscribe(data => {
       this.ac.doi = this.doi;
-      // 0cambia se non riceve un errore
+      // cambia se non riceve un errore
       if (this.ac.doi) {
         console.log(this.doi);
         this.router.navigateByUrl('/reimposta-password')

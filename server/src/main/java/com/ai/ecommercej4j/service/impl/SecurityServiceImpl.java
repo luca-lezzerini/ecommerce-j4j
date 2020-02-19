@@ -134,7 +134,6 @@ public class SecurityServiceImpl implements SecurityService {
     
     @Override
     public Boolean checkToken(String tok) {
-        //per ora il metodo accetta token = null
         return ur.findByToken(tok) != null;
         
     }

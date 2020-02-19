@@ -23,7 +23,6 @@ public class ProdottoServiceImpl implements ProdottoService {
     @Autowired
     private SecurityService securityService;
 
-    
     @Override
     public void createProdotto(ProdottoCreateDto dto) {
 
@@ -47,7 +46,6 @@ public class ProdottoServiceImpl implements ProdottoService {
         }
     }
 
-    
     @Override
     public ProdottoSearchResultsDto searchProdotto(ProdottoSearchDto dto) {
 
@@ -73,7 +71,6 @@ public class ProdottoServiceImpl implements ProdottoService {
         return resultDto;
     }
 
-    
     @Override
     public void deleteProdotto(ProdottoDeleteDto dto) {
 
@@ -93,7 +90,6 @@ public class ProdottoServiceImpl implements ProdottoService {
         }
     }
 
-   
     @Override
     public void updateProdotto(ProdottoUpdateDto dto) {
 
@@ -114,7 +110,7 @@ public class ProdottoServiceImpl implements ProdottoService {
             }
         }
     }
-   
+
     @Override
     public ProdottoSearchResultsDto searchOfferte(ProdottoSearchDto dto) {
 
@@ -146,6 +142,41 @@ public class ProdottoServiceImpl implements ProdottoService {
         } else {
             // ... se il dto non esiste, restituisce un ArrayList vuoto
             resultDto.setResult(Collections.emptyList());
+        }
+        return resultDto;
+    }
+
+    @Override
+    public ProdottoSearchResultsDto searchProdottoPerDescrizione(ProdottoSearchDto dto) {
+
+        // istanzio il dto di ritorno
+        ProdottoSearchResultsDto resultDto = new ProdottoSearchResultsDto();
+
+        // controllo se il dto e la chiave di ricerca sono diversi da null
+        // e se il token è valido
+        if (dto != null && dto.getSearchKey() != null
+                && securityService.checkToken(dto.getToken())) {
+
+            //recupero i risultati e avvaloro il dto di ritorno                
+            List<Prodotto> lp = prodottoRepository.
+                    findByDescrizioneContainingIgnoreCase(dto.getSearchKey());
+
+            // ordino i risultati per codice
+            Collections.sort(lp, (p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
+            resultDto.setResult(lp);
+        } else if (dto.getSearchKey() == null && dto.getSearchKey() == ""
+                && securityService.checkToken(dto.getToken())) {
+            //recupero i risultati e avvaloro il dto di ritorno                
+            List<Prodotto> lp = prodottoRepository.
+                    findByDescrizioneContainingIgnoreCase(dto.getSearchKey());
+
+            // ordino i risultati per codice
+            Collections.sort(lp, (p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
+            resultDto.setResult(lp);
+        } else {
+            // ... se il dto non esiste, restituisce un ArrayList vuoto
+            resultDto.setResult(Collections.emptyList());
+            System.out.println("impossibile cercare");
         }
         return resultDto;
     }

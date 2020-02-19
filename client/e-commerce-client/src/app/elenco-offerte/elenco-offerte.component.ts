@@ -45,7 +45,7 @@ export class ElencoOfferteComponent implements OnInit {
 
     // preparo la richesta http
     const obs: Observable<ProdottoSearchResultsDto> = this.http.post<ProdottoSearchResultsDto>
-      ('http://localhost:8080/search-offerte', dto);
+      (this.ac.hostUrl + '/search-offerte', dto);
 
     obs.subscribe(data => {
       if (data.result.length == 0) {

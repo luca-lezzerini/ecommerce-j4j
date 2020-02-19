@@ -42,7 +42,7 @@ export class ElencoColoriComponent implements OnInit {
 
     // Preparo la richiesta http
     let oss: Observable<ColoriSearchResultsDto> =
-      this.http.post<ColoriSearchResultsDto>('http://localhost:8080/search-colori-per-descrizione', dto);
+      this.http.post<ColoriSearchResultsDto>(this.acService.hostUrl + '/search-colori-per-descrizione', dto);
 
     // Callback
     oss.subscribe(risposta => {

@@ -30,6 +30,18 @@ public interface ProdottoService {
      * @return ArrayList<Prodotto>
      */
     ProdottoSearchResultsDto searchProdotto(ProdottoSearchDto dto);
+    
+    /**
+     * ricerca Prodotto in base al valore della proprietà searchKey di dto.
+     * Restituisce un dto la cui proprietà results contiene un ArrayList di
+     * Prodotto, il cui codice contiene la searchKey. Restituisce una lista
+     * vuota immodificabile se il parametro dto è null, o se non trova
+     * risultati, o se il token non è valido.
+     *
+     * @param dto contiene il token e la chiave di ricerca
+     * @return ArrayList<Prodotto>
+     */
+    ProdottoSearchResultsDto searchProdottoPerDescrizione(ProdottoSearchDto dto);
 
     /**
      * elimina un Prodotto avente id uguale alla proprietà idToDelete del dto.
