@@ -1,5 +1,5 @@
-tocTab[tocTab.length] = new Array("0.15.8.5:1", "", "UI Registrazione-Successo", "EARoot/EA15/EA8/EA5/EA766.htm", "188.png", "41", "0", "", "Custom diagram0","{7BA402EC-B405-4beb-B930-1B5D33E004D5}");
-tocTab[tocTab.length] = new Array("0.15.8.5:2", "", "«WireframeWebsite» Webpage1", "EARoot/EA15/EA8/EA5/EA769.htm", "11.png", "E705", "0", "", "Screen0","{2CFC32C4-A747-4c7f-8B65-C66EFC8DD64B}");
-tocTab[tocTab.length] = new Array("0.15.8.5:3", "", "«WireframeLabel» Complimenti: la sua registrazione è stata completata con successo.", "EARoot/EA15/EA8/EA5/EA770.htm", "16.png", "E706", "E705", "", "GUIElement0","{43BC1B43-66DA-4db6-94BA-D54018333D85}");
-tocTab[tocTab.length] = new Array("0.15.8.5:4", "", "«WireframeButton» Login", "EARoot/EA15/EA8/EA5/EA771.htm", "16.png", "E707", "E705", "", "GUIElement0","{286DC336-7C69-4126-84F5-26C9A0AE4AF1}");
-tocTab[tocTab.length] = new Array("0.15.8.5:5", "", "«WireframeLabel» Può procedere con il login", "EARoot/EA15/EA8/EA5/EA772.htm", "16.png", "E708", "E705", "", "GUIElement0","{EB1D14E3-5B31-4217-9833-3D1ADEE830ED}");
+tocTab[tocTab.length] = new Array("0.10.8.5:1", "", "UI Registrazione-Successo", "EARoot/EA10/EA8/EA5/EA668.htm", "188.png", "41", "0", "", "Custom diagram0","{7BA402EC-B405-4beb-B930-1B5D33E004D5}");
+tocTab[tocTab.length] = new Array("0.10.8.5:2", "", "«WireframeWebsite» Webpage1", "EARoot/EA10/EA8/EA5/EA671.htm", "11.png", "E705", "0", "", "Screen0","{2CFC32C4-A747-4c7f-8B65-C66EFC8DD64B}");
+tocTab[tocTab.length] = new Array("0.10.8.5:3", "", "«WireframeLabel» Complimenti: la sua registrazione è stata completata con successo.", "EARoot/EA10/EA8/EA5/EA672.htm", "16.png", "E706", "E705", "", "GUIElement0","{43BC1B43-66DA-4db6-94BA-D54018333D85}");
+tocTab[tocTab.length] = new Array("0.10.8.5:4", "", "«WireframeButton» Login", "EARoot/EA10/EA8/EA5/EA673.htm", "16.png", "E707", "E705", "", "GUIElement0","{286DC336-7C69-4126-84F5-26C9A0AE4AF1}");
+tocTab[tocTab.length] = new Array("0.10.8.5:5", "", "«WireframeLabel» Può procedere con il login", "EARoot/EA10/EA8/EA5/EA674.htm", "16.png", "E708", "E705", "", "GUIElement0","{EB1D14E3-5B31-4217-9833-3D1ADEE830ED}");
