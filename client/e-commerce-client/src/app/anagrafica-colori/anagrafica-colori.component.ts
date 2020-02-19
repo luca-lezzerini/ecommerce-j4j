@@ -60,7 +60,11 @@ export class AnagraficaColoriComponent implements OnInit {
     }
   }
 
-  // cambia lo stato quando si clicca conferma, invoca diversi metodi in base allo stato precedente
+  /**
+   * cambia lo stato quando si clicca conferma, invoca diversi metodi in base allo stato precedente
+   * @param stato viene impostato in base allo stato corrente (this.state)
+   */
+
   confermaCheckState(stato: string) {
     // Salva i dati del colore selezionato
     this.colore = {
@@ -86,7 +90,10 @@ export class AnagraficaColoriComponent implements OnInit {
     }
   }
 
-  // cambia stato quando si preme annulla, esegue controllo sullo stato precedente
+  /**
+   * cambia stato quando si preme annulla, esegue controllo sullo stato precedente
+   * @param stato viene impostato in base allo stato corrente (this.state)
+   */
   annullaCheckState(stato: string) {
     if (stato === this.statoAggiungi) {
       this.olderState = this.state;
@@ -108,7 +115,11 @@ export class AnagraficaColoriComponent implements OnInit {
       }
     }
   }
-  // cambia lo stato quando si clicca crea: se sto visualizzando passa alla creazione di un nuovo elemento
+
+  /**
+   * cambia lo stato quando si clicca crea: se sto visualizzando passa alla creazione di un nuovo elemento
+   * @param stato viene impostato in base allo stato corrente (this.state)
+   */
   creaCheckState(stato: string) {
     if (stato === this.statoAggiungi) {
       this.olderState = this.state;
@@ -121,7 +132,10 @@ export class AnagraficaColoriComponent implements OnInit {
     }
   }
 
-  // cambia stato quando si preme modifica nel panel
+  /**
+   * cambia stato quando si preme modifica nel panel
+   * @param stato viene impostato in base allo stato corrente (this.state)
+   */
   modificaCheckState(stato: string) {
     if (stato === this.statoCerca || stato === this.statoVisualizza) {
       this.olderState = this.state;
@@ -130,7 +144,11 @@ export class AnagraficaColoriComponent implements OnInit {
       this.inputNotEditable = false;
     }
   }
-  // cambia stato quando si preme modifica nella tabella
+
+  /**
+   * cambia stato quando si preme modifica nella tabella
+   * @param stato viene impostato in base allo stato corrente (this.state)
+   */
   modificaInTableCheckState(stato: string, c: Colori) {
     if (stato === this.statoCerca || stato === this.statoVisualizza) {
       // salva le proprietà dell'elemento selezionato nelle proprietà dichiarate localmente
@@ -144,7 +162,10 @@ export class AnagraficaColoriComponent implements OnInit {
     }
   }
 
-  // cambia stato quando si preme cancella nel panel
+  /**
+   * cambia stato quando si preme cancella nel panel
+   * @param stato viene impostato in base allo stato corrente (this.state)
+   */
   cancellaCheckState(stato: string) {
     if (stato === this.statoCerca || stato === this.statoVisualizza) {
       this.olderState = this.state;
@@ -153,7 +174,11 @@ export class AnagraficaColoriComponent implements OnInit {
       this.inputNotEditable = true;
     }
   }
-  // cambia stato quando si preme cancella nella tabella
+
+  /**
+   * cambia stato quando si preme cancella nella tabella
+   * @param stato viene impostato in base allo stato corrente (this.state)
+   */
   cancellaInTableCheckState(stato: string, c: Colori) {
     if (stato === this.statoCerca || stato === this.statoVisualizza) {
       // salva le proprietà dell'elemento selezionato nelle proprietà dichiarate localmente
@@ -167,7 +192,10 @@ export class AnagraficaColoriComponent implements OnInit {
     }
   }
 
-  // cambia stato quando si preme cerca e esegue la ricerca
+  /**
+   *  cambia stato quando si preme cerca e esegue la ricerca
+   * @param stato viene impostato in base allo stato corrente (this.state)
+   */
   cercaCheckState(stato: string) {
     if (stato === this.statoCerca || stato === this.statoVisualizza) {
       this.olderState = this.state;
@@ -177,6 +205,10 @@ export class AnagraficaColoriComponent implements OnInit {
     }
   }
 
+/**
+ * cambia stato in visualizza quando si preme su visualizza
+ * @param colore viene impostato in base al colore che viene visualizzato
+ */
   visualizzaState(colore: Colori) {
     this.olderState = this.state;
     this.state = this.statoVisualizza;
@@ -198,7 +230,9 @@ export class AnagraficaColoriComponent implements OnInit {
     this.showRisultati = true;
     this.showAggiungi = true;
   }
-  // create, update, delete
+  /**
+   * Cambia stato in Crea, Modifica e Cancella quando si preme su Crea, Modifica o Cancella
+   */
   CUDState() {
     this.showPanel = true;
     this.showConferma = true;
@@ -211,6 +245,10 @@ export class AnagraficaColoriComponent implements OnInit {
     this.showRisultati = false;
     this.showAggiungi = false;
   }
+
+  /**
+   * cambia stato in cerca quando si preme su cerca
+   */
   cercaState() {
     this.showPanel = false;
     this.inputNotEditable = true;
@@ -224,6 +262,9 @@ export class AnagraficaColoriComponent implements OnInit {
     this.showRisultati = true;
     this.showAggiungi = true;
   }
+  /**
+   * cambia stato in aggiungi quando si preme su aggiungi
+   */
   aggiungiState() {
     this.showPanel = true;
     this.inputNotEditable = false;
@@ -241,6 +282,9 @@ export class AnagraficaColoriComponent implements OnInit {
     this.descrizione = '';
   }
 
+  /**
+   * Crea un colore, lo invia al server e lo aggiunge aggiornando e visualizzando la lista dei colori
+   */
   createColori(): void {
     // Fare check dei campi se sono vuoti o meno
     if (this.codice.trim() !== '' && this.descrizione.trim() !== '') {
@@ -267,6 +311,11 @@ export class AnagraficaColoriComponent implements OnInit {
       });
     }
   }
+
+  /**
+   * Ricerca i colori presenti nel Database che corrispondono alla searchKey e li visualizza nella tabella
+   * Nel caso il campo è vuoto mostrerà tutta la lista
+   */
   searchColori(): void {
     // se il campo è vuoto o sono stati inseriti solo spazi imposta ricerca ad una stringa vuota
     if (this.ricerca === undefined) {
@@ -288,6 +337,11 @@ export class AnagraficaColoriComponent implements OnInit {
       this.result = data.result;
     });
   }
+
+  /**
+   * Elimina il colore con l'id corrispondente a quello trovato nel DataBase
+   * @param c (colore da eliminare tramite il parametro id)
+   */
   deleteColori(c: Colori): void {
     // preparo i dati da inviare al server
     const dto: ColoriDeleteDto = new ColoriDeleteDto();
@@ -303,6 +357,11 @@ export class AnagraficaColoriComponent implements OnInit {
       this.searchColori();
     });
   }
+
+  /**
+   * Sul client faccio le modifiche al colore e invio al server il colore modificato tramite il Dto
+   * @param c (colore da modificare)
+   */
   updateColori(c: Colori): void {
     // preparo i dati da inviare al server
     const dto: ColoriUpdateDto = new ColoriUpdateDto();
