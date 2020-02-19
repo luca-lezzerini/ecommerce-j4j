@@ -32,13 +32,13 @@ export class HomePageComponent implements OnInit {
 
     // Preparo richiesta http
     let oss: Observable<ProdottoSearchResultsDto> =
-      this.http.post<ProdottoSearchResultsDto>('http://localhost:8080/search-prodotto', dto);
+      this.http.post<ProdottoSearchResultsDto>('http://localhost:8080/search-prodotto-descrizione', dto);
 
     // Invio la richiesta
     oss.subscribe(risposta => {
       this.prodotti = risposta.result;
       console.log(risposta.result)
-      this.showResults = true; //this.prodotti.length > 0;
+      this.showResults = true; // this.prodotti.length > 0;
     });
   }
 
