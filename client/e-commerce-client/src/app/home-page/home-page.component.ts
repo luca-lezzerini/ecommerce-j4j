@@ -24,6 +24,13 @@ export class HomePageComponent implements OnInit {
 
   visualizzaCarrello() {
     this.router.navigateByUrl('/view-carrello');
+    if (this.acService.token || this.acService.tokenAnonimo) {
+      this.(p, this.acService.token);
+      //preparo la richiesta 
+      this.aggiungiAutenticatoAlCarrello(p, this.acService.tokenAnonimo);
+    } else {
+
+
   }
 
   search() {
@@ -53,6 +60,8 @@ export class HomePageComponent implements OnInit {
   aggiungiAlCarrello(p: Prodotto) {
     if (this.acService.token) {
       this.aggiungiAutenticatoAlCarrello(p, this.acService.token);
+    } else if (this.acService.tokenAnonimo) {
+      this.aggiungiAutenticatoAlCarrello(p, this.acService.tokenAnonimo);
     } else {
       // chiamata per generare token anonimo
 

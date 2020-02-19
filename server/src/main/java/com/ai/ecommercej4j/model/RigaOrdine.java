@@ -22,19 +22,21 @@ public class RigaOrdine {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fkIdOrdine", referencedColumnName = "id")
     @JsonIgnoreProperties(value = "righe", allowSetters = true)
-    public Ordine ordine;
+    private Ordine ordine;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fkIdProdotto", referencedColumnName = "id")
     @JsonIgnoreProperties(value = "righe", allowSetters = true)
-    public Prodotto prodotto;
+    private Prodotto prodotto;
 
     public RigaOrdine() {
 
     }
 
-    public RigaOrdine(int qta) {
+    public RigaOrdine(int qta, Ordine ordine, Prodotto prodotto) {
         this.qta = qta;
+        this.ordine = ordine;
+        this.prodotto = prodotto;
     }
 
     public Long getId() {
