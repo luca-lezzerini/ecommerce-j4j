@@ -12,9 +12,10 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Autowired
     private UtenteRepository ur;
-    
+
     /**
      * genera una stringa casuale utilizzata dal double opt in
+     *
      * @return stringa
      */
     private String generateRandomString() {
@@ -36,17 +37,15 @@ public class SecurityServiceImpl implements SecurityService {
         return response;
     }
 
-    
     @Override
     public void checkDoubleOptin(LoginResponseDto dto) {
-        if(dto.getToken() != null){
-        String doiUtente = ur.findByDoubleOptin(dto.getToken()).getDoubleOptin();
-        }else{
+        if (dto.getToken() != null) {
+            String doiUtente = ur.findByDoubleOptin(dto.getToken()).getDoubleOptin();
+        } else {
             System.out.println("il token non esiste");
         }
     }
-    
-   
+
     @Override
     public LoginResponseDto passwordDimenticata(LoginRequestDto dto) {
 
@@ -75,7 +74,6 @@ public class SecurityServiceImpl implements SecurityService {
 
     }
 
-   
     @Override
     public void reimpostaPassword(ChangePasswordRequestDto dto) {
 
@@ -84,17 +82,17 @@ public class SecurityServiceImpl implements SecurityService {
 
         //...assegnazione utente esistente tramite metodo findByDoubleOptin poiche ce l'ho da prima.
         ut = ur.findByDoubleOptin(dto.getDoiCode());
-       
-            //Se la password nuova è diversa dalla vecchia...
-            if (ut.getPassword().equals(dto.getNewPassword())) {
-                System.out.println("Errore Pass Uguali");
 
-            } else {
-                //...assegno quella nuova all'utente e la salvo
-                ut.setPassword(dto.getNewPassword());
-                ur.save(ut);
-            }
+        //Se la password nuova è diversa dalla vecchia...
+        if (ut.getPassword().equals(dto.getNewPassword())) {
+            System.out.println("Errore Pass Uguali");
+
+        } else {
+            //...assegno quella nuova all'utente e la salvo
+            ut.setPassword(dto.getNewPassword());
+            ur.save(ut);
         }
+    }
 
     @Override
     public RegistrazioneResponseDto registrami(RegistrazioneRequestDto dto) {
@@ -111,6 +109,7 @@ public class SecurityServiceImpl implements SecurityService {
                 utente.setUsername(dto.getUsername());
                 utente.setPassword(dto.getPassword());
                 utente.setEmail(dto.getEmail());
+                utente.setAnonimo(false);
                 ur.save(utente);
                 resp.setRegistrato(true);
             } else {
@@ -137,7 +136,7 @@ public class SecurityServiceImpl implements SecurityService {
         return ur.findByTokenAndAnonimo(tok, false) != null;
         // Utente utente = ur.findByToken(tok)
         // return (utente.getToken() != null && utente.getAnonimo == false)
-        
+
     }
 
     @Override
@@ -154,9 +153,7 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public Boolean checkAnonimo(String token) {
-        return ur.findByToken(token).getAnonimo() != true;
+        return ur.findByToken(token).getAnonimo();
     }
-    
-    
 
 }
