@@ -1,5 +1,6 @@
 package com.ai.ecommercej4j.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +36,12 @@ public class Ordine {
     }
 
     @OneToMany(mappedBy = "ordine", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = "ordine", allowSetters = true)
     List<RigaOrdine> righe = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fkIdUtente", referencedColumnName = "id")
+    @JsonIgnoreProperties(value = "ordini", allowSetters = true)
     private Utente utente;
 
     public Utente getUtente() {
