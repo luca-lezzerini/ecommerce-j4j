@@ -5,10 +5,12 @@
  */
 package com.ai.ecommercej4j.model;
 
+// creo il data transfer object della ricerca delle spedizioni
 public class SpedizioneSearchDto extends LoginResponseDto {
 
     String searchKey;
 
+    // inizializzo il dto con il costruttore della classe genitore 
     public SpedizioneSearchDto(String searchKey, String token) {
         super(token);
         this.searchKey = searchKey;
@@ -17,6 +19,7 @@ public class SpedizioneSearchDto extends LoginResponseDto {
     public SpedizioneSearchDto() {
     }
 
+    // metto i getter e i setter
     public String getSearchKey() {
         return searchKey;
     }

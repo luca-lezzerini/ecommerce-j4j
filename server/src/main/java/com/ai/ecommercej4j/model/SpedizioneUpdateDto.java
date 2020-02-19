@@ -5,8 +5,10 @@
  */
 package com.ai.ecommercej4j.model;
 
+// creo il data transfer object che aggiorna le spedizioni
 public class SpedizioneUpdateDto extends SpedizioneCreateDto {
 
+    // inizializzo il dto con il costruttore della classe genitore 
     public SpedizioneUpdateDto(Spedizione dati, String token) {
          super(dati, token);
     }

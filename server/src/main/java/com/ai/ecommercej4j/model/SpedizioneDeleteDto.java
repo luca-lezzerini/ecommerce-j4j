@@ -5,6 +5,7 @@
  */
 package com.ai.ecommercej4j.model;
 
+// creo il data transfer object della cancellazione delle spedizioni
 public class SpedizioneDeleteDto extends LoginResponseDto {
 
     Long idToDelete;
@@ -18,6 +19,7 @@ public class SpedizioneDeleteDto extends LoginResponseDto {
     public SpedizioneDeleteDto() {
     }
 
+    // metto i getter e i setter
     public Long getIdToDelete() {
         return idToDelete;
     }

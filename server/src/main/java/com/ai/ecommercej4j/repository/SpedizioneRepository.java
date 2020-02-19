@@ -10,10 +10,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author utente
- */
+// creo l'interfaccia del repository spedizioni
 public interface SpedizioneRepository extends JpaRepository<Spedizione, Long> {
 
 
