@@ -58,9 +58,9 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
     this.initView();
   }
-/*Abbiamo inserito che venga effettuato il Login
-  *prima di procedere con le pagine di anagrafica
-*/
+  /*Abbiamo inserito che venga effettuato il Login
+    *prima di procedere con le pagine di anagrafica
+  */
   ngOnInit() {
     if (!this.acService.token) {
       this.router.navigateByUrl('/login');
@@ -79,7 +79,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
     this.searchKey = '';
   }
-// Transizione in uscita da stato search tramite bottone cerca
+  // Transizione in uscita da stato search tramite bottone cerca
   daSearchCerca() {
 
     this.panelEnabled = false;
@@ -99,7 +99,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     }
     this.statoPrecedente = 'search';
   }
-// Transizione in uscita da stato search tramite bottone delete
+  // Transizione in uscita da stato search tramite bottone delete
   daSearchDelete() {
     this.panelEnabled = true;
     this.panelInputDisabled = true;
@@ -117,7 +117,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     this.statoPrecedente = 'search';
     this.vieneDaSearch = true;
   }
-// Transizione in uscita da stato search tramite bottone edit
+  // Transizione in uscita da stato search tramite bottone edit
   daSearchEdit() {
     this.panelEnabled = true;
     this.panelInputDisabled = false;
@@ -134,7 +134,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
     this.statoPrecedente = 'search';
   }
-// Transizione in uscita da stato search tramite bottone view
+  // Transizione in uscita da stato search tramite bottone view
   daSearchView() {
     this.panelEnabled = true;
     this.panelInputDisabled = true;
@@ -156,12 +156,10 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     this.deleteEnabled = true;
 
     this.statoPrecedente = 'search';
-<<<<<<< HEAD
-=======
-    console.log ('stato precedente');
->>>>>>> 9de6c0c632d19d74bc3e39197d823b0410967d51
+
+    console.log('stato precedente');
   }
-// Transizione in uscita da stato search tramite bottone Aggiungi
+  // Transizione in uscita da stato search tramite bottone Aggiungi
   daSearchAggiungi() {
     this.panelEnabled = true;
     this.panelInputDisabled = false;
@@ -179,7 +177,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     this.statoPrecedente = 'search';
 
   }
-// Transizione in uscita da stato Edit tramite bottone view
+  // Transizione in uscita da stato Edit tramite bottone view
   daEditView() {
 
     this.panelEnabled = true;
@@ -204,7 +202,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     this.statoPrecedente = 'edit';
 
   }
-// Transizione in uscita da stato create tramite bottone Annulla
+  // Transizione in uscita da stato create tramite bottone Annulla
   daCreateAnnulla() {
     this.panelEnabled = false;
 
@@ -254,7 +252,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     this.statoPrecedente = 'view';
 
   }
-// Transizione in uscita da stato view tramite bottone Edit
+  // Transizione in uscita da stato view tramite bottone Edit
   daViewEdit() {
     this.panelEnabled = true;
     this.panelInputDisabled = false;
@@ -293,7 +291,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
 
     this.statoPrecedente = 'view';
   }
-// Transizione in uscita da stato delet tramite bottone Conferma
+  // Transizione in uscita da stato delet tramite bottone Conferma
   daDeleteConferma() {
     this.panelEnabled = false;
 
@@ -368,10 +366,10 @@ export class AnagraficaSpedizioniComponent implements OnInit {
         this.modificaSpedizione();      // manda i dati dal panel (codice, descrizione e prezzo) a DB
         this.annullaEdit();
         break;
-        case 'view':
-          this.creaSpedizione();   // crea una nuova spedizione e la manda a DB
-          this.annullaEdit();
-          break;
+      case 'view':
+        this.creaSpedizione();   // crea una nuova spedizione e la manda a DB
+        this.annullaEdit();
+        break;
       default:
         console.log('Stato sbagliato: ' + this.statoPrecedente);
         break;
@@ -525,15 +523,9 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     const dto: SpedizioneSearchDto = new SpedizioneSearchDto();
     dto.searchKey = search;
     dto.token = this.acService.token;
-<<<<<<< HEAD
     const obs: Observable<SpedizioneSearchResultsDto> =
       this.http.post<SpedizioneSearchResultsDto>('http://localhost:8080/search-spedizione', dto);
-=======
-    dto.searchKey = this.searchKey;
-    const obs: Observable<any> =
-      this.http.post<any>('http://localhost:8080/search-spedizione', dto);
     console.log('mandato post ');
->>>>>>> 9de6c0c632d19d74bc3e39197d823b0410967d51
     // invia la richiesta al server
     obs.subscribe(risposta => {
       this.spedizioni = risposta.result;

@@ -12,6 +12,7 @@ import com.ai.ecommercej4j.repository.UtenteRepository;
 import com.ai.ecommercej4j.service.OrdineService;
 import com.ai.ecommercej4j.service.SecurityService;
 import java.time.LocalDate;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,15 +42,20 @@ public class OrdineServiceImpl implements OrdineService {
         // Verifica se il token è di un utente anonimo o registsto...
         if (securityService.checkToken(tok) || securityService.checkAnonimo(tok)) {
             // ... se risuta positivo crea l'ordine e aggiunge una riga
-            // TODO controllare se l'orfdine è gia esistente
-            Ordine ordine = new Ordine();
-            ordine.setData(LocalDate.now());
-            ordine.setStato("carrello");
-            ordine.setNumero((int) (Math.random() * 10000 + 1));
-            ordine.setUtente(utente);
-            ordineRepository.save(ordine);
-            utente.getOrdini().add(ordine);
-            utenteRepository.save(utente);
+            Optional<Ordine> optional = utente.getOrdini().stream().filter(o -> o.getStato().equals("carrello")).findFirst();
+            Ordine ordine;
+            if (optional.isEmpty()) {
+                ordine = new Ordine();
+                ordine.setData(LocalDate.now());
+                ordine.setStato("carrello");
+                ordine.setNumero((int) (Math.random() * 10000 + 1));
+                ordine.setUtente(utente);
+                ordineRepository.save(ordine);
+                utente.getOrdini().add(ordine);
+                utenteRepository.save(utente);
+            } else {
+                ordine = optional.get();
+            }
             RigaOrdine rigaOrdine = new RigaOrdine(1, ordine, prod);
             rigaOrdineRepository.save(rigaOrdine);
             ordine.getRighe().add(rigaOrdine);
@@ -59,6 +65,10 @@ public class OrdineServiceImpl implements OrdineService {
         }
         // ...altrimenti non fa nulla
     }
-    
-    
+
+    @Override
+    public void viewCarrello(OrdineCreateDto dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
