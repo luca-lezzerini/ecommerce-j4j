@@ -40,15 +40,21 @@ public class OrdineServiceImpl implements OrdineService {
         Utente utente = utenteRepository.findByToken(tok);
         // Verifica se il token è di un utente anonimo o registsto...
         if (securityService.checkToken(tok) || securityService.checkAnonimo(tok)) {
-            // ... se risuta positivo crea l'ordine e aggiunge una riga
-            Optional<Ordine> optional = utente.getOrdini().stream().filter(o -> o.getStato().equals("carrello")).findFirst();
+            // ... se risuta positivo recupera l'ordine dell'utente nello stato carrello
+            Optional<Ordine> optional = utente.getOrdini().stream()
+                    .filter(o -> o.getStato().equals("carrello"))
+                    .findFirst();
             Ordine ordine;
+            // Se l'utente non ha ordini nello stato carrello...
             if (optional.isEmpty()) {
+                // ...ne viene creato uno
                 ordine = new Ordine(utente);
                 ordineRepository.save(ordine);
+                // Viene associato l'ordine all'utente
                 utente.getOrdini().add(ordine);
                 utenteRepository.save(utente);
             } else {
+                // ...altrimenti viene recuperato l'ordine già esistente
                 ordine = optional.get();
             }
             RigaOrdine rigaOrdine = new RigaOrdine(1, ordine, prod);

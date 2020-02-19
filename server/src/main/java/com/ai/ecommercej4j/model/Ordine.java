@@ -55,6 +55,11 @@ public class Ordine {
     public Ordine() {
     }
 
+    /**
+     * Inizializza un nuovo ordine partendo dallo stato carrello.
+     *
+     * @param utente L'utente associato all'ordine da creare
+     */
     public Ordine(Utente utente) {
         this.data = LocalDate.now();
         this.stato = "carrello";
