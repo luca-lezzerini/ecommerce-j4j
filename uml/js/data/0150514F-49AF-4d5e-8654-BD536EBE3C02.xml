@@ -1,4 +1,4 @@
-tocTab[tocTab.length] = new Array("0.12.1", "1", "Area Gestore", "EARoot/EA12/EA1/EA768.htm", "4.png", "", "", "{0DF99571-499B-4c99-88CD-44DCE5574727}", "Package");
-tocTab[tocTab.length] = new Array("0.12.2", "1", "Area Riservata", "EARoot/EA12/EA2/EA775.htm", "4.png", "", "", "{BE9BF9E6-A7E0-48df-9B1E-2A6545F202F0}", "Package");
-tocTab[tocTab.length] = new Array("0.12.3", "1", "Development", "EARoot/EA12/EA3/EA779.htm", "4.png", "", "", "{96D3252C-D80A-4490-967D-BC1B9A5E2AB2}", "Package");
-tocTab[tocTab.length] = new Array("0.12.4", "1", "Security", "EARoot/EA12/EA4/EA783.htm", "4.png", "", "", "{C1B6D3B4-92DA-4875-A9B5-FF3DE99F3A2C}", "Package");
+tocTab[tocTab.length] = new Array("0.12.1", "1", "Area Gestore", "EARoot/EA12/EA1/EA778.htm", "4.png", "", "", "{0DF99571-499B-4c99-88CD-44DCE5574727}", "Package");
+tocTab[tocTab.length] = new Array("0.12.2", "1", "Area Riservata", "EARoot/EA12/EA2/EA785.htm", "4.png", "", "", "{BE9BF9E6-A7E0-48df-9B1E-2A6545F202F0}", "Package");
+tocTab[tocTab.length] = new Array("0.12.3", "1", "Development", "EARoot/EA12/EA3/EA789.htm", "4.png", "", "", "{96D3252C-D80A-4490-967D-BC1B9A5E2AB2}", "Package");
+tocTab[tocTab.length] = new Array("0.12.4", "1", "Security", "EARoot/EA12/EA4/EA793.htm", "4.png", "", "", "{C1B6D3B4-92DA-4875-A9B5-FF3DE99F3A2C}", "Package");
