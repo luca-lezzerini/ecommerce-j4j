@@ -145,8 +145,18 @@ public class SecurityServiceImpl implements SecurityService {
         //Creo la risposta...
         LoginResponseDto rdto = new LoginResponseDto();
         Utente anonimo = new Utente();
-        rdto.setToken(generateRandomString());
+        anonimo.setAnonimo(true);
+        anonimo.setToken(generateRandomString());
+        ur.save(anonimo);
+        rdto.setToken(anonimo.getToken());
         return rdto;
     }
+
+    @Override
+    public Boolean checkAnonimo(String token) {
+        return ur.findByToken(token).getAnonimo() != true;
+    }
+    
+    
 
 }
