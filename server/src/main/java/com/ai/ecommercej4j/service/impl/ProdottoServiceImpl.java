@@ -152,8 +152,7 @@ public class ProdottoServiceImpl implements ProdottoService {
 
         // controllo se il dto e la chiave di ricerca sono diversi da null
         // e se il token è valido
-        if (dto != null && dto.getSearchKey() != null
-                && securityService.checkToken(dto.getToken())) {
+        if (dto != null && dto.getSearchKey() != null) {
 
             //recupero i risultati e avvaloro il dto di ritorno                
             List<Prodotto> lp = prodottoRepository.
@@ -162,8 +161,7 @@ public class ProdottoServiceImpl implements ProdottoService {
             // ordino i risultati per codice
             Collections.sort(lp, (p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
             resultDto.setResult(lp);
-        } else if (dto.getSearchKey() == null && dto.getSearchKey() == ""
-                && securityService.checkToken(dto.getToken())) {
+        } else if (dto.getSearchKey() == null && dto.getSearchKey() == "") {
             //recupero i risultati e avvaloro il dto di ritorno                
             List<Prodotto> lp = prodottoRepository.
                     findByDescrizioneContainingIgnoreCase(dto.getSearchKey());
