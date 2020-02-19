@@ -153,7 +153,7 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public Boolean checkAnonimo(String token) {
-        return ur.findByToken(token).getAnonimo() != true;
+        return ur.findByToken(token).getAnonimo();
     }
 
 }
