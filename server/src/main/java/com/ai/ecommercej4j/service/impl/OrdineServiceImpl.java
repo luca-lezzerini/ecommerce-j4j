@@ -88,20 +88,11 @@ public class OrdineServiceImpl implements OrdineService {
             }
         }
     }
-
-    public int generateNumeroOrdine() {
-//        List<Ordine> ordini = ordineRepository.findAll();
-//        Optional<Ordine> optionalOrdine = ordini.parallelStream()
-//                .max((o1, o2)
-//                        -> Integer.valueOf(o1.getNumero())
-//                        .compareTo(Integer.valueOf(o2.getNumero())));
-//        int numero;
-//        if (optionalOrdine.isEmpty()) {
-//            numero = 1;
-//        } else {
-//            numero = optionalOrdine.get().getNumero() + 1;
-//        }
-//        return numero;
+    /**
+     * Restituisce un numero di ordine auto incrementato
+     * @return il numero di ordine
+     */
+    private int generateNumeroOrdine() {
         Optional<Integer> i = ordineRepository.selectMaxNumero();
         if (i.isEmpty()) {
             return 1;
@@ -162,24 +153,33 @@ public class OrdineServiceImpl implements OrdineService {
         ViewCarrelloResponseDto rdto = new ViewCarrelloResponseDto();
         String tok = dto.getToken();
         Ordine carrello = new Ordine();
-        double totale = 0;
+        double totale=0;
+        
+        // Recupero il token dall'utente con la utenteRepository
         Utente utente = utenteRepository.findByToken(tok);
-        System.out.println(utente);
         List<RigaOrdine> listaRigheOrdine;
+        
+        // Verifica se il token è di un utente anonimo o registrato...
         if (securityService.checkToken(tok) || securityService.checkAnonimo(tok)) {
+            
+            // ...recupera l'ordine con lo stato carrello...
             carrello = utente.getOrdini()
                     .parallelStream()
                     .filter(o -> o.getStato().equals("carrello"))
                     .findFirst()
                     .get();
+            // ...recupera l'array con le righe dell'ordine...
             listaRigheOrdine = carrello.getRighe();
-            for (RigaOrdine r : listaRigheOrdine) {
+
+            // ...e per ogni riga dell'array calcola il totale del prezzo dei prodotti
+            for(RigaOrdine r: listaRigheOrdine){
                 totale += r.getProdotto().getPrezzo();
             }
         } else {
-            System.out.println("sto nell'else");
+            // Altrimenti restituisco una lista vuota
             listaRigheOrdine = Collections.emptyList();
         }
+        // Setto i campi del dto e lo restituisco al client
         rdto.setCarrello(listaRigheOrdine);
         rdto.setOrdine(carrello);
         rdto.setTotale(totale);
