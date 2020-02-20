@@ -12,11 +12,13 @@ public interface OrdineRepository extends JpaRepository<Ordine, Long> {
     @Query(value = "SELECT MAX(numero) FROM ordine", nativeQuery = true)
     Optional<Integer> selectMaxNumero();
 
-    List<Ordine> findByDataContaining(LocalDate data);
+    List<Ordine> findByData(LocalDate data);
 
-    List<Ordine> findByNumeroContaining(Integer numero);
+    List<Ordine> findByNumero(Integer numero);
 
-    List<Ordine> findByDataAndNumeroContaining(LocalDate data, Integer numero);
+    List<Ordine> findByDataAndNumero(LocalDate data, Integer numero);
+    
+    
     
     List<Ordine> findByDataAndNumeroAndStato(LocalDate data, Integer numero, String stato);
     
@@ -24,5 +26,5 @@ public interface OrdineRepository extends JpaRepository<Ordine, Long> {
     
     List<Ordine> findByNumeroAndStatoContainingIgnoreCase(Integer numero, String stato);
     
-    List<Ordine> findByStatoContainingIgnoreCase(String stato);
+    List<Ordine> findByStatoContainingIgnoreCase( String stato);
 }

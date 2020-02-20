@@ -15,9 +15,11 @@ import com.ai.ecommercej4j.repository.RigaOrdineRepository;
 import com.ai.ecommercej4j.repository.UtenteRepository;
 import com.ai.ecommercej4j.service.OrdineService;
 import com.ai.ecommercej4j.service.SecurityService;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -88,8 +90,10 @@ public class OrdineServiceImpl implements OrdineService {
             }
         }
     }
+
     /**
      * Restituisce un numero di ordine auto incrementato
+     *
      * @return il numero di ordine
      */
     private int generateNumeroOrdine() {
@@ -112,7 +116,7 @@ public class OrdineServiceImpl implements OrdineService {
 
             //recupero i risultati e avvaloro il dto di ritorno                
             listaOrdine = ordineRepository.
-                    findByDataAndNumeroContaining(dto.getSearchData(), dto.getSearchNumeroOrdine());
+                    findByDataAndNumero(dto.getSearchData(), dto.getSearchNumeroOrdine());
 
             // ordino i risultati per data
             Collections.sort(listaOrdine, (o1, o2) -> o1.getData().compareTo(o2.getData()));
@@ -120,7 +124,7 @@ public class OrdineServiceImpl implements OrdineService {
 
         } else if (dto != null && dto.getSearchData() != null && dto.getSearchNumeroOrdine() == null) {
             listaOrdine = ordineRepository.
-                    findByDataContaining(dto.getSearchData());
+                    findByData(dto.getSearchData());
 
             // ordino i risultati per data
             Collections.sort(listaOrdine, (o1, o2) -> o1.getData().compareTo(o2.getData()));
@@ -128,7 +132,7 @@ public class OrdineServiceImpl implements OrdineService {
 
         } else if (dto != null && dto.getSearchData() == null && dto.getSearchNumeroOrdine() != null) {
             listaOrdine = ordineRepository.
-                    findByNumeroContaining(dto.getSearchNumeroOrdine());
+                    findByNumero(dto.getSearchNumeroOrdine());
 
             // ordino i risultati per data
             Collections.sort(listaOrdine, (o1, o2) -> o1.getData().compareTo(o2.getData()));
@@ -153,15 +157,15 @@ public class OrdineServiceImpl implements OrdineService {
         ViewCarrelloResponseDto rdto = new ViewCarrelloResponseDto();
         String tok = dto.getToken();
         Ordine carrello = new Ordine();
-        double totale=0;
-        
+        double totale = 0;
+
         // Recupero il token dall'utente con la utenteRepository
         Utente utente = utenteRepository.findByToken(tok);
         List<RigaOrdine> listaRigheOrdine;
-        
+
         // Verifica se il token è di un utente anonimo o registrato...
         if (securityService.checkToken(tok) || securityService.checkAnonimo(tok)) {
-            
+
             // ...recupera l'ordine con lo stato carrello...
             carrello = utente.getOrdini()
                     .parallelStream()
@@ -172,7 +176,7 @@ public class OrdineServiceImpl implements OrdineService {
             listaRigheOrdine = carrello.getRighe();
 
             // ...e per ogni riga dell'array calcola il totale del prezzo dei prodotti
-            for(RigaOrdine r: listaRigheOrdine){
+            for (RigaOrdine r : listaRigheOrdine) {
                 totale += r.getProdotto().getPrezzo();
             }
         } else {
@@ -188,6 +192,40 @@ public class OrdineServiceImpl implements OrdineService {
 
     @Override
     public OrdineSearchResultsDto searchOrdine(OrdineSearchDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // istanzio il dto di ritorno
+        OrdineSearchResultsDto resultDto = new OrdineSearchResultsDto();
+
+        // controllo se il dto e lo stato sono diversi da null
+        // creo la lista dei risultati
+        List<Ordine> ordini = new ArrayList<>();
+        if (dto != null && dto.getStato() != null) {
+            if (securityService.checkToken(dto.getToken())) {
+                // creo oggetto ordine che contiene le chiavi di ricerca
+//                Ordine ordine = new Ordine();
+//                ordine.setData(dto.getSearchData());
+//                ordine.setNumero(dto.getSearchNumeroOrdine());
+//                ordine.setStato(dto.getStato());
+                //recupero i risultati e avvaloro il dto di ritorno 
+                //tutte le ricerce sono effettuate per stato
+                //effettuo una ricerca per data e numero
+                if (dto.getSearchData() != null && dto.getSearchNumeroOrdine() != null) {
+                    ordini = ordineRepository.findByDataAndNumeroAndStato(dto.getSearchData(),dto.getSearchNumeroOrdine(),dto.getStato());
+                } else if (dto.getSearchData() == null && dto.getSearchNumeroOrdine() != null) {
+                    ordini = ordineRepository.findByNumeroAndStatoContainingIgnoreCase(dto.getSearchNumeroOrdine(),dto.getStato());
+                } else if (dto.getSearchData() != null && dto.getSearchNumeroOrdine() == null) {
+                    ordini = ordineRepository.findByDataAndStato(dto.getSearchData(),dto.getStato());
+                } else {
+                    ordini = ordineRepository.findByStatoContainingIgnoreCase(dto.getStato());
+                }
+                ordini = ordini.stream().sorted((o1, o2) -> o2.getData().
+                        compareTo(o1.getData())).
+                        collect(Collectors.toList());
+            } else {
+                // ... se il dto non esiste, restituisce un ArrayList vuoto
+                ordini = Collections.emptyList();
+            }
+        }
+        resultDto.setResults(ordini);
+        return resultDto;
     }
 }
