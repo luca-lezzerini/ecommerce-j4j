@@ -58,11 +58,15 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(!this.acService.token){
+    // se l'utente non è loggato viene aperta la pagina di login
+    if (!this.acService.token) {
       this.router.navigateByUrl('/login');
     }
   }
 
+  /**
+   * Aggiorna l'interfaccia utente e esegue l'operazione confermata
+   */
   conferma() {
     // se i campi di input del panel sono vuoti non esegue
     if (this.codice && this.descrizione && this.prezzo !== null) {
@@ -103,7 +107,9 @@ export class AnagraficaProdottiComponent implements OnInit {
     }
   }
 
-  // esegue l'inserimento di un nuovo prodotto
+  /**
+   * esegue l'inserimento di un nuovo prodotto e mostra l'ultima ricerca effettuata
+   */
   private confermaCrea() {
     // prepara i dati da inviare al server
     let dto: ProdottoCreateDto = new ProdottoCreateDto();
@@ -125,7 +131,9 @@ export class AnagraficaProdottiComponent implements OnInit {
     });
   }
 
-  // esegue la modifica di un prodotto
+  /**
+   * esegue la modifica di un prodotto e mostra l'ultima ricerca effettuata
+   */
   private confermaModifica() {
     // prepara i dati da inviare al server
     let dto: ProdottoUpdateDto = new ProdottoUpdateDto();
@@ -149,7 +157,9 @@ export class AnagraficaProdottiComponent implements OnInit {
     });
   }
 
-  // esegue la rimozione di un prodotto
+  /**
+   * esegue la rimozione di un prodotto e mostra l'ultima ricerca effettuata
+   */
   private confermaRimuovi() {
     // prepara i dati da inviare al server
     let dto: ProdottoDeleteDto = new ProdottoDeleteDto();
@@ -168,6 +178,9 @@ export class AnagraficaProdottiComponent implements OnInit {
     });
   }
 
+  /**
+   * Aggiorna l'interfaccia utente
+   */
   annulla() {
     // copia i valori  del prodotto selezionato precedentemente nei campi del panel
     this.popolaCampiPanel(null);
@@ -186,6 +199,9 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showAggiungi = true;
   }
 
+  /**
+   * Aggiorna l'interfaccia utente allo stato crea
+   */
   crea() {
     // pulisci campi di input nel panel
     this.annullaCampiPanel();
@@ -206,6 +222,11 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.statoPrecedente = 'crea';
   }
 
+  /**
+   * Aggiorna l'interfaccia utente allo stato modifica
+   *
+   * @param p prodotto da modificare
+   */
   modifica(p: Prodotto) {
     // copia i valori  del prodotto selezionato nei campi del panel
     this.popolaCampiPanel(p);
@@ -226,6 +247,12 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.statoPrecedente = 'modifica';
   }
 
+  /**
+   * Aggiorna l'interfaccia utente allo stato rimuovi
+   * Tiene traccia della provenienza da view o da cerca
+   *
+   * @param p prodotto da eliminare
+   */
   rimuovi(p: Prodotto) {
     // copia i valori  del prodotto selezionato nei campi del panel
     this.popolaCampiPanel(p);
@@ -250,6 +277,9 @@ export class AnagraficaProdottiComponent implements OnInit {
     }
   }
 
+  /**
+   * Aggiorna l'interfaccia utente allo stato cerca ed esegue la ricerca
+   */
   cerca() {
     // imposta visibilità degli elementi dell'interfaccia
     this.showPanel = false;
@@ -269,6 +299,9 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.eseguiRicerca(this.searchKey);
   }
 
+  /**
+   * Esegue la ricerca
+   */
   private eseguiRicerca(search: string) {
     // prepara i dati da inviare al server
     let dto: ProdottoSearchDto = new ProdottoSearchDto();
@@ -296,6 +329,11 @@ export class AnagraficaProdottiComponent implements OnInit {
     });
   }
 
+  /**
+   * Aggiorna l'interfaccia utente allo stato view
+   *
+   * @param p: il prodotto selezionato da visualizzare nel panel
+   */
   view(p: Prodotto) {
     // copia i valori  del prodotto selezionato nei campi del panel
     this.popolaCampiPanel(p);
@@ -316,7 +354,10 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.statoPrecedente = 'view';
   }
 
-  // copia i valori del prodotto selezionato nei campi di testo del panel
+  /**
+   * Copia i valori del prodotto selezionato nei campi di testo del panel
+   * @param p il prodotto selezionato
+   */
   private popolaCampiPanel(p: Prodotto) {
 
     // se provengo dalla tabella, p è avvalorato...
@@ -340,7 +381,9 @@ export class AnagraficaProdottiComponent implements OnInit {
     }
   }
 
-  // pulisco i valori dei campi di input nel panel
+  /**
+   * Pulisco i valori dei campi di input nel panel
+   */
   private annullaCampiPanel() {
     this.codice = '';
     this.descrizione = '';
