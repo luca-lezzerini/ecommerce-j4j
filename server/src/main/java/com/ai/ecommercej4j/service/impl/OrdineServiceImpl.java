@@ -153,27 +153,41 @@ public class OrdineServiceImpl implements OrdineService {
         ViewCarrelloResponseDto rdto = new ViewCarrelloResponseDto();
         String tok = dto.getToken();
         Ordine carrello = new Ordine();
-        double totale = 0;
+        double totale=0;
+        
+        // Recupero il token dall'utente con la utenteRepository
         Utente utente = utenteRepository.findByToken(tok);
-        System.out.println(utente);
         List<RigaOrdine> listaRigheOrdine;
+        
+        // Verifica se il token è di un utente anonimo o registrato...
         if (securityService.checkToken(tok) || securityService.checkAnonimo(tok)) {
+            
+            // ...recupera l'ordine con lo stato carrello...
             carrello = utente.getOrdini()
                     .parallelStream()
                     .filter(o -> o.getStato().equals("carrello"))
                     .findFirst()
                     .get();
+            // ...recupera l'array con le righe dell'ordine...
             listaRigheOrdine = carrello.getRighe();
-            for (RigaOrdine r : listaRigheOrdine) {
+
+            // ...e per ogni riga dell'array calcola il totale del prezzo dei prodotti
+            for(RigaOrdine r: listaRigheOrdine){
                 totale += r.getProdotto().getPrezzo();
             }
         } else {
-            System.out.println("sto nell'else");
+            // Altrimenti restituisco una lista vuota
             listaRigheOrdine = Collections.emptyList();
         }
+        // Setto i campi del dto e lo restituisco al client
         rdto.setCarrello(listaRigheOrdine);
         rdto.setOrdine(carrello);
         rdto.setTotale(totale);
         return rdto;
+    }
+
+    @Override
+    public OrdineSearchResultsDto searchOrdine(OrdineSearchDto dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

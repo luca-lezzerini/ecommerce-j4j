@@ -35,6 +35,10 @@ export class ViewCarrelloComponent implements OnInit {
     }
   }
 
+  /**
+   * Invia al server la richiesta di visualizzare il carrello contenente i dati del dto
+   * @param token del dto LoginResponseDto
+   */
   viewCarrello(token: string) {
     // preparo dto
     const dto: LoginResponseDto = new LoginResponseDto();
