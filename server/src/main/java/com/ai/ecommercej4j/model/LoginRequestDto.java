@@ -9,7 +9,7 @@ public class LoginRequestDto {
 
     private String username;
     private String password;
-
+    private String token;
     public LoginRequestDto() {
     }
 
@@ -32,6 +32,14 @@ public class LoginRequestDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
     
 }
