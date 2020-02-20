@@ -229,8 +229,9 @@ export class AnagraficaProdottiComponent implements OnInit {
    */
   modifica(p: Prodotto) {
     // copia i valori  del prodotto selezionato nei campi del panel
-    this.popolaCampiPanel(p);
-
+    if (p) {
+      this.popolaCampiPanel(p);
+    }
     // imposta visibilità degli elementi dell'interfaccia
     this.showPanel = true;
     this.inputDisabled = false;
@@ -255,7 +256,9 @@ export class AnagraficaProdottiComponent implements OnInit {
    */
   rimuovi(p: Prodotto) {
     // copia i valori  del prodotto selezionato nei campi del panel
-    this.popolaCampiPanel(p);
+    if (p) {
+      this.popolaCampiPanel(p);
+    }
 
     // imposta visibilità degli elementi dell'interfaccia
     this.showPanel = true;

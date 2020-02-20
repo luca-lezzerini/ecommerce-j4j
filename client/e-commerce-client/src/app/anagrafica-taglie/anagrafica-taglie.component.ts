@@ -232,7 +232,7 @@ export class AnagraficaTaglieComponent implements OnInit {
     this.pulisciCampi();
   }
 
-  modifica(id: number) {
+  modifica() {
     // imposta la visibilità su VisAggiungi
     this.visAttesaConferma();
     this.visPrecedente = 'modifica';
