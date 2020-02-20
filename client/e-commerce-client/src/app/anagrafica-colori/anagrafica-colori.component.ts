@@ -24,19 +24,16 @@ export class AnagraficaColoriComponent implements OnInit {
   result: Colori[] = [];
   state: string;
   olderState: string;
+  msg: string;
 
   // variabili per mostrare o nascondere componenti UI
   showPanel: boolean;
   inputNotEditable: boolean;
-  showConferma: boolean;
-  showAnnulla: boolean;
-  showCrea: boolean;
-  showModifica: boolean;
-  showRimuovi: boolean;
+  showConfermaAnnulla: boolean;
+  showCUD: boolean;
   showCerca: boolean;
   showRisultati: boolean;
   showAggiungi: boolean;
-  showVisualizza: boolean;
 
   // vari stati in cui si può trovare
   statoCerca = 'Cerca';
@@ -46,7 +43,11 @@ export class AnagraficaColoriComponent implements OnInit {
   statoAggiungi = 'Aggiungi';
 
   // inizializzo le variabili UI
-  constructor(private http: HttpClient, private ac: AreaComuneService, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private ac: AreaComuneService,
+    private router: Router
+  ) {
     this.showPanel = false;
     this.showCerca = true;
     this.showRisultati = false;
@@ -55,7 +56,7 @@ export class AnagraficaColoriComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (! this.ac.token) {
+    if (!this.ac.token) {
       this.router.navigateByUrl('login');
     }
   }
@@ -67,26 +68,28 @@ export class AnagraficaColoriComponent implements OnInit {
 
   confermaCheckState(stato: string) {
     // Salva i dati del colore selezionato
-    this.colore = {
-      id: this.id,
-      codice: this.codice,
-      descrizione: this.descrizione,
-    };
-    if (stato === this.statoAggiungi) {
-      this.olderState = this.state;
-      this.state = this.statoCerca;
-      this.createColori();
-      this.cercaState();
-    } else if (stato === this.statoModifica) {
-      this.olderState = this.state;
-      this.state = this.statoVisualizza;
-      this.updateColori(this.colore);
-      this.visualizzaState(this.colore);
-    } else if (stato === this.statoCancella) {
-      this.olderState = this.state;
-      this.state = this.statoCerca;
-      this.deleteColori(this.colore);
-      this.cercaState();
+    if (this.codice.trim() !== '' && this.descrizione.trim() !== '') {
+      this.colore = {
+        id: this.id,
+        codice: this.codice,
+        descrizione: this.descrizione
+      };
+      if (stato === this.statoAggiungi) {
+        this.olderState = this.state;
+        this.state = this.statoCerca;
+        this.createColori();
+        this.cercaState();
+      } else if (stato === this.statoModifica) {
+        this.olderState = this.state;
+        this.state = this.statoVisualizza;
+        this.updateColori(this.colore);
+        this.visualizzaState(this.colore);
+      } else if (stato === this.statoCancella) {
+        this.olderState = this.state;
+        this.state = this.statoCerca;
+        this.deleteColori(this.colore);
+        this.cercaState();
+      }
     }
   }
 
@@ -205,10 +208,10 @@ export class AnagraficaColoriComponent implements OnInit {
     }
   }
 
-/**
- * cambia stato in visualizza quando si preme su visualizza
- * @param colore viene impostato in base al colore che viene visualizzato
- */
+  /**
+   * cambia stato in visualizza quando si preme su visualizza
+   * @param colore viene impostato in base al colore che viene visualizzato
+   */
   visualizzaState(colore: Colori) {
     this.olderState = this.state;
     this.state = this.statoVisualizza;
@@ -220,12 +223,8 @@ export class AnagraficaColoriComponent implements OnInit {
 
     this.showPanel = true;
     this.inputNotEditable = true;
-    this.showConferma = false;
-    this.showAnnulla = false;
-    this.showCrea = true;
-    this.showVisualizza = true;
-    this.showModifica = true;
-    this.showRimuovi = true;
+    this.showConfermaAnnulla = false;
+    this.showCUD = true;
     this.showCerca = true;
     this.showRisultati = true;
     this.showAggiungi = true;
@@ -234,13 +233,10 @@ export class AnagraficaColoriComponent implements OnInit {
    * Cambia stato in Crea, Modifica e Cancella quando si preme su Crea, Modifica o Cancella
    */
   CUDState() {
+    // inputNotEditabile varia in base allo stato in cui si passa
     this.showPanel = true;
-    this.showConferma = true;
-    this.showAnnulla = true;
-    this.showCrea = false;
-    this.showVisualizza = false;
-    this.showModifica = false;
-    this.showRimuovi = false;
+    this.showConfermaAnnulla = true;
+    this.showCUD = false;
     this.showCerca = false;
     this.showRisultati = false;
     this.showAggiungi = false;
@@ -252,12 +248,8 @@ export class AnagraficaColoriComponent implements OnInit {
   cercaState() {
     this.showPanel = false;
     this.inputNotEditable = true;
-    this.showConferma = false;
-    this.showAnnulla = false;
-    this.showCrea = true;
-    this.showVisualizza = true;
-    this.showModifica = true;
-    this.showRimuovi = true;
+    this.showConfermaAnnulla = false;
+    this.showCUD = true;
     this.showCerca = true;
     this.showRisultati = true;
     this.showAggiungi = true;
@@ -268,15 +260,12 @@ export class AnagraficaColoriComponent implements OnInit {
   aggiungiState() {
     this.showPanel = true;
     this.inputNotEditable = false;
-    this.showConferma = true;
-    this.showAnnulla = true;
-    this.showCrea = false;
-    this.showVisualizza = false;
-    this.showModifica = false;
-    this.showRimuovi = false;
+    this.showConfermaAnnulla = true;
+    this.showCUD = false;
     this.showCerca = false;
     this.showRisultati = false;
     this.showAggiungi = true;
+
     this.state = this.statoAggiungi;
     this.codice = '';
     this.descrizione = '';
@@ -302,8 +291,9 @@ export class AnagraficaColoriComponent implements OnInit {
       dto.token = this.ac.token;
       // preparo la richiesta http
       const obs: Observable<void> = this.http.post<void>(
-        this.ac.hostUrl + '/create-colori', dto
-        );
+        this.ac.hostUrl + '/create-colori',
+        dto
+      );
       obs.subscribe(data => {
         // dopo la risposta del server visualizza gli elementi salvati nel database
         this.searchColori();
@@ -330,10 +320,15 @@ export class AnagraficaColoriComponent implements OnInit {
     // preparo la richiesta http
     const obs: Observable<ColoriSearchResultsDto> = this.http.post<
       ColoriSearchResultsDto
-    >(this.ac.hostUrl +'/search-colori', dto);
+    >(this.ac.hostUrl + '/search-colori', dto);
     obs.subscribe(data => {
       // salva la lista di risultati ottenuti dal server nell' array locale che viene visualizzato
       this.result = data.result;
+      if (this.result.length === 0) {
+        this.msg = 'Nessun risultato trovato!';
+      } else {
+        this.msg = 'Trovati ' + this.result.length + ' colori';
+      }
     });
   }
 

@@ -1,13 +1,17 @@
 <div class="panel" *ngIf="showPanel">
-    <label>codice</label>
+    <label>Codice: </label>
     <input type="text" [(ngModel)]="codice" name="codice" disabled="{{inputNotEditable}}">
-    <label>descrizione</label>
+    <label>Descrizione: </label>
     <input type="text" [(ngModel)]="descrizione" name="descrizione" disabled="{{inputNotEditable}}">
-    <button *ngIf="showConferma" (click)="confermaCheckState(state)" >Conferma</button>
-    <button *ngIf="showAnnulla" (click)="annullaCheckState(state)" >Annulla</button>
-    <button *ngIf="showCrea" (click)="creaCheckState(state)">Crea</button>
-    <button *ngIf="showModifica" (click)="modificaCheckState(state)">Modifica</button>
-    <button *ngIf="showRimuovi" (click)="cancellaCheckState(state)">Rimuovi</button>
+    <span *ngIf="showConfermaAnnulla">
+      <button (click)="confermaCheckState(state)" >Conferma</button>
+      <button (click)="annullaCheckState(state)" >Annulla</button>
+    </span>
+<span *ngIf="showCUD">
+  <button *ngIf="showRisultati" (click)="creaCheckState(state)">Crea</button>
+  <button *ngIf="showRisultati" (click)="modificaCheckState(state)">Modifica</button>
+  <button *ngIf="showRisultati" (click)="cancellaCheckState(state)">Rimuovi</button>
+</span>
 </div>
 
 <div class="search" *ngIf="showCerca">
@@ -17,9 +21,9 @@
 <div class="add" *ngIf="showAggiungi">
   <button (click)="aggiungiState()">Aggiungi</button>
 </div>
-
+<p>{{msg}}</p>
 <div class="results" *ngIf="showRisultati">
-  <table *ngIf="result">
+  <table *ngIf="result.length!=0">
     <tr>
       <th>
         Codice
@@ -31,9 +35,9 @@
     <tr *ngFor="let r of result">
       <td>{{ r.codice }}</td>
       <td>{{ r.descrizione }}</td>
-      <td><button *ngIf="showVisualizza" (click)="visualizzaState(r)">Visualizza</button></td>
-      <td><button *ngIf="showModifica" (click)="modificaInTableCheckState(state, r)">Modifica</button></td>
-      <td><button *ngIf="showRimuovi" (click)="cancellaInTableCheckState(state, r)">Rimuovi</button></td>
+      <td><button (click)="visualizzaState(r)">Visualizza</button></td>
+      <td><button (click)="modificaInTableCheckState(state, r)">Modifica</button></td>
+      <td><button (click)="cancellaInTableCheckState(state, r)">Rimuovi</button></td>
     </tr>
   </table>
 </div>
