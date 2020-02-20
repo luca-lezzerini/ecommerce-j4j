@@ -1,16 +1,21 @@
 package com.ai.ecommercej4j.service.impl;
 
+import com.ai.ecommercej4j.model.LoginResponseDto;
 import com.ai.ecommercej4j.model.Ordine;
 import com.ai.ecommercej4j.model.OrdineCreateDto;
 import com.ai.ecommercej4j.model.Prodotto;
 import com.ai.ecommercej4j.model.RigaOrdine;
 import com.ai.ecommercej4j.model.Utente;
+import com.ai.ecommercej4j.model.ViewCarrelloResponseDto;
 import com.ai.ecommercej4j.repository.OrdineRepository;
 import com.ai.ecommercej4j.repository.ProdottoRepository;
 import com.ai.ecommercej4j.repository.RigaOrdineRepository;
 import com.ai.ecommercej4j.repository.UtenteRepository;
 import com.ai.ecommercej4j.service.OrdineService;
 import com.ai.ecommercej4j.service.SecurityService;
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,7 +53,7 @@ public class OrdineServiceImpl implements OrdineService {
             // Se l'utente non ha ordini nello stato carrello...
             if (optionalOrdine.isEmpty()) {
                 // ...ne viene creato uno
-                ordine = new Ordine(utente);
+                ordine = new Ordine(utente, generateNumeroOrdine());
                 ordineRepository.save(ordine);
                 // Viene associato l'ordine all'utente
                 utente.getOrdini().add(ordine);
@@ -82,9 +87,47 @@ public class OrdineServiceImpl implements OrdineService {
         }
     }
 
-    @Override
-    public void viewCarrello(OrdineCreateDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int generateNumeroOrdine() {
+//        List<Ordine> ordini = ordineRepository.findAll();
+//        Optional<Ordine> optionalOrdine = ordini.parallelStream()
+//                .max((o1, o2)
+//                        -> Integer.valueOf(o1.getNumero())
+//                        .compareTo(Integer.valueOf(o2.getNumero())));
+//        int numero;
+//        if (optionalOrdine.isEmpty()) {
+//            numero = 1;
+//        } else {
+//            numero = optionalOrdine.get().getNumero() + 1;
+//        }
+//        return numero;
+        Optional<Integer> i = ordineRepository.selectMaxNumero();
+        if (i.isEmpty()) {
+            return 1;
+        } else {
+            return i.get() + 1;
+        }
     }
 
+    @Override
+    public ViewCarrelloResponseDto viewCarrello(LoginResponseDto dto) {
+        ViewCarrelloResponseDto rdto = new ViewCarrelloResponseDto();
+        String tok = dto.getToken();
+        Ordine carrello = new Ordine();
+        Utente utente = utenteRepository.findByToken(tok);
+        System.out.println(utente);
+        List<RigaOrdine> listaRigheOrdine;
+        if (securityService.checkToken(tok) || securityService.checkAnonimo(tok)) {
+            carrello = utente.getOrdini()
+                    .parallelStream()
+                    .filter(o -> o.getStato().equals("carrello"))
+                    .findFirst()
+                    .get();
+            listaRigheOrdine = carrello.getRighe();
+        } else {
+            System.out.println("sto nell'else");
+            listaRigheOrdine = Collections.emptyList();
+        }
+        rdto.setCarrello(listaRigheOrdine);
+        return rdto;
+    }
 }

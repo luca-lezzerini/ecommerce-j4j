@@ -19,21 +19,23 @@ import org.springframework.stereotype.Service;
 public class DevelopmentServiceImpl implements DevelopmentService {
 
     @Autowired
-    ProdottoRepository prodottoRepository;
+    private ProdottoRepository prodottoRepository;
     @Autowired
-    UtenteRepository utenteRepository;
+    private UtenteRepository utenteRepository;
     @Autowired
-    SpedizioneRepository spedizioneRespository;
+    private SpedizioneRepository spedizioneRespository;
     @Autowired
-    TagliaRepository tagliaRepository;
+    private TagliaRepository tagliaRepository;
     @Autowired
-    ColoriRepository coloriRepository;
+    private ColoriRepository coloriRepository;
     @Autowired
-    StartupDataService startupDataService;
+    private StartupDataService startupDataService;
     @Autowired
-    OrdineRepository ordineRepository;
+    private OrdineRepository ordineRepository;
     @Autowired
-    RigaOrdineRepository rigaOrdineRepository;
+    private RigaOrdineRepository rigaOrdineRepository;
+    @Autowired
+    private OrdineServiceImpl ordineServiceImpl;
 
     @Override
     public void generateTestData() {
@@ -360,12 +362,12 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         // Creo gli ordini ...
         Ordine o1 = new Ordine();
         o1.setData(LocalDate.now());
-        o1.setNumero(1);
+        o1.setNumero(ordineServiceImpl.generateNumeroOrdine());
         o1.setStato("carrello");
         ordineRepository.save(o1);
         Ordine o2 = new Ordine();
         o2.setData(LocalDate.now());
-        o2.setNumero(2);
+        o2.setNumero(ordineServiceImpl.generateNumeroOrdine());
         o2.setStato("carrello");
         ordineRepository.save(o2);
 
