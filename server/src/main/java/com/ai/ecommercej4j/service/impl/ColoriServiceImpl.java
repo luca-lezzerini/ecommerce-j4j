@@ -1,11 +1,6 @@
 package com.ai.ecommercej4j.service.impl;
 
-import com.ai.ecommercej4j.model.Colori;
-import com.ai.ecommercej4j.model.ColoriCreateDto;
-import com.ai.ecommercej4j.model.ColoriDeleteDto;
-import com.ai.ecommercej4j.model.ColoriSearchDto;
-import com.ai.ecommercej4j.model.ColoriSearchResultsDto;
-import com.ai.ecommercej4j.model.ColoriUpdateDto;
+import com.ai.ecommercej4j.model.*;
 import com.ai.ecommercej4j.repository.ColoriRepository;
 import com.ai.ecommercej4j.service.ColoriService;
 import java.util.List;
@@ -35,6 +30,7 @@ public class ColoriServiceImpl implements ColoriService {
             // ... altrimenti recupera solo quelli il cui codice è quello cercato
         } else {
             ace = coloriRepository.findByCodiceContainingIgnoreCase(dto.getSearchKey());
+            ace.addAll(coloriRepository.findByDescrizioneContainingIgnoreCase(dto.getSearchKey()));
         }
         ColoriSearchResultsDto dto2 = new ColoriSearchResultsDto(ace);
         return dto2;
@@ -54,18 +50,4 @@ public class ColoriServiceImpl implements ColoriService {
         coloriRepository.save(c);
     }
 
-    @Override
-    public ColoriSearchResultsDto searchColoriPerDescrizione(ColoriSearchDto dto) {
-        List<Colori> ace;
-        //Se la stringa è vuota recupera dal db tutti gli elementi
-        if ((dto.getSearchKey()).equals("")) {
-            ace = coloriRepository.findAll();
-            //Altrimenti recupera solo quelli la cui descrizione è quella cercata
-        } else {
-
-            ace = coloriRepository.findByDescrizioneContainingIgnoreCase(dto.getSearchKey());
-        }
-        ColoriSearchResultsDto dto2 = new ColoriSearchResultsDto(ace);
-        return dto2;
-    }
 }

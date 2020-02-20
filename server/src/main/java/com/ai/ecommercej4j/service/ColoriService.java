@@ -18,17 +18,12 @@ public interface ColoriService {
     
     /**
      * Cerca i colori salvati nella repository e li salva in una lista 
+     * Effettua la ricerca per codice e descrizione
      * @param dto contiene il parametro su cui viene effettuata la ricerca
      * @return una lista di risultati
      */
     ColoriSearchResultsDto searchColori(ColoriSearchDto dto);
     
-    /**
-     * Cerca i colori salvati nella repository tramite la descrizione e li salva in una lista 
-     * @param dto contiene il parametro su cui viene effettuata la ricerca
-     * @return una lista di risultati
-     */
-    ColoriSearchResultsDto searchColoriPerDescrizione(ColoriSearchDto dto);
     
     /**
      * cancella il colore tramite l'id
