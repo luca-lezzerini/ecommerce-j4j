@@ -27,4 +27,6 @@ public interface OrdineService {
     ViewCarrelloResponseDto viewCarrello(LoginResponseDto dto);
 
     OrdineSearchResultsDto searchOrdineDaSpedire(OrdineSearchDto dto);
+    
+    OrdineSearchResultsDto searchOrdine(OrdineSearchDto dto);
 }

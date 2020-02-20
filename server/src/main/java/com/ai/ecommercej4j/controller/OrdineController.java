@@ -24,7 +24,7 @@ public class OrdineController {
     
     @RequestMapping(value = "/search-ordini-da-spedire")
     @ResponseBody
-    public OrdineSearchResultsDto searchOrdine(@RequestBody OrdineSearchDto dto) {
+    public OrdineSearchResultsDto searchOrdiniDaSpedire(@RequestBody OrdineSearchDto dto) {
         return ordineService.searchOrdineDaSpedire(dto);
     }
     @RequestMapping("/view-carrello")
@@ -32,5 +32,10 @@ public class OrdineController {
     public ViewCarrelloResponseDto viewCarrello(@RequestBody LoginResponseDto dto){
         return ordineService.viewCarrello(dto);
     }
-   
+    
+    @RequestMapping
+    @ResponseBody
+    public OrdineSearchResultsDto searchOrdine(@RequestBody OrdineSearchDto dto){
+     return ordineService.searchOrdine(dto);   
+    }
 }
