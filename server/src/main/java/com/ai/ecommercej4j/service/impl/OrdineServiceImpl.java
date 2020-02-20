@@ -2,7 +2,7 @@ package com.ai.ecommercej4j.service.impl;
 
 import com.ai.ecommercej4j.model.LoginResponseDto;
 import com.ai.ecommercej4j.model.Ordine;
-import com.ai.ecommercej4j.model.OrdineCreateDto;
+import com.ai.ecommercej4j.model.AggiungiCarrelloDto;
 import com.ai.ecommercej4j.model.OrdineSearchDto;
 import com.ai.ecommercej4j.model.OrdineSearchResultsDto;
 import com.ai.ecommercej4j.model.Prodotto;
@@ -40,13 +40,13 @@ public class OrdineServiceImpl implements OrdineService {
     private ProdottoRepository prodottoRepository;
 
     @Override
-    public void addCarrello(OrdineCreateDto dto) {
+    public void addCarrello(AggiungiCarrelloDto dto) {
         String token = dto.getToken();
         Prodotto prodotto = dto.getDati();
         Utente utente = utenteRepository.findByToken(token);
-        // Verifica se il token è di un utente anonimo o registsto...
+        // Verifica se il token è di un utente anonimo o registrato...
         if (securityService.checkToken(token) || securityService.checkAnonimo(token)) {
-            // ... se risuta positivo recupera l'ordine dell'utente nello stato carrello
+            // ... se vero recupera l'ordine dell'utente nello stato carrello
             Optional<Ordine> optionalOrdine = utente.getOrdini().stream()
                     .filter(o -> o.getStato().equals("carrello"))
                     .findFirst();
@@ -65,7 +65,8 @@ public class OrdineServiceImpl implements OrdineService {
             }
             // Recupera la riga del prodotto da aggiungere
             Optional<RigaOrdine> optionalRiga = ordine.getRighe().stream()
-                    .filter(r -> r.getProdotto().getId().equals(prodotto.getId()))
+                    .filter(r -> r.getProdotto()
+                    .getId().equals(prodotto.getId()))
                     .findFirst();
             RigaOrdine rigaOrdine;
             // Se la riga non esiste...
@@ -161,7 +162,7 @@ public class OrdineServiceImpl implements OrdineService {
         ViewCarrelloResponseDto rdto = new ViewCarrelloResponseDto();
         String tok = dto.getToken();
         Ordine carrello = new Ordine();
-        double totale=0;
+        double totale = 0;
         Utente utente = utenteRepository.findByToken(tok);
         System.out.println(utente);
         List<RigaOrdine> listaRigheOrdine;
@@ -172,7 +173,7 @@ public class OrdineServiceImpl implements OrdineService {
                     .findFirst()
                     .get();
             listaRigheOrdine = carrello.getRighe();
-            for(RigaOrdine r: listaRigheOrdine){
+            for (RigaOrdine r : listaRigheOrdine) {
                 totale += r.getProdotto().getPrezzo();
             }
         } else {

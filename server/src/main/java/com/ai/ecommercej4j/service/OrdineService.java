@@ -1,7 +1,7 @@
 package com.ai.ecommercej4j.service;
 
 import com.ai.ecommercej4j.model.LoginResponseDto;
-import com.ai.ecommercej4j.model.OrdineCreateDto;
+import com.ai.ecommercej4j.model.AggiungiCarrelloDto;
 import com.ai.ecommercej4j.model.OrdineSearchDto;
 import com.ai.ecommercej4j.model.OrdineSearchResultsDto;
 import com.ai.ecommercej4j.model.ViewCarrelloResponseDto;
@@ -15,7 +15,7 @@ public interface OrdineService {
      * @param dto Contiene il token dell'utente e il prodotto da aggiungere al
      * carrello
      */
-    void addCarrello(OrdineCreateDto dto);
+    void addCarrello(AggiungiCarrelloDto dto);
 
     ViewCarrelloResponseDto viewCarrello(LoginResponseDto dto);
 

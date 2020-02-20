@@ -1,7 +1,7 @@
 package com.ai.ecommercej4j.controller;
 
 import com.ai.ecommercej4j.model.LoginResponseDto;
-import com.ai.ecommercej4j.model.OrdineCreateDto;
+import com.ai.ecommercej4j.model.AggiungiCarrelloDto;
 import com.ai.ecommercej4j.model.OrdineSearchDto;
 import com.ai.ecommercej4j.model.OrdineSearchResultsDto;
 import com.ai.ecommercej4j.model.ViewCarrelloResponseDto;
@@ -18,7 +18,7 @@ public class OrdineController {
     
     @RequestMapping("/add-carrello")
     @ResponseBody
-    public void addCarrello(@RequestBody OrdineCreateDto dto){
+    public void addCarrello(@RequestBody AggiungiCarrelloDto dto){
         ordineService.addCarrello(dto);
     }
     
