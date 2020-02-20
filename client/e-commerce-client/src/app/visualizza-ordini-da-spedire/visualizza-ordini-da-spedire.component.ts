@@ -1,3 +1,4 @@
+import { OrdineSendDto } from './../classi/ordine-send-dto';
 import { Router } from '@angular/router';
 import { AreaComuneService } from './../area-comune.service';
 import { HttpClient } from '@angular/common/http';
@@ -61,7 +62,6 @@ export class VisualizzaOrdiniDaSpedireComponent implements OnInit {
 
     // Callback
     oss.subscribe(risposta => {
-      console.log(this.searchKeyNumOrd);
       // Aggiorno la lista degli ordini
       this.ordini = risposta.results;
       // Se ci sono risultati li visualizzo
@@ -79,7 +79,16 @@ export class VisualizzaOrdiniDaSpedireComponent implements OnInit {
   }
 
   spedisci(ordine: Ordine) {
+    this.ordineSelezionato = ordine;
+    let dto: OrdineSendDto = new OrdineSendDto();
 
+    // Preparo la richiesta http
+    let oss: Observable<any> =
+      this.http.post<any>(this.sessione.hostUrl + '/spedisci-ordine', dto);
 
+    // Callback
+    oss.subscribe(risposta => {
+      this.eseguiRicerca();
+    });
   }
 }
