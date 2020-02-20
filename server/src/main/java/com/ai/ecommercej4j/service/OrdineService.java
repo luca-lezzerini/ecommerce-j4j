@@ -1,6 +1,8 @@
 package com.ai.ecommercej4j.service;
 
 import com.ai.ecommercej4j.model.OrdineCreateDto;
+import com.ai.ecommercej4j.model.OrdineSearchDto;
+import com.ai.ecommercej4j.model.OrdineSearchResultsDto;
 
 public interface OrdineService {
 
@@ -14,4 +16,8 @@ public interface OrdineService {
     void addCarrello(OrdineCreateDto dto);
 
     void viewCarrello(OrdineCreateDto dto);
+    
+    OrdineSearchResultsDto searchOrdineDaSpedire(OrdineSearchDto dto);
+        
+    
 }
