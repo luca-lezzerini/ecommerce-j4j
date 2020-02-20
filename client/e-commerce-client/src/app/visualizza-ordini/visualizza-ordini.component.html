@@ -4,7 +4,7 @@
     Numero ordine <input type = "text" [(ngModel)] = "numeroOrdine">&nbsp;
     Data <input type = "date" [(ngModel)] = "data">&nbsp;
     <button type="button" (click) = "searchOrdine()"> Cerca </button>&nbsp;
-    <select id = "stato">&nbsp;
+    <select [(ngModel)] = "stato">&nbsp;
       <option>Carrello</option>
       <option>In checkout</option>
       <option>Pagato</option>

@@ -33,9 +33,9 @@ public class OrdineController {
         return ordineService.viewCarrello(dto);
     }
     
-    @RequestMapping
+    @RequestMapping("/search-ordini")
     @ResponseBody
-    public OrdineSearchResultsDto searchOrdine(@RequestBody OrdineSearchDto dto){
+    public OrdineSearchResultsDto searchOrdini(@RequestBody OrdineSearchDto dto){
      return ordineService.searchOrdine(dto);   
     }
 }

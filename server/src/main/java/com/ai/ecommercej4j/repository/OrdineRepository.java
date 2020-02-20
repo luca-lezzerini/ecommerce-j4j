@@ -14,7 +14,15 @@ public interface OrdineRepository extends JpaRepository<Ordine, Long> {
 
     List<Ordine> findByDataContaining(LocalDate data);
 
-    List<Ordine> findByNumeroContaining(String numero);
+    List<Ordine> findByNumeroContaining(Integer numero);
 
-    List<Ordine> findByDataAndNumeroContaining(LocalDate data, String numero);
+    List<Ordine> findByDataAndNumeroContaining(LocalDate data, Integer numero);
+    
+    List<Ordine> findByDataAndNumeroAndStato(LocalDate data, Integer numero, String stato);
+    
+    List<Ordine> findByDataAndStato(LocalDate data, String stato);
+    
+    List<Ordine> findByNumeroAndStatoContainingIgnoreCase(Integer numero, String stato);
+    
+    List<Ordine> findByStatoContainingIgnoreCase(String stato);
 }

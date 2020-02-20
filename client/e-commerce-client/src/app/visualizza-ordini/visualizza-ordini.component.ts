@@ -5,6 +5,7 @@ import { Ordine } from './../classi/ordine';
 import { Component, OnInit } from '@angular/core';
 import { AreaComuneService } from '../area-comune.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-visualizza-ordini',
@@ -14,15 +15,20 @@ import { HttpClient } from '@angular/common/http';
 export class VisualizzaOrdiniComponent implements OnInit {
 
   ordini: Ordine[] = [];
-  numeroOrdine: string = '';
+  numeroOrdine: number;
   data: Date;
   showResults: boolean;
   stato: string;
 
-  constructor(private http: HttpClient, private acService: AreaComuneService) { }
+  constructor(private http: HttpClient,
+              private acService: AreaComuneService,
+              private router: Router) { }
 
   ngOnInit() {
-
+    // se l'utente non è loggato viene aperta la pagina di login
+    if (!this.acService.token) {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   searchOrdine() {
@@ -45,7 +51,7 @@ export class VisualizzaOrdiniComponent implements OnInit {
       // Se ci sono risultati li visualizzo
       this.showResults = risposta.results.length > 0;
       // Pulisco i campi di ricerca
-      this.numeroOrdine = '';
+      this.numeroOrdine = null;
       this.data = null;
       this.stato = 'carrello';
     });
