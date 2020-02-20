@@ -32,18 +32,18 @@ export class HomePageComponent implements OnInit {
   }
   search() {
     // Preparo i dto
-    let dto: ProdottoSearchDto = new ProdottoSearchDto();
+    const dto: ProdottoSearchDto = new ProdottoSearchDto();
     dto.searchKey = this.ricerca;
     dto.token = this.acService.token;
 
     // Preparo richiesta http
-    let oss: Observable<ProdottoSearchResultsDto> =
+    const oss: Observable<ProdottoSearchResultsDto> =
       this.http.post<ProdottoSearchResultsDto>(this.acService.hostUrl + '/search-prodotto-descrizione', dto);
 
     // Invio la richiesta
     oss.subscribe(risposta => {
       this.prodotti = risposta.result;
-      console.log(risposta.result)
+      console.log(risposta.result);
       this.showResults = true; // this.prodotti.length > 0;
     });
   }
@@ -63,13 +63,14 @@ export class HomePageComponent implements OnInit {
       // chiamata per generare token anonimo
 
       // Preparo richiesta http
-      let oss: Observable<LoginResponseDto> =
+      const oss: Observable<LoginResponseDto> =
         this.http.post<LoginResponseDto>(this.acService.hostUrl + '/generate-token-anonimo', null);
 
       // Invio la richiesta
       oss.subscribe(data => {
         this.acService.tokenAnonimo = data.token;
         this.aggiungiAutenticatoAlCarrello(p, this.acService.tokenAnonimo);
+        console.log(data.token);
       }
       );
     }
@@ -82,13 +83,13 @@ export class HomePageComponent implements OnInit {
    */
   private aggiungiAutenticatoAlCarrello(p: Prodotto, token: string) {
     // Preparo i dto
-    let dto: OrdineCreateDto = new OrdineCreateDto();
+    const dto: OrdineCreateDto = new OrdineCreateDto();
     dto.dati = p;
     dto.token = token;
 
     // Preparo richiesta http
-    let oss: Observable<void> =
-      this.http.post<void>(this.acService.hostUrl + '/add-carrello', dto);
+    let oss: Observable<any> =
+      this.http.post<any>(this.acService.hostUrl + '/add-carrello', dto);
 
     // Invio la richiesta
     oss.subscribe(data => {

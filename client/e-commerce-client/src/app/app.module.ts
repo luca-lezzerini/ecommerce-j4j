@@ -67,7 +67,7 @@ const appRoutes: Routes = [
   { path: 'elenco-taglie', component: ElencoTaglieComponent },
   { path: 'visualizza-ordini', component: VisualizzaOrdiniComponent },
   { path: 'home-area-gestore', component: HomeAreaGestoreComponent },
-  { path: 'visualizza-ordini-da-spedire', component: VisualizzaOrdiniDaSpedireComponent }
+  { path: 'visualizza-ordini-da-spedire', component: VisualizzaOrdiniDaSpedireComponent },
 ];
 
 @NgModule({
