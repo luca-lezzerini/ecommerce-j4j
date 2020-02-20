@@ -88,20 +88,11 @@ public class OrdineServiceImpl implements OrdineService {
             }
         }
     }
-
-    public int generateNumeroOrdine() {
-//        List<Ordine> ordini = ordineRepository.findAll();
-//        Optional<Ordine> optionalOrdine = ordini.parallelStream()
-//                .max((o1, o2)
-//                        -> Integer.valueOf(o1.getNumero())
-//                        .compareTo(Integer.valueOf(o2.getNumero())));
-//        int numero;
-//        if (optionalOrdine.isEmpty()) {
-//            numero = 1;
-//        } else {
-//            numero = optionalOrdine.get().getNumero() + 1;
-//        }
-//        return numero;
+    /**
+     * Restituisce un numero di ordine auto incrementato
+     * @return il numero di ordine
+     */
+    private int generateNumeroOrdine() {
         Optional<Integer> i = ordineRepository.selectMaxNumero();
         if (i.isEmpty()) {
             return 1;
