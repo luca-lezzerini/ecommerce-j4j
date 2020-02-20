@@ -221,17 +221,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
   }
   // Transizione in uscita da stato create tramite bottone Conferma
   daCreateConferma() {
-    this.panelEnabled = false;
-
-    this.searchPanelEnabled = true;
-    this.cercaInputDisabled = false;
-    this.cercaEnabled = true;
-    this.aggiungiEnabled = true;
-
-    this.resultsEnabled = true;
-    this.viewEnabled = true;
-    this.editEnabled = true;
-    this.deleteEnabled = true;
+    this.daCreateAnnulla();
 
     this.statoPrecedente = 'create';
   }
