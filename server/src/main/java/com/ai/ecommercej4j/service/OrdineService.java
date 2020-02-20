@@ -22,11 +22,20 @@ public interface OrdineService {
      * LoginResponseDto
      *
      * @param dto LoginResponseDto contente il token
+     * 
      * @return ViewCarrelloResponseDto contenente l'ordine le righe e il totale
      */
     ViewCarrelloResponseDto viewCarrello(LoginResponseDto dto);
 
     OrdineSearchResultsDto searchOrdineDaSpedire(OrdineSearchDto dto);
     
+    /**
+     * Cerca gli ordini dell'utente secondo le chiavi di ricerca inserite
+     * 
+     * @param dto contiene il token dell'utente di cui vengono cercati gli ordini
+     * e i parametri di ricerca: data, numero dell'ordine e stato
+     * 
+     * @return dto con lista di ordini dell'utente
+     */
     OrdineSearchResultsDto searchOrdine(OrdineSearchDto dto);
 }
