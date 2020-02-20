@@ -91,16 +91,19 @@ public class OrdineServiceImpl implements OrdineService {
     public ViewCarrelloResponseDto viewCarrello(LoginResponseDto dto) {
         ViewCarrelloResponseDto rdto = new ViewCarrelloResponseDto();
         String tok = dto.getToken();
-        Ordine ordineCarrello = new Ordine();
+        Ordine carrello = new Ordine();
         Utente utente = utenteRepository.findByToken(tok);
+        System.out.println(utente);
         List<RigaOrdine> listaRigheOrdine;
         if (securityService.checkToken(tok) || securityService.checkAnonimo(tok)) {
-            Optional<Ordine> carrello = utente.getOrdini()
+            carrello = utente.getOrdini()
                     .parallelStream()
                     .filter(o -> o.getStato().equals("carrello"))
-                    .findFirst();
-            listaRigheOrdine = ordineCarrello.getRighe();
+                    .findFirst()
+                    .get();
+            listaRigheOrdine = carrello.getRighe();
         } else {
+            System.out.println("sto nell'else");
             listaRigheOrdine = Collections.emptyList();
         }
         rdto.setCarrello(listaRigheOrdine);

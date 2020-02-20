@@ -1,12 +1,18 @@
-<label>Ordine numero {{nOrdine}}</label> &nbsp;&nbsp;&nbsp;
-<label>Del {{nData}}</label> &nbsp;&nbsp;&nbsp;
-<label>Totale {{nTotale}}</label>
-<br>
+<label>Ordine numero {{ r.ordine.numero }}</label> &nbsp;&nbsp;&nbsp;
+<label>Del {{ r.ordine.data }}</label> &nbsp;&nbsp;&nbsp;
+<label>Totale {{ r.ordine }}</label>
+<br />
 <table>
-  <tr *ngFor="let r of RigaOrdine">
-    <td>{{p.quantita}}</td>
-    <td>{{p.descrizione}}</td>
-    <td>{{p.prezzo}}</td>
+  <tr>
+    <th>Quantità</th>
+    <th>Descrizione</th>
+    <th>Prezzo</th>
+  </tr>
+  <tr *ngFor="let r of righeCarrello">
+    <td>{{ r.qta }}</td>
+    <td>{{ r.prodotto.descrizione }}</td>
+    <td>{{ r.prodotto.prezzo }}</td>
   </tr>
 </table>
-
+<button (click)="checkToken()">Aggiorna</button>
+<button>Paga</button>
