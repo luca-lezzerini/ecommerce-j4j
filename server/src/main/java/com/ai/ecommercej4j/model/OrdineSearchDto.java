@@ -13,13 +13,13 @@ import java.time.LocalDate;
  */
 public class OrdineSearchDto extends LoginResponseDto{
     private LocalDate searchData;
-    private String searchNumeroOrdine;
+    private Integer searchNumeroOrdine;
     private String stato;
 
     public OrdineSearchDto() {
     }
 
-    public OrdineSearchDto(LocalDate searchData, String searchNumeroOrdine, String stato) {
+    public OrdineSearchDto(LocalDate searchData, Integer searchNumeroOrdine, String stato) {
         this.searchData = searchData;
         this.searchNumeroOrdine = searchNumeroOrdine;
         this.stato = stato;
@@ -33,11 +33,11 @@ public class OrdineSearchDto extends LoginResponseDto{
         this.searchData = searchData;
     }
 
-    public String getSearchNumeroOrdine() {
+    public Integer getSearchNumeroOrdine() {
         return searchNumeroOrdine;
     }
 
-    public void setSearchNumeroOrdine(String searchNumeroOrdine) {
+    public void setSearchNumeroOrdine(Integer searchNumeroOrdine) {
         this.searchNumeroOrdine = searchNumeroOrdine;
     }
 

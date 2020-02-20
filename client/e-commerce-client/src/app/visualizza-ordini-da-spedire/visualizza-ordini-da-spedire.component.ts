@@ -14,15 +14,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./visualizza-ordini-da-spedire.component.css']
 })
 export class VisualizzaOrdiniDaSpedireComponent implements OnInit {
-    ordini: Ordine[] = [];
+  ordini: Ordine[] = [];
 
-  numeroOrdine: string;
-  data: string;
   ordineSelezionato: Ordine = new Ordine();
 
   showResults: boolean;
   searchKeyData: Date;
-  searchKeyNumOrd = '';
+  searchKeyNumOrd: number;
 
   constructor(
     private http: HttpClient,
@@ -41,21 +39,20 @@ export class VisualizzaOrdiniDaSpedireComponent implements OnInit {
 
   cerca() {
     // Se la stringa di ricerca è vuota ritorna tutti gli elementi della lista
-    if (this.searchKeyData === null && this.searchKeyNumOrd === '') {
+    if (this.searchKeyData === null && !this.searchKeyNumOrd) {
       this.showResults = true;
-      this.eseguiRicerca(this.searchKeyData, this.searchKeyNumOrd);
+      this.eseguiRicerca();
       // Se invece è piena esegue la ricerca
     } else {
-      this.eseguiRicerca
-        (this.searchKeyData, this.searchKeyNumOrd);
+      this.eseguiRicerca();
     }
   }
 
-  eseguiRicerca(search: Date, search2: string) {
+  eseguiRicerca() {
     // Preparo il dto
     let dto: OrdineSearchDto = new OrdineSearchDto();
-    dto.searchKeyData = search;
-    dto.searchKeyNumeroOrdine = search2;
+    dto.searchKeyData = this.searchKeyData;
+    dto.searchKeyNumeroOrdine = this.searchKeyNumOrd;
     dto.token = this.sessione.token;
 
     // Preparo la richiesta http
@@ -64,13 +61,14 @@ export class VisualizzaOrdiniDaSpedireComponent implements OnInit {
 
     // Callback
     oss.subscribe(risposta => {
+      console.log(this.searchKeyNumOrd);
       // Aggiorno la lista degli ordini
       this.ordini = risposta.results;
       // Se ci sono risultati li visualizzo
       this.showResults = risposta.results.length > 0;
       // pulisco il campo ricerca
       this.searchKeyData = null;
-      this.searchKeyNumOrd = '';
+      this.searchKeyNumOrd = null;
     })
   }
 
