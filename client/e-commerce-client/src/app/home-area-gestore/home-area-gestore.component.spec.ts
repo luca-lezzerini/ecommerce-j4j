@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrdiniDaSpedireComponent } from './ordini-da-spedire.component';
+import { HomeAreaGestoreComponent } from './home-area-gestore.component';
 
-describe('OrdiniDaSpedireComponent', () => {
-  let component: OrdiniDaSpedireComponent;
-  let fixture: ComponentFixture<OrdiniDaSpedireComponent>;
+describe('HomeAreaGestoreComponent', () => {
+  let component: HomeAreaGestoreComponent;
+  let fixture: ComponentFixture<HomeAreaGestoreComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrdiniDaSpedireComponent ]
+      declarations: [ HomeAreaGestoreComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OrdiniDaSpedireComponent);
+    fixture = TestBed.createComponent(HomeAreaGestoreComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
