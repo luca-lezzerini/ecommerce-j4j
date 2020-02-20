@@ -185,4 +185,9 @@ public class OrdineServiceImpl implements OrdineService {
         rdto.setTotale(totale);
         return rdto;
     }
+
+    @Override
+    public OrdineSearchResultsDto searchOrdine(OrdineSearchDto dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
