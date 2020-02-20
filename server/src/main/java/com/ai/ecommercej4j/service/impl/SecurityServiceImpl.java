@@ -4,6 +4,7 @@ import com.ai.ecommercej4j.model.*;
 import com.ai.ecommercej4j.repository.OrdineRepository;
 import com.ai.ecommercej4j.repository.UtenteRepository;
 import com.ai.ecommercej4j.service.SecurityService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +36,26 @@ public class SecurityServiceImpl implements SecurityService {
         LoginResponseDto response = new LoginResponseDto();
         if (utente != null) {
             //verifico se l'utente è un utente anonimo
-            if (dto.getToken() != null) {
-
+            
+            
+            if (ur.findByTokenAndAnonimo(dto.getToken(), true) != null) {
+                utente.setToken(dto.getToken());
+                
                 Utente utenteAnonimo = ur.findByToken(dto.getToken());
                 // ... se risuta positivo recupera l'ordine dell'utente nello stato carrello
+                
+                //lista
                 Optional<Ordine> optionalOrdine = utenteAnonimo.getOrdini().stream()
-                        .filter(o -> o.getStato().equals("carrello"))
-                        .findFirst();
+                    .filter(o -> o.getStato().equals("carrello"))
+                    .findFirst();
+                /*
+                List<Ordine> listaOrdine = 
+                    (List<Ordine>)utenteAnonimo.getOrdini().stream()
+                        .filter(o -> o.getStato().equals("carrello"));
+                */
                 //verifico se l'utente anonimo ha ordini nel carrello
                 if (!optionalOrdine.isEmpty()) {
-                    Ordine ordine= optionalOrdine.get();
+                    Ordine ordine = optionalOrdine.get();
                     //aggiungo l'ordine all' utente registrato
                     utente.getOrdini().add(ordine);
                     ordine.setUtente(utente);
@@ -53,6 +64,7 @@ public class SecurityServiceImpl implements SecurityService {
                 utente.setToken(dto.getToken());
                 ur.save(utente);
                 //Rimuoviamo l'utente anonimo perche riconosciuto come utente registrato
+                
                 ur.deleteById(utenteAnonimo.getId());
             } else {
                 String token = generateRandomString();
