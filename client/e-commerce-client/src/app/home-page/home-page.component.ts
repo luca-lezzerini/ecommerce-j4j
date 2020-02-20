@@ -25,14 +25,11 @@ export class HomePageComponent implements OnInit {
   visualizzaCarrello() {
     this.router.navigateByUrl('/view-carrello');
     if (this.acService.token || this.acService.tokenAnonimo) {
-      this.(p, this.acService.token);
-      //preparo la richiesta 
-      this.aggiungiAutenticatoAlCarrello(p, this.acService.tokenAnonimo);
+
     } else {
 
-
+    }
   }
-
   search() {
     // Preparo i dto
     let dto: ProdottoSearchDto = new ProdottoSearchDto();

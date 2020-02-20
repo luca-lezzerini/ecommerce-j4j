@@ -11,7 +11,7 @@ import com.ai.ecommercej4j.repository.RigaOrdineRepository;
 import com.ai.ecommercej4j.repository.UtenteRepository;
 import com.ai.ecommercej4j.service.OrdineService;
 import com.ai.ecommercej4j.service.SecurityService;
-import java.time.LocalDate;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,30 +35,56 @@ public class OrdineServiceImpl implements OrdineService {
 
     @Override
     public void addCarrello(OrdineCreateDto dto) {
-        String tok = dto.getToken();
-        Prodotto prod = dto.getDati();
-        Utente utente = utenteRepository.findByToken(tok);
+        String token = dto.getToken();
+        Prodotto prodotto = dto.getDati();
+        Utente utente = utenteRepository.findByToken(token);
         // Verifica se il token è di un utente anonimo o registsto...
-        if (securityService.checkToken(tok) || securityService.checkAnonimo(tok)) {
-            // ... se risuta positivo crea l'ordine e aggiunge una riga
-            // TODO controllare se l'orfdine è gia esistente
-            Ordine ordine = new Ordine();
-            ordine.setData(LocalDate.now());
-            ordine.setStato("carrello");
-            ordine.setNumero((int) (Math.random() * 10000 + 1));
-            ordine.setUtente(utente);
-            ordineRepository.save(ordine);
-            utente.getOrdini().add(ordine);
-            utenteRepository.save(utente);
-            RigaOrdine rigaOrdine = new RigaOrdine(1, ordine, prod);
-            rigaOrdineRepository.save(rigaOrdine);
-            ordine.getRighe().add(rigaOrdine);
-            ordineRepository.save(ordine);
-            prod.getRighe().add(rigaOrdine);
-            prodottoRepository.save(prod);
+        if (securityService.checkToken(token) || securityService.checkAnonimo(token)) {
+            // ... se risuta positivo recupera l'ordine dell'utente nello stato carrello
+            Optional<Ordine> optionalOrdine = utente.getOrdini().stream()
+                    .filter(o -> o.getStato().equals("carrello"))
+                    .findFirst();
+            Ordine ordine;
+            // Se l'utente non ha ordini nello stato carrello...
+            if (optionalOrdine.isEmpty()) {
+                // ...ne viene creato uno
+                ordine = new Ordine(utente);
+                ordineRepository.save(ordine);
+                // Viene associato l'ordine all'utente
+                utente.getOrdini().add(ordine);
+                utenteRepository.save(utente);
+            } else {
+                // ...altrimenti viene recuperato l'ordine già esistente
+                ordine = optionalOrdine.get();
+            }
+            // Recupera la riga del prodotto da aggiungere
+            Optional<RigaOrdine> optionalRiga = ordine.getRighe().stream()
+                    .filter(r -> r.getProdotto().getId().equals(prodotto.getId()))
+                    .findFirst();
+            RigaOrdine rigaOrdine;
+            // Se la riga non esiste...
+            if (optionalRiga.isEmpty()) {
+                // ... ne crea una nuova con quantità uguale ad 1
+                rigaOrdine = new RigaOrdine(1, ordine, prodotto);
+                rigaOrdineRepository.save(rigaOrdine);
+                // Associa la nuova riga all'ordine
+                ordine.getRighe().add(rigaOrdine);
+                ordineRepository.save(ordine);
+                // Associa la riga al prodotto
+                prodotto.getRighe().add(rigaOrdine);
+                prodottoRepository.save(prodotto);
+            } else {
+                // ...altrimenti ne incrementa di 1 la quantità
+                rigaOrdine = optionalRiga.get();
+                rigaOrdine.setQta(rigaOrdine.getQta() + 1);
+                rigaOrdineRepository.save(rigaOrdine);
+            }
         }
-        // ...altrimenti non fa nulla
     }
-    
-    
+
+    @Override
+    public void viewCarrello(OrdineCreateDto dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
