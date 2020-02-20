@@ -508,7 +508,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     dto.dati.prezzo = +this.prezzo;  // qui + converte string in number
 
     const obs: Observable<any> =
-      this.http.post<any>('http://localhost:8080/create-spedizione', dto);
+      this.http.post<any>(this.acService.hostUrl + '/create-spedizione', dto);
     // invia la richiesta al server
     obs.subscribe(risposta => {
       // ripete ultima ricerca
@@ -524,7 +524,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     dto.searchKey = search;
     dto.token = this.acService.token;
     const obs: Observable<SpedizioneSearchResultsDto> =
-      this.http.post<SpedizioneSearchResultsDto>('http://localhost:8080/search-spedizione', dto);
+      this.http.post<SpedizioneSearchResultsDto>(this.acService.hostUrl + '/search-spedizione', dto);
     console.log('mandato post ');
     // invia la richiesta al server
     obs.subscribe(risposta => {
@@ -553,7 +553,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     dto.dati.codice = this.codice;
     dto.dati.prezzo = +this.prezzo;  // qui + converte string in number
     const obs: Observable<any> =
-      this.http.post<any>('http://localhost:8080/update-spedizione', dto);
+      this.http.post<any>(this.acService.hostUrl + '/update-spedizione', dto);
     // invia la richiesta al server
     obs.subscribe(risposta => {
       this.searchKeyPrecedente = '';
@@ -568,7 +568,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     dto.token = this.acService.token;
     dto.idToDelete = this.idToDelete;
     const obs: Observable<any> =
-      this.http.post<any>('http://localhost:8080/delete-spedizione', dto);
+      this.http.post<any>(this.acService.hostUrl + '/delete-spedizione', dto);
     // invia la richiesta al server
     obs.subscribe(risposta => {
       // ripete ultima ricerca
