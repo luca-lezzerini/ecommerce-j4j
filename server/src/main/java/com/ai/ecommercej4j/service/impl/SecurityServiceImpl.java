@@ -2,6 +2,7 @@ package com.ai.ecommercej4j.service.impl;
 
 import com.ai.ecommercej4j.model.*;
 import com.ai.ecommercej4j.repository.OrdineRepository;
+import com.ai.ecommercej4j.repository.RigaOrdineRepository;
 import com.ai.ecommercej4j.repository.UtenteRepository;
 import com.ai.ecommercej4j.service.SecurityService;
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ public class SecurityServiceImpl implements SecurityService {
     private UtenteRepository ur;
     @Autowired
     private OrdineRepository or;
+    @Autowired
+    private RigaOrdineRepository ror;
 
     /**
      * genera una stringa casuale utilizzata dal double opt in
@@ -36,35 +39,39 @@ public class SecurityServiceImpl implements SecurityService {
         LoginResponseDto response = new LoginResponseDto();
         if (utente != null) {
             //verifico se l'utente è un utente anonimo
-            
-            
+
             if (ur.findByTokenAndAnonimo(dto.getToken(), true) != null) {
                 utente.setToken(dto.getToken());
-                
+
                 Utente utenteAnonimo = ur.findByToken(dto.getToken());
                 // ... se risuta positivo recupera l'ordine dell'utente nello stato carrello
-                
+
                 //lista
                 Optional<Ordine> optionalOrdine = utenteAnonimo.getOrdini().stream()
-                    .filter(o -> o.getStato().equals("carrello"))
-                    .findFirst();
-                /*
-                List<Ordine> listaOrdine = 
-                    (List<Ordine>)utenteAnonimo.getOrdini().stream()
-                        .filter(o -> o.getStato().equals("carrello"));
-                */
+                        .filter(o -> o.getStato().equals("carrello"))
+                        .findFirst();
                 //verifico se l'utente anonimo ha ordini nel carrello
                 if (!optionalOrdine.isEmpty()) {
                     Ordine ordine = optionalOrdine.get();
                     //aggiungo l'ordine all' utente registrato
+//                    if (utente.getOrdini().size() > 0) {
+//                        for (RigaOrdine r : utente.getOrdini().get(0).getRighe()) {
+//                            r.setOrdine(utente.getOrdini().get(0));
+//
+//                            ror.save(r);
+//
+//                        }
+//                        ordine.setId(utente.getOrdini().get(0).getId());
+//                    }
+
                     utente.getOrdini().add(ordine);
+
                     ordine.setUtente(utente);
                     or.save(ordine);
                 }
-                utente.setToken(dto.getToken());
                 ur.save(utente);
                 //Rimuoviamo l'utente anonimo perche riconosciuto come utente registrato
-                
+
                 ur.deleteById(utenteAnonimo.getId());
             } else {
                 String token = generateRandomString();
