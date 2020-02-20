@@ -35,8 +35,8 @@ export class VisualizzaOrdiniComponent implements OnInit {
     // Tutte le ricerche vengono effettuate anche per stato che di default è "carrello"
     // Preparo il dto
     let dto: OrdineSearchDto = new OrdineSearchDto();
-    dto.searchKeyData = this.data;
-    dto.searchKeyNumeroOrdine = this.numeroOrdine;
+    dto.searchData = this.data;
+    dto.searchNumeroOrdine = this.numeroOrdine;
     dto.stato = this.stato;
     dto.token = this.acService.token;
 

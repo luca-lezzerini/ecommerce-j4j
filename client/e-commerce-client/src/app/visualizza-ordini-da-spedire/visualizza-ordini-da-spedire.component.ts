@@ -51,8 +51,8 @@ export class VisualizzaOrdiniDaSpedireComponent implements OnInit {
   eseguiRicerca() {
     // Preparo il dto
     let dto: OrdineSearchDto = new OrdineSearchDto();
-    dto.searchKeyData = this.searchKeyData;
-    dto.searchKeyNumeroOrdine = this.searchKeyNumOrd;
+    dto.searchData = this.searchKeyData;
+    dto.searchNumeroOrdine = this.searchKeyNumOrd;
     dto.token = this.sessione.token;
 
     // Preparo la richiesta http
