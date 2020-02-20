@@ -15,5 +15,12 @@ public interface OrdineService {
      */
     void addCarrello(OrdineCreateDto dto);
 
+    /**
+     * Recupera l'ordine dell'utente associato al token che riceve da
+     * LoginResponseDto
+     *
+     * @param dto LoginResponseDto contente il token
+     * @return ViewCarrelloResponseDto contenente l'ordine le righe e il totale
+     */
     ViewCarrelloResponseDto viewCarrello(LoginResponseDto dto);
 }
