@@ -113,6 +113,7 @@ public class OrdineServiceImpl implements OrdineService {
         ViewCarrelloResponseDto rdto = new ViewCarrelloResponseDto();
         String tok = dto.getToken();
         Ordine carrello = new Ordine();
+        double totale=0;
         Utente utente = utenteRepository.findByToken(tok);
         System.out.println(utente);
         List<RigaOrdine> listaRigheOrdine;
@@ -123,11 +124,16 @@ public class OrdineServiceImpl implements OrdineService {
                     .findFirst()
                     .get();
             listaRigheOrdine = carrello.getRighe();
+            for(RigaOrdine r: listaRigheOrdine){
+                totale += r.getProdotto().getPrezzo();
+            }
         } else {
             System.out.println("sto nell'else");
             listaRigheOrdine = Collections.emptyList();
         }
         rdto.setCarrello(listaRigheOrdine);
+        rdto.setOrdine(carrello);
+        rdto.setTotale(totale);
         return rdto;
     }
 }

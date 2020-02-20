@@ -18,7 +18,9 @@ export class ViewCarrelloComponent implements OnInit {
     this.checkToken();
   }
   righeCarrello: RigaOrdine[] = [];
-  nTotale: string;
+  nOrdine: string;
+  nData: string;
+  nTotale: number;
 
   ngOnInit() {
   }
@@ -47,6 +49,9 @@ export class ViewCarrelloComponent implements OnInit {
       console.log('ricevo la risposta');
       console.log(data.carrello);
       this.righeCarrello = data.carrello;
+      this.nOrdine = '' + data.ordine.numero;
+      this.nData = '' + data.ordine.data;
+      this.nTotale = data.totale;
     }
     );
   }
