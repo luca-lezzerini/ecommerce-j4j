@@ -12,14 +12,15 @@ package com.ai.ecommercej4j.model;
 public class OrdineSearchDto extends LoginResponseDto{
     private String searchData;
     private String searchNumeroOrdine;
-    
-    public OrdineSearchDto(String token, String searchData, String searchNumeroOrdine){
-        super(token);
-        this.searchData = searchData;
-        this.searchNumeroOrdine = searchNumeroOrdine;
-    }
+    private String stato;
 
     public OrdineSearchDto() {
+    }
+
+    public OrdineSearchDto(String searchData, String searchNumeroOrdine, String stato) {
+        this.searchData = searchData;
+        this.searchNumeroOrdine = searchNumeroOrdine;
+        this.stato = stato;
     }
 
     public String getSearchData() {
@@ -37,6 +38,17 @@ public class OrdineSearchDto extends LoginResponseDto{
     public void setSearchNumeroOrdine(String searchNumeroOrdine) {
         this.searchNumeroOrdine = searchNumeroOrdine;
     }
+
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
+    }
+    
+    
+    
     
     
 }

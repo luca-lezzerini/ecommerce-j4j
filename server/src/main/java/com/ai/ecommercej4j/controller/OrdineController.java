@@ -1,5 +1,6 @@
 package com.ai.ecommercej4j.controller;
 
+import com.ai.ecommercej4j.model.LoginResponseDto;
 import com.ai.ecommercej4j.model.OrdineCreateDto;
 import com.ai.ecommercej4j.service.OrdineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,4 +19,10 @@ public class OrdineController {
         ordineService.addCarrello(dto);
     }
     
+    @RequestMapping("/view-carrello")
+    @ResponseBody
+    public void viewCarrello(@RequestBody LoginResponseDto dto){
+        ordineService.viewCarrello(dto);
+    }
+   
 }
