@@ -5,29 +5,31 @@
  */
 package com.ai.ecommercej4j.model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author utente
  */
 public class OrdineSearchDto extends LoginResponseDto{
-    private String searchData;
+    private LocalDate searchData;
     private String searchNumeroOrdine;
     private String stato;
 
     public OrdineSearchDto() {
     }
 
-    public OrdineSearchDto(String searchData, String searchNumeroOrdine, String stato) {
+    public OrdineSearchDto(LocalDate searchData, String searchNumeroOrdine, String stato) {
         this.searchData = searchData;
         this.searchNumeroOrdine = searchNumeroOrdine;
         this.stato = stato;
     }
 
-    public String getSearchData() {
+    public LocalDate getSearchData() {
         return searchData;
     }
 
-    public void setSearchData(String searchData) {
+    public void setSearchData(LocalDate searchData) {
         this.searchData = searchData;
     }
 

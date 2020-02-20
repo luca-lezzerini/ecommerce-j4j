@@ -1,7 +1,9 @@
 package com.ai.ecommercej4j.controller;
 
 import com.ai.ecommercej4j.model.LoginResponseDto;
-import com.ai.ecommercej4j.model.OrdineCreateDto;
+import com.ai.ecommercej4j.model.AggiungiCarrelloDto;
+import com.ai.ecommercej4j.model.OrdineSearchDto;
+import com.ai.ecommercej4j.model.OrdineSearchResultsDto;
 import com.ai.ecommercej4j.model.ViewCarrelloResponseDto;
 import com.ai.ecommercej4j.service.OrdineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,15 @@ public class OrdineController {
     
     @RequestMapping("/add-carrello")
     @ResponseBody
-    public void addCarrello(@RequestBody OrdineCreateDto dto){
+    public void addCarrello(@RequestBody AggiungiCarrelloDto dto){
         ordineService.addCarrello(dto);
     }
     
+    @RequestMapping(value = "/search-ordini-da-spedire")
+    @ResponseBody
+    public OrdineSearchResultsDto searchOrdine(@RequestBody OrdineSearchDto dto) {
+        return ordineService.searchOrdineDaSpedire(dto);
+    }
     @RequestMapping("/view-carrello")
     @ResponseBody
     public ViewCarrelloResponseDto viewCarrello(@RequestBody LoginResponseDto dto){
