@@ -70,6 +70,7 @@ export class HomePageComponent implements OnInit {
       oss.subscribe(data => {
         this.acService.tokenAnonimo = data.token;
         this.aggiungiAutenticatoAlCarrello(p, this.acService.tokenAnonimo);
+        console.log(data.token);
       }
       );
     }
@@ -87,8 +88,8 @@ export class HomePageComponent implements OnInit {
     dto.token = token;
 
     // Preparo richiesta http
-    const oss: Observable<void> =
-      this.http.post<void>(this.acService.hostUrl + '/add-carrello', dto);
+    let oss: Observable<any> =
+      this.http.post<any>(this.acService.hostUrl + '/add-carrello', dto);
 
     // Invio la richiesta
     oss.subscribe(data => {
