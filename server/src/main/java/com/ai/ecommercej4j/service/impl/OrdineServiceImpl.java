@@ -1,16 +1,21 @@
 package com.ai.ecommercej4j.service.impl;
 
+import com.ai.ecommercej4j.model.LoginResponseDto;
 import com.ai.ecommercej4j.model.Ordine;
 import com.ai.ecommercej4j.model.OrdineCreateDto;
 import com.ai.ecommercej4j.model.Prodotto;
 import com.ai.ecommercej4j.model.RigaOrdine;
 import com.ai.ecommercej4j.model.Utente;
+import com.ai.ecommercej4j.model.ViewCarrelloResponseDto;
 import com.ai.ecommercej4j.repository.OrdineRepository;
 import com.ai.ecommercej4j.repository.ProdottoRepository;
 import com.ai.ecommercej4j.repository.RigaOrdineRepository;
 import com.ai.ecommercej4j.repository.UtenteRepository;
 import com.ai.ecommercej4j.service.OrdineService;
 import com.ai.ecommercej4j.service.SecurityService;
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,8 +88,22 @@ public class OrdineServiceImpl implements OrdineService {
     }
 
     @Override
-    public void viewCarrello(OrdineCreateDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ViewCarrelloResponseDto viewCarrello(LoginResponseDto dto) {
+        ViewCarrelloResponseDto rdto = new ViewCarrelloResponseDto();
+        String tok = dto.getToken();
+        Ordine ordineCarrello = new Ordine();
+        Utente utente = utenteRepository.findByToken(tok);
+        List<RigaOrdine> listaRigheOrdine;
+        if (securityService.checkToken(tok) || securityService.checkAnonimo(tok)) {
+            Optional<Ordine> carrello = utente.getOrdini()
+                    .parallelStream()
+                    .filter(o -> o.getStato().equals("carrello"))
+                    .findFirst();
+            listaRigheOrdine = ordineCarrello.getRighe();
+        } else {
+            listaRigheOrdine = Collections.emptyList();
+        }
+        rdto.setCarrello(listaRigheOrdine);
+        return rdto;
     }
-
 }

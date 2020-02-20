@@ -1,18 +1,17 @@
-import { Ordine } from './../classi/ordine';
 import { Router } from '@angular/router';
 import { AreaComuneService } from './../area-comune.service';
 import { HttpClient } from '@angular/common/http';
+import { Ordine } from './../classi/ordine';
 import { Component, OnInit } from '@angular/core';
 
-
 @Component({
-  selector: 'app-ordini-da-spedire',
-  templateUrl: './ordini-da-spedire.component.html',
-  styleUrls: ['./ordini-da-spedire.component.css']
+  selector: 'app-visualizza-ordini-da-spedire',
+  templateUrl: './visualizza-ordini-da-spedire.component.html',
+  styleUrls: ['./visualizza-ordini-da-spedire.component.css']
 })
-export class OrdiniDaSpedireComponent implements OnInit {
+export class VisualizzaOrdiniDaSpedireComponent implements OnInit 
 
-  ordini: Ordine[] = [];
+{ordini: Ordine[] = [];
 
   numeroOrdine: string;
   data: string;
@@ -45,4 +44,3 @@ export class OrdiniDaSpedireComponent implements OnInit {
 
   }
 }
-

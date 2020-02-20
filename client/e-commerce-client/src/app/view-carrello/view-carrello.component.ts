@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class ViewCarrelloComponent implements OnInit {
 
   constructor(private http: HttpClient, private ac: AreaComuneService) { }
-  prodotti: Prodotto[] = [];
+  : Prodotto[] = [];
   nOrdine: string;
   nData: string;
   nTotale: string;
