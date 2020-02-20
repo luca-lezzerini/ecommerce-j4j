@@ -48,7 +48,7 @@ public class OrdineServiceImpl implements OrdineService {
             // Se l'utente non ha ordini nello stato carrello...
             if (optionalOrdine.isEmpty()) {
                 // ...ne viene creato uno
-                ordine = new Ordine(utente);
+                ordine = new Ordine(utente, generateNumeroOrdine());
                 ordineRepository.save(ordine);
                 // Viene associato l'ordine all'utente
                 utente.getOrdini().add(ordine);
@@ -79,6 +79,27 @@ public class OrdineServiceImpl implements OrdineService {
                 rigaOrdine.setQta(rigaOrdine.getQta() + 1);
                 rigaOrdineRepository.save(rigaOrdine);
             }
+        }
+    }
+
+    public int generateNumeroOrdine() {
+//        List<Ordine> ordini = ordineRepository.findAll();
+//        Optional<Ordine> optionalOrdine = ordini.parallelStream()
+//                .max((o1, o2)
+//                        -> Integer.valueOf(o1.getNumero())
+//                        .compareTo(Integer.valueOf(o2.getNumero())));
+//        int numero;
+//        if (optionalOrdine.isEmpty()) {
+//            numero = 1;
+//        } else {
+//            numero = optionalOrdine.get().getNumero() + 1;
+//        }
+//        return numero;
+        Optional<Integer> i = ordineRepository.selectMaxNumero();
+        if (i.isEmpty()) {
+            return 1;
+        } else {
+            return i.get() + 1;
         }
     }
 

@@ -59,11 +59,12 @@ public class Ordine {
      * Inizializza un nuovo ordine partendo dallo stato carrello.
      *
      * @param utente L'utente associato all'ordine da creare
+     * @param numero Il numero dell'ordine da creare
      */
-    public Ordine(Utente utente) {
+    public Ordine(Utente utente, int numero) {
         this.data = LocalDate.now();
         this.stato = "carrello";
-        this.numero = (int) (Math.random() * 10000 + 1);
+        this.numero = numero;
         this.utente = utente;
     }
 
