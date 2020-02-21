@@ -97,12 +97,7 @@ public class OrdineServiceImpl implements OrdineService {
      * @return il numero di ordine
      */
     private int generateNumeroOrdine() {
-        Optional<Integer> i = ordineRepository.selectMaxNumero();
-        if (i.isEmpty()) {
-            return 1;
-        } else {
-            return i.get() + 1;
-        }
+        return ordineRepository.selectMaxNumero().map(n -> n + 1).orElse(1);
     }
 
     @Override
