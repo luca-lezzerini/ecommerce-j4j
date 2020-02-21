@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TagliaRepository extends JpaRepository<Taglia, Long> {
 
-    Page<Taglia> findByCodiceOrDescrizioneIgnoreCase(String codice, String descrizione, Pageable pageable);
+    Page<Taglia> findByCodiceOrDescrizioneContainingIgnoreCase(String codice, String descrizione, Pageable pageable);
 
     Taglia findByCodiceIgnoreCase(String codice);
 

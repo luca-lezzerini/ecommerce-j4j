@@ -38,9 +38,4 @@ public class TagliaController {
     public void updateTaglia(@RequestBody TagliaUpdateDto dto) {
         ts.updateTaglia(dto);
     }
-    
-    @RequestMapping(value = "/search-taglia-per-descrizione")
-    public TagliaSearchResultsDto searchTagliaPerDescrizione(@RequestBody TagliaSearchDto dto){
-        return ts.searchTagliaPerDescrizione(dto);
-    }
 }

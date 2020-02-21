@@ -47,7 +47,13 @@ public class TagliaServiceImpl implements TagliaService {
         String ricerca = dto.getSearchKey();
         int pagina = dto.getPage();
         if (pagina == -1) {
-            pagina = tr.findAll(generatePage(0)).getTotalPages();
+            if (ricerca.equals("")) {
+                pagina = tr.findAll(generatePage(0)).
+                        getTotalPages() - 1;
+            } else {
+                pagina = tr.findByCodiceOrDescrizioneContainingIgnoreCase(ricerca, ricerca, generatePage(0))
+                        .getTotalPages() - 1;
+            }
         }
         Pageable pageable = generatePage(pagina);
         //verifico che il token sia registrato...
@@ -59,10 +65,12 @@ public class TagliaServiceImpl implements TagliaService {
                 listaPagina = tr.findAll(pageable);
             } else {
                 //...atrimenti cerco solo quelle che soddisfano la ricerca
-                listaPagina = (tr.findByDescrizioneContainingIgnoreCase(dto.getSearchKey(), pageable));
+                listaPagina = (tr.findByCodiceOrDescrizioneContainingIgnoreCase(ricerca, ricerca, pageable));
             }
+            result.setFirst(listaPagina.isFirst());
+            result.setLast(listaPagina.isLast());
             result.setResult(listaPagina.toList());
-            result.setPage(dto.getPage());
+            result.setPage(listaPagina.getNumber());
         } else {
             //...altrimenti ritorno una lista vuota 
             result.setResult(Collections.emptyList());
@@ -91,28 +99,11 @@ public class TagliaServiceImpl implements TagliaService {
         }
     }
 
-    @Override
-    public TagliaSearchResultsDto searchTagliaPerDescrizione(TagliaSearchDto dto) {
-        TagliaSearchResultsDto result = new TagliaSearchResultsDto();
-        String ricerca = dto.getSearchKey();
-        //verifico che il token sia registrato...
-        if (ss.checkToken(dto.getToken())) {
-            //...se è registrato controllo se la stringa di ricerca è vuota...
-            if (ricerca.equals("")) {
-                //...se è vuota ritorno tutte le taglie
-                result.setResult(tr.findAll(generatePage(dto.getPage())).toList());
-            } else {
-                //...atrimenti cerco solo quelle che soddisfano la ricerca
-                result.setResult((tr.findByDescrizioneContainingIgnoreCase(dto.getSearchKey(), generatePage(dto.getPage()))).toList());
-            }
-            result.setPage(dto.getPage());
-        } else {
-            //...altrimenti ritorno una lista vuota 
-            result.setResult(Collections.emptyList());
-        }
-        return result;
-    }
-
+    /**
+     *
+     * @param numeroPagina Il numero della pagina da ottenere
+     * @return Una richiesta di impaginazione da 5 elementi per pagina
+     */
     private Pageable generatePage(int numeroPagina) {
         return PageRequest.of(numeroPagina, PAGE_DIMENSION);
     }

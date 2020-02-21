@@ -19,25 +19,14 @@ public interface TagliaService {
 
     /**
      * Controlla che il token esista, se esiste verifica se la chiave di ricerca
-     * è vuota. Se la chiave di ricerca è vuota vengono ritornate tutte le
-     * taglie, altrimenti quelle che soddisfano la ricerca. Se il token non
-     * esiste verrà ritornata una lista vuota
+     * è vuota. Se la chiave di ricerca è vuota viene ritornata un impaginazione
+     * da 5 elementi di tutte le taglie, altrimenti quelle che soddisfano la
+     * ricerca. Se il token non esiste verrà ritornata una lista vuota
      *
      * @param dto rappresenta i dati necessari per poter effettuare la ricerca.
      * @return restituisce una lista di taglie.
      */
     TagliaSearchResultsDto searchTaglia(TagliaSearchDto dto);
-
-    /**
-     * Controlla che il token esista, se esiste verifica che la chiave di
-     * ricerca è vuota. Se la chiave di ricerca è vuota vengono ritornate tutte
-     * le taglie, altrimenti quelle che soddisfano la ricerca. Se il token non
-     * esiste verrà ritornata una lista vuota
-     *
-     * @param dto rappresenta i dati necessari per poter effettuare la ricerca.
-     * @return restituisce una lista di taglie.
-     */
-    TagliaSearchResultsDto searchTagliaPerDescrizione(TagliaSearchDto dto);
 
     /**
      * Controlla che il token esista, se esiste cancella la taglia nel db

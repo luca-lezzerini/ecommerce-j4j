@@ -176,55 +176,23 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 
     private void generateTaglie() {
 
-        Taglia t1 = new Taglia();
-        t1.setCodice("20");
-        t1.setDescrizione("XL");
-        tagliaRepository.save(t1);
-
-        Taglia t2 = new Taglia();
-        t2.setCodice("37");
-        t2.setDescrizione("S");
-        tagliaRepository.save(t2);
-
-        Taglia t3 = new Taglia();
-        t3.setCodice("11");
-        t3.setDescrizione("M");
-        tagliaRepository.save(t3);
-
-        Taglia t4 = new Taglia();
-        t4.setCodice("46");
-        t4.setDescrizione("XXS");
-        tagliaRepository.save(t4);
-
-        Taglia t5 = new Taglia();
-        t5.setCodice("89");
-        t5.setDescrizione("L");
-        tagliaRepository.save(t5);
-
-        Taglia t6 = new Taglia();
-        t6.setCodice("68");
-        t6.setDescrizione("XXL");
-        tagliaRepository.save(t6);
-
-        Taglia t7 = new Taglia();
-        t7.setCodice("13");
-        t7.setDescrizione("XS");
-        tagliaRepository.save(t7);
-
-        Taglia t8 = new Taglia();
-        t8.setCodice("77");
-        t8.setDescrizione("XXXL");
-        tagliaRepository.save(t8);
-
-        Taglia t9 = new Taglia();
-        t9.setCodice("47");
-        t9.setDescrizione("XXXS");
-        tagliaRepository.save(t9);
-
-        Taglia t10 = new Taglia();
-        t10.setCodice("47");
-        t10.setDescrizione("XXXXS");
-        tagliaRepository.save(t10);
+        tagliaRepository.save(new Taglia("94", "XXXXXXL"));
+        tagliaRepository.save(new Taglia("43", "M"));
+        tagliaRepository.save(new Taglia("68", "XXL"));
+        tagliaRepository.save(new Taglia("23", "L"));
+        tagliaRepository.save(new Taglia("48", "XXS"));
+        tagliaRepository.save(new Taglia("82", "XXXXXXXS"));
+        tagliaRepository.save(new Taglia("65", "XS"));
+        tagliaRepository.save(new Taglia("36", "XXXL"));
+        tagliaRepository.save(new Taglia("99", "XXXXL"));
+        tagliaRepository.save(new Taglia("11", "XXXXS"));
+        tagliaRepository.save(new Taglia("51", "XXXXXXXL"));
+        tagliaRepository.save(new Taglia("20", "S"));
+        tagliaRepository.save(new Taglia("29", "XXXXXS"));
+        tagliaRepository.save(new Taglia("76", "XXXXXL"));
+        tagliaRepository.save(new Taglia("34", "XL"));
+        tagliaRepository.save(new Taglia("96", "XXXS"));
+        tagliaRepository.save(new Taglia("88", "XXXXXXS"));
     }
 
     private void generateColori() {

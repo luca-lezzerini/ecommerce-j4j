@@ -34,6 +34,8 @@ export class AnagraficaTaglieComponent implements OnInit {
   id = 0;
   tagliaSelezionata: Taglia = new Taglia();
   paginaAttuale: number;
+  pageIsFirst: boolean;
+  pageIsLast: boolean;
 
   constructor(
     private http: HttpClient,
@@ -155,6 +157,8 @@ export class AnagraficaTaglieComponent implements OnInit {
     obs.subscribe(risposta => {
       this.taglie = risposta.result;
       this.paginaAttuale = risposta.page;
+      this.pageIsFirst = risposta.first;
+      this.pageIsLast = risposta.last;
       if (this.taglie && this.taglie.length > 0) {
         // se trova qualcosa mostra il risultato
         this.visCercaConRisultato();

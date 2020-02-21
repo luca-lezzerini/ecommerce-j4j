@@ -7,6 +7,30 @@ public class TagliaSearchResultsDto {
 
     private List<Taglia> result;
     private int page;
+    private boolean first;
+    private boolean last;
+
+    public boolean isFirst() {
+        return first;
+    }
+
+    public void setFirst(boolean first) {
+        this.first = first;
+    }
+
+    public boolean isLast() {
+        return last;
+    }
+
+    public void setLast(boolean last) {
+        this.last = last;
+    }
+
+    public TagliaSearchResultsDto(int page, boolean first, boolean last) {
+        this.page = page;
+        this.first = first;
+        this.last = last;
+    }
 
     public int getPage() {
         return page;
