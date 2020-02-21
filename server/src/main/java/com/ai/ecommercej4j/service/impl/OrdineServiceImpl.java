@@ -200,23 +200,22 @@ public class OrdineServiceImpl implements OrdineService {
         List<Ordine> ordini = new ArrayList<>();
         if (dto != null && dto.getStato() != null) {
             if (securityService.checkToken(dto.getToken())) {
-                // creo oggetto ordine che contiene le chiavi di ricerca
-//                Ordine ordine = new Ordine();
-//                ordine.setData(dto.getSearchData());
-//                ordine.setNumero(dto.getSearchNumeroOrdine());
-//                ordine.setStato(dto.getStato());
                 //recupero i risultati e avvaloro il dto di ritorno 
                 //tutte le ricerce sono effettuate per stato
-                //effettuo una ricerca per data e numero
+                //effettuo una ricerca per data, numero e stato
                 if (dto.getSearchData() != null && dto.getSearchNumeroOrdine() != null) {
                     ordini = ordineRepository.findByDataAndNumeroAndStato(dto.getSearchData(),dto.getSearchNumeroOrdine(),dto.getStato());
                 } else if (dto.getSearchData() == null && dto.getSearchNumeroOrdine() != null) {
+                    //effettuo una ricerca per numero e stato
                     ordini = ordineRepository.findByNumeroAndStatoContainingIgnoreCase(dto.getSearchNumeroOrdine(),dto.getStato());
                 } else if (dto.getSearchData() != null && dto.getSearchNumeroOrdine() == null) {
+                    //effettuo una ricerca per data e stato
                     ordini = ordineRepository.findByDataAndStato(dto.getSearchData(),dto.getStato());
                 } else {
+                    //effettuo una ricerca per stato
                     ordini = ordineRepository.findByStatoContainingIgnoreCase(dto.getStato());
                 }
+                // ordino i risultati per data discendente
                 ordini = ordini.stream().sorted((o1, o2) -> o2.getData().
                         compareTo(o1.getData())).
                         collect(Collectors.toList());
