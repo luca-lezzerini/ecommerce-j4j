@@ -15,12 +15,11 @@ public class ProdottoSearchResultsDto {
 
     private List<Prodotto> result;
     private int numeroPagina;
-    private String operazione;
 
-    public ProdottoSearchResultsDto(List<Prodotto> result, int numeroPagina, String operazione) {
+    public ProdottoSearchResultsDto(List<Prodotto> result, int numeroPagina) {
         this.result = result;
         this.numeroPagina = numeroPagina;
-        this.operazione = operazione;
+
     }
 
     public ProdottoSearchResultsDto() {
@@ -41,15 +40,5 @@ public class ProdottoSearchResultsDto {
     public void setnumeroPagina(int numeroPagina) {
         this.numeroPagina = numeroPagina;
     }
-
-    public String getOperazione() {
-        return operazione;
-    }
-
-    public void setOperazione(String operazione) {
-        this.operazione = operazione;
-    }
-
-    
 
 }

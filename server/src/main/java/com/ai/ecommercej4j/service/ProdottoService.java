@@ -77,4 +77,7 @@ public interface ProdottoService {
      *
      */
     ProdottoSearchResultsDto searchOfferte(ProdottoSearchDto dto);
+    
+    ProdottoSearchResultsDto cambiaPagina(ProdottoSearchDto dto);
 }
+

@@ -200,4 +200,9 @@ public class ProdottoServiceImpl implements ProdottoService {
         }
         return resultDto;
     }
+
+    @Override
+    public ProdottoSearchResultsDto cambiaPagina(ProdottoSearchDto dto) {
+        return null;   
+    }
 }
