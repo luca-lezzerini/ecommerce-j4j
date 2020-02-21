@@ -582,6 +582,19 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     this.id = 0;
   }
 
+ primaPagina(){
 
+ }
+
+ paginaPrecedente() {
+
+ }
+
+ paginaSuccessiva(){
+
+}
+ultimaPagina(){
+
+}
 }
 
