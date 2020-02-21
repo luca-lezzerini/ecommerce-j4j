@@ -5,6 +5,7 @@
  */
 package com.ai.ecommercej4j.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -42,7 +43,9 @@ public class Utente implements Serializable {
     private LocalDateTime dOptinTimestamp;
     @Column
     private Boolean anonimo;
+    
     @OneToMany(mappedBy = "utente", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = "utente", allowSetters = true)
     private List<Ordine> ordini = new ArrayList<>();
 
     public List<Ordine> getOrdini() {

@@ -1,6 +1,6 @@
-tocTab[tocTab.length] = new Array("0.11.11:1", "", "UI Elenco Colori", "EARoot/EA11/EA11/EA744.htm", "188.png", "64", "0", "", "Custom diagram0","{E7596ECD-FB15-4212-91F2-30B27C469611}");
-tocTab[tocTab.length] = new Array("0.11.11:2", "", "«WireframeWebsite» Webpage1", "EARoot/EA11/EA11/EA748.htm", "11.png", "E765", "0", "", "Screen0","{E170AF87-D64C-4f4c-A982-A43955F01B7E}");
-tocTab[tocTab.length] = new Array("0.11.11:3", "", "«WireframeButton» Cerca", "EARoot/EA11/EA11/EA749.htm", "16.png", "E767", "E765", "", "GUIElement0","{733DDEF2-01B0-4945-8FCA-27F76CFA72A6}");
-tocTab[tocTab.length] = new Array("0.11.11:4", "", "«WireframeTextField» coloreSearch", "EARoot/EA11/EA11/EA750.htm", "16.png", "E766", "E765", "", "GUIElement0","{ED074696-0BB7-46e2-900F-669EF2044DA8}");
-tocTab[tocTab.length] = new Array("0.11.11:5", "", "«WireframeButton» Home", "EARoot/EA11/EA11/EA751.htm", "16.png", "E769", "E765", "", "GUIElement0","{8C95231E-9CD3-458c-9DFB-C51DA78244A8}");
-tocTab[tocTab.length] = new Array("0.11.11:6", "", "«WireframeTable» Table", "EARoot/EA11/EA11/EA752.htm", "16.png", "E768", "E765", "", "GUIElement0","{FF57E034-5AFB-4793-9C91-75A751C98E89}");
+tocTab[tocTab.length] = new Array("0.11.12:1", "", "UI Elenco Colori", "EARoot/EA11/EA12/EA758.htm", "188.png", "64", "0", "", "Custom diagram0","{E7596ECD-FB15-4212-91F2-30B27C469611}");
+tocTab[tocTab.length] = new Array("0.11.12:2", "", "«WireframeWebsite» Webpage1", "EARoot/EA11/EA12/EA762.htm", "11.png", "E765", "0", "", "Screen0","{E170AF87-D64C-4f4c-A982-A43955F01B7E}");
+tocTab[tocTab.length] = new Array("0.11.12:3", "", "«WireframeButton» Cerca", "EARoot/EA11/EA12/EA763.htm", "16.png", "E767", "E765", "", "GUIElement0","{733DDEF2-01B0-4945-8FCA-27F76CFA72A6}");
+tocTab[tocTab.length] = new Array("0.11.12:4", "", "«WireframeTextField» coloreSearch", "EARoot/EA11/EA12/EA764.htm", "16.png", "E766", "E765", "", "GUIElement0","{ED074696-0BB7-46e2-900F-669EF2044DA8}");
+tocTab[tocTab.length] = new Array("0.11.12:5", "", "«WireframeButton» Home", "EARoot/EA11/EA12/EA765.htm", "16.png", "E769", "E765", "", "GUIElement0","{8C95231E-9CD3-458c-9DFB-C51DA78244A8}");
+tocTab[tocTab.length] = new Array("0.11.12:6", "", "«WireframeTable» Table", "EARoot/EA11/EA12/EA766.htm", "16.png", "E768", "E765", "", "GUIElement0","{FF57E034-5AFB-4793-9C91-75A751C98E89}");

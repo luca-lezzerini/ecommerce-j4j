@@ -30,6 +30,10 @@ export class LoginComponent implements OnInit {
       const lg: LoginRequestDto = new LoginRequestDto();
       lg.username = this.username;
       lg.password = this.password;
+      if (this.ac.tokenAnonimo) {
+        lg.token = this.ac.tokenAnonimo;
+      }
+
 
       // invio i dati al server
       const og: Observable<LoginResponseDto> = this.http.post<LoginResponseDto>(this.ac.hostUrl + '/login', lg);

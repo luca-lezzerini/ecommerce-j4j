@@ -43,5 +43,19 @@ public interface SecurityService {
      * @return vero se è diverso da null, falso in caso contrario.
      */
     Boolean checkToken(String tok);
+    
+    /**
+     * Crea un token per l'utente anonimo usando il metodo generateRandomString
+     *
+     * @return un dto di risposta contenente il token
+     */
+    LoginResponseDto generateTokenAnonimo();
+    
+    /**
+     * Controlla che l'utente non sia anonimo
+     * @param token il token dell'utente
+     * @return true se l'utente è registrato, false se anonimo
+     */
+    Boolean checkAnonimo(String token);
 
 }

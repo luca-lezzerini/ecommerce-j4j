@@ -1,6 +1,6 @@
 Benvenuto!
 <br>
-<button (click)="visualizzaCarrello()">Visualizza Carrello</button> &nbsp;
+<button routerLink="/view-carrello">Visualizza carrello</button>
 <a routerLink="/login">
   <button>Login</button>
 </a>
@@ -21,6 +21,6 @@ Benvenuto!
     <td> {{p.codice}}</td>
     <td> {{p.descrizione}}</td>
     <td> {{p.prezzo}}</td>
-    <td><button (click)="aggiungiAlCarrello()">Aggiungi al carrello</button></td>
+    <td><button (click)="aggiungiAlCarrello(p)">Aggiungi al carrello</button></td>
   </tr>
 </table>

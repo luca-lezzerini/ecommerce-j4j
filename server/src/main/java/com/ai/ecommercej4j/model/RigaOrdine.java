@@ -1,5 +1,6 @@
 package com.ai.ecommercej4j.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,18 +21,22 @@ public class RigaOrdine {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fkIdOrdine", referencedColumnName = "id")
-    public Ordine ordine;
+    @JsonIgnoreProperties(value = "righe", allowSetters = true)
+    private Ordine ordine;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fkIdProdotto", referencedColumnName = "id")
-    public Prodotto prodotto;
+    @JsonIgnoreProperties(value = "righe", allowSetters = true)
+    private Prodotto prodotto;
 
     public RigaOrdine() {
 
     }
 
-    public RigaOrdine(int qta) {
+    public RigaOrdine(int qta, Ordine ordine, Prodotto prodotto) {
         this.qta = qta;
+        this.ordine = ordine;
+        this.prodotto = prodotto;
     }
 
     public Long getId() {

@@ -32,6 +32,9 @@ import { ElencoOfferteComponent } from './elenco-offerte/elenco-offerte.componen
 import { ElencoSpedizioniComponent } from './elenco-spedizioni/elenco-spedizioni.component';
 import { ElencoColoriComponent } from './elenco-colori/elenco-colori.component';
 import { ElencoTaglieComponent } from './elenco-taglie/elenco-taglie.component';
+import { VisualizzaOrdiniComponent } from './visualizza-ordini/visualizza-ordini.component';
+import { HomeAreaGestoreComponent } from './home-area-gestore/home-area-gestore.component';
+import { VisualizzaOrdiniDaSpedireComponent } from './visualizza-ordini-da-spedire/visualizza-ordini-da-spedire.component';
 
 
 const appRoutes: Routes = [
@@ -59,9 +62,12 @@ const appRoutes: Routes = [
   { path: 'visualizzatore06', component: Visualizzatore06Component },
   { path: 'anagrafica-colori', component: AnagraficaColoriComponent },
   { path: 'elenco-offerte', component: ElencoOfferteComponent },
-  { path: 'elenco-spedizioni', component: ElencoSpedizioniComponent},
-  { path: 'elenco-colori', component: ElencoColoriComponent},
-  { path: 'elenco-taglie', component: ElencoTaglieComponent},
+  { path: 'elenco-spedizioni', component: ElencoSpedizioniComponent },
+  { path: 'elenco-colori', component: ElencoColoriComponent },
+  { path: 'elenco-taglie', component: ElencoTaglieComponent },
+  { path: 'visualizza-ordini', component: VisualizzaOrdiniComponent },
+  { path: 'home-area-gestore', component: HomeAreaGestoreComponent },
+  { path: 'visualizza-ordini-da-spedire', component: VisualizzaOrdiniDaSpedireComponent },
 ];
 
 @NgModule({
@@ -92,6 +98,9 @@ const appRoutes: Routes = [
     ElencoSpedizioniComponent,
     ElencoColoriComponent,
     ElencoTaglieComponent,
+    VisualizzaOrdiniComponent,
+    HomeAreaGestoreComponent,
+    VisualizzaOrdiniDaSpedireComponent,
   ],
   imports: [
     RouterModule.forRoot(

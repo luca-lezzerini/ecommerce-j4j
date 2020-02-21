@@ -1,9 +1,13 @@
 package com.ai.ecommercej4j.service.impl;
 
 import com.ai.ecommercej4j.model.*;
+import com.ai.ecommercej4j.repository.OrdineRepository;
+import com.ai.ecommercej4j.repository.RigaOrdineRepository;
 import com.ai.ecommercej4j.repository.UtenteRepository;
 import com.ai.ecommercej4j.service.SecurityService;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +16,14 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Autowired
     private UtenteRepository ur;
-    
+    @Autowired
+    private OrdineRepository or;
+    @Autowired
+    private RigaOrdineRepository ror;
+
     /**
      * genera una stringa casuale utilizzata dal double opt in
+     *
      * @return stringa
      */
     private String generateRandomString() {
@@ -25,28 +34,66 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public LoginResponseDto login(LoginRequestDto dto) {
-        Utente utente = ur.findByUsernameAndPassword(dto.getUsername(), dto.getPassword());;
+
+        Utente utente = ur.findByUsernameAndPassword(dto.getUsername(), dto.getPassword());
         LoginResponseDto response = new LoginResponseDto();
         if (utente != null) {
-            String token = generateRandomString();
-            utente.setToken(token);
-            ur.save(utente);
+            //verifico se l'utente è un utente anonimo
+
+            if (ur.findByTokenAndAnonimo(dto.getToken(), true) != null) {
+                utente.setToken(dto.getToken());
+
+                Utente utenteAnonimo = ur.findByToken(dto.getToken());
+                // ... se risuta positivo recupera l'ordine dell'utente nello stato carrello
+
+                //lista
+                Optional<Ordine> optionalOrdine = utenteAnonimo.getOrdini().stream()
+                        .filter(o -> o.getStato().equals("carrello"))
+                        .findFirst();
+                //verifico se l'utente anonimo ha ordini nel carrello
+                if (!optionalOrdine.isEmpty()) {
+                    Ordine ordine = optionalOrdine.get();
+                    //aggiungo l'ordine all' utente registrato
+//                    if (utente.getOrdini().size() > 0) {
+//                        for (RigaOrdine r : utente.getOrdini().get(0).getRighe()) {
+//                            r.setOrdine(utente.getOrdini().get(0));
+//
+//                            ror.save(r);
+//
+//                        }
+//                        ordine.setId(utente.getOrdini().get(0).getId());
+//                    }
+
+                    utente.getOrdini().add(ordine);
+
+                    ordine.setUtente(utente);
+                    or.save(ordine);
+                }
+                ur.save(utente);
+                //Rimuoviamo l'utente anonimo perche riconosciuto come utente registrato
+
+                ur.deleteById(utenteAnonimo.getId());
+            } else {
+                String token = generateRandomString();
+                utente.setToken(token);
+                ur.save(utente);
+            }
             response.setToken(utente.getToken());
+
         }
+
         return response;
     }
 
-    
     @Override
     public void checkDoubleOptin(LoginResponseDto dto) {
-        if(dto.getToken() != null){
-        String doiUtente = ur.findByDoubleOptin(dto.getToken()).getDoubleOptin();
-        }else{
+        if (dto.getToken() != null) {
+            String doiUtente = ur.findByDoubleOptin(dto.getToken()).getDoubleOptin();
+        } else {
             System.out.println("il token non esiste");
         }
     }
-    
-   
+
     @Override
     public LoginResponseDto passwordDimenticata(LoginRequestDto dto) {
 
@@ -75,7 +122,6 @@ public class SecurityServiceImpl implements SecurityService {
 
     }
 
-   
     @Override
     public void reimpostaPassword(ChangePasswordRequestDto dto) {
 
@@ -84,17 +130,17 @@ public class SecurityServiceImpl implements SecurityService {
 
         //...assegnazione utente esistente tramite metodo findByDoubleOptin poiche ce l'ho da prima.
         ut = ur.findByDoubleOptin(dto.getDoiCode());
-       
-            //Se la password nuova è diversa dalla vecchia...
-            if (ut.getPassword().equals(dto.getNewPassword())) {
-                System.out.println("Errore Pass Uguali");
 
-            } else {
-                //...assegno quella nuova all'utente e la salvo
-                ut.setPassword(dto.getNewPassword());
-                ur.save(ut);
-            }
+        //Se la password nuova è diversa dalla vecchia...
+        if (ut.getPassword().equals(dto.getNewPassword())) {
+            System.out.println("Errore Pass Uguali");
+
+        } else {
+            //...assegno quella nuova all'utente e la salvo
+            ut.setPassword(dto.getNewPassword());
+            ur.save(ut);
         }
+    }
 
     @Override
     public RegistrazioneResponseDto registrami(RegistrazioneRequestDto dto) {
@@ -111,6 +157,7 @@ public class SecurityServiceImpl implements SecurityService {
                 utente.setUsername(dto.getUsername());
                 utente.setPassword(dto.getPassword());
                 utente.setEmail(dto.getEmail());
+                utente.setAnonimo(false);
                 ur.save(utente);
                 resp.setRegistrato(true);
             } else {
@@ -131,11 +178,30 @@ public class SecurityServiceImpl implements SecurityService {
         return resp;
     }
 
-    
+    //ricerca anche che l'utente non sia anonimo
     @Override
     public Boolean checkToken(String tok) {
-        return ur.findByToken(tok) != null;
-        
+        return ur.findByTokenAndAnonimo(tok, false) != null;
+        // Utente utente = ur.findByToken(tok)
+        // return (utente.getToken() != null && utente.getAnonimo == false)
+
+    }
+
+    @Override
+    public LoginResponseDto generateTokenAnonimo() {
+        //Creo la risposta...
+        LoginResponseDto rdto = new LoginResponseDto();
+        Utente anonimo = new Utente();
+        anonimo.setAnonimo(true);
+        anonimo.setToken(generateRandomString());
+        ur.save(anonimo);
+        rdto.setToken(anonimo.getToken());
+        return rdto;
+    }
+
+    @Override
+    public Boolean checkAnonimo(String token) {
+        return ur.findByToken(token).getAnonimo();
     }
 
 }

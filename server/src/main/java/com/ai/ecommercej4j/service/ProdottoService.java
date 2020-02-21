@@ -30,6 +30,8 @@ public interface ProdottoService {
      * @return ArrayList<Prodotto>
      */
     ProdottoSearchResultsDto searchProdotto(ProdottoSearchDto dto);
+
+    ProdottoSearchResultsDto searchProdottoRiservato(ProdottoSearchDto dto);
     
     /**
      * ricerca Prodotto in base al valore della proprietà searchKey di dto.

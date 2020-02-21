@@ -1,18 +1,10 @@
 package com.ai.ecommercej4j.controller;
 
 
-import com.ai.ecommercej4j.model.ColoriCreateDto;
-import com.ai.ecommercej4j.model.ColoriDeleteDto;
-import com.ai.ecommercej4j.model.ColoriSearchDto;
-import com.ai.ecommercej4j.model.ColoriSearchResultsDto;
-import com.ai.ecommercej4j.model.ColoriUpdateDto;
+import com.ai.ecommercej4j.model.*;
 import com.ai.ecommercej4j.service.ColoriService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("*")
@@ -44,9 +36,4 @@ public class ColoriController {
          cs.updateColori(dto);
     }
     
-    @RequestMapping("/search-colori-per-descrizione")
-    @ResponseBody
-    public ColoriSearchResultsDto searchColoriPerDescrizione(@RequestBody ColoriSearchDto dto){
-        return cs.searchColoriPerDescrizione(dto);
-    }
 }

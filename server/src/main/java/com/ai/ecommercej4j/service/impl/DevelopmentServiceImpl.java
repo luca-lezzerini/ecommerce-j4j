@@ -19,21 +19,23 @@ import org.springframework.stereotype.Service;
 public class DevelopmentServiceImpl implements DevelopmentService {
 
     @Autowired
-    ProdottoRepository prodottoRepository;
+    private ProdottoRepository prodottoRepository;
     @Autowired
-    UtenteRepository utenteRepository;
+    private UtenteRepository utenteRepository;
     @Autowired
-    SpedizioneRepository spedizioneRespository;
+    private SpedizioneRepository spedizioneRespository;
     @Autowired
-    TagliaRepository tagliaRepository;
+    private TagliaRepository tagliaRepository;
     @Autowired
-    ColoriRepository coloriRepository;
+    private ColoriRepository coloriRepository;
     @Autowired
-    StartupDataService startupDataService;
+    private StartupDataService startupDataService;
     @Autowired
-    OrdineRepository ordineRepository;
+    private OrdineRepository ordineRepository;
     @Autowired
-    RigaOrdineRepository rigaOrdineRepository;
+    private RigaOrdineRepository rigaOrdineRepository;
+    @Autowired
+    private OrdineServiceImpl ordineServiceImpl;
 
     @Override
     public void generateTestData() {
@@ -62,13 +64,13 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 
     private void dropDataBase() {
         // elimina tutti dati dal db
+        rigaOrdineRepository.deleteAllInBatch();
+        ordineRepository.deleteAllInBatch();
         prodottoRepository.deleteAllInBatch();
         utenteRepository.deleteAllInBatch();
         spedizioneRespository.deleteAllInBatch();
         tagliaRepository.deleteAllInBatch();
         coloriRepository.deleteAllInBatch();
-        rigaOrdineRepository.deleteAllInBatch();
-        ordineRepository.deleteAllInBatch();
     }
 
     private void generateProdotti() {
@@ -342,6 +344,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
     }
 
     private void generateUtentiProdottiOrdiniRighe() {
+
         // Creo l'utente...
         Utente u1 = new Utente();
         u1.setUsername("relazione");
@@ -357,17 +360,26 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         prodottoRepository.save(p1);
 
         // Creo gli ordini ...
-        Ordine o1 = new Ordine(LocalDate.now(), 1);
+        Ordine o1 = new Ordine();
+        o1.setData(LocalDate.now());
+        o1.setNumero(1);
+        o1.setStato("carrello");
         ordineRepository.save(o1);
-        Ordine o2 = new Ordine(LocalDate.now(), 2);
+        Ordine o2 = new Ordine();
+        o2.setData(LocalDate.now());
+        o2.setNumero(2);
+        o2.setStato("carrello");
         ordineRepository.save(o2);
 
         // Creo le righe ...
-        RigaOrdine r11 = new RigaOrdine(5);
+        RigaOrdine r11 = new RigaOrdine();
+        r11.setQta(5);
         rigaOrdineRepository.save(r11);
-        RigaOrdine r12 = new RigaOrdine(7);
+        RigaOrdine r12 = new RigaOrdine();
+        r12.setQta(5);
         rigaOrdineRepository.save(r12);
-        RigaOrdine r13 = new RigaOrdine(34);
+        RigaOrdine r13 = new RigaOrdine();
+        r13.setQta(5);
         rigaOrdineRepository.save(r13);
 
         // ... associo le righe all'ordine

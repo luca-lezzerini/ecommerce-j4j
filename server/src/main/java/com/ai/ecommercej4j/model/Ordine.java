@@ -1,5 +1,6 @@
 package com.ai.ecommercej4j.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +24,24 @@ public class Ordine {
     private LocalDate data;
     @Column
     private int numero;
-    
+    @Column
+    private String stato;
+
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
+    }
+
     @OneToMany(mappedBy = "ordine", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = "ordine", allowSetters = true)
     List<RigaOrdine> righe = new ArrayList<>();
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fkIdUtente", referencedColumnName = "id")
+    @JsonIgnoreProperties(value = "ordini", allowSetters = true)
     private Utente utente;
 
     public Utente getUtente() {
@@ -42,9 +55,24 @@ public class Ordine {
     public Ordine() {
     }
 
-    public Ordine(LocalDate data, int numero) {
+    /**
+     * Inizializza un nuovo ordine partendo dallo stato carrello.
+     *
+     * @param utente L'utente associato all'ordine da creare
+     * @param numero Il numero dell'ordine da creare
+     */
+    public Ordine(Utente utente, int numero) {
+        this.data = LocalDate.now();
+        this.stato = "carrello";
+        this.numero = numero;
+        this.utente = utente;
+    }
+
+    public Ordine(LocalDate data, int numero, String stato, Utente utente) {
         this.data = data;
         this.numero = numero;
+        this.stato = stato;
+        this.utente = utente;
     }
 
     public Long getId() {
