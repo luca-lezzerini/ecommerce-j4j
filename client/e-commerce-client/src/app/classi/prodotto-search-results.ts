@@ -4,4 +4,6 @@ import { Prodotto } from './prodotto';
 
 export class ProdottoSearchResultsDto extends LoginResponseDto{
   result: Prodotto[];
+  numeroPagina: number;
+  operazione: string;
 }

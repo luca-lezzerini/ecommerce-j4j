@@ -14,9 +14,13 @@ import java.util.List;
 public class ProdottoSearchResultsDto {
 
     private List<Prodotto> result;
+    private int numeroPagina;
+    private String operazione;
 
-    public ProdottoSearchResultsDto(List<Prodotto> result) {
+    public ProdottoSearchResultsDto(List<Prodotto> result, int numeroPagina, String operazione) {
         this.result = result;
+        this.numeroPagina = numeroPagina;
+        this.operazione = operazione;
     }
 
     public ProdottoSearchResultsDto() {
@@ -29,5 +33,23 @@ public class ProdottoSearchResultsDto {
     public void setResult(List<Prodotto> result) {
         this.result = result;
     }
+
+    public int getnumeroPagina() {
+        return numeroPagina;
+    }
+
+    public void setnumeroPagina(int numeroPagina) {
+        this.numeroPagina = numeroPagina;
+    }
+
+    public String getOperazione() {
+        return operazione;
+    }
+
+    public void setOperazione(String operazione) {
+        this.operazione = operazione;
+    }
+
+    
 
 }

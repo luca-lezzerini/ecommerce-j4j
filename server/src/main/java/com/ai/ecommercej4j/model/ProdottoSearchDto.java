@@ -12,21 +12,33 @@ package com.ai.ecommercej4j.model;
 public class ProdottoSearchDto extends LoginResponseDto {
 
     private String searchKey;
-
-    public ProdottoSearchDto(String searchKey, String token) {
+    private int numeroPagina;
+    
+    public ProdottoSearchDto(String searchKey, String token, int numeroPagina) {
         super(token);
         this.searchKey = searchKey;
+        this.numeroPagina = numeroPagina;
     }
 
     public ProdottoSearchDto() {
     }
-
+    
+    
+    
     public String getSearchKey() {
         return searchKey;
     }
 
     public void setSearchKey(String searchKey) {
         this.searchKey = searchKey;
+    }
+
+    public int getnumeroPagina() {
+        return numeroPagina;
+    }
+
+    public void setnumeroPagina(int numeroPagina) {
+        this.numeroPagina = numeroPagina;
     }
 
 }
