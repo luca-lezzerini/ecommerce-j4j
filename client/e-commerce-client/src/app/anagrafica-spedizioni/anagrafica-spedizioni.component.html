@@ -49,5 +49,9 @@
       </td>
   </tr>
 </table>
+<button (click)="primaPagina()" *ngIf="editEnabled">Prima Pagina</button>
+<button (click)="paginaPrecedente()" *ngIf="editEnabled">Pagina Precedente</button>
+<button (click)="paginaSuccessiva()" *ngIf="editEnabled">Pagina Successiva</button>
+<button (click)="ultimaPagina()" *ngIf="editEnabled">Ultima Pagina</button>
 </div>
 
