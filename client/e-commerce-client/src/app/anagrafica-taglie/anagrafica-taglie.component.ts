@@ -143,6 +143,8 @@ export class AnagraficaTaglieComponent implements OnInit {
    * Manda una richiesta al server con un oggetto contenente il token per poter
    * verificare l'accesso e la stringa contenente il parametro di ricerca. Se
    * il server ritorna una lista di prodotti non nulla, mostro il suo contenuto.
+   * @param pagina la pagina attuale. Serve al server per decidere che pagina
+   * deve far mostrare
    */
   cerca(pagina: number) {
     // prepara la chiamata al server
