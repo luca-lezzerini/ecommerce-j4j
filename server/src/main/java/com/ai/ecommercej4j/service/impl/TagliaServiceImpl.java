@@ -1,5 +1,6 @@
 package com.ai.ecommercej4j.service.impl;
 
+import com.ai.ecommercej4j.model.Taglia;
 import com.ai.ecommercej4j.model.TagliaCreateDto;
 import com.ai.ecommercej4j.model.TagliaDeleteDto;
 import com.ai.ecommercej4j.model.TagliaSearchDto;
@@ -10,6 +11,7 @@ import com.ai.ecommercej4j.service.SecurityService;
 import com.ai.ecommercej4j.service.TagliaService;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -44,23 +46,22 @@ public class TagliaServiceImpl implements TagliaService {
         TagliaSearchResultsDto result = new TagliaSearchResultsDto();
         String ricerca = dto.getSearchKey();
         int pagina = dto.getPage();
-        // TODO : ottenere ultima pagina se viene passato dal dto -1
-/*        if (pagina == -1) {
-            pagina = ((int) tr.count()) / PAGE_DIMENSION;
-            if (((int) tr.count()) != PAGE_DIMENSION * pagina) {
-                pagina += 1;
-            }
-        }*/
+        if (pagina == -1) {
+            pagina = tr.findAll(generatePage(0)).getTotalPages();
+        }
+        Pageable pageable = generatePage(pagina);
         //verifico che il token sia registrato...
         if (ss.checkToken(dto.getToken())) {
+            Page<Taglia> listaPagina;
             //...se è registrato controllo se la stringa di ricerca è vuota...
             if (ricerca.equals("")) {
                 //...se è vuota ritorno tutte le taglie
-                result.setResult(tr.findAll(generatePage(pagina)).toList());
+                listaPagina = tr.findAll(pageable);
             } else {
                 //...atrimenti cerco solo quelle che soddisfano la ricerca
-                result.setResult((tr.findByDescrizioneContainingIgnoreCase(dto.getSearchKey(), generatePage(pagina))).toList());
+                listaPagina = (tr.findByDescrizioneContainingIgnoreCase(dto.getSearchKey(), pageable));
             }
+            result.setResult(listaPagina.toList());
             result.setPage(dto.getPage());
         } else {
             //...altrimenti ritorno una lista vuota 
