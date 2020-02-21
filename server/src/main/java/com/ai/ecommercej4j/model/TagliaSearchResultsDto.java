@@ -6,9 +6,23 @@ import java.util.List;
 public class TagliaSearchResultsDto {
 
     private List<Taglia> result;
+    private int page;
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
 
     public TagliaSearchResultsDto() {
         result = new ArrayList<>();
+    }
+
+    public TagliaSearchResultsDto(int page) {
+        result = new ArrayList<>();
+        this.page = page;
     }
 
     public List<Taglia> getResult() {

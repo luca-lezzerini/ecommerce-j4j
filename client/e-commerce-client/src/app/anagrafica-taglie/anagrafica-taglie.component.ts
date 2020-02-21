@@ -33,6 +33,7 @@ export class AnagraficaTaglieComponent implements OnInit {
   visPrecedente: string;
   id = 0;
   tagliaSelezionata: Taglia = new Taglia();
+  paginaAttuale: number;
 
   constructor(
     private http: HttpClient,
@@ -113,10 +114,10 @@ export class AnagraficaTaglieComponent implements OnInit {
   visAnnulla() {
     switch (this.visPrecedente) {
       case 'aggiungi':
-        this.cerca();
+        this.cerca(this.paginaAttuale);
         break;
       case 'crea':
-        this.cerca();
+        this.cerca(this.paginaAttuale);
         break;
       case 'edit':
         this.visView();
@@ -141,17 +142,19 @@ export class AnagraficaTaglieComponent implements OnInit {
    * verificare l'accesso e la stringa contenente il parametro di ricerca. Se
    * il server ritorna una lista di prodotti non nulla, mostro il suo contenuto.
    */
-  cerca() {
+  cerca(pagina: number) {
     // prepara la chiamata al server
     const dto: TagliaSearchDto = new TagliaSearchDto();
     dto.token = this.sessione.token;
     dto.searchKey = this.searchKey;
+    dto.page = pagina;
     const obs: Observable<TagliaSearchResultsDto> =
       this.http.post<TagliaSearchResultsDto>(this.sessione.hostUrl + '/search-taglia', dto);
 
     // invia la richiesta al server
     obs.subscribe(risposta => {
       this.taglie = risposta.result;
+      this.paginaAttuale = risposta.page;
       if (this.taglie && this.taglie.length > 0) {
         // se trova qualcosa mostra il risultato
         this.visCercaConRisultato();
@@ -213,7 +216,7 @@ export class AnagraficaTaglieComponent implements OnInit {
         this.view(this.tagliaSelezionata);
         break;
       case 'delete':
-        this.cerca();
+        this.cerca(this.paginaAttuale);
         break;
     }
   }
@@ -288,7 +291,7 @@ export class AnagraficaTaglieComponent implements OnInit {
       // invia la richiesta al server
       obs.subscribe(risposta => {
         // ripete ultima ricerca
-        this.cerca();
+        this.cerca(0);
       });
       this.pulisciCampi();
     }
@@ -312,7 +315,7 @@ export class AnagraficaTaglieComponent implements OnInit {
       const obs: Observable<any> = this.http.post(this.sessione.hostUrl + '/update-taglia', dto);
       // invia la richiesta al server
       obs.subscribe(response => {
-        this.cerca();
+        this.cerca(this.paginaAttuale);
       });
       this.pulisciCampi();
     }
@@ -329,7 +332,7 @@ export class AnagraficaTaglieComponent implements OnInit {
     dto.idToDelete = this.id;
     const obs: Observable<any> = this.http.post<any>(this.sessione.hostUrl + '/delete-taglia', dto);
     obs.subscribe(reponse => {
-      this.cerca();
+      this.cerca(0);
     });
     this.pulisciCampi();
   }

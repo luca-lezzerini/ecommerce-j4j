@@ -31,4 +31,10 @@
     <td><button (click)="edit(taglia)">Edit</button></td>
     <td><button (click)="delete(taglia)">Delete</button></td>
   </tr>
+  <tr>
+    <td><button (click)="cerca(0)">Inizio</button></td>
+    <td><button (click)="cerca(paginaAttuale - 1)">Precedente</button></td>
+    <td><button (click)="cerca(paginaAttuale + 1)">Successivo</button></td>
+    <td><button (click)="cerca(-1)">Fine</button></td>
+  </tr>
 </table>

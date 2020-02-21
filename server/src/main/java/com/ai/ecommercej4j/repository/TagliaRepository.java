@@ -1,15 +1,17 @@
 package com.ai.ecommercej4j.repository;
 
 import com.ai.ecommercej4j.model.Taglia;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TagliaRepository extends JpaRepository<Taglia, Long> {
 
-    List<Taglia> findByCodiceOrDescrizioneIgnoreCase(String codice, String descrizione);
+    Page<Taglia> findByCodiceOrDescrizioneIgnoreCase(String codice, String descrizione, Pageable pageable);
 
     Taglia findByCodiceIgnoreCase(String codice);
-    
-    List<Taglia> findByDescrizioneContainingIgnoreCase(String dto);
 
+    Page<Taglia> findByDescrizioneContainingIgnoreCase(String dto, Pageable pageable);
+
+    Page<Taglia> findAll(Pageable pageable);
 }

@@ -10,10 +10,14 @@ import com.ai.ecommercej4j.service.SecurityService;
 import com.ai.ecommercej4j.service.TagliaService;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TagliaServiceImpl implements TagliaService {
+
+    private final int PAGE_DIMENSION = 5;
 
     @Autowired
     private SecurityService ss;
@@ -39,16 +43,25 @@ public class TagliaServiceImpl implements TagliaService {
     public TagliaSearchResultsDto searchTaglia(TagliaSearchDto dto) {
         TagliaSearchResultsDto result = new TagliaSearchResultsDto();
         String ricerca = dto.getSearchKey();
+        int pagina = dto.getPage();
+        // TODO : ottenere ultima pagina se viene passato dal dto -1
+/*        if (pagina == -1) {
+            pagina = ((int) tr.count()) / PAGE_DIMENSION;
+            if (((int) tr.count()) != PAGE_DIMENSION * pagina) {
+                pagina += 1;
+            }
+        }*/
         //verifico che il token sia registrato...
         if (ss.checkToken(dto.getToken())) {
             //...se è registrato controllo se la stringa di ricerca è vuota...
             if (ricerca.equals("")) {
                 //...se è vuota ritorno tutte le taglie
-                result.setResult(tr.findAll());
+                result.setResult(tr.findAll(generatePage(pagina)).toList());
             } else {
                 //...atrimenti cerco solo quelle che soddisfano la ricerca
-                result.setResult(tr.findByCodiceOrDescrizioneIgnoreCase(ricerca, ricerca));
+                result.setResult((tr.findByDescrizioneContainingIgnoreCase(dto.getSearchKey(), generatePage(pagina))).toList());
             }
+            result.setPage(dto.getPage());
         } else {
             //...altrimenti ritorno una lista vuota 
             result.setResult(Collections.emptyList());
@@ -79,23 +92,27 @@ public class TagliaServiceImpl implements TagliaService {
 
     @Override
     public TagliaSearchResultsDto searchTagliaPerDescrizione(TagliaSearchDto dto) {
-         TagliaSearchResultsDto result = new TagliaSearchResultsDto();
+        TagliaSearchResultsDto result = new TagliaSearchResultsDto();
         String ricerca = dto.getSearchKey();
         //verifico che il token sia registrato...
         if (ss.checkToken(dto.getToken())) {
             //...se è registrato controllo se la stringa di ricerca è vuota...
             if (ricerca.equals("")) {
                 //...se è vuota ritorno tutte le taglie
-                result.setResult(tr.findAll());
+                result.setResult(tr.findAll(generatePage(dto.getPage())).toList());
             } else {
                 //...atrimenti cerco solo quelle che soddisfano la ricerca
-                result.setResult(tr.findByDescrizioneContainingIgnoreCase(dto.getSearchKey()));
+                result.setResult((tr.findByDescrizioneContainingIgnoreCase(dto.getSearchKey(), generatePage(dto.getPage()))).toList());
             }
+            result.setPage(dto.getPage());
         } else {
             //...altrimenti ritorno una lista vuota 
             result.setResult(Collections.emptyList());
         }
         return result;
-    
+    }
+
+    private Pageable generatePage(int numeroPagina) {
+        return PageRequest.of(numeroPagina, PAGE_DIMENSION);
     }
 }
