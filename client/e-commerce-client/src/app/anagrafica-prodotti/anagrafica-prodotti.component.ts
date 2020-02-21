@@ -39,6 +39,8 @@ export class AnagraficaProdottiComponent implements OnInit {
   searchKeyPrecedente = '';
   statoPrecedente = '';
   prodottoSelezionato = new Prodotto();
+  pagina = 0;
+  paginaRichiesta = 0;
 
   constructor(private http: HttpClient,
     private acService: AreaComuneService,
@@ -310,6 +312,7 @@ export class AnagraficaProdottiComponent implements OnInit {
     let dto: ProdottoSearchDto = new ProdottoSearchDto();
     dto.searchKey = search;
     dto.token = this.acService.token;
+    dto.numeroPagina = this.paginaRichiesta;
 
     // prepara la richiesta HTTP
     let oss: Observable<ProdottoSearchResultsDto> =
@@ -320,6 +323,9 @@ export class AnagraficaProdottiComponent implements OnInit {
 
       // aggiorno lista prodotti
       this.prodotti = risposta.result;
+
+      // aggiorno la pagina attuale
+      this.pagina = risposta.numeroPagina;
 
       // se ci sono risultati li visualizzo
       this.showResults = risposta.result.length > 0;
@@ -355,6 +361,40 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // aggiorno lo stato
     this.statoPrecedente = 'view';
+  }
+
+  /**
+   * Imposta la pagina da richiedere ad 1
+   */
+  paginaIniziale() {
+    this.paginaRichiesta = 1;
+    this.eseguiRicerca(this.searchKeyPrecedente);
+  }
+
+  /**
+   * Imposta la pagina da richiedere alla pagina attuale decrementata di 1
+   */
+  paginaPrecedente() {
+    if (this.pagina > 0) {
+      this.paginaRichiesta = this.pagina - 1;
+      this.eseguiRicerca(this.searchKeyPrecedente);
+    }
+  }
+
+  /**
+   * Imposta la pagina da richiedere alla pagina attuale aumentata di 1
+   */
+  paginaSuccessiva() {
+    this.paginaRichiesta = this.pagina + 1;
+    this.eseguiRicerca(this.searchKeyPrecedente);
+  }
+
+  /**
+   * Imposta la pagina da richiedere a -1, che indica l'ultima pagina
+   */
+  paginaFinale() {
+    this.paginaRichiesta = -1;
+    this.eseguiRicerca(this.searchKeyPrecedente);
   }
 
   /**
