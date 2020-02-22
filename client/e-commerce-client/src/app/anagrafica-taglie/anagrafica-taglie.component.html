@@ -1,41 +1,56 @@
-<div *ngIf="panelEnabled">
-  <input type="hidden" [value]="id">
-  <label for="input-codice">Codice </label>
-  <input id="input-codice" [(ngModel)]="codice" [disabled]="inputDisabled">
-  <label for="input-descrizione"> Descrizione </label>
-  <input id="input-descrizione" [(ngModel)]="descrizione" [disabled]="inputDisabled">
+<div class="contenitore">
+  <div *ngIf="panelEnabled">
+    <input class="input" type="hidden" [value]="id">
+    <label for="input-codice">Codice </label>
+    <input class="input" id="input-codice" [(ngModel)]="codice" [disabled]="inputDisabled">
+    <label for="input-descrizione"> Descrizione </label>
+    <input class="input" id="input-descrizione" [(ngModel)]="descrizione" [disabled]="inputDisabled">
+    <br>
+    <button class="button" (click)="conferma()" *ngIf="confermaAndAnnullaEnabled">Conferma</button>
+    <button class="button" (click)="annulla()" *ngIf="confermaAndAnnullaEnabled">Annulla</button>
+    <button class="button" (click)="crea()" *ngIf="creaEnabled">Crea</button>
+    <button class="button" (click)="modifica()" *ngIf="modificaEnabled">Modifica</button>
+    <button class="button" (click)="rimuovi()" *ngIf="rimuoviEnabled">Rimuovi</button>
+  </div>
   <br>
-  <button (click)="conferma()" *ngIf="confermaAndAnnullaEnabled">Conferma</button>
-  <button (click)="annulla()" *ngIf="confermaAndAnnullaEnabled">Annulla</button>
-  <button (click)="crea()" *ngIf="creaEnabled">Crea</button>
-  <button (click)="modifica()" *ngIf="modificaEnabled">Modifica</button>
-  <button (click)="rimuovi()" *ngIf="rimuoviEnabled">Rimuovi</button>
+  <div *ngIf="cercaEnabled">
+    <input class="input" [(ngModel)]="searchKey">&nbsp;
+    <button class="button" (click)="cerca()">Cerca</button>
+    &nbsp;
+    <button class="button" (click)="aggiungi()" *ngIf="aggiungiEnabled">Aggiungi</button>
+  </div>
+  <br>
+  <table class="table" *ngIf="risultatoEnabled">
+    <tr class="th">
+      <th>CODICE</th>
+      <th>DESCRIZIONE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr class="tr" *ngFor="let taglia of taglie">
+      <td class="td">{{taglia.codice}}</td>
+      <td class="td">{{taglia.descrizione}}</td>
+      <td class="td"><button class="button" (click)="view(taglia)">View</button></td>
+      <td class="td"><button class="button" (click)="edit(taglia)">Edit</button></td>
+      <td class="td"><button class="button" (click)="delete(taglia)">Delete</button></td>
+    </tr>
+    <tr>
+      <td class="td">
+        <button class="button" *ngIf="!pageIsFirst" (click)="cerca(0)">Inizio</button>
+      </td>
+      <td class="td">
+        <button class="button" *ngIf="!pageIsFirst" (click)="cerca(paginaAttuale - 1)">Precedente</button>
+      </td>
+      <td class="td">
+        Pagina {{paginaAttuale+1}}
+      </td>
+      <td class="td">
+        <button class="button" *ngIf="!pageIsLast" (click)="cerca(paginaAttuale + 1)">Successivo</button>
+      </td>
+      <td class="td">
+        <button class="button" *ngIf="!pageIsLast" (click)="cerca(-1)">Fine</button>
+      </td>
+    </tr>
+  </table>
 </div>
-<br>
-<div *ngIf="cercaEnabled">
-  <input [(ngModel)]="searchKey">&nbsp;
-  <button (click)="cerca()">Cerca</button>
-  &nbsp;
-  <button (click)="aggiungi()" *ngIf="aggiungiEnabled">Aggiungi</button>
-</div>
-<br>
-<table *ngIf="risultatoEnabled">
-  <tr>
-    <th>CODICE</th>
-    <th>DESCRIZIONE</th>
-  </tr>
-  <tr *ngFor="let taglia of taglie">
-    <td>{{taglia.codice}}</td>
-    <td>{{taglia.descrizione}}</td>
-    <td><button (click)="view(taglia)">View</button></td>
-    <td><button (click)="edit(taglia)">Edit</button></td>
-    <td><button (click)="delete(taglia)">Delete</button></td>
-  </tr>
-  <tr>
-    <td><button *ngIf="!pageIsFirst" (click)="cerca(0)">Inizio</button></td>
-    <td><button *ngIf="!pageIsFirst" (click)="cerca(paginaAttuale - 1)">Precedente</button></td>
-    <td> Pagina {{paginaAttuale+1}} </td>
-    <td><button *ngIf="!pageIsLast" (click)="cerca(paginaAttuale + 1)">Successivo</button></td>
-    <td><button *ngIf="!pageIsLast" (click)="cerca(-1)">Fine</button></td>
-  </tr>
-</table>

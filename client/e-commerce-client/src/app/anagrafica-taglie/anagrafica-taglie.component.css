@@ -1,0 +1,35 @@
+.contenitore {
+  color: #05386B;
+  font-size: 14px;
+  text-align: center;
+}
+
+.button {
+  color: #EDF5E1;
+  background-color: #5CDB95;
+}
+
+.table {
+  margin: auto;
+  border-spacing: 0mm;
+}
+
+.input {
+  border-color: #05386B;
+  background-color: #EDF5E1;
+  color: #05386B;
+  font-size: 14px;
+}
+
+tr.th {
+  background-color: #05386B;
+  color: #EDF5E1;
+}
+
+.tr:nth-child(odd) {
+  background-color: #EDF5E1;
+}
+
+.tr:nth-child(even) {
+  background-color: #8EE4AF;
+}
