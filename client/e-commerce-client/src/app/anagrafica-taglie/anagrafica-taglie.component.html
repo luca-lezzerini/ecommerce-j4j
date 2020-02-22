@@ -15,7 +15,7 @@
   <br>
   <div *ngIf="cercaEnabled">
     <input class="input" [(ngModel)]="searchKey">&nbsp;
-    <button class="button" (click)="cerca()">Cerca</button>
+    <button class="button" (click)="cerca(0)">Cerca</button>
     &nbsp;
     <button class="button" (click)="aggiungi()" *ngIf="aggiungiEnabled">Aggiungi</button>
   </div>
@@ -37,19 +37,19 @@
     </tr>
     <tr>
       <td class="td">
-        <button class="button" *ngIf="!pageIsFirst" (click)="cerca(0)">Inizio</button>
+        <button class="button" (click)="cerca(0)" [disabled]="pageIsFirst">Inizio</button>
       </td>
       <td class="td">
-        <button class="button" *ngIf="!pageIsFirst" (click)="cerca(paginaAttuale - 1)">Precedente</button>
+        <button class="button" (click)="cerca(paginaAttuale - 1)" [disabled]="pageIsFirst">Precedente</button>
       </td>
       <td class="td">
         Pagina {{paginaAttuale+1}}
       </td>
       <td class="td">
-        <button class="button" *ngIf="!pageIsLast" (click)="cerca(paginaAttuale + 1)">Successivo</button>
+        <button class="button" (click)="cerca(paginaAttuale + 1)" [disabled]="pageIsLast">Successivo</button>
       </td>
       <td class="td">
-        <button class="button" *ngIf="!pageIsLast" (click)="cerca(-1)">Fine</button>
+        <button class="button" (click)="cerca(-1)" [disabled]="pageIsLast">Fine</button>
       </td>
     </tr>
   </table>

@@ -9,6 +9,10 @@
   background-color: #5CDB95;
 }
 
+.button:disabled {
+  background-color: silver;
+}
+
 .table {
   margin: auto;
   border-spacing: 0mm;
