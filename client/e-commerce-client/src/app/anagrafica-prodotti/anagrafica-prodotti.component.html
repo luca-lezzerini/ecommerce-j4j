@@ -14,10 +14,8 @@
 <div>
   <input *ngIf="showSearchPanel" type="text" [(ngModel)]="searchKey">&nbsp;
   <button *ngIf="showSearchPanel" (click)="cerca()">Cerca</button>&nbsp;
+  <button *ngIf="showAggiungi" (click)="crea()">Aggiungi</button>
 </div>
-<br>
-<button *ngIf="showAggiungi" (click)="crea()">Aggiungi</button>
-
 
 <div *ngIf="showResults && prodotti && prodotti.length > 0">
   <br>
