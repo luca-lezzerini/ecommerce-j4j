@@ -12,6 +12,10 @@ import com.ai.ecommercej4j.service.SecurityService;
 import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,7 +40,7 @@ public class ProdottoServiceImpl implements ProdottoService {
 
                 // controllo se esiste già il codice del prodotto da creare
                 List<Prodotto> lp = prodottoRepository
-                        .findByCodiceContainingIgnoreCase(dto.getDati().getCodice());
+                        .findByCodiceIgnoreCase(dto.getDati().getCodice());
 
                 // se non esiste già, lo creo
                 if (lp.isEmpty()) {
@@ -53,17 +57,41 @@ public class ProdottoServiceImpl implements ProdottoService {
         ProdottoSearchResultsDto resultDto = new ProdottoSearchResultsDto();
 
         // controllo se il dto e la chiave di ricerca sono diversi da null
-        if (dto != null && dto.getSearchKey() != null) {
+        // e se il token è valido
+        if (dto != null && dto.getSearchKey() != null
+                && securityService.checkToken(dto.getToken())) {
 
-            //recupero i risultati e avvaloro il dto di ritorno                
-            List<Prodotto> lp = prodottoRepository.
-                    findByCodiceContainingIgnoreCase(dto.getSearchKey());
+            int paginaRichiesta;
+            Pageable page;
+            //trovo il numero totale delle pagine
+            int numeroUltimaPagina = (int) ((prodottoRepository.countByCodiceContaining(dto.getSearchKey()) - 1) / 5);
+            
+            //se la pagina che cerco è un numero positivo minore del numero totale di pagine...
+            if (dto.getNumeroPagina() >= 0 && dto.getNumeroPagina() < numeroUltimaPagina) {
+                paginaRichiesta = dto.getNumeroPagina();
+            } else {
+                // ... altrimenti la pagina che cerco è l'ultima
+                paginaRichiesta = numeroUltimaPagina;
+            }
 
-            // ordino i risultati per codice
-            Collections.sort(lp, (p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
-            resultDto.setResult(lp);
+            //preparo i dati della pagina da selezionare
+            page = PageRequest.of(paginaRichiesta, 5, Sort.by("codice"));
+
+            //recupero i risultati               
+            Slice<Prodotto> sliceProdotto = prodottoRepository.
+                    findByCodiceContainingIgnoreCase(dto.getSearchKey(), page);
+
+            //se ho ottenuto dei risultati, avvaloro il dto di ritorno...
+            if (sliceProdotto != null && sliceProdotto.hasContent()) {
+                resultDto.setNumeroPagina(sliceProdotto.getNumber());
+                resultDto.setResult(sliceProdotto.getContent());
+
+            } else {
+                // ... se non ci sono risultati, restituisce una List vuota
+                resultDto.setResult(Collections.emptyList());
+            }
         } else {
-            // ... se il dto non esiste, restituisce un ArrayList vuoto
+            // ... se il dto non esiste, restituisce una List vuota
             resultDto.setResult(Collections.emptyList());
         }
         return resultDto;
@@ -199,10 +227,5 @@ public class ProdottoServiceImpl implements ProdottoService {
             resultDto.setResult(Collections.emptyList());
         }
         return resultDto;
-    }
-
-    @Override
-    public ProdottoSearchResultsDto cambiaPagina(ProdottoSearchDto dto) {
-        return null;   
     }
 }

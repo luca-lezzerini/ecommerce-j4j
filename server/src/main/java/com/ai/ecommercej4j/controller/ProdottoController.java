@@ -60,11 +60,5 @@ public class ProdottoController {
     @ResponseBody
     public ProdottoSearchResultsDto searchOfferte(@RequestBody ProdottoSearchDto dto) {
        return ps.searchOfferte(dto);
-    }
-    
-   @RequestMapping(value = "/cambia-pagina")
-   @ResponseBody
-   public ProdottoSearchResultsDto cambiaPagina(@RequestBody ProdottoSearchDto dto){
-       return ps.cambiaPagina(dto);
-    }
+    }    
 }

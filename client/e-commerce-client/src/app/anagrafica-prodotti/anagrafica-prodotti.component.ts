@@ -40,7 +40,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   statoPrecedente = '';
   prodottoSelezionato = new Prodotto();
   pagina = 0;
-  paginaRichiesta = 0;
+  backDisabled: boolean;
 
   constructor(private http: HttpClient,
     private acService: AreaComuneService,
@@ -129,7 +129,7 @@ export class AnagraficaProdottiComponent implements OnInit {
     oss.subscribe(risposta => {
 
       // una volta eseguito l'inserimento, eseguo di nuovo l'ultima ricerca effettuata
-      this.eseguiRicerca(this.searchKeyPrecedente);
+      this.eseguiRicerca(this.searchKeyPrecedente, this.pagina);
     });
   }
 
@@ -155,7 +155,7 @@ export class AnagraficaProdottiComponent implements OnInit {
     oss.subscribe(risposta => {
 
       // una volta eseguita la modifica, eseguo di nuovo l'ultima ricerca effettuata
-      this.eseguiRicerca(this.searchKeyPrecedente);
+      this.eseguiRicerca(this.searchKeyPrecedente, this.pagina);
     });
   }
 
@@ -176,7 +176,7 @@ export class AnagraficaProdottiComponent implements OnInit {
     oss.subscribe(risposta => {
 
       // una volta eseguita la rimozione, eseguo di nuovo l'ultima ricerca effettuata
-      this.eseguiRicerca(this.searchKeyPrecedente);
+      this.eseguiRicerca(this.searchKeyPrecedente, this.pagina);
     });
   }
 
@@ -283,7 +283,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   /**
-   * Aggiorna l'interfaccia utente allo stato cerca ed esegue la ricerca
+   * Aggiorna l'interfaccia utente allo stato cerca ed esegue la ricerca della prima pagina
    */
   cerca() {
     // imposta visibilità degli elementi dell'interfaccia
@@ -301,18 +301,19 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.statoPrecedente = 'cerca';
 
     // eseguo la ricerca con la searchKey attuale
-    this.eseguiRicerca(this.searchKey);
+    this.eseguiRicerca(this.searchKey, 0);
   }
 
   /**
    * Esegue la ricerca
    */
-  private eseguiRicerca(search: string) {
+  public eseguiRicerca(search: string, paginaRichiesta: number) {
     // prepara i dati da inviare al server
+    console.log(search);
     let dto: ProdottoSearchDto = new ProdottoSearchDto();
     dto.searchKey = search;
     dto.token = this.acService.token;
-    dto.numeroPagina = this.paginaRichiesta;
+    dto.numeroPagina = paginaRichiesta;
 
     // prepara la richiesta HTTP
     let oss: Observable<ProdottoSearchResultsDto> =
@@ -324,14 +325,17 @@ export class AnagraficaProdottiComponent implements OnInit {
       // aggiorno lista prodotti
       this.prodotti = risposta.result;
 
-      // aggiorno la pagina attuale
+      // aggiorno il numero di pagina pagina attuale
       this.pagina = risposta.numeroPagina;
+
+      // se la pagina restituita è la numero 0, disabilito i bottoni per le pagine precedenti
+      this.backDisabled = !this.pagina;
 
       // se ci sono risultati li visualizzo
       this.showResults = risposta.result.length > 0;
 
       // salvo la chiave di ricerca
-      this.searchKeyPrecedente = this.searchKey;
+      this.searchKeyPrecedente = search;
 
       // pulisco il campo ricerca
       this.searchKey = '';
@@ -361,40 +365,6 @@ export class AnagraficaProdottiComponent implements OnInit {
 
     // aggiorno lo stato
     this.statoPrecedente = 'view';
-  }
-
-  /**
-   * Imposta la pagina da richiedere ad 1
-   */
-  paginaIniziale() {
-    this.paginaRichiesta = 1;
-    this.eseguiRicerca(this.searchKeyPrecedente);
-  }
-
-  /**
-   * Imposta la pagina da richiedere alla pagina attuale decrementata di 1
-   */
-  paginaPrecedente() {
-    if (this.pagina > 0) {
-      this.paginaRichiesta = this.pagina - 1;
-      this.eseguiRicerca(this.searchKeyPrecedente);
-    }
-  }
-
-  /**
-   * Imposta la pagina da richiedere alla pagina attuale aumentata di 1
-   */
-  paginaSuccessiva() {
-    this.paginaRichiesta = this.pagina + 1;
-    this.eseguiRicerca(this.searchKeyPrecedente);
-  }
-
-  /**
-   * Imposta la pagina da richiedere a -1, che indica l'ultima pagina
-   */
-  paginaFinale() {
-    this.paginaRichiesta = -1;
-    this.eseguiRicerca(this.searchKeyPrecedente);
   }
 
   /**

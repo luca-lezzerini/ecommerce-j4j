@@ -20,19 +20,22 @@ public interface ProdottoService {
     void createProdotto(ProdottoCreateDto dto);
 
     /**
-     * ricerca Prodotto in base al valore della proprietà searchKey di dto.
-     * Restituisce un dto la cui proprietà results contiene un ArrayList di
-     * Prodotto, il cui codice contiene la searchKey. Restituisce una lista
-     * vuota immodificabile se il parametro dto è null, o se non trova
-     * risultati, o se il token non è valido.
+     * ricerca i prodotti in base al valore della proprietà searchKey di dto e
+     * il cui numero di pagina è specificato nella proprietà numeroPagina del
+     * dto. Restituisce un dto la cui proprietà results contiene un ArrayList di
+     * massimo 5 prodotti, nel cui codice è contenuta la searchKey. Se la pagina
+     * da cercare è un numero negativo o superiore a quello delle pagine totali,
+     * restituisce l'ultima pagina. Restituisce una lista vuota immodificabile
+     * se il parametro dto è null, o se non trova risultati, o se il token non è
+     * valido.
      *
-     * @param dto contiene il token e la chiave di ricerca
+     * @param dto contiene il token, la chiave di ricerca e il numero di pagina.
      * @return ArrayList<Prodotto>
      */
     ProdottoSearchResultsDto searchProdotto(ProdottoSearchDto dto);
 
     ProdottoSearchResultsDto searchProdottoRiservato(ProdottoSearchDto dto);
-    
+
     /**
      * ricerca Prodotto in base al valore della proprietà searchKey di dto.
      * Restituisce un dto la cui proprietà results contiene un ArrayList di
@@ -77,7 +80,4 @@ public interface ProdottoService {
      *
      */
     ProdottoSearchResultsDto searchOfferte(ProdottoSearchDto dto);
-    
-    ProdottoSearchResultsDto cambiaPagina(ProdottoSearchDto dto);
 }
-

@@ -33,11 +33,11 @@ public class ProdottoSearchResultsDto {
         this.result = result;
     }
 
-    public int getnumeroPagina() {
+    public int getNumeroPagina() {
         return numeroPagina;
     }
 
-    public void setnumeroPagina(int numeroPagina) {
+    public void setNumeroPagina(int numeroPagina) {
         this.numeroPagina = numeroPagina;
     }
 

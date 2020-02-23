@@ -33,11 +33,11 @@ public class ProdottoSearchDto extends LoginResponseDto {
         this.searchKey = searchKey;
     }
 
-    public int getnumeroPagina() {
+    public int getNumeroPagina() {
         return numeroPagina;
     }
 
-    public void setnumeroPagina(int numeroPagina) {
+    public void setNumeroPagina(int numeroPagina) {
         this.numeroPagina = numeroPagina;
     }
 
