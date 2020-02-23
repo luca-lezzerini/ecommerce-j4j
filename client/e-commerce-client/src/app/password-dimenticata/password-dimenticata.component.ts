@@ -12,29 +12,38 @@ import { Observable } from 'rxjs';
   styleUrls: ['./password-dimenticata.component.css']
 })
 export class PasswordDimenticataComponent implements OnInit {
-
   username: string;
   password: string;
   doi: string;
+  msg: string;
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private ac: AreaComuneService
+  ) {}
 
-  constructor(private http: HttpClient, private router: Router, private ac: AreaComuneService) { }
-
-  ngOnInit() { }
+  ngOnInit() {}
 
   /**
    * invio il Dto contenente lo username al server e recupera il Double Optin dal server
    */
   passDimenticata() {
     // preparo i dati da inviare al server
-    let dto: LoginRequestDto = new LoginRequestDto();
+    const dto: LoginRequestDto = new LoginRequestDto();
     dto.username = this.username;
     // preparo la richiesta http
-    let obs: Observable<LoginResponseDto> = this.http.post<LoginResponseDto>(
+    const obs: Observable<LoginResponseDto> = this.http.post<LoginResponseDto>(
       this.ac.hostUrl + '/password-dimenticata',
       dto
     );
-    obs.subscribe(data => { // data.token è il doi generato dal service, NON LA SESSIONE
+    obs.subscribe(data => {
+      // data.token è il doi generato dal service, NON LA SESSIONE
       this.doi = data.token;
+      if (!this.doi) {
+        this.msg = 'Questo nome utente non è registrato. Riprova.';
+      } else {
+        this.msg = null;
+      }
     });
   }
 
@@ -43,11 +52,11 @@ export class PasswordDimenticataComponent implements OnInit {
    */
   checkDoubleOptin() {
     // prepara i dati
-    let dto: LoginResponseDto = new LoginResponseDto();
+    const dto: LoginResponseDto = new LoginResponseDto();
     dto.token = this.doi;
 
     // prepara la richiesta
-    let obs: Observable<void> = this.http.post<void>(
+    const obs: Observable<void> = this.http.post<void>(
       this.ac.hostUrl + '/check-double-optin',
       dto
     );
@@ -57,7 +66,7 @@ export class PasswordDimenticataComponent implements OnInit {
       // cambia se non riceve un errore
       if (this.ac.doi) {
         console.log(this.doi);
-        this.router.navigateByUrl('/reimposta-password')
+        this.router.navigateByUrl('/reimposta-password');
       }
     });
   }

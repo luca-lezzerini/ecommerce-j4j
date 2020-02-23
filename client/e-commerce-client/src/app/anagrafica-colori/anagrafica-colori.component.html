@@ -1,34 +1,53 @@
 <div class="panel" *ngIf="showPanel">
-    <label>Codice: </label>
-    <input type="text" [(ngModel)]="codice" name="codice" disabled="{{inputNotEditable}}">
-    <label>Descrizione: </label>
-    <input type="text" [(ngModel)]="descrizione" name="descrizione" disabled="{{inputNotEditable}}">
-    <span *ngIf="showConfermaAnnulla">
-      <button (click)="confermaCheckState(state)" >Conferma</button>
-      <button (click)="annullaCheckState(state)" >Annulla</button>
-    </span>
-<span *ngIf="showCUD">
-  <button *ngIf="showRisultati" (click)="creaCheckState(state)">Crea</button>
-  <button *ngIf="showRisultati" (click)="modificaCheckState(state)">Modifica</button>
-  <button *ngIf="showRisultati" (click)="cancellaCheckState(state)">Rimuovi</button>
-</span>
+  <label for="codice">Codice: </label>
+  <input
+    id="codice"
+    type="text"
+    [(ngModel)]="codice"
+    name="codice"
+    disabled="{{ inputNotEditable }}"
+  />
+  <label for="descrizione">  Descrizione: </label>
+  <input
+    id="descrizione"
+    type="text"
+    [(ngModel)]="descrizione"
+    name="descrizione"
+    disabled="{{ inputNotEditable }}"
+  />
+  <span *ngIf="showConfermaAnnulla">
+    <button (click)="confermaCheckState(state)">Conferma</button>
+    <button (click)="annullaCheckState(state)">Annulla</button>
+  </span>
+  <span *ngIf="showCUD">
+    <button *ngIf="showRisultati" (click)="creaCheckState(state)">Crea</button>
+    <button *ngIf="showRisultati" (click)="modificaCheckState(state)">
+      Modifica
+    </button>
+    <button *ngIf="showRisultati" (click)="cancellaCheckState(state)">
+      Rimuovi
+    </button>
+  </span>
+</div>
+<br />
+<div class="search" *ngIf="showCerca">
+  <input type="text" [(ngModel)]="ricerca" placeholder="Cerca colore"/>
+  <button (click)="cercaCheckState(state)">Cerca</button>
+  <span class="add" *ngIf="showAggiungi">
+    <button (click)="aggiungiState()">Aggiungi</button>
+  </span>
 </div>
 
-<div class="search" *ngIf="showCerca">
-  <input type="text" [(ngModel)]="ricerca" />
-  <button (click)="cercaCheckState(state)">Cerca</button>
-</div>
-<div class="add" *ngIf="showAggiungi">
-  <button (click)="aggiungiState()">Aggiungi</button>
-</div>
-<p>{{msg}}</p>
+<br />
+<p>{{ msg }}</p>
+<br />
 <div class="results" *ngIf="showRisultati">
-  <table *ngIf="result.length!=0">
+  <table *ngIf="result.length != 0">
     <tr>
-      <th>
+      <th class="display-c">
         Codice
       </th>
-      <th>
+      <th class="display-d">
         Descrizione
       </th>
     </tr>
@@ -36,8 +55,12 @@
       <td>{{ r.codice }}</td>
       <td>{{ r.descrizione }}</td>
       <td><button (click)="visualizzaState(r)">Visualizza</button></td>
-      <td><button (click)="modificaInTableCheckState(state, r)">Modifica</button></td>
-      <td><button (click)="cancellaInTableCheckState(state, r)">Rimuovi</button></td>
+      <td>
+        <button (click)="modificaInTableCheckState(state, r)">Modifica</button>
+      </td>
+      <td>
+        <button (click)="cancellaInTableCheckState(state, r)">Rimuovi</button>
+      </td>
     </tr>
   </table>
 </div>

@@ -233,6 +233,7 @@ export class AnagraficaColoriComponent implements OnInit {
    * Cambia stato in Crea, Modifica e Cancella quando si preme su Crea, Modifica o Cancella
    */
   CUDState() {
+    this.msg = null;
     // inputNotEditabile varia in base allo stato in cui si passa
     this.showPanel = true;
     this.showConfermaAnnulla = true;
@@ -258,6 +259,7 @@ export class AnagraficaColoriComponent implements OnInit {
    * cambia stato in aggiungi quando si preme su aggiungi
    */
   aggiungiState() {
+    this.msg = null;
     this.showPanel = true;
     this.inputNotEditable = false;
     this.showConfermaAnnulla = true;

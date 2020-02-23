@@ -1,7 +1,7 @@
 <button value="home" routerLink="/home-riservata">Home</button>
 <hr>
-<label>Ricerca per prezzo </label>
-<input type="number" [(ngModel)]="prezzoSearch" name="prezzoSearch" placeholder="Prezzo massimo prodotti"
+<label for="prezzo">Ricerca per prezzo </label>
+<input id="prezzo" type="number" [(ngModel)]="prezzoSearch" name="prezzoSearch" placeholder="Prezzo massimo prodotti"
 onkeydown="javascript:
 return event.keyCode === 8
 || event.keyCode === 46
