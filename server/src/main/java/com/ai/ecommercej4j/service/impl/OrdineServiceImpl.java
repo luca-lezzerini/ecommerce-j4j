@@ -172,7 +172,7 @@ public class OrdineServiceImpl implements OrdineService {
 
             // ...e per ogni riga dell'array calcola il totale del prezzo dei prodotti
             for (RigaOrdine r : listaRigheOrdine) {
-                totale += r.getProdotto().getPrezzo();
+                totale += (r.getProdotto().getPrezzo()*r.getQta());
             }
         } else {
             // Altrimenti restituisco una lista vuota
