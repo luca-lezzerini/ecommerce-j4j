@@ -41,6 +41,7 @@ export class AnagraficaProdottiComponent implements OnInit {
   prodottoSelezionato = new Prodotto();
   pagina = 0;
   backDisabled: boolean;
+  forwardDisabled: boolean;
 
   constructor(private http: HttpClient,
     private acService: AreaComuneService,
@@ -305,7 +306,11 @@ export class AnagraficaProdottiComponent implements OnInit {
   }
 
   /**
-   * Esegue la ricerca
+   * Esegue la ricerca, imposta la visibilità dei risultati e abilita i bottoni per cambiare pagina
+   *
+   * @param search: la string contenente la chiave di ricerca
+   *
+   * @param paginaRichiesta: il numero di pagina da cercare
    */
   public eseguiRicerca(search: string, paginaRichiesta: number) {
     // prepara i dati da inviare al server
@@ -325,11 +330,14 @@ export class AnagraficaProdottiComponent implements OnInit {
       // aggiorno lista prodotti
       this.prodotti = risposta.result;
 
-      // aggiorno il numero di pagina pagina attuale
+      // aggiorno il numero di pagina attuale
       this.pagina = risposta.numeroPagina;
 
       // se la pagina restituita è la numero 0, disabilito i bottoni per le pagine precedenti
       this.backDisabled = !this.pagina;
+
+      // se la pagina restituita è l'ultima, disabilito i bottoni per le pagine successive
+      this.forwardDisabled = risposta.ultimaPagina;
 
       // se ci sono risultati li visualizzo
       this.showResults = risposta.result.length > 0;
@@ -369,6 +377,7 @@ export class AnagraficaProdottiComponent implements OnInit {
 
   /**
    * Copia i valori del prodotto selezionato nei campi di testo del panel
+   * 
    * @param p il prodotto selezionato
    */
   private popolaCampiPanel(p: Prodotto) {

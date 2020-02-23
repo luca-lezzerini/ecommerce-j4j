@@ -45,9 +45,17 @@
       </td>
       </tr>
   </table>
-  <button (click) = "this.eseguiRicerca(this.searchKeyPrecedente, 0)" [disabled]=backDisabled><<</button> &nbsp;
-  <button (click) = "this.eseguiRicerca(this.searchKeyPrecedente, this.pagina - 1)" [disabled]=backDisabled><</button> &nbsp;
+  <button (click) = "this.eseguiRicerca(this.searchKeyPrecedente, 0)" [disabled]=backDisabled>
+    <<
+  </button> &nbsp;
+  <button (click) = "this.eseguiRicerca(this.searchKeyPrecedente, this.pagina - 1)" [disabled]=backDisabled>
+    <
+  </button> &nbsp;
   {{pagina+1}} &nbsp;
-  <button (click) = "this.eseguiRicerca(this.searchKeyPrecedente, this.pagina + 1)">></button> &nbsp;
-  <button (click) = "this.eseguiRicerca(this.searchKeyPrecedente, -1)">>></button> &nbsp;
+  <button (click) = "this.eseguiRicerca(this.searchKeyPrecedente, this.pagina + 1)" [disabled]=forwardDisabled>
+    >
+  </button> &nbsp;
+  <button (click) = "this.eseguiRicerca(this.searchKeyPrecedente, -1)" [disabled]=forwardDisabled>
+    >>
+  </button> &nbsp;
 </div>

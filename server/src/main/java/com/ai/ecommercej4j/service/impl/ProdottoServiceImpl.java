@@ -85,6 +85,7 @@ public class ProdottoServiceImpl implements ProdottoService {
             if (sliceProdotto != null && sliceProdotto.hasContent()) {
                 resultDto.setNumeroPagina(sliceProdotto.getNumber());
                 resultDto.setResult(sliceProdotto.getContent());
+                resultDto.setUltimaPagina(sliceProdotto.isLast());
 
             } else {
                 // ... se non ci sono risultati, restituisce una List vuota

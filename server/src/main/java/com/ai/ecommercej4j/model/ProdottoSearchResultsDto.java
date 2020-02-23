@@ -15,12 +15,13 @@ public class ProdottoSearchResultsDto {
 
     private List<Prodotto> result;
     private int numeroPagina;
+    private boolean ultimaPagina;
 
-    public ProdottoSearchResultsDto(List<Prodotto> result, int numeroPagina) {
+    public ProdottoSearchResultsDto(List<Prodotto> result, int numeroPagina, boolean ultimaPagina) {
         this.result = result;
         this.numeroPagina = numeroPagina;
-
-    }
+        this.ultimaPagina = ultimaPagina;
+    }  
 
     public ProdottoSearchResultsDto() {
     }
@@ -41,4 +42,11 @@ public class ProdottoSearchResultsDto {
         this.numeroPagina = numeroPagina;
     }
 
+    public boolean isUltimaPagina() {
+        return ultimaPagina;
+    }
+
+    public void setUltimaPagina(boolean ultimaPagina) {
+        this.ultimaPagina = ultimaPagina;
+    }
 }

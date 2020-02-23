@@ -30,7 +30,12 @@ public interface ProdottoService {
      * valido.
      *
      * @param dto contiene il token, la chiave di ricerca e il numero di pagina.
-     * @return ArrayList<Prodotto>
+     *
+     * @return ProdottoSearchResultsDto con i parametri: result, contenente un
+     * ArrayList con i risultati o una lista vuota immodificabile se non ci sono
+     * risultati; numeroPagina il numero di pagina restituita; ultimaPagina di
+     * tipo boolean, uguale a true se la pagina restituita è l'ultima, false
+     * altrimenti
      */
     ProdottoSearchResultsDto searchProdotto(ProdottoSearchDto dto);
 
