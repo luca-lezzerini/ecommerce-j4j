@@ -9,6 +9,10 @@
   background-color: #5CDB95;
 }
 
+.button:hover {
+  background-color: #379683;
+}
+
 .button:disabled {
   background-color: silver;
 }
