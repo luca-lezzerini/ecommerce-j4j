@@ -1,0 +1,39 @@
+body {
+    background-color: #EDF5E1;
+}
+
+div.master {
+    color: #05386b;
+    text-align: center;
+    font-size: 14px;
+}
+
+button {
+    background-color: #5CDB95;
+    border: 1px #05386b;
+    color: #EDF5E1;
+    border-radius: 3px;
+}
+
+button:hover {
+    background-color: #379683;
+}
+
+input {
+    border: solid 2px #05386b;
+    color: #05386b;
+}
+
+tr.header {
+    background-color: #05386b;
+    color: #EDF5E1;
+}
+
+tr:nth-child(even) {
+    background: #8ee4af
+}
+
+table.tabella-centrata {
+    margin-left: auto;
+    margin-right: auto;
+}

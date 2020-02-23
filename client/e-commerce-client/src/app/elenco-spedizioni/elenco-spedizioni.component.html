@@ -1,23 +1,26 @@
-<h1> Siamo in Elenco Spedizioni Component</h1>
-  <hr>
-  <input type="number" [(ngModel)]="searchKey" placeholder="prezzoSearch">
-  &nbsp;
-  <button (click)="searchSpedizione()">Cerca</button>&nbsp;
-  <button [routerLink]="['/home-riservata']">Home</button>&nbsp;
-<hr>
-<br>
-<table>
-  <tr *ngIf="tableHeaderEnabled">
-    <th>Descrizione</th>
-    <th>Prezzo</th>
-    <th>Codice</th>
-  </tr>
-  <tr *ngFor="let s of spedizioni">
-
-      <td>{{s.codice}}</td>
-      <td>{{s.descrizione}}</td>
-      <td>{{s.prezzo}}</td>
-  </tr>
-</table>
-
-
+<div class="master">
+    <h1> Siamo in Elenco Spedizioni Component</h1>
+    <input type="number" [(ngModel)]="searchKey" placeholder="prezzoSearch"> &nbsp;
+    <button (click)="searchSpedizione()">Cerca</button>&nbsp;
+    <button [routerLink]="['/home-riservata']">Home</button>&nbsp;
+    <br>
+    <table class="tabella-centrata">
+        <tr *ngIf="tableHeaderEnabled" class="header">
+            <th>Descrizione</th>
+            <th>Prezzo</th>
+            <th>Codice</th>
+        </tr>
+        <tr *ngFor="let s of spedizioni">
+            <td>{{s.codice}}</td>
+            <td>{{s.descrizione}}</td>
+            <td>{{s.prezzo}}</td>
+        </tr>
+    </table>
+    <div *ngIf="tableHeaderEnabled" class="btn">
+        <!-- Bottoni da ultimare, possibile inserire nei bottoni figure "freccia" rappresentative del caso -->
+        <button (click)="paginaIniziale()">Pagina iniziale</button> &nbsp;
+        <button (click)="paginaPrecedente()">Precedente</button> &nbsp;
+        <button (click)="paginaSuccessiva()">Successica</button> &nbsp;
+        <button (click)="paginaFinale()">Pagina Finale</button> &nbsp;
+    </div>
+</div>

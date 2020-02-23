@@ -35,24 +35,28 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     public LoginResponseDto login(LoginRequestDto dto) {
 
+        //Ho l'utente loggato, lo trovo in repository con il metodo che segue
         Utente utente = ur.findByUsernameAndPassword(dto.getUsername(), dto.getPassword());
         LoginResponseDto response = new LoginResponseDto();
+        //Partendo dal presupposto che l'utente esiste, eseguo l'if 
         if (utente != null) {
-            //verifico se l'utente è un utente anonimo
-
+           //Controllo che l'utente acquisito sia anonimo e che il suo token sia !=null
             if (ur.findByTokenAndAnonimo(dto.getToken(), true) != null) {
                 utente.setToken(dto.getToken());
-
                 Utente utenteAnonimo = ur.findByToken(dto.getToken());
                 // ... se risuta positivo recupera l'ordine dell'utente nello stato carrello
 
-                //lista
+                /*Adesso si suppone che l'utente abbia o 
+                non abbia un ordine che dovrà portare con se una volta loggato*/
                 Optional<Ordine> optionalOrdine = utenteAnonimo.getOrdini().stream()
                         .filter(o -> o.getStato().equals("carrello"))
                         .findFirst();
-                //verifico se l'utente anonimo ha ordini nel carrello
+                                    System.out.println("STAMPA QUALCOSAAAA"+ optionalOrdine );
+
+                //verifico se l'utente anonimo ha ordini nel carrello ed eseguo l'if
                 if (!optionalOrdine.isEmpty()) {
                     Ordine ordine = optionalOrdine.get();
+                    System.out.println("Ordini utente anonimo che devo portare nel log"+ ordine );
                     //aggiungo l'ordine all' utente registrato
 //                    if (utente.getOrdini().size() > 0) {
 //                        for (RigaOrdine r : utente.getOrdini().get(0).getRighe()) {
