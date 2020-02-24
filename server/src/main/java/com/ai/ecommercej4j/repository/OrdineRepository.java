@@ -26,4 +26,18 @@ public interface OrdineRepository extends JpaRepository<Ordine, Long> {
     Page<Ordine> findByNumeroAndStatoContainingIgnoreCase(Integer numero, String stato,Pageable pageable);
 
     Page<Ordine> findByStatoContainingIgnoreCase( String stato, Pageable pageable);
+
+    Integer countByDataAndNumeroAndStato(LocalDate searchData, Integer searchNumeroOrdine, String stato);
+
+    Integer countByNumeroAndStato(Integer searchNumeroOrdine, String stato);
+
+    Integer countByDataAndStato(LocalDate searchData, String stato);
+
+    Integer countByStato(String stato);
+
+    public int countByDataAndNumero(LocalDate searchData, Integer searchNumeroOrdine);
+
+    public int countByNumero(Integer searchNumeroOrdine);
+
+    public int countByData(LocalDate searchData);
 }

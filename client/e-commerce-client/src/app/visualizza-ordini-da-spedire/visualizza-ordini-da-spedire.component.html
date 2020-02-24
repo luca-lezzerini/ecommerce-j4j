@@ -23,12 +23,10 @@
       <td><button (click)="spedisci(ordine)">Spedisci</button></td>
     </tr>
     <tr>
-      <td><button (click)='eseguiRicerca(0)'>inizio</button></td>
-      <td><button (click)='eseguiRicerca(paginaAttuale-1)'>precedente</button></td>
-      <td><button (click)='eseguiMirko()'>mirko puzza</button></td>
-      <td><button (click)='eseguiRicerca(paginaAttuale+1)'>successivo</button></td>
-    <!-- TODO ricerca per ultima pagina -->
-      <td><button (click)='eseguiRicerca()'>fine</button></td>
+      <td><button (click)='eseguiRicerca(0)' [disabled]=backDisabled>inizio</button></td>
+      <td><button (click)='eseguiRicerca(paginaAttuale-1)' [disabled]=backDisabled>precedente</button></td>
+      <td><button (click)='eseguiRicerca(paginaAttuale+1)' [disabled]=forwardDisabled>successivo</button></td>
+      <td><button (click)='eseguiRicerca(-1)' [disabled]=forwardDisabled>fine</button></td>
     </tr>
   </table>
 </div>
