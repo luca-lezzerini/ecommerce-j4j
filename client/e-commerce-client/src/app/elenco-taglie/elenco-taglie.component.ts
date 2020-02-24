@@ -5,6 +5,7 @@ import { AreaComuneService } from '../area-comune.service';
 import { TagliaSearchDto } from '../classi/taglia-search-dto';
 import { TagliaSearchResultsDto } from '../classi/taglia-search-results-dto';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-elenco-taglie',
@@ -15,29 +16,29 @@ export class ElencoTaglieComponent implements OnInit {
 
   taglie: Taglia[] = [];
   searchKey = '';
+  searchKeyPrecedente = '';
   showResults: boolean;
+  pagina = 0;
+  backDisabled: boolean;
+  forwardDisabled: boolean;
 
-  constructor(private http: HttpClient, private acService: AreaComuneService) { }
+  constructor(private http: HttpClient,
+    private acService: AreaComuneService,
+    private router: Router) { }
 
   ngOnInit() {
-  }
-
-  searchTaglie() {
-    // Se la stringa di ricerca è vuota ritorna tutti gli elementi della lista
-    if (this.searchKey === '') {
-      this.showResults = true;
-      this.eseguiRicerca(this.searchKey);
-      // Se invece è piena esegue la ricerca
-    } else {
-      this.eseguiRicerca(this.searchKey);
+    // se l'utente non è loggato viene aperta la pagina di login
+    if (!this.acService.token) {
+      this.router.navigateByUrl('/login');
     }
   }
 
-  eseguiRicerca(search: string) {
+  eseguiRicerca(search: string, paginaRichiesta: number) {
     // Preparo il dto
     let dto: TagliaSearchDto = new TagliaSearchDto();
     dto.searchKey = this.searchKey;
     dto.token = this.acService.token;
+    dto.page = paginaRichiesta;
 
     // Preparo la richiesta http
     let oss: Observable<TagliaSearchResultsDto> =
@@ -49,7 +50,15 @@ export class ElencoTaglieComponent implements OnInit {
       this.taglie = risposta.result;
       // Se ci sono risultati li visualizzo
       this.showResults = risposta.result.length > 0;
-      // pulisco il campo ricerca
+      // Aggiorno il numero di pagina
+      this.pagina = risposta.page;
+      // Se la pagina restituita è la numero 0, disabilito i bottoni per le pagine precedenti
+      this.backDisabled = risposta.first;
+      // Se la pagina restituita è l'ultima, disabilito i bottoni per le pagine successive
+      this.forwardDisabled = risposta.last;
+      // Salvo la chiave di ricerca
+      this.searchKeyPrecedente = search;
+      // Pulisco il campo ricerca
       this.searchKey = '';
     })
   }

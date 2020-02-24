@@ -377,7 +377,7 @@ export class AnagraficaProdottiComponent implements OnInit {
 
   /**
    * Copia i valori del prodotto selezionato nei campi di testo del panel
-   * 
+   *
    * @param p il prodotto selezionato
    */
   private popolaCampiPanel(p: Prodotto) {

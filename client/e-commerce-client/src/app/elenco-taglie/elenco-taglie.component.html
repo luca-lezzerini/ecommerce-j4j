@@ -1,6 +1,6 @@
 <div>
   <input type='text' [(ngModel)]='searchKey'>&nbsp;
-  <button (click)='searchTaglie()'>Cerca</button>
+  <button (click)='eseguiRicerca(searchKey, 0)'>Cerca</button>
   <a routerLink='/home-pubblica'>
     <button>Home</button>
   </a>
@@ -16,4 +16,17 @@
       <td>{{t.descrizione}}</td>
     </tr>
   </table>
+  <button (click) = "this.eseguiRicerca(this.searchKeyPrecedente, 0)" [disabled]=backDisabled>
+    <<
+  </button> &nbsp;
+  <button (click) = "this.eseguiRicerca(this.searchKeyPrecedente, this.pagina - 1)" [disabled]=backDisabled>
+    <
+  </button> &nbsp;
+  {{pagina+1}} &nbsp;
+  <button (click) = "this.eseguiRicerca(this.searchKeyPrecedente, this.pagina + 1)" [disabled]=forwardDisabled>
+    >
+  </button> &nbsp;
+  <button (click) = "this.eseguiRicerca(this.searchKeyPrecedente, -1)" [disabled]=forwardDisabled>
+    >>
+  </button>
 </div>

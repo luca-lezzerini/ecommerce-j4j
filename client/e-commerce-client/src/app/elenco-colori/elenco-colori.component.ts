@@ -5,6 +5,7 @@ import { Colori } from './../classi/colori';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AreaComuneService } from '../area-comune.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-elenco-colori',
@@ -18,9 +19,15 @@ export class ElencoColoriComponent implements OnInit {
 
   showResults: boolean;
 
-  constructor(private http: HttpClient, private acService: AreaComuneService) { }
+  constructor(private http: HttpClient,
+    private acService: AreaComuneService,
+    private router: Router) { }
 
   ngOnInit() {
+    // se l'utente non è loggato viene aperta la pagina di login
+    if (!this.acService.token) {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   searchColori() {
