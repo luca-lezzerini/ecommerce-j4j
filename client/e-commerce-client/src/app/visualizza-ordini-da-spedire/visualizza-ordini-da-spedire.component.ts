@@ -22,6 +22,8 @@ export class VisualizzaOrdiniDaSpedireComponent implements OnInit {
   searchKeyData: Date;
   searchKeyNumOrd: number;
   paginaAttuale: number;
+  backDisabled: boolean;
+  forwardDisabled: boolean;
 
   constructor(
     private http: HttpClient,
@@ -65,6 +67,10 @@ export class VisualizzaOrdiniDaSpedireComponent implements OnInit {
       // assegno valore della pagina
       this.paginaAttuale = risposta.page;
       console.log(risposta.page);
+      // Se la pagina restituita è la numero 0, disabilito i bottoni per le pagine precedenti
+      this.backDisabled = !risposta.page;
+      // Se la pagina restituita è l'ultima, disabilito i bottoni per le pagine successive
+      this.forwardDisabled = risposta.ultimaPagina;
     });
   }
 

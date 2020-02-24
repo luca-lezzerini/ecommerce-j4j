@@ -112,51 +112,41 @@ public class OrdineServiceImpl implements OrdineService {
 
     @Override
     public OrdineSearchResultsDto searchOrdineDaSpedire(OrdineSearchDto dto) {
-        System.out.println(dto.getPage() + "---------------- " + dto.getStato() + "------------------ " + dto.getSearchNumeroOrdine());
         // istanzio il dto di ritorno
         OrdineSearchResultsDto resultDto = new OrdineSearchResultsDto();
-        List<Ordine> listaOrdine;
-        // controllo se il dto e la chiave di ricerca sono diversi da null
-        if (dto != null && dto.getSearchData() != null && dto.getSearchNumeroOrdine() != null) {
 
-            //recupero i risultati e avvaloro il dto di ritorno  
-            listaOrdine = ordineRepository.
-                    findByDataAndNumero(dto.getSearchData(), dto.getSearchNumeroOrdine(), createPageableRequest(dto.getPage())).toList();
-
-            // ordino i risultati per data
-            Collections.sort(listaOrdine, (o1, o2) -> o1.getData().compareTo(o2.getData()));
-            resultDto.setResults(listaOrdine);
-
-        } else if (dto != null && dto.getSearchData() != null && dto.getSearchNumeroOrdine() == null) {
-            listaOrdine = ordineRepository.
-                    findByData(dto.getSearchData(), createPageableRequest(dto.getPage())).toList();
-
-            // ordino i risultati per data
-            Collections.sort(listaOrdine, (o1, o2) -> o1.getData().compareTo(o2.getData()));
-            resultDto.setResults(listaOrdine);
-
-        } else if (dto != null && dto.getSearchData() == null && dto.getSearchNumeroOrdine() != null) {
-            listaOrdine = ordineRepository.
-                    findByNumero(dto.getSearchNumeroOrdine(), createPageableRequest(dto.getPage())).toList();
-
-            // ordino i risultati per data
-            Collections.sort(listaOrdine, (o1, o2) -> o1.getData().compareTo(o2.getData()));
-            resultDto.setResults(listaOrdine);
-
-        } else if (dto != null && dto.getSearchData() == null && dto.getSearchNumeroOrdine() == null) {
-            listaOrdine = ordineRepository.
-                    findAll(createPageableRequest(dto.getPage())).toList();
-            // TODO
-            // ordino i risultati per data
-//            Collections.sort(listaOrdine, (o1, o2) -> o1.getData().compareTo(o2.getData()));
-
-            resultDto.setResults(listaOrdine);
-
+        // creo lo slice e la lista dei risultati
+        Page<Ordine> pageOrdine;
+        List<Ordine> ordini;
+        // controllo se il dto è diverso da null e se l'utente è autenticato
+        if (dto != null && securityService.checkToken(dto.getToken())) {
+            //effettuo una ricerca per data e numero
+            if (dto.getSearchData() != null && dto.getSearchNumeroOrdine() != null) {
+                pageOrdine = ordineRepository.findByDataAndNumero(dto.getSearchData(), dto.getSearchNumeroOrdine(), createPageableRequest(dto.getPage()));
+            } else if (dto.getSearchData() == null && dto.getSearchNumeroOrdine() != null) {
+                //effettuo una ricerca per numero
+                pageOrdine = ordineRepository.findByNumero(dto.getSearchNumeroOrdine(), createPageableRequest(dto.getPage()));
+            } else if (dto.getSearchData() != null && dto.getSearchNumeroOrdine() == null) {
+                //effettuo una ricerca per data
+                pageOrdine = ordineRepository.findByData(dto.getSearchData(), createPageableRequest(dto.getPage()));
+            } else {
+                //effettuo una ricerca di tutto
+                pageOrdine = ordineRepository.findAll(createPageableRequest(dto.getPage()));
+            }
+            // filtro gli ordini non spediti e li ordino per data discendente
+            ordini = pageOrdine.stream()
+                    .filter(o -> !o.getStato().equals("Spedito"))
+                    .sorted((o1, o2) -> o2.getData().compareTo(o1.getData()))
+                    .collect(Collectors.toList());
+            // setto la pagina del dto di ritorno
+            resultDto.setPage(pageOrdine.getNumber());
+            resultDto.setUltimaPagina(pageOrdine.isLast());
         } else {
             // ... se il dto non esiste, restituisce un ArrayList vuoto
-            resultDto.setResults(Collections.emptyList());
+            ordini = Collections.emptyList();
+
         }
-        resultDto.setPage(dto.getPage());
+        resultDto.setResults(ordini);
         return resultDto;
     }
 
