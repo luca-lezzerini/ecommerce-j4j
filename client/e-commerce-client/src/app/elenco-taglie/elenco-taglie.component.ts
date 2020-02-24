@@ -33,10 +33,17 @@ export class ElencoTaglieComponent implements OnInit {
     }
   }
 
+  /**
+   * Esegue la ricerca, imposta la visibilità dei risultati e abilita i bottoni per cambiare pagina
+   *
+   * @param search: la string contenente la chiave di ricerca
+   *
+   * @param paginaRichiesta: il numero di pagina da cercare
+   */
   eseguiRicerca(search: string, paginaRichiesta: number) {
     // Preparo il dto
     let dto: TagliaSearchDto = new TagliaSearchDto();
-    dto.searchKey = this.searchKey;
+    dto.searchKey = search;
     dto.token = this.acService.token;
     dto.page = paginaRichiesta;
 
@@ -62,5 +69,4 @@ export class ElencoTaglieComponent implements OnInit {
       this.searchKey = '';
     })
   }
-
 }

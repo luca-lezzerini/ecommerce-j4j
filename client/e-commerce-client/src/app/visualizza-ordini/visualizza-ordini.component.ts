@@ -31,6 +31,13 @@ export class VisualizzaOrdiniComponent implements OnInit {
     }
   }
 
+  /**TODO!!!!!!
+   * Esegue la ricerca, imposta la visibilità dei risultati e abilita i bottoni per cambiare pagina
+   *
+   * @param search: la string contenente la chiave di ricerca
+   *
+   * @param paginaRichiesta: il numero di pagina da cercare
+   */
   searchOrdine() {
     // Tutte le ricerche vengono effettuate anche per stato che di default è "carrello"
     // Preparo il dto
