@@ -1,6 +1,7 @@
 package com.ai.ecommercej4j.repository;
 
 import com.ai.ecommercej4j.model.Prodotto;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -22,7 +23,5 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
 
     List<Prodotto> findByPrezzoLessThanEqualAndOfferta(double prezzo, boolean offerta);
 
-    List<Prodotto> findByOfferta(boolean offerta);
-    
-    
+    List<Prodotto> findByOfferta(boolean offerta);    
 }

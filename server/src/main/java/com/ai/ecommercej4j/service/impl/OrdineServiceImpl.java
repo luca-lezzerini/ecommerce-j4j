@@ -46,8 +46,6 @@ public class OrdineServiceImpl implements OrdineService {
     private final int SIZE = 5;
 
     private Pageable createPageableRequest(int page) {
-        System.out.println("siamo dentro create ........................:     " + SIZE);
-
         return PageRequest.of(page, SIZE);
     }
 
@@ -120,17 +118,38 @@ public class OrdineServiceImpl implements OrdineService {
         List<Ordine> ordini;
         // controllo se il dto è diverso da null e se l'utente è autenticato
         if (dto != null && securityService.checkToken(dto.getToken())) {
-            //effettuo una ricerca per data e numero
+            int numeroUltimaPagina;
             if (dto.getSearchData() != null && dto.getSearchNumeroOrdine() != null) {
+                //se il numero di pagina è negativo, cerco il numero dell'ultima pagina
+                numeroUltimaPagina = (int) ((ordineRepository.countByDataAndNumero(dto.getSearchData(), dto.getSearchNumeroOrdine()) - 1) / SIZE);
+                if (dto.getPage() < 0 || dto.getPage() > numeroUltimaPagina) {
+                    dto.setPage(numeroUltimaPagina);
+                }
+                //effettuo una ricerca per data e numero
                 pageOrdine = ordineRepository.findByDataAndNumero(dto.getSearchData(), dto.getSearchNumeroOrdine(), createPageableRequest(dto.getPage()));
             } else if (dto.getSearchData() == null && dto.getSearchNumeroOrdine() != null) {
+                //se il numero di pagina è negativo, cerco il numero dell'ultima pagina
+                numeroUltimaPagina = (int) ((ordineRepository.countByNumero(dto.getSearchNumeroOrdine()) - 1) / SIZE);
+                if (dto.getPage() < 0 || dto.getPage() > numeroUltimaPagina) {
+                    dto.setPage(numeroUltimaPagina);
+                }
                 //effettuo una ricerca per numero
                 pageOrdine = ordineRepository.findByNumero(dto.getSearchNumeroOrdine(), createPageableRequest(dto.getPage()));
             } else if (dto.getSearchData() != null && dto.getSearchNumeroOrdine() == null) {
+                //se il numero di pagina è negativo, cerco il numero dell'ultima pagina
+                numeroUltimaPagina = (int) ((ordineRepository.countByData(dto.getSearchData()) - 1) / SIZE);
+                if (dto.getPage() < 0 || dto.getPage() > numeroUltimaPagina) {
+                    dto.setPage(numeroUltimaPagina);
+                }
                 //effettuo una ricerca per data
                 pageOrdine = ordineRepository.findByData(dto.getSearchData(), createPageableRequest(dto.getPage()));
             } else {
-                //effettuo una ricerca di tutto
+                //se il numero di pagina è negativo, cerco il numero dell'ultima pagina
+                numeroUltimaPagina = (int) ((ordineRepository.count() - 1) / SIZE);
+                if (dto.getPage() < 0 || dto.getPage() > numeroUltimaPagina) {
+                    dto.setPage(numeroUltimaPagina);
+                }
+                //effettuo una ricerca di tutto la tabella
                 pageOrdine = ordineRepository.findAll(createPageableRequest(dto.getPage()));
             }
             // filtro gli ordini non spediti e li ordino per data discendente
@@ -198,16 +217,37 @@ public class OrdineServiceImpl implements OrdineService {
         List<Ordine> ordini;
         // controllo se il dto e lo stato sono diversi da null e se l'utente è autenticato
         if (dto != null && dto.getStato() != null && securityService.checkToken(dto.getToken())) {
-            //effettuo una ricerca per data, numero e stato
+            int numeroUltimaPagina;
             if (dto.getSearchData() != null && dto.getSearchNumeroOrdine() != null) {
+                //se il numero di pagina è negativo, cerco il numero dell'ultima pagina
+                numeroUltimaPagina = (int) ((ordineRepository.countByDataAndNumeroAndStato(dto.getSearchData(), dto.getSearchNumeroOrdine(), dto.getStato()) - 1) / SIZE);
+                if (dto.getPage() < 0 || dto.getPage() > numeroUltimaPagina) {
+                    dto.setPage(numeroUltimaPagina);
+                }
+                //effettuo una ricerca per data, numero e stato
                 pageOrdine = ordineRepository.findByDataAndNumeroAndStato(dto.getSearchData(), dto.getSearchNumeroOrdine(), dto.getStato(), createPageableRequest(dto.getPage()));
             } else if (dto.getSearchData() == null && dto.getSearchNumeroOrdine() != null) {
+                //se il numero di pagina è negativo, cerco il numero dell'ultima pagina
+                numeroUltimaPagina = (int) ((ordineRepository.countByNumeroAndStato(dto.getSearchNumeroOrdine(), dto.getStato()) - 1) / SIZE);
+                if (dto.getPage() < 0 || dto.getPage() > numeroUltimaPagina) {
+                    dto.setPage(numeroUltimaPagina);
+                }
                 //effettuo una ricerca per numero e stato
                 pageOrdine = ordineRepository.findByNumeroAndStatoContainingIgnoreCase(dto.getSearchNumeroOrdine(), dto.getStato(), createPageableRequest(dto.getPage()));
             } else if (dto.getSearchData() != null && dto.getSearchNumeroOrdine() == null) {
+                //se il numero di pagina è negativo, cerco il numero dell'ultima pagina
+                numeroUltimaPagina = (int) ((ordineRepository.countByDataAndStato(dto.getSearchData(), dto.getStato()) - 1) / SIZE);
+                if (dto.getPage() < 0 || dto.getPage() > numeroUltimaPagina) {
+                    dto.setPage(numeroUltimaPagina);
+                }
                 //effettuo una ricerca per data e stato
                 pageOrdine = ordineRepository.findByDataAndStato(dto.getSearchData(), dto.getStato(), createPageableRequest(dto.getPage()));
             } else {
+                //se il numero di pagina è negativo, cerco il numero dell'ultima pagina
+                numeroUltimaPagina = (int) ((ordineRepository.countByStato(dto.getStato()) - 1) / SIZE);
+                if (dto.getPage() < 0 || dto.getPage() > numeroUltimaPagina) {
+                    dto.setPage(numeroUltimaPagina);
+                }
                 //effettuo una ricerca per stato
                 pageOrdine = ordineRepository.findByStatoContainingIgnoreCase(dto.getStato(), createPageableRequest(dto.getPage()));
             }
