@@ -11,6 +11,10 @@ public class ColoriSearchResultsDto {
     public ColoriSearchResultsDto() {
     }
 
+    public ColoriSearchResultsDto(List<Colori> result) {
+        this.result = result;
+    }   
+
     public ColoriSearchResultsDto(List<Colori> result, int numeroPagina, boolean ultimaPagina) {
         this.result = result;
         this.numeroPagina = numeroPagina;
