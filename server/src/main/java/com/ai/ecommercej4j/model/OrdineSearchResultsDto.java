@@ -12,10 +12,13 @@ import java.util.List;
  * @author utente
  */
 public class OrdineSearchResultsDto extends LoginResponseDto {
+
+    private int page;
     private List<Ordine> results;
 
-    public OrdineSearchResultsDto(List<Ordine> results) {
+    public OrdineSearchResultsDto(List<Ordine> results, int page) {
         this.results = results;
+        this.page = page;
     }
 
     public OrdineSearchResultsDto() {
@@ -28,6 +31,13 @@ public class OrdineSearchResultsDto extends LoginResponseDto {
     public void setResults(List<Ordine> results) {
         this.results = results;
     }
-    
-    
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
 }

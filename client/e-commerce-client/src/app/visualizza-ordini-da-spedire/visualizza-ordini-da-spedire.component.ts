@@ -19,9 +19,9 @@ export class VisualizzaOrdiniDaSpedireComponent implements OnInit {
 
   ordineSelezionato: Ordine = new Ordine();
 
-  showResults: boolean;
   searchKeyData: Date;
   searchKeyNumOrd: number;
+  paginaAttuale: number;
 
   constructor(
     private http: HttpClient,
@@ -39,37 +39,33 @@ export class VisualizzaOrdiniDaSpedireComponent implements OnInit {
   }
 
   cerca() {
-    // Se la stringa di ricerca è vuota ritorna tutti gli elementi della lista
-    if (this.searchKeyData === null && !this.searchKeyNumOrd) {
-      this.showResults = true;
-      this.eseguiRicerca();
-      // Se invece è piena esegue la ricerca
-    } else {
-      this.eseguiRicerca();
-    }
+    this.eseguiRicerca(0);
   }
 
-  eseguiRicerca() {
+  eseguiRicerca(paginaRichiesta: number) {
+
     // Preparo il dto
-    let dto: OrdineSearchDto = new OrdineSearchDto();
+    const dto: OrdineSearchDto = new OrdineSearchDto();
     dto.searchData = this.searchKeyData;
     dto.searchNumeroOrdine = this.searchKeyNumOrd;
+    dto.page = paginaRichiesta;
     dto.token = this.sessione.token;
-
+    console.log(dto.page);
     // Preparo la richiesta http
-    let oss: Observable<OrdineSearchResultsDto> =
+    const oss: Observable<OrdineSearchResultsDto> =
       this.http.post<OrdineSearchResultsDto>(this.sessione.hostUrl + '/search-ordini-da-spedire', dto);
 
     // Callback
     oss.subscribe(risposta => {
       // Aggiorno la lista degli ordini
       this.ordini = risposta.results;
-      // Se ci sono risultati li visualizzo
-      this.showResults = risposta.results.length > 0;
       // pulisco il campo ricerca
       this.searchKeyData = null;
       this.searchKeyNumOrd = null;
-    })
+      // assegno valore della pagina
+      this.paginaAttuale = risposta.page;
+      console.log(risposta.page);
+    });
   }
 
 
@@ -80,15 +76,15 @@ export class VisualizzaOrdiniDaSpedireComponent implements OnInit {
 
   spedisci(ordine: Ordine) {
     this.ordineSelezionato = ordine;
-    let dto: OrdineSendDto = new OrdineSendDto();
+    const dto: OrdineSendDto = new OrdineSendDto();
 
     // Preparo la richiesta http
-    let oss: Observable<any> =
+    const oss: Observable<any> =
       this.http.post<any>(this.sessione.hostUrl + '/spedisci-ordine', dto);
 
     // Callback
     oss.subscribe(risposta => {
-      this.eseguiRicerca();
+      this.eseguiRicerca(0);
     });
   }
 }

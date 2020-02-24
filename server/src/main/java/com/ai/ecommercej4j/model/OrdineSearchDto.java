@@ -11,18 +11,21 @@ import java.time.LocalDate;
  *
  * @author utente
  */
-public class OrdineSearchDto extends LoginResponseDto{
+public class OrdineSearchDto extends LoginResponseDto {
+
     private LocalDate searchData;
     private Integer searchNumeroOrdine;
     private String stato;
+    private int page;
 
     public OrdineSearchDto() {
     }
 
-    public OrdineSearchDto(LocalDate searchData, Integer searchNumeroOrdine, String stato) {
+    public OrdineSearchDto(LocalDate searchData, Integer searchNumeroOrdine, String stato, int page) {
         this.searchData = searchData;
         this.searchNumeroOrdine = searchNumeroOrdine;
         this.stato = stato;
+        this.page = page;
     }
 
     public LocalDate getSearchData() {
@@ -48,9 +51,13 @@ public class OrdineSearchDto extends LoginResponseDto{
     public void setStato(String stato) {
         this.stato = stato;
     }
-    
-    
-    
-    
-    
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
 }
