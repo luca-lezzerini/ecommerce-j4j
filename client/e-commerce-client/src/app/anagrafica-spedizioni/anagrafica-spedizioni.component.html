@@ -1,14 +1,15 @@
 <div *ngIf="panelEnabled">
   Codice <input type="text" [(ngModel)]="codice" [disabled]="panelInputDisabled">&nbsp;
   Descrizione <input type="text" [(ngModel)]="descrizione"[disabled]="panelInputDisabled">&nbsp;
+  <br>
   Prezzo <input type="text" [(ngModel)]="prezzo" [disabled]="panelInputDisabled">
   <br>
   <br>
-  <button (click)="conferma()" *ngIf="confermaEnabled">Conferma</button>&nbsp;
-  <button (click)="annulla()" *ngIf="annullaEnabled">Annulla</button>&nbsp;
-  <button (click)="crea()" *ngIf="creaEnabled">Crea</button>&nbsp;
-  <button (click)="modifica()" *ngIf="modificaEnabled">Modifica</button>&nbsp;
-  <button (click)="rimuovi()" *ngIf="rimuoviEnabled">Rimuovi</button>
+  <button *ngIf="confermaEnabled" (click)="conferma()" >Conferma</button>&nbsp;
+  <button  *ngIf="annullaEnabled" (click)="annulla()">Annulla</button>&nbsp;
+  <button *ngIf="creaEnabled" (click)="crea()" >Crea</button>&nbsp;
+  <button *ngIf="modificaEnabled" (click)="modifica()" >Modifica</button>&nbsp;
+  <button *ngIf="rimuoviEnabled" (click)="rimuovi()" >Rimuovi</button>
 </div>
 <br>
 <hr>
@@ -49,9 +50,10 @@
       </td>
   </tr>
 </table>
-<button (click)="primaPagina()" *ngIf="editEnabled">Prima Pagina</button>
-<button (click)="paginaPrecedente()" *ngIf="editEnabled">Pagina Precedente</button>
-<button (click)="paginaSuccessiva()" *ngIf="editEnabled">Pagina Successiva</button>
-<button (click)="ultimaPagina()" *ngIf="editEnabled">Ultima Pagina</button>
+<button (click)="this.cercaSpedizione(this.searchKeyPrecedente, 0)" *ngIf="editEnabled" [disabled]=backDisabled>Prima Pagina</button>&nbsp;
+<button (click)="this.cercaSpedizione(this.searchKeyPrecedente, this.pagina - 1)" *ngIf="editEnabled" [disabled]=backDisabled>Pagina Precedente</button>&nbsp;
+Pagina {{pagina+1}} &nbsp;
+<button (click)="this.cercaSpedizione(this.searchKeyPrecedente, this.pagina + 1)" *ngIf="editEnabled" [disabled]=forwardDisabled>Pagina Successiva</button>&nbsp;
+<button (click)="this.cercaSpedizione(this.searchKeyPrecedente, -1)" *ngIf="editEnabled" [disabled]=forwardDisabled>Ultima Pagina</button>
 </div>
 

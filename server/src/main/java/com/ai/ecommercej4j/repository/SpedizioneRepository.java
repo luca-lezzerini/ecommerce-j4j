@@ -6,8 +6,9 @@
 package com.ai.ecommercej4j.repository;
 
 import com.ai.ecommercej4j.model.Spedizione;
-import java.awt.print.Pageable;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // creo l'interfaccia del repository spedizioni
@@ -17,4 +18,8 @@ public interface SpedizioneRepository extends JpaRepository<Spedizione, Long> {
 
     List<Spedizione> findByPrezzoLessThan(Double prezzo);
     
+    Slice<Spedizione> findByCodiceContainingIgnoreCase(String codice, Pageable page);
+    
+    Integer countByCodiceContaining(String codice);
+
 }

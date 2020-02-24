@@ -15,12 +15,16 @@ import com.ai.ecommercej4j.model.SpedizioneSearchResultsDto;
 import com.ai.ecommercej4j.model.SpedizioneUpdateDto;
 import com.ai.ecommercej4j.service.SpedizioneService;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.ai.ecommercej4j.repository.SpedizioneRepository;
 import com.ai.ecommercej4j.service.SecurityService;
-import static java.lang.Double.NaN;
+//import static java.lang.Double.NaN;
 import java.util.Collections;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 @Service
 public class SpedizioneServiceImpl implements SpedizioneService {
@@ -49,27 +53,51 @@ public class SpedizioneServiceImpl implements SpedizioneService {
     @Override
     public SpedizioneSearchResultsDto searchSpedizione(SpedizioneSearchDto dto) {
         System.out.println("server, searchdto");
-        SpedizioneSearchResultsDto dtossr = new SpedizioneSearchResultsDto();
+      
+        SpedizioneSearchResultsDto resultDto = new SpedizioneSearchResultsDto();
+        
+        
         //Verifico l'esistenza del dto in ingresso e la validità del token
-        if (dto != null && securityService.checkToken(dto.getToken())) {
-            System.out.println("token " + dto.getToken());
-            List<Spedizione> ls = spedizioneRepository.findByCodiceContainingIgnoreCase(dto.getSearchKey());
-             System.out.println(dto.getSearchKey());
-            ls.forEach(ob -> {
-                System.out.println("Codice" + ob.getCodice());
-                System.out.println("Descrizione" + ob.getDescrizione());
-                System.out.println("Prezzo" + ob.getPrezzo());
+        if (dto != null && dto.getSearchKey() != null && securityService.checkToken(dto.getToken())) 
+        {
+        
+            int paginaRichiesta;
+            Pageable page;
+            
+            //trovo il numero totale delle pagine
+            int numeroUltimaPagina = (int) ((spedizioneRepository.countByCodiceContaining(dto.getSearchKey()) - 1) / 5);
+            
+            //se la pagina che cerco è un numero positivo minore del numero totale di pagine...
+            if (dto.getNumeroPagina() >= 0 && dto.getNumeroPagina() < numeroUltimaPagina) {
+                paginaRichiesta = dto.getNumeroPagina();
+            } else {
+                // ... altrimenti la pagina che cerco è l'ultima
+                paginaRichiesta = numeroUltimaPagina;
             }
-            );
-            // ordino i risultati per codice
-            Collections.sort(ls, (s1, s2) -> s1.getCodice().compareTo(s2.getCodice()));
-            dtossr.setResult(ls);
+
+            //preparo i dati della pagina da selezionare
+            page = PageRequest.of(paginaRichiesta, 5, Sort.by("codice"));
+
+            //recupero i risultati               
+            Slice<Spedizione> sliceSpedizione = spedizioneRepository.
+                    findByCodiceContainingIgnoreCase(dto.getSearchKey(), page);
+
+            //se ho ottenuto dei risultati, avvaloro il dto di ritorno...
+            if (sliceSpedizione != null && sliceSpedizione.hasContent()) {
+                resultDto.setNumeroPagina(sliceSpedizione.getNumber());
+                resultDto.setResult(sliceSpedizione.getContent());
+                resultDto.setUltimaPagina(sliceSpedizione.isLast());
+
+            } else {
+                // ... se non ci sono risultati, restituisce una List vuota
+                resultDto.setResult(Collections.emptyList());
+            }
         } else {
-            System.out.println("token non esiste" + dto.getToken());
-            //Se non esiste restituisco lista vuota
-            dtossr.setResult(Collections.emptyList());
+            // ... se il dto non esiste, restituisce una List vuota
+            resultDto.setResult(Collections.emptyList());
         }
-        return dtossr;
+        return resultDto;
+       
     }
 
     @Override

@@ -52,6 +52,13 @@ export class AnagraficaSpedizioniComponent implements OnInit {
   vieneDaSearch = false;
   statoPrecedente: string;
 
+  paginaAttuale: number;
+  pagina: number;
+  pageIsFirst: boolean;
+  pageIsLast: boolean;
+  backDisabled: boolean;
+  forwardDisabled: boolean;
+
 
 
   constructor(private http: HttpClient, private acService: AreaComuneService, private router: Router) {
@@ -481,7 +488,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
         break;
     }
     this.statoPrecedente = 'search';
-    this.cercaSpedizione(this.searchKey);   // cerca spedizione nel db e vissualizza se trova qualcosa
+    this.cercaSpedizione(this.searchKey, 0);   // cerca spedizione nel db e vissualizza se trova qualcosa
     console.log('dopo cerca nel db sono in stato ' + this.statoPrecedente);
     this.daSearchView();
 
@@ -504,21 +511,35 @@ export class AnagraficaSpedizioniComponent implements OnInit {
       // ripete ultima ricerca
       // una volta eseguito l'inserimento, stampoeseguo di nuovo l'ultima ricerca effettuata, oppure tutta la tabella
       this.searchKeyPrecedente = '';
-      this.cercaSpedizione(this.searchKeyPrecedente);
+      this.cercaSpedizione(this.searchKeyPrecedente, this.pagina);
     });
     this.showResults();
   }
-  cercaSpedizione(search: string) {    // CRUD read
+  cercaSpedizione(search: string, paginaRichiesta: number) {    // CRUD read
     // prepara la chiamata al server
     const dto: SpedizioneSearchDto = new SpedizioneSearchDto();
     dto.searchKey = search;
     dto.token = this.acService.token;
+    dto.numeroPagina = paginaRichiesta;
+
     const obs: Observable<SpedizioneSearchResultsDto> =
       this.http.post<SpedizioneSearchResultsDto>(this.acService.hostUrl + '/search-spedizione', dto);
     console.log('mandato post ');
     // invia la richiesta al server
     obs.subscribe(risposta => {
       this.spedizioni = risposta.result;
+
+       // aggiorno il numero di pagina attuale
+      this.pagina = risposta.numeroPagina;
+
+       // se la pagina restituita è la numero 0, disabilito i bottoni per le pagine precedenti
+      this.backDisabled = !this.pagina;
+
+       // se la pagina restituita è l'ultima, disabilito i bottoni per le pagine successive
+      this.forwardDisabled = risposta.ultimaPagina;
+
+
+
       if (risposta.result.length > 0) {
         // se trova qualcosa lo fa vedere
         this.showResults();
@@ -547,7 +568,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     // invia la richiesta al server
     obs.subscribe(risposta => {
       this.searchKeyPrecedente = '';
-      this.cercaSpedizione(this.searchKeyPrecedente);
+      this.cercaSpedizione(this.searchKeyPrecedente, this.pagina);
     });
     this.showResults();
   }
@@ -562,7 +583,7 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     // invia la richiesta al server
     obs.subscribe(risposta => {
       // ripete ultima ricerca
-      this.cercaSpedizione(this.searchKeyPrecedente);
+      this.cercaSpedizione(this.searchKeyPrecedente, this.pagina);
 
     });
   }
@@ -582,19 +603,6 @@ export class AnagraficaSpedizioniComponent implements OnInit {
     this.id = 0;
   }
 
- primaPagina(){
 
- }
-
- paginaPrecedente() {
-
- }
-
- paginaSuccessiva(){
-
-}
-ultimaPagina(){
-
-}
 }
 

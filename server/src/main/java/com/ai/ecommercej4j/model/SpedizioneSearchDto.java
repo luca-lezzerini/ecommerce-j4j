@@ -9,11 +9,14 @@ package com.ai.ecommercej4j.model;
 public class SpedizioneSearchDto extends LoginResponseDto {
 
     String searchKey;
+    private int numeroPagina;
+
 
     // inizializzo il dto con il costruttore della classe genitore 
-    public SpedizioneSearchDto(String searchKey, String token) {
+    public SpedizioneSearchDto(String searchKey, String token , int numeroPagina) {
         super(token);
         this.searchKey = searchKey;
+        this.numeroPagina = numeroPagina;
     }
 
     public SpedizioneSearchDto() {
@@ -26,6 +29,14 @@ public class SpedizioneSearchDto extends LoginResponseDto {
 
     public void setSearchKey(String searchKey) {
         this.searchKey = searchKey;
+    }
+
+    public int getNumeroPagina() {
+        return numeroPagina;
+    }
+
+    public void setNumeroPagina(int numeroPagina) {
+        this.numeroPagina = numeroPagina;
     }
 
 }
