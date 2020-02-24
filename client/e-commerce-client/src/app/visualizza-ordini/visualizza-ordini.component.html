@@ -1,6 +1,6 @@
 <div>
   <label>
-    <input type = "text" [(ngModel)] = "numeroOrdine" placeholder="Numero ordine">&nbsp;
+    <input type = "number" [(ngModel)] = "numeroOrdine" placeholder="Numero ordine">&nbsp;
     Data <input type = "date" [(ngModel)] = "data">&nbsp;
     <select [(ngModel)] = "stato">&nbsp;
       <option>Carrello</option>
@@ -22,8 +22,16 @@
       <td>{{o.stato}}</td>
     </tr>
   </table>
-  <button (click) = "searchOrdine('first')"><<</button> &nbsp;
-  <button (click) = "searchOrdine('previous')"><</button> &nbsp;
-  <button (click) = "searchOrdine('next')">></button> &nbsp;
-  <button (click) = "searchOrdine('last')">>></button> &nbsp;
+  <button (click) = "searchOrdine(numeroPrecedente, dataPrecedente, statoPrecedente, 0)" [disabled]=backDisabled>
+    <<
+  </button> &nbsp;
+  <button (click) = "searchOrdine(numeroPrecedente, dataPrecedente, statoPrecedente, this.pagina -1)" [disabled]=backDisabled>
+    <
+  </button> &nbsp;
+  <button (click) = "searchOrdine(numeroPrecedente, dataPrecedente, statoPrecedente, this.pagina +1)" [disabled]=forwardDisabled>
+    >
+  </button> &nbsp;
+  <button (click) = "searchOrdine(numeroPrecedente, dataPrecedente, statoPrecedente, -1)" [disabled]=forwardDisabled>
+    >>
+  </button> &nbsp;
 </div>

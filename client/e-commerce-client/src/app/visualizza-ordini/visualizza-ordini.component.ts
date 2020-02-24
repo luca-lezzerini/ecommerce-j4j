@@ -81,7 +81,7 @@ export class VisualizzaOrdiniComponent implements OnInit {
       // Pulisco i campi di ricerca
       this.numeroOrdine = null;
       this.data = null;
-      this.stato = 'carrello';
+      this.stato = 'Carrello';
     });
   }
 }
