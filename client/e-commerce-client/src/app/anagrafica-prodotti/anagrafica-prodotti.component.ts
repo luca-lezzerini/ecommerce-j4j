@@ -33,7 +33,6 @@ export class AnagraficaProdottiComponent implements OnInit {
   showRimuovi: boolean;
   showSearchPanel: boolean;
   showResults: boolean;
-  showAggiungi: boolean;
   trovatoQualcosa: boolean;
   searchKey = '';
   searchKeyPrecedente = '';
@@ -57,7 +56,6 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showRimuovi = false;
     this.showSearchPanel = true;
     this.showResults = false;
-    this.showAggiungi = true;
   }
 
   ngOnInit() {
@@ -94,7 +92,6 @@ export class AnagraficaProdottiComponent implements OnInit {
       this.showModifica = this.statoPrecedente == 'modifica';
       this.showRimuovi = this.statoPrecedente == 'modifica';
       this.showSearchPanel = true;
-      this.showAggiungi = true;
 
       // eseguo operazione confermata in base allo stato precedente
       switch (this.statoPrecedente) {
@@ -199,7 +196,6 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showRimuovi = mostraPanel;
     this.showSearchPanel = true;
     this.showResults = true;
-    this.showAggiungi = true;
   }
 
   /**
@@ -219,7 +215,6 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showRimuovi = false;
     this.showSearchPanel = false;
     this.showResults = false;
-    this.showAggiungi = false;
 
     // aggiorno lo stato
     this.statoPrecedente = 'crea';
@@ -245,7 +240,6 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showRimuovi = false;
     this.showSearchPanel = false;
     this.showResults = false;
-    this.showAggiungi = false;
 
     // aggiorno lo stato
     this.statoPrecedente = 'modifica';
@@ -273,7 +267,6 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showRimuovi = false;
     this.showSearchPanel = false;
     this.showResults = false;
-    this.showAggiungi = false;
 
     // aggiorno lo stato
     if (this.statoPrecedente == 'view') {
@@ -296,7 +289,6 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showModifica = false;
     this.showRimuovi = false;
     this.showSearchPanel = true;
-    this.showAggiungi = true;
 
     // aggiorno lo stato
     this.statoPrecedente = 'cerca';
@@ -369,7 +361,6 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showRimuovi = true;
     this.showSearchPanel = true;
     this.showResults = true;
-    this.showAggiungi = true;
 
     // aggiorno lo stato
     this.statoPrecedente = 'view';

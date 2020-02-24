@@ -5,7 +5,7 @@ div {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-input {
+input, select {
   font-size: 14px;
   border-color: #05386B;
   font-family: Verdana, Geneva, Tahoma, sans-serif;

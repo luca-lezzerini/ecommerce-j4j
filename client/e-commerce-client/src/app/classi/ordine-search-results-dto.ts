@@ -4,4 +4,5 @@ import { Ordine } from './ordine';
 export class OrdineSearchResultsDto extends LoginResponseDto {
   results: Ordine[];
   page: number;
+  ultimaPagina: boolean;
 }

@@ -15,10 +15,12 @@ public class OrdineSearchResultsDto extends LoginResponseDto {
 
     private int page;
     private List<Ordine> results;
+    private boolean ultimaPagina;
 
-    public OrdineSearchResultsDto(List<Ordine> results, int page) {
+    public OrdineSearchResultsDto(List<Ordine> results, int page, boolean ultimaPagina) {
         this.results = results;
         this.page = page;
+        this.ultimaPagina = ultimaPagina;
     }
 
     public OrdineSearchResultsDto() {
@@ -38,6 +40,14 @@ public class OrdineSearchResultsDto extends LoginResponseDto {
 
     public void setPage(int page) {
         this.page = page;
+    }
+
+    public boolean isUltimaPagina() {
+        return ultimaPagina;
+    }
+
+    public void setUltimaPagina(boolean ultimaPagina) {
+        this.ultimaPagina = ultimaPagina;
     }
 
 }
