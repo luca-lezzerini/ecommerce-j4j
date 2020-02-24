@@ -1,0 +1,18 @@
+div {
+  text-align: center;
+  font-size: 35px;
+  font-family: "Verdana";
+  color: #05386B
+}
+button {
+  font-size: 14px;
+  color: #EDF5E1;
+  background-color: #5CDB95;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #379683;
+  color: #EDF5E1;
+}
