@@ -17,16 +17,16 @@ public interface ColoriService {
     void createColori(ColoriCreateDto dto);
     
     /**
-     * Cerca i colori salvati nella repository e li salva in una lista 
+     * Cerca i colori salvati nel database, li impagina e li restituisce
      * Effettua la ricerca per codice e descrizione
-     * @param dto contiene il parametro su cui viene effettuata la ricerca
-     * @return una lista di risultati
+     * @param dto contiene la chiave di ricerca e la pagina da visualizzare
+     * @return una slice di elementi da visualizzare
      */
     ColoriSearchResultsDto searchColori(ColoriSearchDto dto);
     
     
     /**
-     * cancella il colore tramite l'id
+     * Cancella il colore tramite l'id
      * @param dto contiene l'id dell'elemento da eliminare
      */
     void deleteColori(ColoriDeleteDto dto);

@@ -2,12 +2,19 @@ package com.ai.ecommercej4j.model;
 
 import java.util.List;
 
-
 public class ColoriSearchResultsDto {
-    private List<Colori> result;
 
-    public ColoriSearchResultsDto(List<Colori> result) {
+    private List<Colori> result;
+    private int numeroPagina;
+    private boolean ultimaPagina;
+
+    public ColoriSearchResultsDto(List<Colori> result, int numeroPagina, boolean ultimaPagina) {
         this.result = result;
+        this.numeroPagina = numeroPagina;
+        this.ultimaPagina = ultimaPagina;
+    }
+
+    public ColoriSearchResultsDto() {
     }
 
     public List<Colori> getResult() {
@@ -16,5 +23,21 @@ public class ColoriSearchResultsDto {
 
     public void setResult(List<Colori> result) {
         this.result = result;
+    }
+
+    public int getNumeroPagina() {
+        return numeroPagina;
+    }
+
+    public void setNumeroPagina(int numeroPagina) {
+        this.numeroPagina = numeroPagina;
+    }
+
+    public boolean isUltimaPagina() {
+        return ultimaPagina;
+    }
+
+    public void setUltimaPagina(boolean ultimaPagina) {
+        this.ultimaPagina = ultimaPagina;
     }
 }

@@ -1,20 +1,8 @@
 <div class="panel" *ngIf="showPanel">
   <label for="codice">Codice: </label>
-  <input
-    id="codice"
-    type="text"
-    [(ngModel)]="codice"
-    name="codice"
-    disabled="{{ inputNotEditable }}"
-  />
-  <label for="descrizione">  Descrizione: </label>
-  <input
-    id="descrizione"
-    type="text"
-    [(ngModel)]="descrizione"
-    name="descrizione"
-    disabled="{{ inputNotEditable }}"
-  />
+  <input id="codice" type="text" [(ngModel)]="codice" name="codice" disabled="{{ inputNotEditable }}" />
+  <label for="descrizione"> Descrizione: </label>
+  <input id="descrizione" type="text" [(ngModel)]="descrizione" name="descrizione" disabled="{{ inputNotEditable }}" />
   <span *ngIf="showConfermaAnnulla">
     <button (click)="confermaCheckState(state)">Conferma</button>
     <button (click)="annullaCheckState(state)">Annulla</button>
@@ -29,9 +17,10 @@
     </button>
   </span>
 </div>
+
 <br />
 <div class="search" *ngIf="showCerca">
-  <input type="text" [(ngModel)]="ricerca" placeholder="Cerca colore"/>
+  <input type="text" [(ngModel)]="ricerca" placeholder="Cerca colore" />
   <button (click)="cercaCheckState(state)">Cerca</button>
   <span class="add" *ngIf="showAggiungi">
     <button (click)="aggiungiState()">Aggiungi</button>
@@ -44,10 +33,10 @@
 <div class="results" *ngIf="showRisultati">
   <table *ngIf="result.length != 0">
     <tr>
-      <th class="display-c">
+      <th>
         Codice
       </th>
-      <th class="display-d">
+      <th>
         Descrizione
       </th>
     </tr>
@@ -63,4 +52,21 @@
       </td>
     </tr>
   </table>
+
+
+  <div class="pagination">
+    <button (click)="cambiaPagina(0)">
+      &laquo;
+    </button>
+    <button (click)="cambiaPagina(pagina-1)">
+      &lsaquo;
+    </button>
+    {{pagina+1}}
+    <button (click)="cambiaPagina(pagina+1)">
+      &rsaquo;
+    </button>
+    <button (click)="cambiaPagina(-1)">
+      &raquo;
+    </button>
+  </div>
 </div>

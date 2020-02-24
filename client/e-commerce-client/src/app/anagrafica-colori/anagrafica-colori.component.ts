@@ -25,6 +25,7 @@ export class AnagraficaColoriComponent implements OnInit {
   state: string;
   olderState: string;
   msg: string;
+  pagina = 0;
 
   // variabili per mostrare o nascondere componenti UI
   showPanel: boolean;
@@ -203,7 +204,7 @@ export class AnagraficaColoriComponent implements OnInit {
     if (stato === this.statoCerca || stato === this.statoVisualizza) {
       this.olderState = this.state;
       this.state = this.statoCerca;
-      this.searchColori();
+      this.searchColori(0);
       this.cercaState();
     }
   }
@@ -298,7 +299,7 @@ export class AnagraficaColoriComponent implements OnInit {
       );
       obs.subscribe(data => {
         // dopo la risposta del server visualizza gli elementi salvati nel database
-        this.searchColori();
+        this.searchColori(0);
       });
     }
   }
@@ -307,7 +308,7 @@ export class AnagraficaColoriComponent implements OnInit {
    * Ricerca i colori presenti nel Database che corrispondono alla searchKey e li visualizza nella tabella
    * Nel caso il campo è vuoto mostrerà tutta la lista
    */
-  searchColori(): void {
+  searchColori(pagina: number): void {
     // se il campo è vuoto o sono stati inseriti solo spazi imposta ricerca ad una stringa vuota
     if (this.ricerca === undefined) {
       this.ricerca = '';
@@ -317,6 +318,7 @@ export class AnagraficaColoriComponent implements OnInit {
     }
     // preparo i dati da inviare al server
     const dto: ColoriSearchDto = new ColoriSearchDto();
+    dto.numeroPagina = pagina;
     dto.searchKey = this.ricerca;
     dto.token = this.ac.token;
     // preparo la richiesta http
@@ -324,12 +326,15 @@ export class AnagraficaColoriComponent implements OnInit {
       ColoriSearchResultsDto
     >(this.ac.hostUrl + '/search-colori', dto);
     obs.subscribe(data => {
-      // salva la lista di risultati ottenuti dal server nell' array locale che viene visualizzato
+      // salva la lista di risultati ottenuti dal server nell'array locale che viene visualizzato
       this.result = data.result;
+      // aggiorno il numero di pagina attuale
+      this.pagina = data.numeroPagina;
+      // mando un messaggio in caso non siano stati trovati risultati...
       if (this.result.length === 0) {
         this.msg = 'Nessun risultato trovato!';
       } else {
-        this.msg = 'Trovati ' + this.result.length + ' colori';
+        this.msg = null;
       }
     });
   }
@@ -350,7 +355,7 @@ export class AnagraficaColoriComponent implements OnInit {
     );
     obs.subscribe(data => {
       // dopo la risposta del server visualizza gli elementi salvati nel database
-      this.searchColori();
+      this.searchColori(0);
     });
   }
 
@@ -370,7 +375,12 @@ export class AnagraficaColoriComponent implements OnInit {
     );
     obs.subscribe(data => {
       // dopo la risposta del server visualizza gli elementi salvati nel database
-      this.searchColori();
+      this.searchColori(0);
     });
+  }
+
+  cambiaPagina(pagina: number) {
+    if (pagina == -1) { pagina = 0; }
+    this.searchColori(pagina);
   }
 }
