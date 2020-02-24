@@ -6,6 +6,7 @@ import com.ai.ecommercej4j.service.ColoriService;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import com.ai.ecommercej4j.service.SecurityService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,9 @@ public class ColoriServiceImpl implements ColoriService {
 
     @Autowired
     private ColoriRepository coloriRepository;
+
+    @Autowired
+    private SecurityService securityService;
 
     @Override
     public void createColori(ColoriCreateDto dto) {
@@ -24,41 +28,38 @@ public class ColoriServiceImpl implements ColoriService {
 
     @Override
     public ColoriSearchResultsDto searchColori(ColoriSearchDto dto) {
-        ColoriSearchResultsDto rdto;
-        // il numero della pagina che devo visualizzare
+
+        // istanzio il dto di risposta
+        ColoriSearchResultsDto rdto = new ColoriSearchResultsDto();
+
         int paginaRichiesta;
         Pageable pagina;
         // numero totale di elementi diviso numero di elementi per pagina (quindi ultima pagina)
         int numeroUltimaPagina = (int) ((coloriRepository.countByDescrizioneContaining(dto.getSearchKey()) - 1) / 5);
+
         //se la pagina che sto cercando è un numero positivo minore del numero totale di pagine...
-        if (dto.getNumeroPagina() >= 0 
-                && dto.getNumeroPagina() < numeroUltimaPagina) {
+        if (dto.getNumeroPagina() >= 0 && dto.getNumeroPagina() < numeroUltimaPagina) {
             paginaRichiesta = dto.getNumeroPagina();
         } else {
             // ... altrimenti sto cercando l'ultima pagina
             paginaRichiesta = numeroUltimaPagina;
         }
-        //preparo i dati della pagina che devo visualizzare
-        pagina = PageRequest.of(paginaRichiesta, 5);
-        Slice<Colori> sliceColori;
-        //recupero i risultati in base alla chiave di ricerca che ho ricevuto (cerco per codice e per descrizione)
-        if (dto.getSearchKey().equals("")) {
-            sliceColori = coloriRepository.findAll(pagina);
-        } else {
-            sliceColori = coloriRepository.
-                    findByCodiceOrDescrizioneContainingIgnoreCase(dto.getSearchKey(), dto.getSearchKey(), pagina);
-        }
 
-        //se trovo dei risultati, li inserisco nel dto
-        if (sliceColori != null && sliceColori.hasContent()) {
-            rdto = new ColoriSearchResultsDto(
-                    sliceColori.getContent(),
-                    sliceColori.getNumber(),
-                    sliceColori.isLast());
+        //preparo i dati della pagina da selezionare, ordinati per codice
+        pagina = PageRequest.of(paginaRichiesta, 5, Sort.by("codice"));
+
+        //recupero i risultati               
+        Slice<Colori> sliceColore = coloriRepository.
+                findByCodiceOrDescrizioneContainingIgnoreCase(dto.getSearchKey(), dto.getSearchKey(), pagina);
+
+        //se ottengo dei risultati, li salvo nel dto
+        if (sliceColore != null && sliceColore.hasContent()) {
+            rdto.setNumeroPagina(sliceColore.getNumber());
+            rdto.setResult(sliceColore.getContent());
+            rdto.setUltimaPagina(sliceColore.isLast());
 
         } else {
-            // ... altrimenti restituisco una lista vuota
-            rdto = new ColoriSearchResultsDto();
+            // ... altrimenti ritorno una lista vuota
             rdto.setResult(Collections.emptyList());
         }
 

@@ -65,7 +65,7 @@ public class ProdottoServiceImpl implements ProdottoService {
             Pageable page;
             //trovo il numero totale delle pagine
             int numeroUltimaPagina = (int) ((prodottoRepository.countByCodiceContaining(dto.getSearchKey()) - 1) / 5);
-            
+
             //se la pagina che cerco è un numero positivo minore del numero totale di pagine...
             if (dto.getNumeroPagina() >= 0 && dto.getNumeroPagina() < numeroUltimaPagina) {
                 paginaRichiesta = dto.getNumeroPagina();
@@ -142,68 +142,100 @@ public class ProdottoServiceImpl implements ProdottoService {
     public ProdottoSearchResultsDto searchOfferte(ProdottoSearchDto dto) {
 
         // istanzio il dto di ritorno
-        ProdottoSearchResultsDto resultDto = new ProdottoSearchResultsDto();
+        ProdottoSearchResultsDto rdto = new ProdottoSearchResultsDto();
 
         // controllo se il dto e la chiave di ricerca sono diversi da null
         // e se il token è valido
         if (dto != null && dto.getSearchKey() != null
                 && securityService.checkToken(dto.getToken())) {
-            List<Prodotto> lp;
-            // se la key che riceve è vuota restituisce tutti i prodotti in offerta...
+            int paginaRichiesta;
+            Pageable pagina;
+            //trovo il numero totale delle pagine
+            int numeroUltimaPagina = (int) ((prodottoRepository
+                    .countByPrezzoLessThanEqualAndOfferta(Double.parseDouble(dto.getSearchKey()), true) - 1) / 5);
+
+            //se la pagina che cerco è un numero positivo minore del numero totale di pagine...
+            if (dto.getNumeroPagina() >= 0 && dto.getNumeroPagina() < numeroUltimaPagina) {
+                paginaRichiesta = dto.getNumeroPagina();
+            } else {
+                // ... altrimenti la pagina che cerco è l'ultima
+                paginaRichiesta = numeroUltimaPagina;
+            }
+
+            //preparo i dati della pagina da selezionare
+            pagina = PageRequest.of(paginaRichiesta, 5, Sort.by("codice"));
+            
+            Slice<Prodotto> sliceOfferte;
+            // se la key che riceve ha come valore Double.MAX_VALUE restituisce tutti i prodotti in offerta...
             if ((dto.getSearchKey().trim()).equals(Double.MAX_VALUE)) {
-                lp = prodottoRepository.findByOfferta(true);
+                sliceOfferte = prodottoRepository.findByOfferta(true, pagina);
                 //...altrimenti ricerca i prodotti in offerta con prezzo inferiore a quello dato
             } else {
                 //trasformo la chiave di ricerca da string a double
                 double prezzo = Double.parseDouble(dto.getSearchKey());
 
                 //recupero i risultati e avvaloro il dto di ritorno
-                lp = prodottoRepository.
-                        findByPrezzoLessThanEqualAndOfferta(prezzo, true);
+                sliceOfferte = prodottoRepository.
+                        findByPrezzoLessThanEqualAndOfferta(prezzo, true, pagina);
 
-                // ordino i risultati per codice
-//                Collections.sort(lp,(p1, p2) -> p1.getPrezzo().compareTo(p2.getPrezzo()));
             }
-            resultDto.setResult(lp);
+            // se trovo dei risultati, li inserisco nel dto di risposta...
+            if (sliceOfferte != null && sliceOfferte.hasContent()) {
+                rdto.setNumeroPagina(sliceOfferte.getNumber());
+                rdto.setResult(sliceOfferte.getContent());
+                rdto.setUltimaPagina(sliceOfferte.isLast());
+
+            } else {
+                // ... se non ci sono risultati, restituisce una lista vuota
+                rdto.setResult(Collections.emptyList());
+            }
 
         } else {
-            // ... se il dto non esiste, restituisce un ArrayList vuoto
-            resultDto.setResult(Collections.emptyList());
+            // ... se il dto non esiste, restituisce una lista vuoto
+            rdto.setResult(Collections.emptyList());
         }
-        return resultDto;
+        return rdto;
     }
 
     @Override
     public ProdottoSearchResultsDto searchProdottoPerDescrizione(ProdottoSearchDto dto) {
 
-        // istanzio il dto di ritorno
-        ProdottoSearchResultsDto resultDto = new ProdottoSearchResultsDto();
+        // istanzio il dto di risposta
+        ProdottoSearchResultsDto rdto = new ProdottoSearchResultsDto();
 
-        // controllo se il dto e la chiave di ricerca sono diversi da null
-        // e se il token è valido
-        if (dto != null && dto.getSearchKey() != null) {
+        int paginaRichiesta;
+        Pageable pagina;
+        // numero totale di elementi diviso numero di elementi per pagina (quindi ultima pagina)
+        int numeroUltimaPagina = (int) ((prodottoRepository.countByDescrizioneContaining(dto.getSearchKey()) - 1) / 5);
 
-            //recupero i risultati e avvaloro il dto di ritorno                
-            List<Prodotto> lp = prodottoRepository.
-                    findByDescrizioneContainingIgnoreCase(dto.getSearchKey());
-
-            // ordino i risultati per codice
-            Collections.sort(lp, (p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
-            resultDto.setResult(lp);
-        } else if (dto.getSearchKey() == null && dto.getSearchKey() == "") {
-            //recupero i risultati e avvaloro il dto di ritorno                
-            List<Prodotto> lp = prodottoRepository.
-                    findByDescrizioneContainingIgnoreCase(dto.getSearchKey());
-
-            // ordino i risultati per codice
-            Collections.sort(lp, (p1, p2) -> p1.getCodice().compareTo(p2.getCodice()));
-            resultDto.setResult(lp);
+        //se la pagina che sto cercando è un numero positivo minore del numero totale di pagine...
+        if (dto.getNumeroPagina() >= 0 && dto.getNumeroPagina() < numeroUltimaPagina) {
+            paginaRichiesta = dto.getNumeroPagina();
         } else {
-            // ... se il dto non esiste, restituisce un ArrayList vuoto
-            resultDto.setResult(Collections.emptyList());
-            System.out.println("impossibile cercare");
+            // ... altrimenti sto cercando l'ultima pagina
+            paginaRichiesta = numeroUltimaPagina;
         }
-        return resultDto;
+
+        //preparo i dati della pagina da selezionare, ordinati per codice
+        pagina = PageRequest.of(paginaRichiesta, 5, Sort.by("codice"));
+
+        //recupero i risultati               
+        Slice<Prodotto> sliceColore = prodottoRepository.
+                findByCodiceOrDescrizioneContainingIgnoreCase(dto.getSearchKey(), dto.getSearchKey(), pagina);
+
+        //se ottengo dei risultati, li salvo nel dto
+        if (sliceColore != null && sliceColore.hasContent()) {
+            rdto.setNumeroPagina(sliceColore.getNumber());
+            rdto.setResult(sliceColore.getContent());
+            rdto.setUltimaPagina(sliceColore.isLast());
+
+        } else {
+            // ... altrimenti ritorno una lista vuota
+            rdto.setResult(Collections.emptyList());
+        }
+
+        return rdto;
+    
     }
 
     @Override

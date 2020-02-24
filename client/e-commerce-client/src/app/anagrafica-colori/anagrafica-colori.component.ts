@@ -380,7 +380,7 @@ export class AnagraficaColoriComponent implements OnInit {
   }
 
   cambiaPagina(pagina: number) {
-    if (pagina == -1) { pagina = 0; }
+    if (pagina === -1) { pagina = 0; }
     this.searchColori(pagina);
   }
 }

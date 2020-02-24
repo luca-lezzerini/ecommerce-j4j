@@ -11,13 +11,11 @@ import org.springframework.stereotype.Repository;
 public interface ColoriRepository extends JpaRepository<Colori, Long> {
 
     List<Colori> findByCodiceContainingIgnoreCase(String key);
-
-    List<Colori> findByDescrizioneContainingIgnoreCase(String dto, Pageable pageable);
+    
+    Integer countByDescrizioneContaining(String descrizione);
 
     List<Colori> findByDescrizioneContainingIgnoreCase(String key);
     
     Slice<Colori> findByCodiceOrDescrizioneContainingIgnoreCase(String key, String key2, Pageable pageable);
     
-    Integer countByDescrizioneContaining(String key);
-
 }

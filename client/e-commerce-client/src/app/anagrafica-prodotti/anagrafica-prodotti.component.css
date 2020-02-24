@@ -1,12 +1,14 @@
 div {
   text-align: center;
   font-size: 14px;
-  color: #05386B
+  color: #05386B;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 input {
   font-size: 14px;
   border-color: #05386B;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 table {
@@ -43,4 +45,8 @@ button {
 button:hover {
   background-color: #379683;
   color: #EDF5E1;
+}
+
+button:disabled {
+  background-color: silver;
 }

@@ -11,10 +11,10 @@
   <button *ngIf="showRimuovi" (click)="rimuovi(null)">Rimuovi</button>
 </div>
 <br>
-<div>
-  <input *ngIf="showSearchPanel" type="text" [(ngModel)]="searchKey">&nbsp;
-  <button *ngIf="showSearchPanel" (click)="cerca()">Cerca</button>&nbsp;
-  <button *ngIf="showAggiungi" (click)="crea()">Aggiungi</button>
+<div *ngIf="showSearchPanel">
+  <input  type="text" [(ngModel)]="searchKey">&nbsp;
+  <button (click)="cerca()">Cerca</button>&nbsp;
+  <button (click)="crea()">Aggiungi</button>
 </div>
 
 <div *ngIf="showResults && prodotti && prodotti.length > 0">
@@ -55,5 +55,5 @@
   </button> &nbsp;
   <button (click) = "this.eseguiRicerca(this.searchKeyPrecedente, -1)" [disabled]=forwardDisabled>
     >>
-  </button> &nbsp;
+  </button>
 </div>

@@ -20,7 +20,7 @@ public class ColoriSearchDto extends LoginResponseDto {
     public void setSearchKey(String searchKey) {
         this.searchKey = searchKey;
     }
-
+    
     public int getNumeroPagina() {
         return numeroPagina;
     }

@@ -1,26 +1,44 @@
-Benvenuto!
+<div>Benvenuto!</div>
 <br>
 <button routerLink="/view-carrello">Visualizza carrello</button>
+&nbsp;
 <a routerLink="/login">
   <button>Login</button>
 </a>
 <br>
 <br>
 <input type="text" [(ngModel)]="ricerca"> &nbsp;
-<button (click)="search()">Search</button>
+<button (click)="search(0)">Search</button>
 <br>
 <br>
-<table *ngIf="showResults">
-  <tr>
-    <th>Codice</th>
-    <th>Descrizione</th>
-    <th>Prezzo</th>
-    <th>Aggiungi al carrello</th>
-  </tr>
-  <tr *ngFor="let p of prodotti">
-    <td> {{p.codice}}</td>
-    <td> {{p.descrizione}}</td>
-    <td> {{p.prezzo}}</td>
-    <td><button (click)="aggiungiAlCarrello(p)">Aggiungi al carrello</button></td>
-  </tr>
-</table>
+<div *ngIf="showResults">
+  <table>
+    <tr>
+      <th>Codice</th>
+      <th>Descrizione</th>
+      <th>Prezzo</th>
+      <th>Aggiungi al carrello</th>
+    </tr>
+    <tr *ngFor="let p of prodotti">
+      <td> {{p.codice}}</td>
+      <td> {{p.descrizione}}</td>
+      <td> {{p.prezzo}}</td>
+      <td><button (click)="aggiungiAlCarrello(p)">Aggiungi al carrello</button></td>
+    </tr>
+  </table>
+  <div class="pagination">
+    <button (click)="cambiaPagina(0)">
+      &laquo;
+    </button>
+    <button (click)="cambiaPagina(pagina-1)">
+      &lsaquo;
+    </button>
+    {{pagina+1}}
+    <button (click)="cambiaPagina(pagina+1)">
+      &rsaquo;
+    </button>
+    <button (click)="cambiaPagina(-2)">
+      &raquo;
+    </button>
+  </div>
+</div>

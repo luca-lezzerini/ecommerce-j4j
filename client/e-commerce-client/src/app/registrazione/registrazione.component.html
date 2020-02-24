@@ -1,24 +1,24 @@
-<div>
+<div class="contenitore">
   Username
-  <input [(ngModel)]="username">
+  <input class="input" [(ngModel)]="username">
 
   <br><br>
   Password
-  <input [(ngModel)]="password">
+  <input class="input" [(ngModel)]="password">
 
   <br><br>
   Conferma password
-  <input [(ngModel)]="confermapassword">
+  <input class="input" [(ngModel)]="confermapassword">
 
   <br><br>
   Email
-  <input [(ngModel)]="email">
+  <input class="input" [(ngModel)]="email">
 
   <br><br>
   <div *ngIf="messaggioErrore">{{ messaggioErrore }}</div>
-  <button (click)="registrami()">Conferma</button>
+  <button class="button" (click)="registrami()">Conferma</button>
 
   &nbsp;
-  <button (click)="annulla()">Annulla</button>
+  <button class="button" (click)="annulla()">Annulla</button>
 
 </div>

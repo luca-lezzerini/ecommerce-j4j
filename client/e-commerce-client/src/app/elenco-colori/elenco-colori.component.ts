@@ -5,6 +5,7 @@ import { Colori } from './../classi/colori';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AreaComuneService } from '../area-comune.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-elenco-colori',
@@ -15,30 +16,36 @@ export class ElencoColoriComponent implements OnInit {
 
   colori: Colori[] = [];
   searchKey = '';
-
+  searchKeyPrecedente = '';
   showResults: boolean;
+  pagina = 0;
+  backDisabled: boolean;
+  forwardDisabled: boolean;
 
-  constructor(private http: HttpClient, private acService: AreaComuneService) { }
+  constructor(private http: HttpClient,
+    private acService: AreaComuneService,
+    private router: Router) { }
 
   ngOnInit() {
-  }
-
-  searchColori() {
-    // Se la stringa di ricerca è vuota ritorna tutti gli elementi della lista
-    if (this.searchKey === '') {
-      this.showResults = true;
-      this.eseguiRicerca(this.searchKey);
-      // Se invece è piena esegue la ricerca
-    } else {
-      this.eseguiRicerca(this.searchKey);
+    // se l'utente non è loggato viene aperta la pagina di login
+    if (!this.acService.token) {
+      this.router.navigateByUrl('/login');
     }
   }
 
-  eseguiRicerca(search: string) {
+  /**
+   * Esegue la ricerca, imposta la visibilità dei risultati e abilita i bottoni per cambiare pagina
+   *
+   * @param search: la string contenente la chiave di ricerca
+   *
+   * @param paginaRichiesta: il numero di pagina da cercare
+   */
+  eseguiRicerca(search: string, paginaRichiesta: number) {
     // Preparo il dto
     let dto: ColoriSearchDto = new ColoriSearchDto();
-    dto.searchKey = this.searchKey;
+    dto.searchKey = search;
     dto.token = this.acService.token;
+    dto.numeroPagina = paginaRichiesta;
 
     // Preparo la richiesta http
     let oss: Observable<ColoriSearchResultsDto> =
@@ -50,9 +57,16 @@ export class ElencoColoriComponent implements OnInit {
       this.colori = risposta.result;
       // Se ci sono risultati li visualizzo
       this.showResults = risposta.result.length > 0;
-      // pulisco il campo ricerca
+      // Aggiorno il numero di pagina
+      this.pagina = risposta.numeroPagina;
+      // Se la pagina restituita è la numero 0, disabilito i bottoni per le pagine precedenti
+      this.backDisabled = !risposta.numeroPagina;
+      // Se la pagina restituita è l'ultima, disabilito i bottoni per le pagine successive
+      this.forwardDisabled = risposta.ultimaPagina;
+      // Salvo la chiave di ricerca
+      this.searchKeyPrecedente = search;
+      // Pulisco il campo ricerca
       this.searchKey = '';
     })
   }
-
 }

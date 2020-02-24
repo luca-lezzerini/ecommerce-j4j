@@ -19,6 +19,7 @@ export class HomePageComponent implements OnInit {
   prodotti: Prodotto[] = [];
   ricerca = '';
   showResults: boolean;
+  pagina = 0;
 
   constructor(private router: Router, private acService: AreaComuneService, private http: HttpClient) { }
 
@@ -30,11 +31,12 @@ export class HomePageComponent implements OnInit {
 
     }
   }
-  search() {
+  search(pagina: number) {
     // Preparo i dto
     const dto: ProdottoSearchDto = new ProdottoSearchDto();
     dto.searchKey = this.ricerca;
     dto.token = this.acService.token;
+    dto.numeroPagina = pagina;
 
     // Preparo richiesta http
     const oss: Observable<ProdottoSearchResultsDto> =
@@ -43,6 +45,7 @@ export class HomePageComponent implements OnInit {
     // Invio la richiesta
     oss.subscribe(risposta => {
       this.prodotti = risposta.result;
+      this.pagina = risposta.numeroPagina;
       console.log(risposta.result);
       this.showResults = true; // this.prodotti.length > 0;
     });
@@ -100,6 +103,10 @@ export class HomePageComponent implements OnInit {
 
 
   ngOnInit() {
+  }
+  cambiaPagina(pagina: number) {
+    if (pagina === -1) { pagina = 0; }
+    this.search(pagina);
   }
 
 }

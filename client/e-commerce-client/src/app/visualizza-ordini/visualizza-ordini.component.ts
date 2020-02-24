@@ -18,11 +18,18 @@ export class VisualizzaOrdiniComponent implements OnInit {
   numeroOrdine: number;
   data: Date;
   showResults: boolean;
-  stato: string;
+  stato = 'Carrello';
+  numeroPrecedente: number;
+  dataPrecedente: Date;
+  showResultsPrecedente: boolean;
+  statoPrecedente = '';
+  pagina = 0;
+  backDisabled: boolean;
+  forwardDisabled: boolean;
 
   constructor(private http: HttpClient,
-              private acService: AreaComuneService,
-              private router: Router) { }
+    private acService: AreaComuneService,
+    private router: Router) { }
 
   ngOnInit() {
     // se l'utente non è loggato viene aperta la pagina di login
@@ -31,14 +38,25 @@ export class VisualizzaOrdiniComponent implements OnInit {
     }
   }
 
-  searchOrdine() {
-    // Tutte le ricerche vengono effettuate anche per stato che di default è "carrello"
+  /**
+   * Esegue la ricerca, imposta la visibilità dei risultati e abilita i bottoni per cambiare pagina
+   *
+   * @param numeroSearch: string contenente il numero di ordine da cercare
+   *
+   * @param dataSearch: la data da cercare
+   *
+   * @param statoSearch: lo stato dell'ordine di cui effettuare la ricerca
+   *
+   * @param paginaRichiesta: il numero di pagina da cercare
+   */
+  searchOrdine(numeroSearch: number, dataSearch: Date, statoSearch: string, paginaRichiesta: number) {
     // Preparo il dto
     let dto: OrdineSearchDto = new OrdineSearchDto();
-    dto.searchData = this.data;
-    dto.searchNumeroOrdine = this.numeroOrdine;
-    dto.stato = this.stato;
+    dto.searchData = dataSearch;
+    dto.searchNumeroOrdine = numeroSearch;
+    dto.stato = statoSearch;
     dto.token = this.acService.token;
+    dto.page = paginaRichiesta;
 
     // Preparo la richiesta http
     let oss: Observable<OrdineSearchResultsDto> =
@@ -50,10 +68,20 @@ export class VisualizzaOrdiniComponent implements OnInit {
       this.ordini = risposta.results;
       // Se ci sono risultati li visualizzo
       this.showResults = risposta.results.length > 0;
+      // Aggiorno il numero di pagina
+      this.pagina = risposta.page;
+      // Se la pagina restituita è la numero 0, disabilito i bottoni per le pagine precedenti
+      this.backDisabled = !risposta.page;
+      // Se la pagina restituita è l'ultima, disabilito i bottoni per le pagine successive
+      this.forwardDisabled = risposta.ultimaPagina;
+      // Salvo la chiave di ricerca
+      this.numeroPrecedente = numeroSearch;
+      this.dataPrecedente = dataSearch;
+      this.statoPrecedente = statoSearch;
       // Pulisco i campi di ricerca
       this.numeroOrdine = null;
       this.data = null;
-      this.stato = 'carrello';
+      this.stato = 'Carrello';
     });
   }
 }

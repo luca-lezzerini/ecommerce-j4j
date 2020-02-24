@@ -8,13 +8,13 @@ public class ColoriSearchResultsDto {
     private int numeroPagina;
     private boolean ultimaPagina;
 
+    public ColoriSearchResultsDto() {
+    }
+
     public ColoriSearchResultsDto(List<Colori> result, int numeroPagina, boolean ultimaPagina) {
         this.result = result;
         this.numeroPagina = numeroPagina;
         this.ultimaPagina = ultimaPagina;
-    }
-
-    public ColoriSearchResultsDto() {
     }
 
     public List<Colori> getResult() {

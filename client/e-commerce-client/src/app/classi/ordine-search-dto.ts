@@ -4,4 +4,5 @@ export class OrdineSearchDto extends LoginResponseDto {
   stato: string;
   searchData: Date;
   searchNumeroOrdine: number;
+  page: number;
 }

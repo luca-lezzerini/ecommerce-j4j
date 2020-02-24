@@ -1,3 +1,5 @@
+<button value="home" routerLink="/home-riservata">&lsaquo; Indietro</button>
+<hr>
 <div class="panel" *ngIf="showPanel">
   <label for="codice">Codice: </label>
   <input id="codice" type="text" [(ngModel)]="codice" name="codice" disabled="{{ inputNotEditable }}" />
@@ -65,7 +67,7 @@
     <button (click)="cambiaPagina(pagina+1)">
       &rsaquo;
     </button>
-    <button (click)="cambiaPagina(-1)">
+    <button (click)="cambiaPagina(-2)">
       &raquo;
     </button>
   </div>

@@ -1,27 +1,45 @@
-<button value="home" routerLink="/home-riservata">Home</button>
+<button value="home" routerLink="/home-riservata">&lsaquo; Indietro</button>
 <hr>
 <label for="prezzo">Ricerca per prezzo </label>
 <input id="prezzo" type="number" [(ngModel)]="prezzoSearch" name="prezzoSearch" placeholder="Prezzo massimo prodotti"
-onkeydown="javascript:
+  onkeydown="javascript:
 return event.keyCode === 8
 || event.keyCode === 46
-|| event.keyCode === 190 ? true : !isNaN(Number(event.key))" >
-<!-- Conttrollo sui tasti cliccati: ammessi solo numeri, punto e tasti di canecllazione-->
+|| event.keyCode === 190 ? true : !isNaN(Number(event.key))">
+<!-- Controllo sui tasti cliccati: ammessi solo numeri, punto e tasti di cancellazione-->
 <button value="ricerca" (click)="ricerca()">Cerca</button>
 <br>
 <p>{{ msg }}</p>
-<table *ngIf="prodotti">
+<div *ngIf="prodotti">
 
-  <tr>
-    <th>Codice</th>
-    <th>Descrizione</th>
-    <th>Prezzo</th>
-  </tr>
+  <table>
+    <tr>
+      <th>Codice</th>
+      <th>Descrizione</th>
+      <th>Prezzo</th>
+    </tr>
 
-  <tr *ngFor="let p of prodotti">
-    <td>{{ p.codice }}</td>
-    <td>{{ p.descrizione }}</td>
-    <td>{{ p.prezzo }}</td>
-  </tr>
+    <tr *ngFor="let p of prodotti">
+      <td>{{ p.codice }}</td>
+      <td>{{ p.descrizione }}</td>
+      <td>{{ p.prezzo }}</td>
+    </tr>
 
-</table>
+  </table>
+
+  <div class="pagination">
+    <button (click)="cambiaPagina(0)">
+      &laquo;
+    </button>
+    <button (click)="cambiaPagina(pagina-1)">
+      &lsaquo;
+    </button>
+    {{pagina+1}}
+    <button (click)="cambiaPagina(pagina+1)">
+      &rsaquo;
+    </button>
+    <button (click)="cambiaPagina(-2)">
+      &raquo;
+    </button>
+  </div>
+</div>

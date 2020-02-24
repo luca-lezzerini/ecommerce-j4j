@@ -1,3 +1,44 @@
 *{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+.center {
+  height: 370px;
+  padding: 100px;
+  margin: auto;
+  width: 70%;
+  border: 3px solid green;
+}
+h1 {
+  font-size: 45px;
+  height: 60px;
+  padding: 20px;
+  border-top: 5px solid green;
+  border-bottom: 2px solid green;
+  border-left: 5px solid green;
+  border-right: 5px solid green;
+  margin: auto;
+  width: 50%;
+  text-shadow: 3px 3px orange;
+}
+h4 {
+font-style: italic;
+}
+a:link {
+  text-decoration: none;
+  color: #05386B;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #05386B;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #05386B;
+}
+
+a:active {
+  text-decoration: none;
+  color: #05386B;
+}

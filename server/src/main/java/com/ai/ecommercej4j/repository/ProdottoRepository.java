@@ -18,11 +18,14 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
     
     Slice<Prodotto> findByCodiceContainingIgnoreCase(String codice, Pageable page);
    
-    List<Prodotto> findByDescrizioneContainingIgnoreCase(String descrizione);
+    Slice<Prodotto> findByCodiceOrDescrizioneContainingIgnoreCase(String key, String key2, Pageable pageable);
 
-    List<Prodotto> findByPrezzoLessThanEqualAndOfferta(double prezzo, boolean offerta);
+    Slice<Prodotto> findByPrezzoLessThanEqualAndOfferta(double prezzo, boolean offerta, Pageable pagina);
 
-    List<Prodotto> findByOfferta(boolean offerta);
+    Slice<Prodotto> findByOfferta(boolean offerta, Pageable pagina);
     
+    Integer countByPrezzoLessThanEqualAndOfferta(double prezzo, boolean offerta);
+    
+    Integer countByDescrizioneContaining(String descrizione);
     
 }

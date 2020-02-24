@@ -8,7 +8,7 @@
   <button (click)="cerca()"> Cerca </button>
 </div>
 
-<div *ngIf='showResults || ordini && ordini.length > 0'>
+<div *ngIf='ordini && ordini.length > 0'>
   <table>
     <tr>
       <th>Data ordine</th>
@@ -21,6 +21,14 @@
       <td>{{ordine.stato}}</td>
       <td><button (click)="dettagli(ordine)">Dettagli</button></td>
       <td><button (click)="spedisci(ordine)">Spedisci</button></td>
+    </tr>
+    <tr>
+      <td><button (click)='eseguiRicerca(0)'>inizio</button></td>
+      <td><button (click)='eseguiRicerca(paginaAttuale-1)'>precedente</button></td>
+      <td><button (click)='eseguiMirko()'>mirko puzza</button></td>
+      <td><button (click)='eseguiRicerca(paginaAttuale+1)'>successivo</button></td>
+    <!-- TODO ricerca per ultima pagina -->
+      <td><button (click)='eseguiRicerca()'>fine</button></td>
     </tr>
   </table>
 </div>
