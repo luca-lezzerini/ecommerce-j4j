@@ -2,7 +2,6 @@
     <div class="log">
         <h1>Login</h1>
     </div>
-    <div class="up">
             <p>
                 <label>Username</label> &nbsp;
                 <input type="text" [(ngModel)]="username" class="username" placeholder=" Username" />
@@ -11,11 +10,9 @@
                 <label> Password </label> &nbsp;
                 <input type="password" [(ngModel)]="password" class="password" placeholder=" Password" />
             </p>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="L" (click)="login()">Login</button>
+            <button (click)="login()">Login</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="P" [routerLink]="['/password-dimenticata']">Password dimenticata</button>
+            <button  [routerLink]="['/password-dimenticata']">Password dimenticata</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button [routerLink]="['/registrazione']">Registrazione</button>
     </div>
-</div>
