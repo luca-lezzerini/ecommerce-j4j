@@ -3,6 +3,7 @@ package com.ai.ecommercej4j.repository;
 import com.ai.ecommercej4j.model.Colori;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,8 +11,10 @@ import org.springframework.stereotype.Repository;
 public interface ColoriRepository extends JpaRepository<Colori, Long> {
 
     List<Colori> findByCodiceContainingIgnoreCase(String dto);
+    
+    Integer countByDescrizioneContaining(String descrizione);
 
-    List<Colori> findByDescrizioneContainingIgnoreCase(String dto, Pageable pageable);
+    Slice<Colori> findByDescrizioneContainingIgnoreCase(String dto, Pageable pageable);
 
     List<Colori> findByDescrizioneContainingIgnoreCase(String key);
 

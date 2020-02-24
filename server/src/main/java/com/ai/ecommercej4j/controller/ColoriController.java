@@ -24,6 +24,12 @@ public class ColoriController {
          return cs.searchColori(dto);
     }
     
+    @RequestMapping("/search-colori-per-descrizione")
+    @ResponseBody
+    public ColoriSearchResultsDto searchColoriPerDescrizione(@RequestBody ColoriSearchDto dto) {
+         return cs.searchColoriPerDescrizione(dto);
+    }
+    
     @RequestMapping("/delete-colori")
     @ResponseBody
     public void deleteColori(@RequestBody ColoriDeleteDto dto) {
