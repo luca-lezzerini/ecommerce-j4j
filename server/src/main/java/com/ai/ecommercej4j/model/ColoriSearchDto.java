@@ -2,12 +2,15 @@ package com.ai.ecommercej4j.model;
 
 public class ColoriSearchDto extends LoginResponseDto{
     private String searchKey;
+    private int numeroPagina;
 
     public ColoriSearchDto() {
     }
 
-    public ColoriSearchDto(String searchKey) {
+    public ColoriSearchDto(String searchKey, String token, int numeroPagina) {
+        super(token);
         this.searchKey = searchKey;
+        this.numeroPagina = numeroPagina;
     }
 
     public String getSearchKey() {
@@ -16,5 +19,13 @@ public class ColoriSearchDto extends LoginResponseDto{
 
     public void setSearchKey(String searchKey) {
         this.searchKey = searchKey;
+    }
+    
+    public int getNumeroPagina() {
+        return numeroPagina;
+    }
+
+    public void setNumeroPagina(int numeroPagina) {
+        this.numeroPagina = numeroPagina;
     }
 }
