@@ -6,7 +6,9 @@
 package com.ai.ecommercej4j.repository;
 
 
+import com.ai.ecommercej4j.model.Prodotto;
 import com.ai.ecommercej4j.model.ProdottoTaglia;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +18,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ProdottoTagliaRepository extends JpaRepository<ProdottoTaglia, Long> {
-    
+    List<ProdottoTaglia> findByProdotto(Prodotto prodotto);
 }
