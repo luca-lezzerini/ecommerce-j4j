@@ -1,5 +1,6 @@
 package com.ai.ecommercej4j.service.impl;
 
+import com.ai.ecommercej4j.model.AssociazioneTagliaColori;
 import com.ai.ecommercej4j.model.Colori;
 import com.ai.ecommercej4j.model.Ordine;
 import com.ai.ecommercej4j.model.Prodotto;
@@ -38,6 +39,8 @@ public class DevelopmentServiceImpl implements DevelopmentService {
     private OrdineServiceImpl ordineServiceImpl;
     @Autowired
     private ProdottoTagliaRepository prodottoTagliaRepository;
+    @Autowired
+    private AssociazioneTagliaColoriRepository associazioneTagliaColoriRepository;
 
     @Override
     public void generateTestData() {
@@ -62,15 +65,19 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 
         // Generazione ordini e righe associate
         generateUtentiProdottiOrdiniRighe();
+
+        generateAssociazioneTagliaColori();
     }
 
     private void dropDataBase() {
         // elimina tutti dati dal db
+        prodottoTagliaRepository.deleteAllInBatch();
         rigaOrdineRepository.deleteAllInBatch();
         ordineRepository.deleteAllInBatch();
         prodottoRepository.deleteAllInBatch();
         utenteRepository.deleteAllInBatch();
         spedizioneRespository.deleteAllInBatch();
+        associazioneTagliaColoriRepository.deleteAllInBatch();
         tagliaRepository.deleteAllInBatch();
         coloriRepository.deleteAllInBatch();
     }
@@ -191,23 +198,14 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 
     private void generateTaglie() {
 
-        tagliaRepository.save(new Taglia("94", "XXXXXXL"));
         tagliaRepository.save(new Taglia("43", "M"));
         tagliaRepository.save(new Taglia("68", "XXL"));
         tagliaRepository.save(new Taglia("23", "L"));
         tagliaRepository.save(new Taglia("48", "XXS"));
-        tagliaRepository.save(new Taglia("82", "XXXXXXXS"));
         tagliaRepository.save(new Taglia("65", "XS"));
         tagliaRepository.save(new Taglia("36", "XXXL"));
-        tagliaRepository.save(new Taglia("99", "XXXXL"));
-        tagliaRepository.save(new Taglia("11", "XXXXS"));
-        tagliaRepository.save(new Taglia("51", "XXXXXXXL"));
         tagliaRepository.save(new Taglia("20", "S"));
-        tagliaRepository.save(new Taglia("29", "XXXXXS"));
-        tagliaRepository.save(new Taglia("76", "XXXXXL"));
         tagliaRepository.save(new Taglia("34", "XL"));
-        tagliaRepository.save(new Taglia("96", "XXXS"));
-        tagliaRepository.save(new Taglia("88", "XXXXXXS"));
     }
 
     private void generateColori() {
@@ -551,5 +549,20 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         rigaOrdineRepository.save(r81);
         rigaOrdineRepository.save(r91);
         rigaOrdineRepository.save(r101);
+    }
+
+    private void generateAssociazioneTagliaColori() {
+        AssociazioneTagliaColori tc = new AssociazioneTagliaColori();
+        Taglia t1 = new Taglia("82", "XXXS");
+        t1.getTagliaColori().add(tc);
+        Colori c1 = new Colori();
+        c1.setCodice("99");
+        c1.setDescrizione("rosso pompeiano");
+        c1.getTagliaColori().add(tc);
+        coloriRepository.save(c1);
+        tagliaRepository.save(t1);
+        tc.setTaglia(t1);
+        tc.setColore(c1);
+        associazioneTagliaColoriRepository.save(tc);
     }
 }
