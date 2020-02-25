@@ -23,6 +23,7 @@ export class ElencoSpedizioniComponent implements OnInit {
   prezzo: number;
   tableHeaderEnabled: boolean;
   pagina = 0;
+  paginazione: boolean;
 
   constructor(private http: HttpClient, private singleton: AreaComuneService) {
 
@@ -30,9 +31,14 @@ export class ElencoSpedizioniComponent implements OnInit {
 
   ngOnInit() {
   }
+  cambiaPagina(pagina: number) {
+    if (pagina === -1) { pagina = 0; }
+    this.searchSpedizione(pagina);
+  }
 
-  searchSpedizione() {
-    // console.log('siamo in search spedizione');
+  searchSpedizione(pagina: number,) {
+    this.paginazione = true;
+
     if (this.searchKey === null) {
       this.showResults = true;
       this.eseguiRicerca(this.searchKey);

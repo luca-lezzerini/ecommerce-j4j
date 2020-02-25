@@ -1,3 +1,7 @@
+*{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 body {
     background-color: #EDF5E1;
 }
@@ -10,7 +14,6 @@ div.master {
 
 button {
     background-color: #5CDB95;
-    border: 1px #05386b;
     color: #EDF5E1;
     border-radius: 3px;
 }
@@ -23,10 +26,16 @@ input {
     border: solid 2px #05386b;
     color: #05386b;
 }
-
+table{
+  column-width: 50px;
+}
 tr.header {
     background-color: #05386b;
     color: #EDF5E1;
+
+}
+ tr.dati:hover{
+  background-color: #379683;
 }
 
 tr:nth-child(even) {

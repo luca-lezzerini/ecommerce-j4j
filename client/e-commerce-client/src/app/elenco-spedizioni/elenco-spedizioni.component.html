@@ -3,30 +3,30 @@
     <input type="number" [(ngModel)]="searchKey" placeholder="prezzoSearch"> &nbsp;
     <button (click)="searchSpedizione()">Cerca</button>&nbsp;
     <button [routerLink]="['/home-riservata']">Home</button>&nbsp;
-    <br>
+    <br><br>
     <table class="tabella-centrata">
         <tr *ngIf="tableHeaderEnabled" class="header">
             <th>Descrizione</th>
             <th>Prezzo</th>
             <th>Codice</th>
         </tr>
-        <tr *ngFor="let s of spedizioni">
-            <td>{{s.codice}}</td>
+        <tr *ngFor="let s of spedizioni" class="dati">
             <td>{{s.descrizione}}</td>
             <td>{{s.prezzo}}</td>
+            <td>{{s.codice}}</td>
         </tr>
     </table>
-    <div class="pagination">
+    <div *ngIf="paginazione" class="pagination">
       <button (click)="cambiaPagina(0)">
         &laquo;
-      </button>
+      </button>&nbsp;
       <button (click)="cambiaPagina(pagina-1)">
         &lsaquo;
-      </button>
+      </button>&nbsp;
       {{pagina+1}}
       <button (click)="cambiaPagina(pagina+1)">
         &rsaquo;
-      </button>
+      </button>&nbsp;
       <button (click)="cambiaPagina(-2)">
         &raquo;
       </button>

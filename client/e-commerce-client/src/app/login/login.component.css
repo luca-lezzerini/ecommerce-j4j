@@ -1,6 +1,7 @@
 div.master {
     text-align: center;
     font-family: "Verdana";
+    color:  #05386b;
 }
 
 div.log {
@@ -21,8 +22,9 @@ div.log h1 {
 
 input {
     height: 20px;
-    border: solid, 0.1px;
-    border-color: grey;
+    border: solid, 0.1px, #05386b;
+    border-color:  #05386b;
+    background-color: white;
 }
 
 button {
