@@ -1,21 +1,22 @@
 <div class="contenitore">
-  Username
-  <input class="input" [(ngModel)]="username">
+  <label for="username">Username</label>
+  <input id="username" class="input" [(ngModel)]="username">
 
   <br><br>
-  Password
-  <input class="input" [(ngModel)]="password">
+  <label for="password">Password</label>
+  <input id="password" class="input" [(ngModel)]="password">
 
   <br><br>
-  Conferma password
-  <input class="input" [(ngModel)]="confermapassword">
+  <label for="conferma-password">Conferma password</label>
+  <input id="conferma-password" class=" input" [(ngModel)]="confermapassword">
 
   <br><br>
-  Email
-  <input class="input" [(ngModel)]="email">
+  <label for="email">Email</label>
+  <input id="email" class="input" [(ngModel)]="email">
 
   <br><br>
   <div *ngIf="messaggioErrore">{{ messaggioErrore }}</div>
+  <br>
   <button class="button" (click)="registrami()">Conferma</button>
 
   &nbsp;

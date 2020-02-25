@@ -1,3 +1,4 @@
+import { Prodotto } from './../classi/prodotto';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -16,13 +17,16 @@ export class LoginComponent implements OnInit {
   password: string;
   token: string;
 
+
   constructor(
     private http: HttpClient,
     private ac: AreaComuneService,
     private router: Router
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+   }
 
   login() {
     if (this.username && this.password) {

@@ -27,9 +27,10 @@
     <th>View</th>
     <th>Edit</th>
     <th>Delete</th>
+    <th>Taglie</th>
     </tr>
     <tr *ngFor="let p of prodotti">
-      <td>{{p.codice}}</td>
+      <td >{{p.codice}}</td>
       <td>{{p.descrizione}}</td>
       <td>{{p.prezzo}}</td>
       <td>
@@ -40,6 +41,9 @@
       </td>
       <td>
         <button (click)="rimuovi(p)">Delete</button>
+      </td>
+      <td>
+        <button (click)="rigaSelezionata(p)" routerLink="/associazioni-prodotti-taglie">Taglie</button>
       </td>
       </tr>
   </table>

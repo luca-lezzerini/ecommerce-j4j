@@ -16,11 +16,19 @@
             <td>{{s.prezzo}}</td>
         </tr>
     </table>
-    <div *ngIf="tableHeaderEnabled" class="btn">
-        <!-- Bottoni da ultimare, possibile inserire nei bottoni figure "freccia" rappresentative del caso -->
-        <button (click)="paginaIniziale()">Pagina iniziale</button> &nbsp;
-        <button (click)="paginaPrecedente()">Precedente</button> &nbsp;
-        <button (click)="paginaSuccessiva()">Successica</button> &nbsp;
-        <button (click)="paginaFinale()">Pagina Finale</button> &nbsp;
+    <div class="pagination">
+      <button (click)="cambiaPagina(0)">
+        &laquo;
+      </button>
+      <button (click)="cambiaPagina(pagina-1)">
+        &lsaquo;
+      </button>
+      {{pagina+1}}
+      <button (click)="cambiaPagina(pagina+1)">
+        &rsaquo;
+      </button>
+      <button (click)="cambiaPagina(-2)">
+        &raquo;
+      </button>
     </div>
 </div>

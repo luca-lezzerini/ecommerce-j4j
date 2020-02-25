@@ -21,13 +21,16 @@ export class AssociazioniProdottiTaglieComponent implements OnInit {
   tagliaSelezionata = new Taglia();
   checkSelezionati: boolean[];
   checkDisponibili: boolean[];
+  prodottoSelezionato : Prodotto;
+  prodSel: boolean;
 
   constructor(private http: HttpClient,
     private acService: AreaComuneService,
     private router: Router) { }
 
   ngOnInit() {
-
+    this.prodottoSelezionato = this.acService.prodottoSelezionato;
+    this.getListe();
   }
 
   aggiungiASelezionate(taglieDisponibili: Taglia) {
@@ -64,10 +67,11 @@ export class AssociazioniProdottiTaglieComponent implements OnInit {
 
   getListe() {
     let obs: Observable<ProdottoTagliaResultsDto> =
-      this.http.post<ProdottoTagliaResultsDto>(this.acService.hostUrl + '/get-taglie', new Prodotto());
+      this.http.post<ProdottoTagliaResultsDto>(this.acService.hostUrl + '/get-taglie', this.prodottoSelezionato);
     obs.subscribe(risposta => {
       this.taglieSelezionate = risposta.listaSelezionati;
       this.taglieDisponibili = risposta.listaDisponibili;
+      console.log(this.taglieDisponibili);
     })
   }
 }

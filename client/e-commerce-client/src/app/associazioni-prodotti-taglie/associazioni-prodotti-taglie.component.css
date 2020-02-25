@@ -50,3 +50,7 @@ button:disabled {
 }
 
 
+label.prodottoSelezionato{
+font-size: large;
+color: #05386B;
+}

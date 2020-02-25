@@ -41,8 +41,8 @@ export class AnagraficaProdottiComponent implements OnInit {
   pagina = 0;
   backDisabled: boolean;
   forwardDisabled: boolean;
-
-  constructor(private http: HttpClient,
+  constructor(
+    private http: HttpClient,
     private acService: AreaComuneService,
     private router: Router) {
     // imposta visibilità iniziale degli elementi dell'interfaccia
@@ -58,6 +58,15 @@ export class AnagraficaProdottiComponent implements OnInit {
     this.showResults = false;
   }
 
+  rigaSelezionata(p: Prodotto) {
+    // copia in prodottoSelezionato i dati dei campi
+    console.log(this.acService.prodottoSelezionato);
+    this.acService.prodottoSelezionato = p;
+    console.log(this.acService.prodottoSelezionato);
+
+
+
+  }
   ngOnInit() {
     // se l'utente non è loggato viene aperta la pagina di login
     if (!this.acService.token) {
