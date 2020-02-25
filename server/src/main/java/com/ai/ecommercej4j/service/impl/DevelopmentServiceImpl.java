@@ -3,6 +3,7 @@ package com.ai.ecommercej4j.service.impl;
 import com.ai.ecommercej4j.model.Colori;
 import com.ai.ecommercej4j.model.Ordine;
 import com.ai.ecommercej4j.model.Prodotto;
+import com.ai.ecommercej4j.model.ProdottoTaglia;
 import com.ai.ecommercej4j.model.RigaOrdine;
 import com.ai.ecommercej4j.model.Spedizione;
 import com.ai.ecommercej4j.model.Taglia;
@@ -11,7 +12,6 @@ import com.ai.ecommercej4j.repository.*;
 import com.ai.ecommercej4j.service.DevelopmentService;
 import com.ai.ecommercej4j.service.StartupDataService;
 import java.time.LocalDate;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +36,8 @@ public class DevelopmentServiceImpl implements DevelopmentService {
     private RigaOrdineRepository rigaOrdineRepository;
     @Autowired
     private OrdineServiceImpl ordineServiceImpl;
+    @Autowired
+    private ProdottoTagliaRepository prodottoTagliaRepository;
 
     @Override
     public void generateTestData() {
@@ -74,6 +76,19 @@ public class DevelopmentServiceImpl implements DevelopmentService {
     }
 
     private void generateProdotti() {
+
+        Prodotto p0 = new Prodotto();
+        p0.setDescrizione("prova");
+        prodottoRepository.save(p0);
+
+        Taglia t0 = new Taglia();
+        t0.setDescrizione("prova");
+        tagliaRepository.save(t0);
+
+        ProdottoTaglia pt = new ProdottoTaglia();
+        pt.setProdotto(p0);
+        pt.setTaglia(t0);
+        prodottoTagliaRepository.save(pt);
 
         Prodotto p1 = new Prodotto();
         p1.setPrezzo(12.50);
@@ -337,7 +352,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         o2.setData(LocalDate.now());
         o2.setNumero(2);
         o2.setStato("Carrello");
-        ordineRepository.save(o2);        
+        ordineRepository.save(o2);
         Ordine o3 = new Ordine();
         o3.setData(LocalDate.now());
         o3.setNumero(3);
@@ -378,7 +393,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         o10.setNumero(10);
         o10.setStato("Spedito");
         ordineRepository.save(o10);
-        
+
         // Creo le righe ...
         RigaOrdine r11 = new RigaOrdine();
         r11.setQta(5);
@@ -416,7 +431,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         RigaOrdine r101 = new RigaOrdine();
         r13.setQta(10);
         rigaOrdineRepository.save(r101);
-        
+
         // ... associo le righe all'ordine
         o1.getRighe().add(r11);
         o1.getRighe().add(r12);
@@ -463,7 +478,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         r91.setOrdine(o9);
         rigaOrdineRepository.save(r91);
         r101.setOrdine(o10);
-        rigaOrdineRepository.save(r101);        
+        rigaOrdineRepository.save(r101);
 
         // ... associo gli ordini all'utente
         u1.getOrdini().add(o1);

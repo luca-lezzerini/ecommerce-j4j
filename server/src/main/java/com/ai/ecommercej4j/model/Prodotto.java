@@ -26,7 +26,7 @@ public class Prodotto implements Serializable {
     @JsonIgnoreProperties(value = "prodotto", allowSetters = true)
     private List<RigaOrdine> righe = new ArrayList<>();
     
-    @OneToMany(mappedBy = "prodotto")
+    @OneToMany(mappedBy = "prodotto", fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "prodotto", allowSetters = true)
     private List<ProdottoTaglia> prodottoTaglia;
     
