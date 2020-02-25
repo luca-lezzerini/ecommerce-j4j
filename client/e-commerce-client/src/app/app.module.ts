@@ -69,6 +69,7 @@ const appRoutes: Routes = [
   { path: 'visualizza-ordini', component: VisualizzaOrdiniComponent },
   { path: 'home-area-gestore', component: HomeAreaGestoreComponent },
   { path: 'visualizza-ordini-da-spedire', component: VisualizzaOrdiniDaSpedireComponent },
+  { path: 'taglie-colori', component: TaglieColoriComponent },
 ];
 
 @NgModule({
