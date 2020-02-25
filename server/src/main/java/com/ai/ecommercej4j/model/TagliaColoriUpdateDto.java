@@ -5,29 +5,27 @@
  */
 package com.ai.ecommercej4j.model;
 
+import java.util.List;
+
 /**
  *
  * @author utente
  */
 public class TagliaColoriUpdateDto extends TagliaColoriRequestDto {
-    private Colori coloreSelezionato;
+    private List <Colori> coloreSelezionato;
 
-    public TagliaColoriUpdateDto(Colori coloreSelezionato, Taglia taglia, Prodotto prodotto, String token) {
+    public TagliaColoriUpdateDto(List<Colori> coloreSelezionato, Taglia taglia, Prodotto prodotto, String token) {
         super(taglia, prodotto, token);
         this.coloreSelezionato = coloreSelezionato;
     }
 
-    public TagliaColoriUpdateDto() {
-    }
-
-    public Colori getColoreSelezionato() {
+    public List <Colori> getColoreSelezionato() {
         return coloreSelezionato;
     }
 
-    public void setColoreSelezionato(Colori coloreSelezionato) {
+    public void setColoreSelezionato(List <Colori> coloreSelezionato) {
         this.coloreSelezionato = coloreSelezionato;
     }
-    
     
     
 }
