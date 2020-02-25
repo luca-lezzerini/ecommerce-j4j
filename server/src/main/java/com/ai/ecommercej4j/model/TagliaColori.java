@@ -10,27 +10,35 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class AssociazioneTagliaColori {
+public class TagliaColori {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fkIdTaglia", referencedColumnName = "id")
+    @JoinColumn(name = "fkIdProdottoTaglia", referencedColumnName = "id")
     @JsonIgnoreProperties(value = "tagliaColori", allowSetters = true)
-    private Taglia taglia;
+    private ProdottoTaglia prodottoTaglia;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fkIdColori", referencedColumnName = "id")
     @JsonIgnoreProperties(value = "tagliaColori", allowSetters = true)
     private Colori colore;
 
-    public AssociazioneTagliaColori(Taglia taglia, Colori colore) {
-        this.taglia = taglia;
+    public ProdottoTaglia getProdottoTaglia() {
+        return prodottoTaglia;
+    }
+
+    public void setProdottoTaglia(ProdottoTaglia prodottoTaglia) {
+        this.prodottoTaglia = prodottoTaglia;
+    }
+
+    public TagliaColori(ProdottoTaglia prodottoTaglia, Colori colore) {
+        this.prodottoTaglia = prodottoTaglia;
         this.colore = colore;
     }
 
-    public AssociazioneTagliaColori() {
+    public TagliaColori() {
     }
 
     public Long getId() {
@@ -39,14 +47,6 @@ public class AssociazioneTagliaColori {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Taglia getTaglia() {
-        return taglia;
-    }
-
-    public void setTaglia(Taglia taglia) {
-        this.taglia = taglia;
     }
 
     public Colori getColore() {
