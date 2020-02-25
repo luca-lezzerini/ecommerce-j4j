@@ -1,15 +1,20 @@
-
 package com.ai.ecommercej4j.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Colori implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,6 +22,18 @@ public class Colori implements Serializable {
     private String codice;
     @Column
     private String descrizione;
+
+    @OneToMany(mappedBy = "colore", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = "colore", allowSetters = true)
+    private List<AssociazioneTagliaColori> tagliaColori = new ArrayList<>();
+
+    public List<AssociazioneTagliaColori> getTagliaColori() {
+        return tagliaColori;
+    }
+
+    public void setTagliaColori(List<AssociazioneTagliaColori> tagliaColori) {
+        this.tagliaColori = tagliaColori;
+    }
 
     public Colori(Long id, String codice, String descrizione) {
         this.id = id;
@@ -27,7 +44,6 @@ public class Colori implements Serializable {
     public Colori() {
     }
 
-    
     public String getDescrizione() {
         return descrizione;
     }
@@ -50,5 +66,5 @@ public class Colori implements Serializable {
 
     public void setCodice(String codice) {
         this.codice = codice;
-    }         
+    }
 }
