@@ -1,10 +1,10 @@
+import { ProdottoTagliaResultsDto } from './../classi/prodotto-taglia-results-dto';
 import { Prodotto } from './../classi/prodotto';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AreaComuneService } from '../area-comune.service';
 import { Router } from '@angular/router';
 import { Taglia } from '../classi/taglia';
-import { ProdottoTagliaGetDto } from '../classi/prodotto-taglia-get-dto';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -19,15 +19,18 @@ export class AssociazioniProdottiTaglieComponent implements OnInit {
   taglieDisponibili: Taglia[] = [];
   prodotto = new Prodotto();
   tagliaSelezionata = new Taglia();
+  checkSelezionati: boolean[];
+  checkDisponibili: boolean[];
 
   constructor(private http: HttpClient,
-              private acService: AreaComuneService,
-              private router: Router) { }
+    private acService: AreaComuneService,
+    private router: Router) { }
 
   ngOnInit() {
+
   }
 
-  aggiungiASelezionate(taglieDisponibili: Taglia){
+  aggiungiASelezionate(taglieDisponibili: Taglia) {
 
     // for()
 
@@ -51,13 +54,20 @@ export class AssociazioniProdottiTaglieComponent implements OnInit {
 
   }
 
-  togliASelezionate(){
+  togliASelezionate() {
 
   }
 
-  esci(){
+  esci() {
 
   }
 
-
+  getListe() {
+    let obs: Observable<ProdottoTagliaResultsDto> =
+      this.http.post<ProdottoTagliaResultsDto>(this.acService.hostUrl + '/get-taglie', new Prodotto());
+    obs.subscribe(risposta => {
+      this.taglieSelezionate = risposta.listaSelezionati;
+      this.taglieDisponibili = risposta.listaDisponibili;
+    })
+  }
 }

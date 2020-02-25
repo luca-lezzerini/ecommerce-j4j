@@ -7,15 +7,15 @@ Prodotto &nbsp; &nbsp;
     <div>
       <table class="tagliesel">
         <th> Taglie selezionate </th>
-        <tr *ngFor="let taglia of taglieSelezionate">
-          <td> <input type="checkbox" value=taglia>
+        <tr *ngFor="let taglia of taglieSelezionate, index as i">
+          <td> <input type="checkbox" [(ngModel)]="checkSelezionati[i]">
             {{taglia.codice}} </td>
         </tr>
       </table>
     </div>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <div>
-      <button type="submit" (click)="togliASelezionate(taglieSelezionate)"> > </button>
+      <button type="submit" (click)="togliASelezionate()"> > </button>
       <br>
       <br>
     </div>
@@ -32,8 +32,9 @@ Prodotto &nbsp; &nbsp;
     <div>
       <table class="tagliedisp">
         <th> Taglie disponibili </th>
-        <tr *ngFor="let taglia of taglieDisponibili">
-          <td>{{taglia.codice}}</td>
+        <tr *ngFor="let taglia of taglieDisponibili, index as i">
+          <td> <input type="checkbox" [(ngModel)]="checkDisponibili[i]">
+            {{taglia.codice}}</td>
         </tr>
       </table>
     </div>
