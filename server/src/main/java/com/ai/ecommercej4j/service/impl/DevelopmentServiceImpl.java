@@ -1,6 +1,6 @@
 package com.ai.ecommercej4j.service.impl;
 
-import com.ai.ecommercej4j.model.AssociazioneTagliaColori;
+import com.ai.ecommercej4j.model.TagliaColori;
 import com.ai.ecommercej4j.model.Colori;
 import com.ai.ecommercej4j.model.Ordine;
 import com.ai.ecommercej4j.model.Prodotto;
@@ -40,7 +40,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
     @Autowired
     private ProdottoTagliaRepository prodottoTagliaRepository;
     @Autowired
-    private TagliaColoriRepository associazioneTagliaColoriRepository;
+    private TagliaColoriRepository tagliaColoriRepository;
 
     @Override
     public void generateTestData() {
@@ -71,31 +71,18 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 
     private void dropDataBase() {
         // elimina tutti dati dal db
+        tagliaColoriRepository.deleteAllInBatch();
         prodottoTagliaRepository.deleteAllInBatch();
         rigaOrdineRepository.deleteAllInBatch();
         ordineRepository.deleteAllInBatch();
         prodottoRepository.deleteAllInBatch();
         utenteRepository.deleteAllInBatch();
         spedizioneRespository.deleteAllInBatch();
-        associazioneTagliaColoriRepository.deleteAllInBatch();
         tagliaRepository.deleteAllInBatch();
         coloriRepository.deleteAllInBatch();
     }
 
     private void generateProdotti() {
-
-        Prodotto p0 = new Prodotto();
-        p0.setDescrizione("prova");
-        prodottoRepository.save(p0);
-
-        Taglia t0 = new Taglia();
-        t0.setDescrizione("prova");
-        tagliaRepository.save(t0);
-
-        ProdottoTaglia pt = new ProdottoTaglia();
-        pt.setProdotto(p0);
-        pt.setTaglia(t0);
-        prodottoTagliaRepository.save(pt);
 
         Prodotto p1 = new Prodotto();
         p1.setPrezzo(12.50);
@@ -552,17 +539,23 @@ public class DevelopmentServiceImpl implements DevelopmentService {
     }
 
     private void generateAssociazioneTagliaColori() {
-        AssociazioneTagliaColori tc = new AssociazioneTagliaColori();
-        Taglia t1 = new Taglia("82", "XXXS");
-        t1.getTagliaColori().add(tc);
-        Colori c1 = new Colori();
-        c1.setCodice("99");
-        c1.setDescrizione("rosso pompeiano");
-        c1.getTagliaColori().add(tc);
-        coloriRepository.save(c1);
-        tagliaRepository.save(t1);
-        tc.setTaglia(t1);
-        tc.setColore(c1);
-        associazioneTagliaColoriRepository.save(tc);
+        ProdottoTaglia pt = new ProdottoTaglia();
+        Prodotto p = new Prodotto("Test", "Test", 12.99, false);
+        Taglia t = new Taglia("Test", "Test");
+        p.getProdottoTaglia().add(pt);
+        t.getTagliaProdotto().add(pt);
+        pt.setProdotto(p);
+        pt.setTaglia(t);
+        prodottoRepository.save(p);
+        tagliaRepository.save(t);
+        TagliaColori tg = new TagliaColori();
+        Colori c = new Colori("Test", "Test");
+        tg.setProdottoTaglia(pt);
+        tg.setColore(c);
+        c.getTagliaColori().add(tg);
+        pt.getTagliaColori().add(tg);
+        prodottoTagliaRepository.save(pt);
+        coloriRepository.save(c);
+        tagliaColoriRepository.save(tg);
     }
 }

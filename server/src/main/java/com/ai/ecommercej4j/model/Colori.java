@@ -25,18 +25,17 @@ public class Colori implements Serializable {
 
     @OneToMany(mappedBy = "colore", fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "colore", allowSetters = true)
-    private List<AssociazioneTagliaColori> tagliaColori = new ArrayList<>();
+    private List<TagliaColori> tagliaColori = new ArrayList<>();
 
-    public List<AssociazioneTagliaColori> getTagliaColori() {
+    public List<TagliaColori> getTagliaColori() {
         return tagliaColori;
     }
 
-    public void setTagliaColori(List<AssociazioneTagliaColori> tagliaColori) {
+    public void setTagliaColori(List<TagliaColori> tagliaColori) {
         this.tagliaColori = tagliaColori;
     }
 
-    public Colori(Long id, String codice, String descrizione) {
-        this.id = id;
+    public Colori(String codice, String descrizione) {
         this.codice = codice;
         this.descrizione = descrizione;
     }

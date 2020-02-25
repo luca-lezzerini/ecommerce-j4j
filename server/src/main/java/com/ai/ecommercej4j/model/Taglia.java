@@ -32,18 +32,6 @@ public class Taglia {
     @JsonIgnoreProperties(value = "taglia", allowSetters = true)
     private List<ProdottoTaglia> tagliaProdotto = new ArrayList<>();
 
-    @OneToMany(mappedBy = "taglia", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = "taglia", allowSetters = true)
-    private List<AssociazioneTagliaColori> tagliaColori = new ArrayList<>();
-
-    public List<AssociazioneTagliaColori> getTagliaColori() {
-        return tagliaColori;
-    }
-
-    public void setTagliaColori(List<AssociazioneTagliaColori> tagliaColori) {
-        this.tagliaColori = tagliaColori;
-    }
-
     public List<ProdottoTaglia> getTagliaProdotto() {
         return tagliaProdotto;
     }

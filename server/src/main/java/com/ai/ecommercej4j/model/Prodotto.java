@@ -25,10 +25,10 @@ public class Prodotto implements Serializable {
     @OneToMany(mappedBy = "prodotto", fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "prodotto", allowSetters = true)
     private List<RigaOrdine> righe = new ArrayList<>();
-    
+
     @OneToMany(mappedBy = "prodotto", fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "prodotto", allowSetters = true)
-    private List<ProdottoTaglia> prodottoTaglia;
+    private List<ProdottoTaglia> prodottoTaglia = new ArrayList<>();
 
     public List<ProdottoTaglia> getProdottoTaglia() {
         return prodottoTaglia;
@@ -37,8 +37,7 @@ public class Prodotto implements Serializable {
     public void setProdottoTaglia(List<ProdottoTaglia> prodottoTaglia) {
         this.prodottoTaglia = prodottoTaglia;
     }
-    
-    
+
     public List<RigaOrdine> getRighe() {
         return righe;
     }
@@ -50,8 +49,7 @@ public class Prodotto implements Serializable {
     public Prodotto() {
     }
 
-    public Prodotto(Long id, String codice, String descrizione, double prezzo, boolean offerta) {
-        this.id = id;
+    public Prodotto(String codice, String descrizione, double prezzo, boolean offerta) {
         this.codice = codice;
         this.descrizione = descrizione;
         this.prezzo = prezzo;

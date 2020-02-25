@@ -5,8 +5,9 @@
  */
 package com.ai.ecommercej4j.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -15,20 +16,32 @@ import javax.persistence.*;
  */
 @Entity
 public class ProdottoTaglia {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn (name = "prodotto_id", referencedColumnName = "id")
+    @JoinColumn(name = "prodotto_id", referencedColumnName = "id")
     @JsonIgnoreProperties(value = "prodottoTaglia", allowSetters = true)
     private Prodotto prodotto;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn (name = "taglia_id", referencedColumnName = "id")
+    @JoinColumn(name = "taglia_id", referencedColumnName = "id")
     @JsonIgnoreProperties(value = "tagliaProdotto", allowSetters = true)
     private Taglia taglia;
+
+    @OneToMany(mappedBy = "prodottoTaglia", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = "prodottoTaglia", allowSetters = true)
+    private List<TagliaColori> tagliaColori = new ArrayList<>();
+
+    public List<TagliaColori> getTagliaColori() {
+        return tagliaColori;
+    }
+
+    public void setTagliaColori(List<TagliaColori> tagliaColori) {
+        this.tagliaColori = tagliaColori;
+    }
 
     public ProdottoTaglia() {
     }
@@ -62,6 +75,5 @@ public class ProdottoTaglia {
     public void setTaglia(Taglia taglia) {
         this.taglia = taglia;
     }
-    
-    
+
 }
