@@ -40,7 +40,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
     @Autowired
     private ProdottoTagliaRepository prodottoTagliaRepository;
     @Autowired
-    private AssociazioneTagliaColoriRepository associazioneTagliaColoriRepository;
+    private TagliaColoriRepository associazioneTagliaColoriRepository;
 
     @Override
     public void generateTestData() {
