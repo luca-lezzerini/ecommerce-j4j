@@ -1,0 +1,52 @@
+div {
+  text-align: center;
+  font-size: 14px;
+  color: #05386B;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input {
+  font-size: 14px;
+  border-color: #05386B;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+table {
+  text-align: center;
+  color: #05386B;
+  margin: auto;
+}
+
+th {
+  color: #EDF5E1;
+  background-color: #05386B;
+  font-size: 14px;
+}
+
+tr:nth-child(odd) {
+  background-color: #EDF5E1;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #8EE4AF;
+  font-size: 14px;
+}
+
+button {
+  font-size: 14px;
+  color: #EDF5E1;
+  background-color: #5CDB95;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #379683;
+  color: #EDF5E1;
+}
+
+button:disabled {
+  background-color: silver;
+}
