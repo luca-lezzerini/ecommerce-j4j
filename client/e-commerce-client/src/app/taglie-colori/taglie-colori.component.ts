@@ -17,17 +17,16 @@ import { Observable } from 'rxjs';
 })
 export class TaglieColoriComponent implements OnInit {
   // TODO: eliminare commenti
-  //prodotto: Prodotto = { id: 1, codice: '1', offerta: true, righe: null, descrizione: 'scarpe', prezzo: 50 };
-  //taglia: Taglia = { id: 1, codice: '1', descrizione: 'S' };
-
-  // TODO: svuota array
-  coloriAssociati: Colori[] = [{ id: 1, codice: '1', descrizione: 'rosso' },
-  { id: 2, codice: '2', descrizione: 'cocco' }];
-  coloriNonAssociati: Colori[] = [{ id: 3, codice: '3', descrizione: 'verde' },
-  { id: 4, codice: '4', descrizione: 'blu' }];
+  coloriAssociati: Colori[] = [];
+  // [{ id: 1, codice: '1', descrizione: 'rosso' },
+  // { id: 2, codice: '2', descrizione: 'cocco' }];
+  coloriNonAssociati: Colori[] = [];
+  // [{ id: 3, codice: '3', descrizione: 'verde' },
+  // { id: 4, codice: '4', descrizione: 'blu' }];
   checkAssociati: boolean[] = [false, false];
   checkNonAssociati: boolean[] = [false, false];
-
+  prodotto: Prodotto;
+  taglia: Taglia;
   abilitaAssociati: boolean;
   abilitaNonAssociati: boolean;
 
@@ -38,14 +37,20 @@ export class TaglieColoriComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let dto = new TagliaColoriRequestDto();
+    // TODO da levare
+    this.acService.prodottoSelezionato.id = 1344;
+    this.acService.tagliaSelezionata.id = 1345;
+    // TODO Da levare fino a qui
+    this.taglia = this.acService.tagliaSelezionata;
+    this.prodotto = this.acService.prodottoSelezionato;
+    const dto = new TagliaColoriRequestDto();
     dto.token = this.acService.token;
     dto.prodotto = this.acService.prodottoSelezionato;
     dto.taglia = this.acService.tagliaSelezionata;
 
     // prepara la richiesta HTTP
     const oss: Observable<TagliaColoriResponseDto> =
-      this.http.post<TagliaColoriResponseDto>(this.acService.hostUrl + '/aggiungi-taglia-colori', dto);
+      this.http.post<TagliaColoriResponseDto>(this.acService.hostUrl + '/richiedi-taglia-colori', dto);
 
     // invio la richiesta
     oss.subscribe(risposta => {
@@ -56,7 +61,7 @@ export class TaglieColoriComponent implements OnInit {
   }
 
   aggiungi() {
-    let dto = new TagliaColoriUpdateDto();
+    const dto = new TagliaColoriUpdateDto();
     dto.token = this.acService.token;
     dto.prodotto = this.acService.prodottoSelezionato;
     dto.taglia = this.acService.tagliaSelezionata;
@@ -77,7 +82,7 @@ export class TaglieColoriComponent implements OnInit {
 
 
   rimuovi() {
-    let dto = new TagliaColoriUpdateDto();
+    const dto = new TagliaColoriUpdateDto();
     dto.token = this.acService.token;
     dto.prodotto = this.acService.prodottoSelezionato;
     dto.taglia = this.acService.tagliaSelezionata;
@@ -115,6 +120,6 @@ export class TaglieColoriComponent implements OnInit {
   }
 
   esci() {
-    console.log('uscita');
+    this.router.navigateByUrl('associazioni-prodotti-taglie');
   }
 }
