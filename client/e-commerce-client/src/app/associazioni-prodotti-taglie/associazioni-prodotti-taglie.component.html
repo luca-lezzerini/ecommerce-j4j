@@ -1,0 +1,41 @@
+<!--Prodotto {{prodotto.descrizone}} &nbsp; &nbsp; -->
+Prodotto &nbsp; &nbsp;
+<button (click)="esci()">ESCI</button>&nbsp;
+<hr>
+<div id="main">
+  <form>
+    <div>
+      <table class="tagliesel">
+        <th> Taglie selezionate </th>
+        <tr *ngFor="let taglia of taglieSelezionate">
+          <td> <input type="checkbox" value=taglia>
+            {{taglia.codice}} </td>
+        </tr>
+      </table>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div>
+      <button type="submit" (click)="togliASelezionate(taglieSelezionate)"> > </button>
+      <br>
+      <br>
+    </div>
+  </form>
+  <form>
+    <div>
+      <button type="submit" (click)="aggiungiASelezionate(taglieDisponibili)">
+        < </button>
+          <br>
+          <br>
+
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div>
+      <table class="tagliedisp">
+        <th> Taglie disponibili </th>
+        <tr *ngFor="let taglia of taglieDisponibili">
+          <td>{{taglia.codice}}</td>
+        </tr>
+      </table>
+    </div>
+  </form>
+</div>
