@@ -2,3 +2,39 @@
   Prodotto: {{prodotto.descrizione}} Taglia: {{taglia.descrizione}}
   <button (click)="esci()">Esci</button>
 </div>
+<br>
+<div class="main">
+<div class="section">
+  <table>
+    <tr>
+      <th>Colori Associati</th>
+    </tr>
+    <tr *ngFor="let c of coloriAssociati; index as i">
+      <td>
+        <input type="checkbox" [(ngModel)]="checkAssociati[i]" (change)="aggiornaAssociati()" [disabled]="abilitaAssociati">
+        {{c.descrizione}}
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="section">
+  <button (click)="aggiungi()" [disabled]="!coloriNonAssociati || !abilitaAssociati"><</button>
+  <br>
+  <button (click)="rimuovi()" [disabled]="!coloriAssociati || !abilitaNonAssociati">></button>
+</div>
+
+<div>
+  <table class="table">
+    <tr>
+      <th>Colori Non Associati</th>
+    </tr>
+    <tr *ngFor="let c of coloriNonAssociati; index as i">
+      <td>
+        <input type="checkbox" [(ngModel)]="checkNonAssociati[i]" (change)="aggiornaNonAssociati()" [disabled]="abilitaNonAssociati">
+        {{c.descrizione}}
+      </td>
+    </tr>
+  </table>
+</div>
+</div>

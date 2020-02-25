@@ -5,6 +5,15 @@ div {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.section {
+  margin: 2%;
+}
+
 input {
   font-size: 14px;
   border-color: #05386B;
