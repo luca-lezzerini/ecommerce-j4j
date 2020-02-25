@@ -35,6 +35,7 @@ import { ElencoTaglieComponent } from './elenco-taglie/elenco-taglie.component';
 import { VisualizzaOrdiniComponent } from './visualizza-ordini/visualizza-ordini.component';
 import { HomeAreaGestoreComponent } from './home-area-gestore/home-area-gestore.component';
 import { VisualizzaOrdiniDaSpedireComponent } from './visualizza-ordini-da-spedire/visualizza-ordini-da-spedire.component';
+import { TaglieColoriComponent } from './taglie-colori/taglie-colori.component';
 
 
 const appRoutes: Routes = [
@@ -68,6 +69,7 @@ const appRoutes: Routes = [
   { path: 'visualizza-ordini', component: VisualizzaOrdiniComponent },
   { path: 'home-area-gestore', component: HomeAreaGestoreComponent },
   { path: 'visualizza-ordini-da-spedire', component: VisualizzaOrdiniDaSpedireComponent },
+  { path: 'taglie-colori', component: TaglieColoriComponent },
 ];
 
 @NgModule({
@@ -101,6 +103,7 @@ const appRoutes: Routes = [
     VisualizzaOrdiniComponent,
     HomeAreaGestoreComponent,
     VisualizzaOrdiniDaSpedireComponent,
+    TaglieColoriComponent,
   ],
   imports: [
     RouterModule.forRoot(
