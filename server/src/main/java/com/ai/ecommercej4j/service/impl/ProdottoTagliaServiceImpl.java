@@ -82,6 +82,8 @@ public class ProdottoTagliaServiceImpl implements ProdottoTagliaService {
             }
         }
         ProdottoTagliaResponseDto rdto = new ProdottoTagliaResponseDto(taglieDisponibili, taglieNonDisponibili);
+        System.out.println("\n"+taglieDisponibili+"\n");
+        System.out.println("\n"+taglieNonDisponibili+"\n");
         return rdto;
     }
 }
