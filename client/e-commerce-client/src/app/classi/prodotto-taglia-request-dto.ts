@@ -3,6 +3,6 @@ import { Taglia } from './taglia';
 import { Prodotto } from './prodotto';
 
 export class ProdottoTagliaRequestDto extends LoginResponseDto{
-  taglia: Taglia[];
+  taglia: Taglia[] = [];
   prodotto: Prodotto;
 }

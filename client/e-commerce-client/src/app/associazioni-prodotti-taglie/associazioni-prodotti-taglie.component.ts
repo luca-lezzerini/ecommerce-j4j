@@ -6,6 +6,7 @@ import { AreaComuneService } from '../area-comune.service';
 import { Router } from '@angular/router';
 import { Taglia } from '../classi/taglia';
 import { Observable } from 'rxjs';
+import { ProdottoTagliaRequestDto } from '../classi/prodotto-taglia-request-dto';
 
 @Component({
   selector: 'app-associazioni-prodotti-taglie',
@@ -15,13 +16,13 @@ import { Observable } from 'rxjs';
 export class AssociazioniProdottiTaglieComponent implements OnInit {
 
   prodotti: Prodotto[] = [];
-  taglieSelezionate: Taglia[] = [];
-  taglieDisponibili: Taglia[] = [];
+  taglieSelezionate: Taglia[];
+  taglieDisponibili: Taglia[];
   prodotto = new Prodotto();
   tagliaSelezionata = new Taglia();
-  checkSelezionati: boolean[];
-  checkDisponibili: boolean[];
-  prodottoSelezionato : Prodotto;
+  checkSelezionati: boolean[] = [];
+  checkDisponibili: boolean[] = [];
+  prodottoSelezionato: Prodotto;
   prodSel: boolean;
 
   constructor(private http: HttpClient,
@@ -33,31 +34,29 @@ export class AssociazioniProdottiTaglieComponent implements OnInit {
     this.getListe();
   }
 
-  aggiungiASelezionate(taglieDisponibili: Taglia) {
+  aggiungiASelezionate() {
+    // let dto: ProdottoTagliaRequestDto = new ProdottoTagliaRequestDto();
+    // console.log(this.checkDisponibili);
+    // this.checkDisponibili.
+    // dto.prodotto = this.prodottoSelezionato;
 
-    // for()
+    // let obs: Observable<ProdottoTagliaResultsDto> =
+    //   this.http.post<ProdottoTagliaResultsDto>(this.acService.hostUrl + '/add-taglia', dto);
+    // obs.subscribe(risposta => {
+    //   this.taglieSelezionate = risposta.taglieDisponibili;
+    //   this.taglieDisponibili = risposta.taglieNonDisponibili;
 
+    //   this.checkSelezionati.length = this.taglieSelezionate.length;
+    //   this.checkDisponibili.length = this.taglieDisponibili.length;
+    //   console.log(risposta.taglieNonDisponibili);
+    // });
+    // this.checkDisponibili = [];
 
-    // // Preparo il dto
-    // let dto: ProdottoTagliaGetDto = new ProdottoTagliaGetDto();
-    // dto.taglia = this.tagliaSelezionata;
-    // dto.token = this.acService.token;
-    // dto.prodotto= this.prodotto;
-
-    // // Preparo la richiesta http
-    // let oss: Observable<ProdottoTagliaGetDto> =
-    //   this.http.post<ProdottoTagliaGetDto>(this.acService.hostUrl + '/get-taglie', dto);
-
-    // // Callback
-    // oss.subscribe(risposta => {
-    //   // Aggiorno la lista delle taglie
-    //   this.taglia = risposta.result;
-
-    // })
 
   }
 
   togliASelezionate() {
+
 
   }
 
@@ -67,11 +66,14 @@ export class AssociazioniProdottiTaglieComponent implements OnInit {
 
   getListe() {
     let obs: Observable<ProdottoTagliaResultsDto> =
-      this.http.post<ProdottoTagliaResultsDto>(this.acService.hostUrl + '/get-taglie', this.prodottoSelezionato);
+      this.http.post<ProdottoTagliaResultsDto>(this.acService.hostUrl + '/get-taglie', this.acService.prodottoSelezionato);
     obs.subscribe(risposta => {
-      this.taglieSelezionate = risposta.listaSelezionati;
-      this.taglieDisponibili = risposta.listaDisponibili;
-      console.log(this.taglieDisponibili);
+      this.taglieSelezionate = risposta.taglieDisponibili;
+      this.taglieDisponibili = risposta.taglieNonDisponibili;
+
+      this.checkSelezionati.length = this.taglieSelezionate.length;
+      this.checkDisponibili.length = this.taglieDisponibili.length;
+      console.log(risposta.taglieNonDisponibili);
     })
   }
 }
