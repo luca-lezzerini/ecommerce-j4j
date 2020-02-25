@@ -20,6 +20,8 @@ import org.springframework.stereotype.Repository;
 public interface ProdottoTagliaRepository extends JpaRepository<ProdottoTaglia, Long> {
 
     List<ProdottoTaglia> findByProdotto(Prodotto prodotto);
-    
+
     ProdottoTaglia findByProdottoAndTaglia(Prodotto p, Taglia t);
+
+    ProdottoTaglia findByProdottoIdAndTagliaId(Long idProdotto, Long idTaglia);
 }
