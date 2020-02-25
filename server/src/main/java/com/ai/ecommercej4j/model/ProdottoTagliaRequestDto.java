@@ -1,16 +1,18 @@
 package com.ai.ecommercej4j.model;
 
+import java.util.List;
+
 public class ProdottoTagliaRequestDto {
     
     private Prodotto prodotto;
-    private Taglia taglia;
-
-    public ProdottoTagliaRequestDto(Prodotto prodotto, Taglia taglia) {
-        this.prodotto = prodotto;
-        this.taglia = taglia;
-    }
+    private List<Taglia> taglia;
 
     public ProdottoTagliaRequestDto() {
+    }
+
+    public ProdottoTagliaRequestDto(Prodotto prodotto, List<Taglia> taglia) {
+        this.prodotto = prodotto;
+        this.taglia = taglia;
     }
 
     public Prodotto getProdotto() {
@@ -21,12 +23,13 @@ public class ProdottoTagliaRequestDto {
         this.prodotto = prodotto;
     }
 
-    public Taglia getTaglia() {
+    public List<Taglia> getTaglia() {
         return taglia;
     }
 
-    public void setTaglia(Taglia taglia) {
+    public void setTaglia(List<Taglia> taglia) {
         this.taglia = taglia;
     }
+
     
 }

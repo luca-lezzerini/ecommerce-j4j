@@ -8,6 +8,7 @@ package com.ai.ecommercej4j.controller;
 
 import com.ai.ecommercej4j.model.ProdottoTagliaResponseDto;
 import com.ai.ecommercej4j.model.Prodotto;
+import com.ai.ecommercej4j.model.ProdottoTagliaRequestDto;
 import com.ai.ecommercej4j.service.ProdottoTagliaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +28,13 @@ public class ProdottoTagliaController {
     }
     @RequestMapping(value = "/add-taglia")
     @ResponseBody
-    public ProdottoTagliaResponseDto addTaglia(@RequestBody Prodotto prodotto) {
-        return prodottoTagliaService.getTaglie(prodotto);
+    public ProdottoTagliaResponseDto addTaglia(@RequestBody ProdottoTagliaRequestDto dto) {
+        return prodottoTagliaService.addTaglia(dto);
     }
     @RequestMapping(value = "/remove-taglia")
     @ResponseBody
-    public ProdottoTagliaResponseDto removeTaglia(@RequestBody Prodotto prodotto) {
-        return prodottoTagliaService.getTaglie(prodotto);
+    public ProdottoTagliaResponseDto removeTaglia(@RequestBody ProdottoTagliaRequestDto dto) {
+        return prodottoTagliaService.removeTaglia(dto);
     }
     
 }
