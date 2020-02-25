@@ -40,28 +40,31 @@ public class ProdottoTagliaServiceImpl implements ProdottoTagliaService {
     @Override
     public ProdottoTagliaResponseDto addTaglia(ProdottoTagliaRequestDto dto) {
         List<ProdottoTaglia> listaPt = new ArrayList<>();
-        ProdottoTaglia pt = new ProdottoTaglia();
-        pt.setProdotto(dto.getProdotto());
         // per ogni taglia presente nella lista del dto aggiungo un elemento alla lista di ProdottoTaglie che deve essere aggiunta 
         for (Taglia t : dto.getTaglia()) {
+            ProdottoTaglia pt = new ProdottoTaglia();
+            pt.setProdotto(dto.getProdotto());
             pt.setTaglia(t);
             listaPt.add(pt);
         }
+        System.out.println("\n listapt" + listaPt + "\n");
+
         prodottoTagliaRepository.saveAll(listaPt);
-        return trovaTaglie(pt.getProdotto());
+
+        return trovaTaglie(dto.getProdotto());
     }
 
     @Override
     public ProdottoTagliaResponseDto removeTaglia(ProdottoTagliaRequestDto dto) {
         List<ProdottoTaglia> listaPt = new ArrayList<>();
-        ProdottoTaglia pt = new ProdottoTaglia();
         // per ogni taglia presente nella lista del dto aggiungo un elemento alla lista di ProdottoTaglie che deve essere eliminata 
         for (Taglia t : dto.getTaglia()) {
+            ProdottoTaglia pt = new ProdottoTaglia();
             pt = prodottoTagliaRepository.findByProdottoAndTaglia(dto.getProdotto(), t);
             listaPt.add(pt);
         }
         prodottoTagliaRepository.deleteAll(listaPt);
-        return trovaTaglie(pt.getProdotto());
+        return trovaTaglie(dto.getProdotto());
     }
 
     private ProdottoTagliaResponseDto trovaTaglie(Prodotto prodotto) {
@@ -82,8 +85,8 @@ public class ProdottoTagliaServiceImpl implements ProdottoTagliaService {
             }
         }
         ProdottoTagliaResponseDto rdto = new ProdottoTagliaResponseDto(taglieDisponibili, taglieNonDisponibili);
-        System.out.println("\n"+taglieDisponibili+"\n");
-        System.out.println("\n"+taglieNonDisponibili+"\n");
+        System.out.println("\n" + taglieDisponibili + "\n");
+        System.out.println("\n" + taglieNonDisponibili + "\n");
         return rdto;
     }
 }

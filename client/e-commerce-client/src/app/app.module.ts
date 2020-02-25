@@ -36,7 +36,7 @@ import { VisualizzaOrdiniComponent } from './visualizza-ordini/visualizza-ordini
 import { HomeAreaGestoreComponent } from './home-area-gestore/home-area-gestore.component';
 import { VisualizzaOrdiniDaSpedireComponent } from './visualizza-ordini-da-spedire/visualizza-ordini-da-spedire.component';
 import { TaglieColoriComponent } from './taglie-colori/taglie-colori.component';
-import { AssociazioniProdottiTaglieComponent } from './associazioni-prodotti-taglie/associazioni-prodotti-taglie.component';
+import { ProdottiTaglieComponent } from './prodotti-taglie/prodotti-taglie.component';
 
 
 
@@ -72,7 +72,7 @@ const appRoutes: Routes = [
   { path: 'home-area-gestore', component: HomeAreaGestoreComponent },
   { path: 'visualizza-ordini-da-spedire', component: VisualizzaOrdiniDaSpedireComponent },
   { path: 'taglie-colori', component: TaglieColoriComponent },
-  { path: 'associazioni-prodotti-taglie', component: AssociazioniProdottiTaglieComponent },
+  { path: 'prodotti-taglie', component: ProdottiTaglieComponent },
 
 ];
 
@@ -108,7 +108,7 @@ const appRoutes: Routes = [
     HomeAreaGestoreComponent,
     VisualizzaOrdiniDaSpedireComponent,
     TaglieColoriComponent,
-    AssociazioniProdottiTaglieComponent,
+    ProdottiTaglieComponent,
   ],
   imports: [
     RouterModule.forRoot(

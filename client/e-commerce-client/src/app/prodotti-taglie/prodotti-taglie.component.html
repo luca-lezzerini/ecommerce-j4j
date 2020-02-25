@@ -1,0 +1,37 @@
+<div>
+  <button (click)="colori()" [disabled]=button>Associa colori</button>
+  <label class="prodottoSelezionato">{{prodottoSelezionato.descrizione}}</label>
+  <button (click)="esci()">ESCI</button>&nbsp;
+  <hr>
+  <div id="main">
+    <div>
+      <table class="tagliesel">
+        <th> Taglie selezionate </th>
+        <tr *ngFor="let taglia of taglieDisponibili, index as i">
+          <td> <input type="checkbox" [(ngModel)]="checkDisponibili[i]" name="check" [disabled]=dd
+              (change)="disableNonDisponibili()">
+            {{taglia.descrizione}} </td>
+        </tr>
+      </table>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div>
+      <button (click)="togliDaDisponibili()" [disabled]=dd> > </button>
+      <br>
+      <br>
+      <button (click)="aggiungiADisponibili()" [disabled]=dnd>
+        < </button>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div>
+      <table class="tagliedisp">
+        <th> Taglie disponibili </th>
+        <tr *ngFor="let taglia of taglieNonDisponibili, index as i">
+          <td> <input type="checkbox" [(ngModel)]="checkNonDisponibili[i]" name="check" [disabled]=dnd
+              (change)="disableDisponibili()">
+            {{taglia.descrizione}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
