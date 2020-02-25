@@ -22,6 +22,7 @@ export class ElencoSpedizioniComponent implements OnInit {
   showResults: boolean;
   prezzo: number;
   tableHeaderEnabled: boolean;
+  pagina = 0;
 
   constructor(private http: HttpClient, private singleton: AreaComuneService) {
 

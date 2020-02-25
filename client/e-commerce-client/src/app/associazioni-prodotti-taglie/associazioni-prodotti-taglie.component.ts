@@ -19,12 +19,15 @@ export class AssociazioniProdottiTaglieComponent implements OnInit {
   taglieDisponibili: Taglia[] = [];
   prodotto = new Prodotto();
   tagliaSelezionata = new Taglia();
+  prodottoSelezionato : Prodotto;
+  prodSel: boolean;
 
   constructor(private http: HttpClient,
               private acService: AreaComuneService,
               private router: Router) { }
 
   ngOnInit() {
+    this.prodottoSelezionato = this.acService.prodottoSelezionato;
   }
 
   aggiungiASelezionate(taglieDisponibili: Taglia){

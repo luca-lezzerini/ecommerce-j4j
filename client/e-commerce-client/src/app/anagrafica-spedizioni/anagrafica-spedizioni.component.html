@@ -38,7 +38,7 @@
   <tr *ngFor="let s of spedizioni">
       <td>{{s.codice}}</td>
       <td>{{s.descrizione}}</td>
-      <td>{{s.prezzo}}</td>
+      <td> {{s.prezzo}}</td>
       <td>
         <button (click)="view(s)" *ngIf="viewEnabled">View</button>
       </td>
