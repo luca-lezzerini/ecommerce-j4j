@@ -5,10 +5,13 @@
  */
 package com.ai.ecommercej4j.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -23,6 +26,10 @@ public class Taglia {
     private String codice;
     private String descrizione;
 
+    @OneToMany(mappedBy = "taglia")
+    @JsonIgnoreProperties(value = "taglia", allowSetters = true)
+    private List<ProdottoTaglia> prodottoTaglia;
+    
     public Taglia() {
     }
 
