@@ -18,7 +18,6 @@ export class ProdottiTaglieComponent implements OnInit {
   prodotti: Prodotto[] = [];
   taglieDisponibili: Taglia[];
   taglieNonDisponibili: Taglia[];
-  prodotto = new Prodotto();
   checkDisponibili: boolean[] = [];
   checkNonDisponibili: boolean[] = [];
   prodottoSelezionato: Prodotto;
@@ -28,8 +27,8 @@ export class ProdottiTaglieComponent implements OnInit {
   button = true;
 
   constructor(private http: HttpClient,
-    private acService: AreaComuneService,
-    private router: Router) { }
+              private acService: AreaComuneService,
+              private router: Router) { }
 
   ngOnInit() {
     if (!this.acService.token) {
@@ -71,7 +70,6 @@ export class ProdottiTaglieComponent implements OnInit {
   togliDaDisponibili() {
     // il funzionamento è lo stesso del metodo precedente ma fatto con gli elementi disponibili
     const dto: ProdottoTagliaRequestDto = new ProdottoTagliaRequestDto();
-    const lista: Taglia[] = [];
     this.checkDisponibili.forEach(e => {
       const index = this.checkDisponibili.indexOf(true);
       dto.taglia.push(this.taglieDisponibili[index]);
@@ -111,7 +109,7 @@ export class ProdottiTaglieComponent implements OnInit {
     });
   }
   /**
-   *Salva la taglia selezionata in area comune e si sposta sulla pagina per associare taglie e colori
+   * Salva la taglia selezionata in area comune e si sposta sulla pagina per associare taglie e colori
    */
   colori() {
     this.acService.tagliaSelezionata = this.taglieDisponibili[this.checkDisponibili.findIndex(e => e == true)];

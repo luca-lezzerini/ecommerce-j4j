@@ -9,7 +9,6 @@ div.panel button{
 div.search button{
   margin: 6px;
 }
-
 div.pagination button{
   margin: 6px;
 }
@@ -24,7 +23,8 @@ table, th, td{
 }
 
 table {
-  text-align: center;
+  align-content: left;
+  text-align: left;
   color: #05386B;
   margin: auto;
 }
