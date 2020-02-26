@@ -8,5 +8,7 @@ public interface TagliaColoriService {
 
     TagliaColoriResponseDto richiediTagliaColori(TagliaColoriRequestDto dto);
 
-    void aggiungiTagliaColori(TagliaColoriUpdateDto dto);
+    TagliaColoriResponseDto aggiungiTagliaColori(TagliaColoriUpdateDto dto);
+    
+    TagliaColoriResponseDto rimuoviTagliaColori(TagliaColoriUpdateDto dto);
 }

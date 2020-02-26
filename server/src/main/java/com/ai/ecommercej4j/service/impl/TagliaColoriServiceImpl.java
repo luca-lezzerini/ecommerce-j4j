@@ -46,11 +46,6 @@ public class TagliaColoriServiceImpl implements TagliaColoriService {
             for (TagliaColori tc : pt.getTagliaColori()) {
                 listaColoriAssociati.add(tc.getColore());
             }
-//            System.out.println("\n\n\n\n\n\n");
-//            for (Colori colori : listaColoriAssociati) {
-//                System.out.println(colori.getDescrizione());
-//            }
-//            System.out.println("\n\n\n\n\n\n");
             response.setListaColoriAssociati(listaColoriAssociati);
             response.setListaColori(cr.findAll());
         } else {
@@ -61,7 +56,33 @@ public class TagliaColoriServiceImpl implements TagliaColoriService {
     }
 
     @Override
-    public void aggiungiTagliaColori(TagliaColoriUpdateDto dto) {
+    public TagliaColoriResponseDto aggiungiTagliaColori(TagliaColoriUpdateDto dto) {
+        String token = dto.getToken();
+        Taglia taglia = dto.getTaglia();
+        Prodotto prodotto = dto.getProdotto();
+        List<Colori> coloriSelezionati = dto.getColoriSelezionati();
+        if (ss.checkToken(token)) {
+            ProdottoTaglia pt = ptr.findByProdottoIdAndTagliaId(prodotto.getId(), taglia.getId());
+
+            System.out.println("\n\n\n\n\n\n");
+            System.out.println(dto.getColoriSelezionati());
+            System.out.println("\n\n\n\n\n\n");
+            for (Colori colore : coloriSelezionati) {
+                TagliaColori tc = new TagliaColori();
+                tc.setColore(colore);
+                tc.setProdottoTaglia(pt);
+                pt.getTagliaColori().add(tc);
+                colore.getTagliaColori().add(tc);
+                ptr.save(pt);
+                cr.save(colore);
+                tcr.save(tc);
+            }
+        }
+        return richiediTagliaColori(dto);
+    }
+
+    @Override
+    public TagliaColoriResponseDto rimuoviTagliaColori(TagliaColoriUpdateDto dto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -38,8 +38,8 @@ export class TaglieColoriComponent implements OnInit {
 
   ngOnInit() {
     // TODO da levare
-    this.acService.prodottoSelezionato.id = 1344;
-    this.acService.tagliaSelezionata.id = 1345;
+    this.acService.prodottoSelezionato.id = 1424;
+    this.acService.tagliaSelezionata.id = 1425;
     // TODO Da levare fino a qui
     this.taglia = this.acService.tagliaSelezionata;
     this.prodotto = this.acService.prodottoSelezionato;
@@ -73,7 +73,7 @@ export class TaglieColoriComponent implements OnInit {
 
     // invio la richiesta
     oss.subscribe(risposta => {
-
+      console.log(risposta);
       // una volta eseguito l'inserimento, eseguo di nuovo l'ultima ricerca effettuata
       this.coloriAssociati = risposta.listaColoriAssociati;
       this.coloriNonAssociati = risposta.listaColori.filter(colore => !risposta.listaColoriAssociati.includes(colore));

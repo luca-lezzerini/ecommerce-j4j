@@ -28,4 +28,9 @@ public class TagliaColoriController {
         ts.aggiungiTagliaColori(dto);
     }
 
+    @RequestMapping(value = "/rimuovi-taglia-colori")
+    public void rimuoviTagliaColori(@RequestBody TagliaColoriUpdateDto dto) {
+        ts.rimuoviTagliaColori(dto);
+    }
+
 }

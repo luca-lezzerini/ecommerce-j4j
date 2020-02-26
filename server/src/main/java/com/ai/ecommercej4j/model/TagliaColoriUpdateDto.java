@@ -12,19 +12,19 @@ import java.util.List;
  * @author utente
  */
 public class TagliaColoriUpdateDto extends TagliaColoriRequestDto {
-    private List <Colori> coloreSelezionato;
+    private List <Colori> coloriSelezionati;
 
     public TagliaColoriUpdateDto(List<Colori> coloreSelezionato, Taglia taglia, Prodotto prodotto, String token) {
         super(taglia, prodotto, token);
-        this.coloreSelezionato = coloreSelezionato;
+        this.coloriSelezionati = coloreSelezionato;
     }
 
-    public List <Colori> getColoreSelezionato() {
-        return coloreSelezionato;
+    public List <Colori> getColoriSelezionati() {
+        return coloriSelezionati;
     }
 
-    public void setColoreSelezionato(List <Colori> coloreSelezionato) {
-        this.coloreSelezionato = coloreSelezionato;
+    public void setColoriSelezionati(List <Colori> coloriSelezionati) {
+        this.coloriSelezionati = coloriSelezionati;
     }
     
     
