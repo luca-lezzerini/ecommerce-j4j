@@ -63,10 +63,6 @@ public class TagliaColoriServiceImpl implements TagliaColoriService {
         List<Colori> coloriSelezionati = dto.getColoriSelezionati();
         if (ss.checkToken(token)) {
             ProdottoTaglia pt = ptr.findByProdottoIdAndTagliaId(prodotto.getId(), taglia.getId());
-
-            System.out.println("\n\n\n\n\n\n");
-            System.out.println(dto.getColoriSelezionati());
-            System.out.println("\n\n\n\n\n\n");
             for (Colori colore : coloriSelezionati) {
                 TagliaColori tc = new TagliaColori();
                 tc.setColore(colore);
@@ -83,6 +79,21 @@ public class TagliaColoriServiceImpl implements TagliaColoriService {
 
     @Override
     public TagliaColoriResponseDto rimuoviTagliaColori(TagliaColoriUpdateDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String token = dto.getToken();
+        Taglia taglia = dto.getTaglia();
+        Prodotto prodotto = dto.getProdotto();
+        List<Colori> coloriSelezionati = dto.getColoriSelezionati();
+        if (ss.checkToken(token)) {
+            ProdottoTaglia pt = ptr.findByProdottoIdAndTagliaId(prodotto.getId(), taglia.getId());
+            List<TagliaColori> listaTC = tcr.findByProdottoTagliaId(pt.getId());
+            for (Colori colore : coloriSelezionati) {
+                for (TagliaColori tagliaColori : listaTC) {
+                    if (tagliaColori.getColore().getId().equals(colore.getId())) {
+                        tcr.deleteById(tagliaColori.getId());
+                    }
+                }
+            }
+        }
+        return richiediTagliaColori(dto);
     }
 }

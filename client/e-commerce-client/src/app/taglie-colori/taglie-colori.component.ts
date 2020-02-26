@@ -38,8 +38,8 @@ export class TaglieColoriComponent implements OnInit {
 
   ngOnInit() {
     // TODO da levare
-    this.acService.prodottoSelezionato.id = 1424;
-    this.acService.tagliaSelezionata.id = 1425;
+    this.acService.prodottoSelezionato.id = 1503;
+    this.acService.tagliaSelezionata.id = 1504;
     // TODO Da levare fino a qui
     this.taglia = this.acService.tagliaSelezionata;
     this.prodotto = this.acService.prodottoSelezionato;
