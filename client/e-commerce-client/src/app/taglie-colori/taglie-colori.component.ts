@@ -16,15 +16,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./taglie-colori.component.css']
 })
 export class TaglieColoriComponent implements OnInit {
-  // TODO: eliminare commenti
   coloriAssociati: Colori[] = [];
-  // [{ id: 1, codice: '1', descrizione: 'rosso' },
-  // { id: 2, codice: '2', descrizione: 'cocco' }];
   coloriNonAssociati: Colori[] = [];
-  // [{ id: 3, codice: '3', descrizione: 'verde' },
-  // { id: 4, codice: '4', descrizione: 'blu' }];
-  checkAssociati: boolean[] = [false, false];
-  checkNonAssociati: boolean[] = [false, false];
+  checkAssociati: boolean[] = [];
+  checkNonAssociati: boolean[] = [];
   prodotto: Prodotto;
   taglia: Taglia;
   abilitaAssociati: boolean;
@@ -37,10 +32,6 @@ export class TaglieColoriComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // TODO da levare
-    this.acService.prodottoSelezionato.id = 1503;
-    this.acService.tagliaSelezionata.id = 1504;
-    // TODO Da levare fino a qui
     this.taglia = this.acService.tagliaSelezionata;
     this.prodotto = this.acService.prodottoSelezionato;
     const dto = new TagliaColoriRequestDto();
@@ -53,11 +44,7 @@ export class TaglieColoriComponent implements OnInit {
       this.http.post<TagliaColoriResponseDto>(this.acService.hostUrl + '/richiedi-taglia-colori', dto);
 
     // invio la richiesta
-    oss.subscribe(risposta => {
-
-      this.coloriAssociati = risposta.listaColoriAssociati;
-      this.coloriNonAssociati = risposta.listaColori.filter(colore => !risposta.listaColoriAssociati.includes(colore));
-    });
+    oss.subscribe(risposta => { this.filtraNonAssociati(risposta); });
   }
 
   aggiungi() {
@@ -72,14 +59,31 @@ export class TaglieColoriComponent implements OnInit {
       this.http.post<TagliaColoriResponseDto>(this.acService.hostUrl + '/aggiungi-taglia-colori', dto);
 
     // invio la richiesta
-    oss.subscribe(risposta => {
-      console.log(risposta);
-      // una volta eseguito l'inserimento, eseguo di nuovo l'ultima ricerca effettuata
-      this.coloriAssociati = risposta.listaColoriAssociati;
-      this.coloriNonAssociati = risposta.listaColori.filter(colore => !risposta.listaColoriAssociati.includes(colore));
-    });
+    oss.subscribe(risposta => { this.filtraNonAssociati(risposta); });
   }
 
+  filtraNonAssociati(risposta: TagliaColoriResponseDto) {
+
+    this.coloriAssociati = risposta.listaColoriAssociati;
+    this.coloriNonAssociati = [];
+    risposta.listaColori.forEach(colore => {
+      let trovato = false;
+      risposta.listaColoriAssociati.forEach(c => {
+        if (c.id === colore.id) {
+          trovato = true;
+        }
+      });
+      if (!trovato) {
+        this.coloriNonAssociati.push(colore);
+      }
+    });
+    this.checkNonAssociati = [];
+    this.coloriNonAssociati.forEach(x => this.checkNonAssociati.push(false));
+    this.checkAssociati = [];
+    this.coloriAssociati.forEach(x => this.checkAssociati.push(false));
+    this.aggiornaAssociati();
+    this.aggiornaNonAssociati();
+  }
 
   rimuovi() {
     const dto = new TagliaColoriUpdateDto();
@@ -94,11 +98,7 @@ export class TaglieColoriComponent implements OnInit {
       this.http.post<TagliaColoriResponseDto>(this.acService.hostUrl + '/rimuovi-taglia-colori', dto);
 
     // invio la richiesta
-    oss.subscribe(risposta => {
-
-      this.coloriAssociati = risposta.listaColoriAssociati;
-      this.coloriNonAssociati = risposta.listaColori.filter(colore => !risposta.listaColoriAssociati.includes(colore));
-    });
+    oss.subscribe(risposta => { this.filtraNonAssociati(risposta); });
   }
 
   aggiornaAssociati() {

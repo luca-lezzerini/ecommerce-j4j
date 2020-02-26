@@ -24,13 +24,13 @@ public class TagliaColoriController {
     }
 
     @RequestMapping(value = "/aggiungi-taglia-colori")
-    public void aggiungiTagliaColori(@RequestBody TagliaColoriUpdateDto dto) {
-        ts.aggiungiTagliaColori(dto);
+    public TagliaColoriResponseDto aggiungiTagliaColori(@RequestBody TagliaColoriUpdateDto dto) {
+        return ts.aggiungiTagliaColori(dto);
     }
 
     @RequestMapping(value = "/rimuovi-taglia-colori")
-    public void rimuoviTagliaColori(@RequestBody TagliaColoriUpdateDto dto) {
-        ts.rimuoviTagliaColori(dto);
+    public TagliaColoriResponseDto rimuoviTagliaColori(@RequestBody TagliaColoriUpdateDto dto) {
+        return ts.rimuoviTagliaColori(dto);
     }
 
 }
